@@ -17,6 +17,10 @@ html {
     margin-top: 20px;
 }
 
+.bottom {
+    margin-bottom: 30px;
+}
+
 .form-horizontal {
     width: 600px;
     margin: 0 auto;
@@ -32,7 +36,6 @@ ul {
 
 .section { 
 	z-index: 1;
-	/*min-height:420px;*/
 	width: 100%; 
 	overflow:hidden;
 	height:auto;
@@ -42,7 +45,6 @@ ul {
 } 
 
 
-/* Show one of sections */
 #profile { 
 	display: block;
 }

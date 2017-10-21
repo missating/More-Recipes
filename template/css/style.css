@@ -13,7 +13,12 @@ html {
     margin-top: 20px;
 }
 
+
 .form-horizontal {
     width: 600px;
     margin: 0 auto;
+}
+
+.button {
+    text-align: center;
 }
