@@ -72,9 +72,9 @@ ul {
     width: 0;
 }
 
-input[type="text"] {
+#right {
     margin-left: 270px;
-    padding: 5px;
+    padding: 5px; 
 }
 
 #box1 {
