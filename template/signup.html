@@ -28,26 +28,33 @@
                     <a class="nav-link" href="recipes.html">Recipes <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="signin.html">Sign In</a>
+                    <a class="nav-link" href="signin.html">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="signup.html">Sign Up</a>
+                    <a class="nav-link active" href="signup.html">Sign Up</a>
                 </li>
             </ul>
         </div>
     </nav>
 
     <div class="container top">
-        <h2 class="text-center"> SIGN IN</h2>
-        <p class="text-center"> Don't have an account, <a href="#"> Sign Up? </a></p>
+        <h2 class="text-center"> SIGN UP</h2>
+        <p class="text-center"> Have an account ? <a href="#"> Sign In</a></p>
 
 
         <form action="admin/profile.html" method="post" class="form-horizontal" id="inform">
+            <label for="username">Full Name</label>
+            <input type="text" name="fullname" class="form-control">
+            
             <label for="username">Username</label>
             <input type="text" name="username" class="form-control">
+            
+            <label for="username">Email</label>
+            <input type="text" name="email" class="form-control">
+            
             <label for="password">Password</label>
             <input type="password" name="password" class="form-control"><br>
-            <input type="submit" class="btn btn-primary form-control" value="Sign In">
+            <input type="submit" class="btn btn-primary form-control" value="Sign Up">
         </form>
 
 
