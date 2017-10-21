@@ -12,3 +12,8 @@ html {
 .top {
     margin-top: 20px;
 }
+
+.form-horizontal {
+    width: 600px;
+    margin: 0 auto;
+}
