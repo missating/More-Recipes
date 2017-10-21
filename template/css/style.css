@@ -22,3 +22,24 @@ html {
 .button {
     text-align: center;
 }
+
+
+#search {
+    position: relative;
+    z-index: 1;
+    left: -25px;
+    top: 1px;
+    color: #000;
+    cursor: pointer;
+    width: 0;
+}
+
+input[type="text"] {
+    margin-left: 270px;
+    padding: 5px;
+}
+
+#box1 {
+    margin: 10px 0 10px 0;
+    
+}
