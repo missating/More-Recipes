@@ -1,12 +1,87 @@
 body {
     width: 100%;
     height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: ghostwhite;
 }
 
 html {
     width: 100%;
     height: 100%;
 }
+
+
+h1,
+h2,
+h3,
+h4,
+h6 {
+    color: #2c3e50;
+    font-size: 2.0rem;
+}
+
+h5 {
+    font-weight: bold;
+     color: #2c3e50;
+}
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #222;
+}
+
+.navbar-custom {
+    background-color: #333;
+}
+
+/* change the brand and text color */
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255, 255, 255, .8);
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 22px;
+}
+
+/* change the link color */
+
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, .8);
+    font-size: 15px;
+    text-transform: uppercase;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* change the color of active or hovered links */
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    color: #3498db;
+    font-weight: bolder;
+    font-size: 0.6em;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #bdc4cf;
+}
+
+p a {
+    font-size: 15px;
+}
+
+.mainmenu a {
+    font-size: 20px;
+}
+
 
 .size {
     width: 500px;
@@ -26,6 +101,13 @@ html {
     margin: 0 auto;
 }
 
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+    .form-horizontal {
+        width: 300px;
+    }
+
+}
+
 ul {
     list-style: none;
 }
@@ -34,19 +116,19 @@ ul {
     padding: 10px;
 }
 
-.section { 
-	z-index: 1;
-	width: 100%; 
-	overflow:hidden;
-	height:auto;
-	padding-top:20px; 
+.section {
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+    padding-top: 20px;
     padding-bottom: 30px;
-	display:none;
-} 
+    display: none;
+}
 
 
-#profile { 
-	display: block;
+#profile {
+    display: block;
 }
 
 .rounded {
@@ -58,6 +140,13 @@ ul {
     border: 1px solid red;
     width: 500px;
     margin: 0 auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+    .bord {
+        width: 300px;
+    }
+
 }
 
 
@@ -74,16 +163,14 @@ ul {
 
 #right {
     margin-left: 270px;
-    padding: 5px; 
+    padding: 5px;
 }
 
 #box1 {
     margin: 10px 0 10px 0;
-    
+
 }
 
 .button {
     text-align: center;
 }
-
-
