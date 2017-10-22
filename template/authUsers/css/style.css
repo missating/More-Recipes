@@ -14,16 +14,18 @@ html {
 h1,
 h2,
 h3,
-h4,
+h5,
 h6 {
     color: #2c3e50;
     font-size: 2.0rem;
 }
 
-h5 {
+
+h4 {
     font-weight: bold;
      color: #2c3e50;
 }
+
 
 p {
     font-family: 'Source Sans Pro', sans-serif;
