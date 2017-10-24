@@ -147,3 +147,33 @@ p a {
     }
 
 }
+
+
+.center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #bdc4cf;
+    margin: 0 4px;
+    font-size: 16px;
+}
+
+.pagination a.active {
+    background-color: #3498db;
+    color: white;
+    border: 1px solid #3498db;
+}
+
+.pagination a:hover:not(.active) {background-color: #bdc4cf;
+
