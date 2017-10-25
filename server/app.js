@@ -1,4 +1,3 @@
-
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
@@ -15,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setup a default catch-all route that sends back a welcome message in JSON format
 app.all('*', (req, res) => {
-    res.status(404)
+  res.status(404)
     .send("The page you requested doesn't exist");
 });
 
