@@ -7,11 +7,11 @@ import db from '../models/database';
  */
 class Recipe {
   /**
-   * 
-   * 
-   * @param {any} req 
-   * @param {any} res 
-   * @returns 
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {json} the result from the api
    * @memberof Recipe
    */
   getAllRecipes(req, res) {
