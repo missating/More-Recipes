@@ -11,6 +11,61 @@ class Recipe {
    *
    * @param {any} req
    * @param {any} res
+   * @returns {json} adds a recipe
+   * @memberof Recipe
+   */
+  addRecipe(req, res) {
+    const { owner } = req.body.owner;
+    const { name } = req.body.name;
+    const { ingredient } = req.body.ingredients;
+    const { description } = req.body.description;
+    if (!owner) {
+      return res.status(400)
+        .send('Recipe should have an owner');
+    }
+    if (!name) {
+      return res.status(400)
+        .send('Recipe should have a name');
+    }
+    if (!ingredient) {
+      return res.status(400)
+        .send('Recipe should have ingredients');
+    }
+    if (!description) {
+      return res.status(400)
+        .send('Recipe should have directions to cook');
+    }
+    if (ingredient.trim().length < 1) {
+      return res.status(400)
+        .send('Ingredients are empty');
+    }
+    if (description.trim().length < 1) {
+      return res.status(400)
+        .send('Recipe should have a direction to cook');
+    }
+    const id = db.recipes.length + 1;
+    const newRecipe = {
+      id,
+      ownerId: owner,
+      name,
+      ingredients: [ingredient],
+      description,
+      downVote: 0,
+      upVote: 0
+    };
+    db.recipes.push(newRecipe);
+    return res.status(201)
+      .json({
+        status: 'success',
+        message: 'Recipe added',
+        recipe: newRecipe
+      });
+  }
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
    * @returns {json} the result from the api
    * @memberof Recipe
    */
