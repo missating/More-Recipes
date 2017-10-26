@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/missating/More-Recipes.svg?branch=develop)](https://travis-ci.org/missating/More-Recipes)
+
+
 # More-Recipes
 
 More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.
