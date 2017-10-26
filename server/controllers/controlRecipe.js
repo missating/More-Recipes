@@ -96,6 +96,28 @@ class Recipe {
    *
    * @param {any} req
    * @param {any} res
+   * @returns {json} after deleting a particular recipe
+   * @memberof Recipe
+   */
+  deleteRecipe(req, res) {
+    for (let i = 0; i < db.recipes.length; i += 1) {
+      if (parseInt(db.recipes[i].id, 10) === parseInt(req.params.recipeId, 10)) {
+        db.recipes.splice(i, 1);
+        return res.status(200)
+          .json({
+            status: 'success',
+            message: 'Recipe has been deleted'
+          });
+      }
+    }
+    return res.status(404)
+      .send('Recipe not found');
+  }
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
    * @returns {json} the result from the api
    * @memberof Recipe
    */
