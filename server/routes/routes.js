@@ -1,9 +1,11 @@
 import * as Recipe from '../controllers/controlRecipe';
 import * as Review from '../controllers/controlReview';
+import * as Upvote from '../controllers/controlUpVote';
 
 
 const recipe = new Recipe.default();
 const review = new Review.default();
+const upvote = new Upvote.default();
 
 
 const router = (app) => {
@@ -16,6 +18,7 @@ const router = (app) => {
   app.delete('/api/recipes/:recipeId', recipe.deleteRecipe);
   app.get('/api/recipes', recipe.getAllRecipes);
   app.post('/api/recipes/:recipeId/review', review.addReview);
+  app.get('/api/recipes?sort=up&order=des', upvote.getUpvotes);
 };
 
 export default router;
