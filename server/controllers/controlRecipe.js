@@ -77,7 +77,6 @@ class Recipe {
     }
     for (let i = 0; i < db.recipes.length; i += 1) {
       if (parseInt(db.recipes[i].id, 10) === parseInt(req.params.recipeId, 10)) {
-        db.recipes[i].name = req.body.newName || db.recipes[i].name;
         db.recipes[i].ingredients = [req.body.newIngredients] || db.recipes[i].ingredients;
         db.recipes[i].description = req.body.newDescription || db.recipes[i].description;
         return res.status(200)
