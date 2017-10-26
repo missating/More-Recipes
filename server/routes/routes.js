@@ -11,6 +11,7 @@ const router = (app) => {
   });
   app.post('/api/recipes', recipe.addRecipe);
   app.put('/api/recipes/:recipeId', recipe.updateRecipe);
+  app.delete('/api/recipes/:recipeId', recipe.deleteRecipe);
 };
 
 export default router;
