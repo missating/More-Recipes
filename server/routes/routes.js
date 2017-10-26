@@ -15,10 +15,10 @@ const router = (app) => {
   });
   app.post('/api/v1/recipes', recipe.addRecipe);
   app.put('/api/v1/recipes/:recipeId', recipe.updateRecipe);
-  app.delete('/api/v1/recipes/:recipeId', recipe.deleteRecipe);
-  app.get('/api/v1/recipes', recipe.getAllRecipes);
   app.post('/api/v1/recipes/:recipeId/review', review.addReview);
+  app.delete('/api/v1/recipes/:recipeId', recipe.deleteRecipe);
   app.get('/api/v1/recipes?sort=up&order=des', upvote.getUpvotes);
+  app.get('/api/v1/recipes', recipe.getAllRecipes);
 };
 
 export default router;
