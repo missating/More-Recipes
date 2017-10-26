@@ -16,10 +16,8 @@ class Recipe {
    */
   addRecipe(req, res) {
     const { ownerId } = req.body;
-    console.log(ownerId);
     const { name } = req.body;
     const { ingredients } = req.body;
-    console.log(ingredients);
     const { description } = req.body;
     if (!ownerId) {
       return res.status(400)
