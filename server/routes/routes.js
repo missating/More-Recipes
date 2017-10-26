@@ -13,12 +13,12 @@ const router = (app) => {
     res.status(200)
       .send('Welcome to more-recipes api');
   });
-  app.post('/api/recipes', recipe.addRecipe);
-  app.put('/api/recipes/:recipeId', recipe.updateRecipe);
-  app.delete('/api/recipes/:recipeId', recipe.deleteRecipe);
-  app.get('/api/recipes', recipe.getAllRecipes);
-  app.post('/api/recipes/:recipeId/review', review.addReview);
-  app.get('/api/recipes?sort=up&order=des', upvote.getUpvotes);
+  app.post('/api/v1/recipes', recipe.addRecipe);
+  app.put('/api/v1/recipes/:recipeId', recipe.updateRecipe);
+  app.delete('/api/v1/recipes/:recipeId', recipe.deleteRecipe);
+  app.get('/api/v1/recipes', recipe.getAllRecipes);
+  app.post('/api/v1/recipes/:recipeId/review', review.addReview);
+  app.get('/api/v1/recipes?sort=up&order=des', upvote.getUpvotes);
 };
 
 export default router;
