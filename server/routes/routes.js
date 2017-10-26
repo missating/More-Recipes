@@ -10,6 +10,7 @@ const router = (app) => {
       .send('Welcome to more-recipes api');
   });
   app.post('/api/recipes', recipe.addRecipe);
+  app.put('/api/recipes/:recipeId', recipe.updateRecipe);
 };
 
 export default router;
