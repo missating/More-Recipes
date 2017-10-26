@@ -12,6 +12,7 @@ const router = (app) => {
   app.post('/api/recipes', recipe.addRecipe);
   app.put('/api/recipes/:recipeId', recipe.updateRecipe);
   app.delete('/api/recipes/:recipeId', recipe.deleteRecipe);
+  app.get('/api/recipes', recipe.getAllRecipes);
 };
 
 export default router;
