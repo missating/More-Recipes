@@ -15,8 +15,8 @@ class Review {
      * @memberof Review
      */
   addReview(req, res) {
-    const { reviewer } = req.body.reviewer;
-    const { content } = req.body.content;
+    const { reviewer } = req.body;
+    const { content } = req.body;
     const recipe = req.params.recipeId;
     if (!content) {
       return res.status(400)
