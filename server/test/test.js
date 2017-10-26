@@ -12,6 +12,7 @@ describe('Test for API routes', () => {
       chai.request(app)
         .get('/')
         .end((err, res) => {
+          expect(err).to.be.null;          
           expect(res).to.have.status(200);
           done();
         });
@@ -19,7 +20,8 @@ describe('Test for API routes', () => {
     it('Should return 404 for unknown routes', (done) => {
       chai.request(app)
         .get('///recipes/')
-        .end((err, res) => {
+        .end((err, res) => { 
+          expect(err).to.not.be.null;       
           expect(res).to.have.status(404);
           done();
         });
@@ -48,6 +50,7 @@ describe('Test for API routes', () => {
           upVote: 12
         })
         .end((err, res) => {
+          expect(err).to.not.be.null;          
           expect(res).to.have.status(400);
           done();
         });
@@ -64,6 +67,7 @@ describe('Test for API routes', () => {
           upVote: 8
         })
         .end((err, res) => {
+          expect(err).to.not.be.null;          
           expect(res).to.have.status(400);
           done();
         });
@@ -75,6 +79,7 @@ describe('Test for API routes', () => {
       chai.request(app)
         .get('/api/recipes')
         .end((err, res) => {
+          expect(err).to.be.null;          
           expect(res).to.have.status(200);
           done();
         });
@@ -83,6 +88,7 @@ describe('Test for API routes', () => {
       chai.request(app)
         .get('/api/recipes?sort=up&order=des')
         .end((err, res) => {
+          expect(err).to.be.null;          
           expect(res).to.have.status(200);
           done();
         });
@@ -91,6 +97,7 @@ describe('Test for API routes', () => {
       chai.request(app)
         .get('/api/recipes')
         .end((err, res) => {
+          expect(err).to.be.null;          
           expect(res.body).to.have.property('status').equal('success');
           done();
         });
@@ -107,6 +114,7 @@ describe('Test for API routes', () => {
           description: 'boil everything together'
         })
         .end((err, res) => {
+          expect(err).to.be.null;          
           expect(res.status).to.equal(200);
           expect(res.body).to.have.property('status').equal('success');
           done();
@@ -124,6 +132,7 @@ describe('Test for API routes', () => {
           recipe: 3
         })
         .end((err, res) => {
+          expect(err).to.be.null;          
           expect(res).to.have.status(201);
           done();
         });
@@ -136,6 +145,7 @@ describe('Test for API routes', () => {
           recipe: 3
         })
         .end((err, res) => {
+          expect(err).to.not.be.null;          
           expect(res).to.have.status(400);
           done();
         });
@@ -147,6 +157,7 @@ describe('Test for API routes', () => {
       chai.request(app)
         .delete('/api/recipes/3')
         .end((err, res) => {
+          expect(err).to.be.null;          
           expect(res).to.have.status(200);
           done();
         });
@@ -155,7 +166,7 @@ describe('Test for API routes', () => {
       chai.request(app)
         .delete('/api/recipes/200')
         .end((err, res) => {
-          expect(res).to.have.status(404);
+         expect(res).to.have.status(404);
           done();
         });
     });
