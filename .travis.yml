@@ -7,4 +7,6 @@ install:
   - npm install
 
 script:
-  - npm test
+  - npm 
+  
+after_success: npm run coverage
