@@ -15,11 +15,13 @@ class Recipe {
    * @memberof Recipe
    */
   addRecipe(req, res) {
-    const { owner } = req.body.owner;
-    const { name } = req.body.name;
-    const { ingredient } = req.body.ingredients;
-    const { description } = req.body.description;
-    if (!owner) {
+    const { ownerId } = req.body;
+    console.log(ownerId);
+    const { name } = req.body;
+    const { ingredients } = req.body;
+    console.log(ingredients);
+    const { description } = req.body;
+    if (!ownerId) {
       return res.status(400)
         .send('Recipe should have an owner');
     }
@@ -27,7 +29,7 @@ class Recipe {
       return res.status(400)
         .send('Recipe should have a name');
     }
-    if (!ingredient) {
+    if (!ingredients) {
       return res.status(400)
         .send('Recipe should have ingredients');
     }
@@ -35,7 +37,7 @@ class Recipe {
       return res.status(400)
         .send('Recipe should have directions to cook');
     }
-    if (ingredient.trim().length < 1) {
+    if (ingredients.trim().length < 1) {
       return res.status(400)
         .send('Ingredients are empty');
     }
@@ -46,9 +48,9 @@ class Recipe {
     const id = db.recipes.length + 1;
     const newRecipe = {
       id,
-      ownerId: owner,
+      ownerId,
       name,
-      ingredients: [ingredient],
+      ingredients: [ingredients],
       description,
       downVote: 0,
       upVote: 0
