@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/missating/More-Recipes.svg?branch=develop)](https://travis-ci.org/missating/More-Recipes)
+[![Coverage Status](https://coveralls.io/repos/github/missating/More-Recipes/badge.svg?branch=coveralls)](https://coveralls.io/github/missating/More-Recipes?branch=coveralls)
 
 
 # More-Recipes
