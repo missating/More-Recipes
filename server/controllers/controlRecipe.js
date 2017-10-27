@@ -15,7 +15,7 @@ class Recipe {
    * @memberof Recipe
    */
   addRecipe(req, res) {
-    const owner = req.body.owner;
+    const owner = req.body.ownerId;
     const name = req.body.name;
     const ingredient = req.body.ingredients;
     const description = req.body.description;
