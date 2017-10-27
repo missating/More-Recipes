@@ -80,15 +80,12 @@ class Recipe {
         db.recipes[i].name = req.body.newName || db.recipes[i].name;
         db.recipes[i].ingredients = req.body.newIngredients || db.recipes[i].ingredients;
         db.recipes[i].description = req.body.newDescription || db.recipes[i].description;
-        if (db.recipes[i].downVote !== '') {
-          req.body.downVote = db.recipes[i].downVote;
-        } else {
-          db.recipes[i].downVote += parseInt(req.body.newDownVote, 10);
+        if (req.body.downVote) {
+          db.recipes[i].downVote += parseInt(req.body.downVote, 10);
         }
-        if (db.recipes[i].upVote !== '') {
-          req.body.upVote = db.recipes[i].upVote;
-        } else {
-          db.recipes[i].upVote += parseInt(req.body.newUpVote, 10);
+
+        if (req.body.upVote) {
+          db.recipes[i].upVote += parseInt(req.body.upVote, 10);
         }
         return res.status(200)
           .json({
