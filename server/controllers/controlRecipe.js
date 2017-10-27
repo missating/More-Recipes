@@ -147,7 +147,4 @@ class Recipe {
 }
 
 export default Recipe;
-function newFunction(req) {
-  return req.body.newDownVote += 1;
-}
 
