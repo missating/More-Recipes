@@ -78,8 +78,18 @@ class Recipe {
     for (let i = 0; i < db.recipes.length; i += 1) {
       if (parseInt(db.recipes[i].id, 10) === parseInt(req.params.recipeId, 10)) {
         db.recipes[i].name = req.body.newName || db.recipes[i].name;
-        db.recipes[i].ingredients = [req.body.newIngredients] || db.recipes[i].ingredients;
+        db.recipes[i].ingredients = req.body.newIngredients || db.recipes[i].ingredients;
         db.recipes[i].description = req.body.newDescription || db.recipes[i].description;
+        if (db.recipes[i].downVote !== '') {
+          req.body.downVote = db.recipes[i].downVote;
+        } else {
+          db.recipes[i].downVote += parseInt(req.body.newDownVote, 10);
+        }
+        if (db.recipes[i].upVote !== '') {
+          req.body.upVote = db.recipes[i].upVote;
+        } else {
+          db.recipes[i].upVote += parseInt(req.body.newUpVote, 10);
+        }
         return res.status(200)
           .json({
             status: 'success',
@@ -122,13 +132,11 @@ class Recipe {
    * @memberof Recipe
    */
   getAllRecipes(req, res) {
-    if (req.query.sort) {
-      const sorted = db.recipes.sort((a, b) => b.upVote - a.upVote);
-      return res.status(200)
-        .json({
-          status: 'success',
-          data: sorted
-        });
+    if (req.query.sort === 'upvotes') {
+      if (req.query.order === 'desc') {
+        db.recipes.sort((a, b) => a.upVote - b.upVote);
+      }
+      db.recipes.sort((a, b) => b.upVote - a.upVote);
     }
     return res.status(200)
       .json({
@@ -139,3 +147,7 @@ class Recipe {
 }
 
 export default Recipe;
+function newFunction(req) {
+    return req.body.newDownVote += 1;
+}
+

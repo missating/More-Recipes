@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon --exec babel-node server/bin/www",
-    "test": "mocha server/test/*.js --exit --require babel-register --reporter spec"
+    "test": "mocha server/test/*.js --exit --require babel-register --reporter spec",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -22,10 +24,12 @@
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
+    "coveralls": "^3.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "nyc": "^11.2.1"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -35,5 +39,4 @@
     "chai-http": "^3.0.0",
     "mocha": "^4.0.1"
   }
-  
 }

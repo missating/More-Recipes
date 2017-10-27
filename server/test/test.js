@@ -18,7 +18,7 @@ describe('Test for API', () => {
     });
     it('Should return 404 for unknown routes', (done) => {
       chai.request(app)
-        .get('/some/very/useless/route')
+        .get('/some/very/stupid/route')
         .end((err, res) => {
           expect(res).to.have.status(404);
           done();
@@ -79,7 +79,7 @@ describe('Test for API', () => {
     });
     it('Should return 200 for sorted recipes', (done) => {
       chai.request(app)
-        .get('/api/v1/recipes?sort=up&order=des')
+        .get('/api/v1/recipes?sort=upvotes&order=desc')
         .end((err, res) => {
           expect(res).to.have.status(200);
           done();
