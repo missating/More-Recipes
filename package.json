@@ -19,9 +19,7 @@
     "url": "https://github.com/missating/More-Recipes/issues"
   },
   "homepage": "https://github.com/missating/More-Recipes#readme",
-  "devDependencies": {
-   
-  },
+ 
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
