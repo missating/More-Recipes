@@ -2,12 +2,12 @@
 [![Coverage Status](https://coveralls.io/repos/github/missating/More-Recipes/badge.svg?branch=coveralls)](https://coveralls.io/github/missating/More-Recipes?branch=coveralls)
 
 
-# More-Recipes
+## More-Recipes
 
 More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.
 Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.
 
- # Features
+ ## Features
 <ul>
 <li>A User can sign up and sign in to use app</li>
     
@@ -29,3 +29,29 @@ Suppose a user comes up with a recipe, he/she can post it on More-Recipes and ge
         </ol>
 
 </ul>
+
+## To Run:
+
+* clone this repo by typing this in the command line
+
+```
+git clone https://github.com/missating/More-Recipes.git
+```
+
+* then cd into the new directry and run
+
+```
+npm install && npm run start:dev
+```
+
+* Navigate to your browser and go to the following URL
+
+* GET http://localhost:3000/api/v1/recipes - to view all recipes
+
+* PUT http://localhost:3000/api/v1/recipes/1 - to update a recipes with ID of 1
+
+* DELETE http://localhost:3000/api/v1/recipes/1 - to delete a recipe with ID of 1
+
+* POST http://localhost:3000/api/v1/recipes - to add a recipe
+
+* POST http://localhost:3000/api/v1/recipes/1/review - to add a review for recipe with ID of 1
