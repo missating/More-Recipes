@@ -1,9 +1,4 @@
-import * as Recipe from '../controllers/controlRecipe';
-import * as Review from '../controllers/controlReview';
-
-
-const recipe = new Recipe.default();
-const review = new Review.default();
+import User from '../controllers/controlUsers';
 
 
 const router = (app) => {
@@ -11,11 +6,8 @@ const router = (app) => {
     res.status(200)
       .send('Welcome to more-recipes api');
   });
-  app.post('/api/v1/recipes', recipe.addRecipe);
-  app.put('/api/v1/recipes/:recipeId', recipe.updateRecipe);
-  app.post('/api/v1/recipes/:recipeId/review', review.addReview);
-  app.delete('/api/v1/recipes/:recipeId', recipe.deleteRecipe);
-  app.get('/api/v1/recipes', recipe.getAllRecipes);
+  app.post('/api/users/signup', User.createUser);
+  app.post('/api/users/signin', User.userLogin);
 };
 
 export default router;
