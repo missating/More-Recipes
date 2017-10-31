@@ -26,10 +26,14 @@ export default class Users {
       return userValidate.message;
     }
     const {
-      fullname, username, email,
+      fullname,
+      username,
+      email,
     } = req.body;
     db.User.findOne({
-      where: { email }
+      where: {
+        email
+      }
     })
       .then((existing) => {
         if (existing) {
@@ -45,23 +49,16 @@ export default class Users {
             email,
             password: bcrypt.hashSync(req.body.password, 10),
           })
-          .then((newUser) => {
-            const token = jwt.sign({
-              id: newUser.id,
-              fullname: newUser.fullname,
-              username: newUser.username,
-              email: newUser.email,
-            }, 'secretkeyhere', { expiresIn: 1440 });
-            return res.status(201)
-              .json({
-                status: 'success',
-                token,
-                message: 'Account created'
-              });
-          }).catch(error => res.status(400).send(error.message));
-      })
-      .catch(() => res.status(500).json({ message: 'server is currently not available, please try again' }));
+          .then(newUser => res.status(201)
+            .json({
+              status: 'success',
+              message: 'Account created',
+              newUser,
+            }))
+          .catch(error => res.status(400).send(error.message));
+      }).catch(error => res.status(400).send(error.message));
   }
+
   /**
  *
  *
@@ -72,7 +69,15 @@ export default class Users {
  * @memberof Users
  */
   static userLogin(req, res) {
-    const { email } = req.body;
+    const { email, password } = req.body;
+
+    if (!password) {
+      return res.status(400).json({ message: 'Password field is empty' });
+    }
+    if (!email) {
+      return res.status(400).json({ message: 'Email field is empty' });
+    }
+
     db.User.findOne({
       where: {
         email
@@ -81,11 +86,27 @@ export default class Users {
       .then((foundUser) => {
         const match = bcrypt.compareSync(req.body.password, foundUser.password);
         if (match) {
-          const token = jwt.sign({ id: foundUser.id }, 'secretkeyhere', { expiresIn: 1440 });
-          return res.status(200).send({ status: 'Success.', token: { token } });
+          const token = jwt.sign({
+            id: foundUser.id
+          }, 'secretkeyhere', {
+            expiresIn: '3h'
+          });
+          return res.status(200).send({
+            status: 'Success.',
+            token: {
+              token
+            }
+          });
         }
-        return res.status(400).send({ status: 'Failed', message: 'Invalid password.' });
+        return res.status(400).send({
+          status: 'Failed',
+          message: 'Invalid password.'
+        });
       })
-      .catch(error => res.status(400).send({ status: 'Failed', message: error.message }));
+      .catch(error => res.status(400).send({
+        status: 'Failed',
+        message: error.message
+      }));
   }
 }
+
