@@ -3,8 +3,14 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import router from './routes/routes';
 
+
+
+
+
 // Set up the express app
 const app = express();
+
+
 
 // Log requests to the console
 app.use(logger('dev'));

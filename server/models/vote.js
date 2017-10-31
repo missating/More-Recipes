@@ -4,7 +4,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allownull: false
     },
-
     recipeId: {
       type: DataTypes.INTEGER,
       allownull: false
@@ -15,4 +14,5 @@ export default (sequelize, DataTypes) => {
     Vote.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
     Vote.belongsTo(models.Recipe, { foreignKey: 'recipeId', onDelete: 'CASCADE' });
   };
+  return Vote;
 };
