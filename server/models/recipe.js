@@ -39,7 +39,7 @@ export default (sequelize, DataTypes) => {
     Recipe.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
     Recipe.hasMany(models.Review, { foreignKey: 'recipeId' });
     Recipe.hasMany(models.Vote, { foreignKey: 'recipeId' });
-    Recipe.hasMany(models.Favourite, { foreignKey: 'recipeId' });
   };
   return Recipe;
 };
+
