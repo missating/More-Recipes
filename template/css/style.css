@@ -10,6 +10,60 @@ html {
     height: 100%;
 }
 
+
+
+h1,
+h2,
+h3,
+h5,
+h6 {
+    color: #2c3e50;
+    font-size: 2.3rem;
+}
+
+h4 {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #222;
+}
+
+.navbar-custom {
+    background-color: #333;
+}
+
+/* change the brand and text color */
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255, 255, 255, .8);
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 22px;
+}
+
+/* change the link color */
+
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, .8);
+    font-size: 15px;
+    text-transform: uppercase;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* change the color of active or hovered links */
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+
 .card {
     width: 300px;
     /* Set width of cards */
@@ -29,7 +83,7 @@ html {
 .card-header {
     color: #3498db;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     border-bottom: 1px solid #2c3e50;
     background-color: #f5f5f5;
@@ -70,58 +124,6 @@ a .btn-outline-primary{
 	border-radius: 4px;
     border: 1px solid #000;
     color: #3498db;
-}
-
-
-h1,
-h2,
-h3,
-h5,
-h6 {
-    color: #2c3e50;
-    font-size: 2.0rem;
-}
-
-h4 {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-
-p {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #222;
-}
-
-.navbar-custom {
-    background-color: #333;
-}
-
-/* change the brand and text color */
-
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
-    color: rgba(255, 255, 255, .8);
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 22px;
-}
-
-/* change the link color */
-
-.navbar-custom .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, .8);
-    font-size: 15px;
-    text-transform: uppercase;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-/* change the color of active or hovered links */
-
-.navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:hover .nav-link {
-    color: #ffffff;
 }
 
 
@@ -177,6 +179,29 @@ p a {
     color: #fff;
     margin: 5px;
     text-align: center;
+}
+
+
+#oneRecipe {
+        max-width: 700px;
+    margin: 70px auto;
+    font-family: 'Source Sans Pro', sans-serif;
+     border: 10px solid #3498db;
+    padding: 20px;
+}
+
+#oneRecipe img {
+     width: 100%;
+    margin-bottom: 30px;
+}
+
+.styles {
+    
+    text-align: center;
+    padding-bottom: 50px;
+  color: #2c3e50;
+    font-weight: bolder;
+
 }
 
 
@@ -244,3 +269,67 @@ p a {
 
 .pagination a:hover:not(.active) {
     background-color: #bdc4cf;
+}
+
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------Zoom-Effect---------------------------------- */
+/* ---------------------------------------------------------------------------- */	
+.zoom-container {
+	position: relative;
+	overflow: hidden;
+       margin: 30px;
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.zoom-container img {
+	display: block;
+	width: 100%;
+	height: auto;
+	-webkit-transition: all .5s ease; /* Safari and Chrome */
+    -moz-transition: all .5s ease; /* Firefox */
+    -ms-transition: all .5s ease; /* IE 9 */
+    -o-transition: all .5s ease; /* Opera */
+    transition: all .5s ease;
+	
+}
+.zoom-container .zoom-caption {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+	background: rgba(0, 0, 0, .5);
+	-webkit-transition: all .5s ease; /* Safari and Chrome */
+    -moz-transition: all .5s ease; /* Firefox */
+    -ms-transition: all .5s ease; /* IE 9 */
+    -o-transition: all .5s ease; /* Opera */
+    transition: all .5s ease;
+}
+.zoom-container .zoom-caption span {
+	display: block;
+	text-align: center;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 20px;
+	font-weight: 900;
+	letter-spacing: -1px;
+	text-transform: uppercase;
+	color: #fff;
+	margin: 23% 0 0;
+	padding: 10px 0;
+	border-top: 5px solid rgba(255, 255, 255, .15);
+	border-bottom: 5px solid rgba(255, 255, 255, .15);
+}
+.zoom-container:hover img {
+	-webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+}
+.zoom-container:hover .zoom-caption {
+	background: none;
+}	
