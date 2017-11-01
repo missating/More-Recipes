@@ -1,9 +1,9 @@
 var image = document.getElementById("mainImage");
 
 var imageArr = [
-  "img/3.jpg",
-  "img/2.jpg",
-  "img/1.jpg"
+  "img/banner3.jpg",
+  "img/banner2.jpg",
+  "img/banner1.jpg"
 ];
 
 var imageIndex = 0;

@@ -10,6 +10,68 @@ html {
     height: 100%;
 }
 
+.card {
+    width: 300px;
+    /* Set width of cards */
+    border: 1px solid #2c3e50;
+    /* Set up Border */
+    border-radius: 4px;
+    /* Slightly Curve edges */
+    overflow: hidden;
+    /* Fixes the corners */
+    display: flex;
+    /* Children use Flexbox */
+    flex-direction: column;
+    /* Rotate Axis */
+}
+
+
+.card-header {
+    color: #3498db;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #2c3e50;
+    background-color: #f5f5f5;
+    padding: 5px 10px;
+}
+
+.mainBtn {
+  display: inline-block;
+}
+
+
+
+
+.card-main {
+    display: flex;
+    /* Children use Flexbox */
+    flex-direction: column;
+    /* Rotate Axis to Vertical */
+    justify-content: center;
+    /* Group Children in Center */
+    align-items: center;
+    /* Group Children in Center (+axis) */
+    padding: 15px 0;
+    /* Add padding to the top/bottom */
+}
+
+.main-description {
+    color: #222;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+}
+
+
+a .btn-outline-primary{
+	margin: 20px;
+	padding: 5px 15px;
+	border-radius: 4px;
+    border: 1px solid #000;
+    color: #3498db;
+}
+
 
 h1,
 h2,
@@ -22,7 +84,7 @@ h6 {
 
 h4 {
     font-weight: bold;
-     color: #2c3e50;
+    color: #2c3e50;
 }
 
 
@@ -111,9 +173,10 @@ p a {
 }
 
 .btn-dark {
-    font-size: 20px;
+    font-size: 15px;
     color: #fff;
     margin: 5px;
+    text-align: center;
 }
 
 
@@ -148,6 +211,10 @@ p a {
 
 }
 
+#mainImage {
+    margin-top: 50px;
+}
+
 
 .center {
     text-align: center;
@@ -175,5 +242,5 @@ p a {
     border: 1px solid #3498db;
 }
 
-.pagination a:hover:not(.active) {background-color: #bdc4cf;
-
+.pagination a:hover:not(.active) {
+    background-color: #bdc4cf;
