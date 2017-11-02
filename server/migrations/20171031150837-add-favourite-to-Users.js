@@ -4,6 +4,6 @@ module.exports = {
   },
 
   down: (queryInterface /* , Sequelize */) => {
-    queryInterface.removeColumn('Users', 'favourite')
+    queryInterface.removeColumn('Users', 'favourite');
   }
 };

@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import db from '../models/index';
-import validateUser from '../validation/validateUser';
+import Sequelize from 'sequelize';
 
 
 /**
@@ -21,15 +21,34 @@ export default class Users {
    * @memberof User
    */
   static createUser(req, res) {
-    const userValidate = validateUser(req.body);
-    if (!userValidate) {
-      return userValidate.message;
-    }
     const {
-      fullname,
-      username,
-      email,
+      email, password, confirmPassword, fullname, username
     } = req.body;
+
+    if (!fullname) {
+      return res.status(400).json({ message: 'Fullname field is empty' });
+    }
+    if (!username) {
+      return res.status(400).json({ message: 'Lastname field is empty' });
+    }
+    if (!password) {
+      return res.status(400).json({ message: 'Password field is empty' });
+    }
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Passwords should be at leats 6 characters' });
+    }
+    if (!confirmPassword) {
+      return res.status(400).json({ message: 'confirm Password field is empty' });
+    }
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: 'Passwords don\'t match' });
+    }
+    if (!email) {
+      return res.status(400).json({ message: 'Email field is empty' });
+    }
+    if (typeof email !== 'string') {
+      return res.status(400).json({ message: 'Invalid Email' });
+    }
     db.User.findOne({
       where: {
         email
@@ -53,7 +72,9 @@ export default class Users {
             .json({
               status: 'success',
               message: 'Account created',
-              newUser,
+              username: newUser.username,
+              fullname: newUser.fullname,
+              email: newUser.email
             }))
           .catch(error => res.status(400).send(error.message));
       }).catch(error => res.status(400).send(error.message));
@@ -108,5 +129,85 @@ export default class Users {
         message: error.message
       }));
   }
+  /**
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
+ * @returns {success} 
+ * @memberof Users
+ */
+  static addFavourite(req, res) {
+    const recipeId = req.body.recipeId;
+
+    db.Recipe.findById(req.body.recipeId)
+      .then((found) => {
+        if (!found) {
+          return res.status(404)
+            .json({ message: 'recipe doesn\'t exist in catalogue' });
+        }
+        if (found) {
+          db.User.findById(req.params.userid)
+            .then((foundUser) => {
+              if (!foundUser) {
+                return res.status(404)
+                  .json({ message: 'user not found' });
+              }
+              if (foundUser) {
+                db.User.update(
+                  { favourite: Sequelize.fn('array_append', Sequelize.col('favourite'), recipeId) },
+                  { where: { id: req.params.userid } }
+                );
+              }
+              return res.status(201).json({
+                status: 'Success',
+                message: 'Recipe added to favourites'
+              });
+            })
+            .catch(() => res.status(500)
+              .json({ message: 'Unable to add to favourites due to server error' }));
+        }
+      });
+  }
+  /**
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
+ * @returns {json} with the user's favorite
+ * @memberof Users
+ */
+  static getAllFavourite(req, res) {
+   
+
+    db.Recipe.findAll({
+      where: {
+        //userId: req.params.id,
+        id: db.User.favorites
+      },
+    })
+    .then((found) => {
+      if (!found) {
+        return res.status(404)
+          .json({
+            status: 'success',
+            message: 'You have no recipes added as favourites'
+          });
+      }
+      if (found) {
+        return res.status(200)
+          .json({
+            status: 'Success',
+            favourites: found
+          });
+      }
+    })
+    // .catch((error) => {
+    //   return res.status(500)
+    //     .json({ message: 'Unable to get favourites, internal server error' });
+    // });
+}
 }
 

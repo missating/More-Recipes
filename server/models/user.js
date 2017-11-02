@@ -23,7 +23,7 @@ export default (sequelize, DataTypes) => {
     favourite: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       allowNull: true,
-      defaultvalue: 0
+      defaultvalue: []
     }
   });
 
