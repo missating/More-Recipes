@@ -18,9 +18,7 @@ export default class Recipes {
    * @memberof Recipes
    */
   static addRecipe(req, res) {
-    const name = req.body.name;
-    const ingredients = req.body.ingredients;
-    const description = req.body.description;
+    const { name, ingredients, description } = req.body;
 
     if (!ingredients) {
       return res.status(400).json({ message: 'Ingredients field is empty' });
@@ -78,13 +76,6 @@ export default class Recipes {
   static updateRecipe(req, res) {
     const { name, ingredients, description } = req.body;
 
-
-    if (!(req.params.recipeId)) {
-      return res.status(400)
-        .json({ message: 'Include ID of recipe to update' });
-    }
-
-
     db.Recipe.findOne({
       where: {
         id: req.params.recipeId,
@@ -135,11 +126,6 @@ export default class Recipes {
  * @memberof Recipes
  */
   static deleteRecipe(req, res) {
-    if (!(req.params.recipeId)) {
-      return res.status(400)
-        .json({ message: 'Include ID of recipe to delete' });
-    }
-
     db.Recipe.findOne({
       where: {
         id: req.params.recipeId,
@@ -237,5 +223,78 @@ export default class Recipes {
           }));
     }
   }
-}
 
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @memberof Recipe
+   */
+  static viewOne(req, res) {
+    db.Recipe.findOne({
+      where: { id: req.params.recipeId },
+      include: [
+        { model: db.User, attributes: ['fullname', 'username', 'email'] },
+        { model: db.Review, attributes: ['content'] }
+      ]
+    })
+      .then((foundRecipe) => {
+        if (!foundRecipe) {
+          return res.status(404)
+            .json({ message: `Can't find recipe with id ${req.params.recipeId}` });
+        }
+        if (foundRecipe) {
+          if (userId) {
+            if (userId !== foundRecipe.userId) {
+              foundRecipe.increment('views');
+            }
+          }
+          return res.status(200)
+            .json({
+              status: 'Success',
+              foundRecipe,
+            });
+        }
+      })
+      .catch(error => res.status(500)
+        .json({
+          status: 'Fail',
+          error,
+        }));
+  }
+
+  /**
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
+ * @memberof Recipes
+ */
+  static getAllUser(req, res) {
+    db.Recipe.findAll({
+      where: {
+        userId: req.body.userId
+      },
+      include: [
+        { model: db.Review, attributes: ['content'] }
+      ]
+    })
+      .then((all) => {
+        if (!all) {
+          return res.status(404)
+            .json({ message: 'You currently have no recipes' });
+        }
+        if (all) {
+          return res.status(200)
+            .json({
+              status: 'Success',
+              recipes: all
+            });
+        }
+      })
+      .catch(() => res.status(500)
+        .json({ message: 'Unable to find all recipes by you' }));
+  }
+}

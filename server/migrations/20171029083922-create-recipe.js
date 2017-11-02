@@ -26,7 +26,11 @@ module.exports = {
       type: Sequelize.TEXT,
       allowNull: false
     },
-
+    views: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
     downvote: {
       type: Sequelize.INTEGER,
       allowNull: true,

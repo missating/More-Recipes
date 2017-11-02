@@ -19,7 +19,11 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false
     },
-
+    views: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
     downvote: {
       type: DataTypes.INTEGER,
       allowNull: true,
