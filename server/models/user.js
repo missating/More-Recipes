@@ -31,7 +31,6 @@ export default (sequelize, DataTypes) => {
     // associations defined here
     User.hasMany(models.Recipe, { foreignKey: 'userId' });
     User.hasMany(models.Review, { foreignKey: 'userId' });
-    User.hasMany(models.Vote, { foreignKey: 'userId' });
   };
   return User;
 };

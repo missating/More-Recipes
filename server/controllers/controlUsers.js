@@ -1,7 +1,7 @@
+import Sequelize from 'sequelize';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import db from '../models/index';
-import Sequelize from 'sequelize';
 
 
 /**
@@ -129,17 +129,18 @@ export default class Users {
         message: error.message
       }));
   }
+
   /**
  *
  *
  * @static
  * @param {any} req
  * @param {any} res
- * @returns {success} 
+ * @returns {success} when user adds favourite
  * @memberof Users
  */
   static addFavourite(req, res) {
-    const recipeId = req.body.recipeId;
+    const { recipeId } = req.body;
 
     db.Recipe.findById(req.body.recipeId)
       .then((found) => {
@@ -148,7 +149,7 @@ export default class Users {
             .json({ message: 'recipe doesn\'t exist in catalogue' });
         }
         if (found) {
-          db.User.findById(req.params.userid)
+          db.User.findById(req.params.userId)
             .then((foundUser) => {
               if (!foundUser) {
                 return res.status(404)
@@ -157,7 +158,7 @@ export default class Users {
               if (foundUser) {
                 db.User.update(
                   { favourite: Sequelize.fn('array_append', Sequelize.col('favourite'), recipeId) },
-                  { where: { id: req.params.userid } }
+                  { where: { id: req.params.userId } }
                 );
               }
               return res.status(201).json({
@@ -180,34 +181,31 @@ export default class Users {
  * @memberof Users
  */
   static getAllFavourite(req, res) {
-   
-
-    db.Recipe.findAll({
-      where: {
-        //userId: req.params.id,
-        id: db.User.favorites
-      },
-    })
-    .then((found) => {
-      if (!found) {
-        return res.status(404)
-          .json({
-            status: 'success',
-            message: 'You have no recipes added as favourites'
-          });
-      }
-      if (found) {
-        return res.status(200)
-          .json({
-            status: 'Success',
-            favourites: found
-          });
-      }
-    })
-    // .catch((error) => {
-    //   return res.status(500)
-    //     .json({ message: 'Unable to get favourites, internal server error' });
-    // });
+    db.User.findById(req.params.userId)
+      .then((found) => {
+        if (!found) {
+          return res.status(404)
+            .json({
+              status: 'Failed',
+              message: 'User not found'
+            });
+        }
+        if (found) {
+          db.Recipe.findAll({
+            where: {
+              id: found.favourite
+            }
+          })
+            .then((recipes) => {
+              res.status(200)
+                .json({
+                  status: 'Success',
+                  recipes
+                });
+            })
+            .catch(() => res.status(500)
+              .json({ status: 'Failed', message: 'Unable to get favourites, internal server error' }));
+        }
+      });
+  }
 }
-}
-

@@ -10,17 +10,16 @@ const router = (app) => {
     res.status(200)
       .send('Welcome to more-recipes api');
   });
-  app.post('/api/users/signup', User.createUser);
-  app.post('/api/users/signin', User.userLogin);
-  app.post('/api/recipes', extractToken, verifyToken, Recipe.addRecipe);
-  app.put('/api/recipes/:recipeId', extractToken, verifyToken, Recipe.updateRecipe);
-  app.delete('/api/recipes/:recipeId', extractToken, verifyToken, Recipe.deleteRecipe);
-  app.post('/api/recipes/:recipeId/reviews', extractToken, verifyToken, Review.addReview);
-  app.post('/api/users/:userid/favourite', User.addFavourite);
-  app.get('/api/users/:userid/recipes', User.getAllFavourite);
-  app.get('/api/recipes/:recipeId', Recipe.viewOne);
-  app.get('/api/recipes/user/all', extractToken, verifyToken, Recipe.getAllUser);
-  app.get('/api/recipes', Recipe.getAllRecipes);
+  app.post('/api/v1/users/signup', User.createUser); // create a user
+  app.post('/api/v1/users/signin', User.userLogin); // user signs in
+  app.post('/api/v1/recipes', extractToken, verifyToken, Recipe.addRecipe); // add recipes
+  app.put('/api/v1/recipes/:recipeId', extractToken, verifyToken, Recipe.updateRecipe); // update recipes
+  app.delete('/api/v1/recipes/:recipeId', extractToken, verifyToken, Recipe.deleteRecipe);
+  app.post('/api/v1/recipes/:recipeId/reviews', extractToken, verifyToken, Review.addReview);
+  app.post('/api/v1/users/:userId/favourite', User.addFavourite);
+  app.get('/api/v1/users/:userId/recipes', User.getAllFavourite);
+  app.get('/api/v1/recipes/user/all', extractToken, verifyToken, Recipe.getAllUser);
+  app.get('/api/v1/recipes', Recipe.getAllRecipes);
 };
 
 export default router;
