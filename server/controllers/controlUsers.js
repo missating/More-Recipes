@@ -184,7 +184,6 @@ export default class Users {
 
     db.Recipe.findAll({
       where: {
-        //userId: req.params.id,
         id: db.User.favorites
       },
     })
