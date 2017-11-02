@@ -95,7 +95,9 @@ p {
 }
 
 
-
+.navbar-toggler-icon {
+    color: #fff;
+}
 
 .card-main {
     display: flex;
@@ -126,6 +128,9 @@ a .btn-outline-primary{
     color: #3498db;
 }
 
+.my-2 input {
+    margin: 5px;
+}
 
 
 a {
@@ -175,7 +180,7 @@ p a {
 }
 
 .btn-dark {
-    font-size: 15px;
+    font-size: 20px;
     color: #fff;
     margin: 5px;
     text-align: center;
