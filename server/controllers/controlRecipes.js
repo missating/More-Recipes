@@ -224,45 +224,6 @@ export default class Recipes {
     }
   }
 
-  /**
-   *
-   *
-   * @param {any} req
-   * @param {any} res
-   * @memberof Recipe
-   */
-  static viewOne(req, res) {
-    db.Recipe.findOne({
-      where: { id: req.params.recipeId },
-      include: [
-        { model: db.User, attributes: ['fullname', 'username', 'email'] },
-        { model: db.Review, attributes: ['content'] }
-      ]
-    })
-      .then((foundRecipe) => {
-        if (!foundRecipe) {
-          return res.status(404)
-            .json({ message: `Can't find recipe with id ${req.params.recipeId}` });
-        }
-        if (foundRecipe) {
-          if (userId) {
-            if (userId !== foundRecipe.userId) {
-              foundRecipe.increment('views');
-            }
-          }
-          return res.status(200)
-            .json({
-              status: 'Success',
-              foundRecipe,
-            });
-        }
-      })
-      .catch(error => res.status(500)
-        .json({
-          status: 'Fail',
-          error,
-        }));
-  }
 
   /**
  *
@@ -270,6 +231,7 @@ export default class Recipes {
  * @static
  * @param {any} req
  * @param {any} res
+ * @returns { json } gets details of a user
  * @memberof Recipes
  */
   static getAllUser(req, res) {
