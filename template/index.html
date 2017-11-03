@@ -21,7 +21,7 @@
 
     <nav class="navbar navbar-expand-sm navbar-custom fixed-top py-1">
         <a class="navbar-brand" href="index.html">More Recipes</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="icon">
     <span class="navbar-toggler-icon"></span>
   </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -33,11 +33,11 @@
                     <a class="nav-link" href="recipe.html">Recipes</a>
                 </li>
             </ul>
-	<form class="form-inline my-2 my-lg-0">
-        <input type="text" name="email" class="form-control" placeholder="Email">
-		 <input type="password" name="password" class="form-control" placeholder="Password">
-      <button class="btn btn-primary my-2 my-sm-0" type="submit">Sign In</button>
-    </form>
+            <form class="form-inline my-2 my-lg-0" method="post" action="authUsers/profile.html">
+                <input type="text" name="email" class="form-control" placeholder="Email">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Sign In</button>
+            </form>
         </div>
     </nav>
 
@@ -51,7 +51,41 @@
             <div class="col-md-4" id="media">
                 <p>More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.</p>
                 <p>Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.</p>
-                <a href="#"><button type="button" class="btn btn-dark btn-lg fa fa-sign-in"> Join</button></a>
+                <p><strong>Don't have an account ? </strong><a href="#myModal" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-dark btn-lg fa fa-sign-in"> Sign Up</button></a></p>
+
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labbelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <form action="authUsers/profile.html" method="post" class="form-horizontal" id="inform">
+                                            <label for="username">Full Name</label>
+                                            <input type="text" name="fullname" class="form-control">
+
+                                            <label for="username">Username</label>
+                                            <input type="text" name="username" class="form-control">
+
+                                            <label for="username">Email</label>
+                                            <input type="text" name="email" class="form-control">
+
+                                            <label for="password">Password</label>
+                                            <input type="password" name="password" class="form-control"><br>
+                                            <div class="button">
+                                                <input type="submit" class="btn btn-primary btn-lg" value="Submit">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -68,7 +102,9 @@
                         <div class="card-header">Recipe 1</div>
                         <div class="card-main">
                             <img src="img/7.jpg" class="img-thumbnail" id="box1">
-                           <div class="main-description"><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p></div>
+                            <div class="main-description">
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
+                            </div>
 
                             <div class="mainBtn">
                                 <button class="btn btn-danger btn-sm"><span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
@@ -89,7 +125,9 @@
                         </div>
                         <div class="card-main">
                             <img src="img/8.jpg" class="img-thumbnail" id="box1">
-                            <div class="main-description"><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p></div>
+                            <div class="main-description">
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
+                            </div>
                             <div class="mainBtn">
                                 <button class="btn btn-danger btn-sm"><span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
 
@@ -111,7 +149,9 @@
                         </div>
                         <div class="card-main">
                             <img src="img/17.jpg" class="img-thumbnail" id="box1">
-                            <div class="main-description"><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p></div>
+                            <div class="main-description">
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
+                            </div>
                             <div class="mainBtn">
                                 <button class="btn btn-danger btn-sm"><span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
 
@@ -137,13 +177,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                     <div class="card">
+                    <div class="card">
                         <div class="card-header">
                             Recipe 1
                         </div>
                         <div class="card-main">
                             <img src="img/10.jpg" class="img-thumbnail" id="box1">
-                            <div class="main-description"><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p></div>
+                            <div class="main-description">
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
+                            </div>
                             <div class="mainBtn">
                                 <button class="btn btn-danger btn-sm"><span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
 
@@ -159,13 +201,15 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                       <div class="card">
+                    <div class="card">
                         <div class="card-header">
                             Recipe 2
                         </div>
                         <div class="card-main">
                             <img src="img/11.jpg" class="img-thumbnail" id="box1">
-                              <div class="main-description"><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p></div>
+                            <div class="main-description">
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
+                            </div>
                             <div class="mainBtn">
                                 <button class="btn btn-danger btn-sm"><span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
 
@@ -181,13 +225,15 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                       <div class="card">
+                    <div class="card">
                         <div class="card-header">
                             Recipe 3
                         </div>
                         <div class="card-main">
                             <img src="img/13.jpg" class="img-thumbnail" id="box1">
-                           <div class="main-description"><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p></div>
+                            <div class="main-description">
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
+                            </div>
                             <div class="mainBtn">
                                 <button class="btn btn-danger btn-sm"><span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
 
