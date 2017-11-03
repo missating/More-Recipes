@@ -95,9 +95,7 @@ p {
 }
 
 
-.navbar-toggler-icon {
-    color: #fff;
-}
+
 
 .card-main {
     display: flex;
@@ -126,10 +124,15 @@ a .btn-outline-primary{
 	border-radius: 4px;
     border: 1px solid #000;
     color: #3498db;
+    cursor: pointer;
 }
 
 .my-2 input {
     margin: 5px;
+}
+
+.my-2 {
+     cursor: pointer;
 }
 
 
@@ -184,6 +187,15 @@ p a {
     color: #fff;
     margin: 5px;
     text-align: center;
+    cursor: pointer;
+}
+
+.btn-danger {
+    cursor: pointer;
+}
+
+small {
+    cursor: pointer;
 }
 
 
@@ -191,7 +203,7 @@ p a {
         max-width: 700px;
     margin: 70px auto;
     font-family: 'Source Sans Pro', sans-serif;
-     border: 10px solid #3498db;
+     box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.5);
     padding: 20px;
 }
 

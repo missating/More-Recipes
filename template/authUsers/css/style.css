@@ -22,7 +22,7 @@ h6 {
 
 h4 {
     font-weight: bold;
-     color: #2c3e50;
+    color: #2c3e50;
 }
 
 p {
@@ -74,6 +74,10 @@ a:hover {
     color: #bdc4cf;
 }
 
+.fa-pencil {
+    cursor: pointer
+}
+
 p a {
     font-size: 15px;
 }
@@ -116,6 +120,7 @@ ul {
     padding: 10px;
 }
 
+
 .section {
     z-index: 1;
     width: 100%;
@@ -137,7 +142,7 @@ ul {
 }
 
 .bord {
-    border: 1px solid red;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.5);
     width: 500px;
     margin: 0 auto;
 }
@@ -147,6 +152,10 @@ ul {
         width: 300px;
     }
 
+}
+
+.btn {
+    cursor: pointer;
 }
 
 
@@ -201,5 +210,271 @@ ul {
     border: 1px solid #3498db;
 }
 
-.pagination a:hover:not(.active) {background-color: #bdc4cf;
+.pagination a:hover:not(.active) {
+    background-color: #bdc4cf;
+}
 
+
+
+
+.mainBtn {
+  display: inline-block;
+}
+
+
+
+
+.card-main {
+    display: flex;
+    /* Children use Flexbox */
+    flex-direction: column;
+    /* Rotate Axis to Vertical */
+    justify-content: center;
+    /* Group Children in Center */
+    align-items: center;
+    /* Group Children in Center (+axis) */
+    padding: 15px 0;
+    /* Add padding to the top/bottom */
+}
+
+.main-description {
+    color: #222;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+}
+
+
+a .btn-outline-primary{
+	margin: 20px;
+	padding: 5px 15px;
+	border-radius: 4px;
+    border: 1px solid #000;
+    color: #3498db;
+    cursor: pointer;
+}
+
+.my-2 input {
+    margin: 5px;
+}
+
+.my-2 {
+     cursor: pointer;
+}
+
+
+a {
+    text-decoration: none;
+    outline: none;
+    color: #3498db;
+    font-weight: bolder;
+    font-size: 0.6em;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #bdc4cf;
+}
+
+p a {
+    font-size: 15px;
+}
+
+
+
+.size {
+    width: 500px;
+    margin: 30px auto;
+}
+
+.top {
+    margin-top: 30px;
+}
+
+
+.form-horizontal {
+    width: 600px;
+    margin: 0 auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+    .form-horizontal {
+        width: 300px;
+    }
+
+}
+
+
+.button {
+    text-align: center;
+}
+
+.btn-dark {
+    font-size: 20px;
+    color: #fff;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-danger {
+    cursor: pointer;
+}
+
+small {
+    cursor: pointer;
+}
+
+
+#oneRecipe {
+        max-width: 700px;
+    margin: 70px auto;
+    font-family: 'Source Sans Pro', sans-serif;
+     box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.5);
+    padding: 20px;
+}
+
+#oneRecipe img {
+     width: 100%;
+    margin-bottom: 30px;
+}
+
+.styles {
+    
+    text-align: center;
+    padding-bottom: 50px;
+  color: #2c3e50;
+    font-weight: bolder;
+
+}
+
+
+#right {
+    margin-left: 270px;
+    padding: 5px;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+    #right {
+        margin: 5px 0 0 0;
+    }
+
+}
+
+#box1 {
+    margin: 10px 0 10px 0;
+
+}
+
+#media {
+    margin: 65px auto;
+    margin-left: -80px;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+    #media {
+        margin-left: 0;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+}
+
+#mainImage {
+    margin-top: 50px;
+}
+
+
+.center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #bdc4cf;
+    margin: 0 4px;
+    font-size: 16px;
+}
+
+.pagination a.active {
+    background-color: #3498db;
+    color: white;
+    border: 1px solid #3498db;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #bdc4cf;
+}
+
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------Zoom-Effect---------------------------------- */
+/* ---------------------------------------------------------------------------- */	
+.zoom-container {
+	position: relative;
+	overflow: hidden;
+       margin: 30px;
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.zoom-container img {
+	display: block;
+	width: 100%;
+	height: auto;
+	-webkit-transition: all .5s ease; /* Safari and Chrome */
+    -moz-transition: all .5s ease; /* Firefox */
+    -ms-transition: all .5s ease; /* IE 9 */
+    -o-transition: all .5s ease; /* Opera */
+    transition: all .5s ease;
+	
+}
+.zoom-container .zoom-caption {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+	background: rgba(0, 0, 0, .5);
+	-webkit-transition: all .5s ease; /* Safari and Chrome */
+    -moz-transition: all .5s ease; /* Firefox */
+    -ms-transition: all .5s ease; /* IE 9 */
+    -o-transition: all .5s ease; /* Opera */
+    transition: all .5s ease;
+}
+.zoom-container .zoom-caption span {
+	display: block;
+	text-align: center;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 20px;
+	font-weight: 900;
+	letter-spacing: -1px;
+	text-transform: uppercase;
+	color: #fff;
+	margin: 23% 0 0;
+	padding: 10px 0;
+	border-top: 5px solid rgba(255, 255, 255, .15);
+	border-bottom: 5px solid rgba(255, 255, 255, .15);
+}
+.zoom-container:hover img {
+	-webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+}
+.zoom-container:hover .zoom-caption {
+	background: none;
+}	
+    
