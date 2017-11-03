@@ -2,6 +2,17 @@ language: node_js
 
 node_js:
   - stable
+  services:
+  - postgresql
+before_script:
+  - psql -c 'create database more_recipes_test;' -U postgres 
+install:
+  - npm install sequelize
+  - npm install sequelize-cli
+  - npm install pg
+  - npm install pg-hstore
+script:
+  - sequelize db:migrate --env test
 
 install:
   - npm install
