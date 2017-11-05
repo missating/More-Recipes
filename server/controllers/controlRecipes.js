@@ -234,15 +234,31 @@ export default class Recipes {
  * @returns { json } gets details of a user
  * @memberof Recipes
  */
-  static getAllUser(req, res) {
-    db.Recipe.findAll({
+  static getAllUserRecipes(req, res) {
+    const userId = req.headers.id;
+
+    if (!userId) {
+      return res.status(400).json({ message: 'UserId field is empty' });
+    }
+
+    db.Recipe.findOne({
       where: {
-        userId: req.body.userId
-      },
-      include: [
-        { model: db.Review, attributes: ['content'] }
-      ]
-    })
+        userId
+      }
+    }).then((existing) => {
+      if (!existing) {
+        return res.status(404).send({
+          status: 'Not found',
+          message: 'A user with that Id is not found',
+        });
+      }  db.Recipe.findAll({
+        where: {
+          userId
+        },
+        include: [
+          { model: db.Review, attributes: ['content'] }
+        ]
+      })
       .then((all) => {
         if (!all) {
           return res.status(404)
@@ -256,7 +272,12 @@ export default class Recipes {
             });
         }
       })
-      .catch(() => res.status(500)
-        .json({ message: 'Unable to find all recipes by you' }));
+      .catch(() => { return res.status(500)
+        .json({ message: 'Unable to find all recipes by you' });
+      });
+
+    });
+
   }
+
 }

@@ -16,9 +16,9 @@ const router = (app) => {
   app.put('/api/v1/recipes/:recipeId', extractToken, verifyToken, Recipe.updateRecipe); // update recipes
   app.delete('/api/v1/recipes/:recipeId', extractToken, verifyToken, Recipe.deleteRecipe);
   app.post('/api/v1/recipes/:recipeId/reviews', extractToken, verifyToken, Review.addReview);
-  app.post('/api/v1/users/:userId/favourite', User.addFavourite);
-  app.get('/api/v1/users/:userId/recipes', User.getAllFavourite);
-  app.get('/api/v1/recipes/user/all', extractToken, verifyToken, Recipe.getAllUser);
+  app.post('/api/v1/users/:userId/favourite', extractToken, verifyToken, User.addFavourite);
+  app.get('/api/v1/users/:userId/recipes', extractToken, verifyToken, User.getAllFavourite);
+  app.get('/api/v1/recipes/user/allrecipes', extractToken, verifyToken, Recipe.getAllUserRecipes);
   app.get('/api/v1/recipes', Recipe.getAllRecipes);
 };
 

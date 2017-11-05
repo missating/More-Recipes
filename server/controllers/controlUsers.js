@@ -194,7 +194,10 @@ export default class Users {
           db.Recipe.findAll({
             where: {
               id: found.favourite
-            }
+            },
+            include: [
+              { model: db.Review, attributes: ['content'] }
+            ]
           })
             .then((recipes) => {
               res.status(200)
