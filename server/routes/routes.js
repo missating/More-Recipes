@@ -1,6 +1,7 @@
 import User from '../controllers/controlUsers';
 import Recipe from '../controllers/controlRecipes';
 import Review from '../controllers/controlReview';
+import Vote from '../controllers/controlVote';
 import extractToken from '../middlewares/authenticateUser';
 import verifyToken from '../middlewares/allowUser';
 
@@ -20,6 +21,8 @@ const router = (app) => {
   app.get('/api/v1/users/:userId/recipes', extractToken, verifyToken, User.getAllFavourite);
   app.get('/api/v1/recipes/user/allrecipes', extractToken, verifyToken, Recipe.getAllUserRecipes);
   app.get('/api/v1/recipes', Recipe.getAllRecipes);
+  app.post('/api/v1/recipes/:recipeId/upvote', extractToken, verifyToken, Vote.upvote); // user can upvote recipe
+  app.post('/api/v1/recipes/:recipeId/downvote', extractToken, verifyToken, Vote.downVote); // user can downvote recipe
 };
 
 export default router;
