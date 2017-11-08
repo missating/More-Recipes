@@ -19,11 +19,6 @@ export default (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    favourite: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-      allowNull: true,
-      defaultvalue: []
     }
   });
 
@@ -31,6 +26,9 @@ export default (sequelize, DataTypes) => {
     // associations defined here
     User.hasMany(models.Recipe, { foreignKey: 'userId' });
     User.hasMany(models.Review, { foreignKey: 'userId' });
+    User.hasMany(models.Upvote, { foreignKey: 'userId' });
+    User.hasMany(models.Downvote, { foreignKey: 'userId' });
+    User.hasMany(models.Favourite, { foreignKey: 'userId' });
   };
   return User;
 };
