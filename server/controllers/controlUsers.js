@@ -29,13 +29,13 @@ export default class Users {
       return res.status(400).json({ message: 'Fullname field is empty' });
     }
     if (!username) {
-      return res.status(400).json({ message: 'Lastname field is empty' });
+      return res.status(400).json({ message: 'Username field is empty' });
     }
     if (!password) {
       return res.status(400).json({ message: 'Password field is empty' });
     }
     if (password.length < 6) {
-      return res.status(400).json({ message: 'Passwords should be at leats 6 characters' });
+      return res.status(400).json({ message: 'Passwords should be at least 6 characters' });
     }
     if (!confirmPassword) {
       return res.status(400).json({ message: 'confirm Password field is empty' });

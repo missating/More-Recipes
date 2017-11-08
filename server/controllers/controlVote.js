@@ -34,7 +34,7 @@ export default class Vote {
             db.Downvote.findOne({
               where: {
                 recipeId: req.params.recipeId,
-                $and: { userId: req.userId }
+                userId: req.userId
               },
               attributes: ['id', 'recipeId', 'userId']
             }).then((foundDownvote) => {
