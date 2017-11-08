@@ -23,13 +23,13 @@ export default (sequelize, DataTypes) => {
     downvote: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultvalue: '0'
+      defaultValue: 0
     },
 
     upvote: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultvalue: '0'
+      defaultValue: 0
     }
   });
 
@@ -39,6 +39,7 @@ export default (sequelize, DataTypes) => {
     Recipe.hasMany(models.Review, { foreignKey: 'recipeId' });
     Recipe.hasMany(models.Upvote, { foreignKey: 'recipeId' });
     Recipe.hasMany(models.Downvote, { foreignKey: 'recipeId' });
+    Recipe.hasMany(models.Favourite, { foreignKey: 'recipeId' });
   };
   return Recipe;
 };

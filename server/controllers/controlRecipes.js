@@ -18,7 +18,7 @@ export default class Recipes {
    * @memberof Recipes
    */
   static addRecipe(req, res) {
-    const { name, ingredients, description, upvote, downvote } = req.body;
+    const { name, ingredients, description } = req.body;
 
     if (!ingredients) {
       return res.status(400).json({ message: 'Ingredients field is empty' });
@@ -31,10 +31,6 @@ export default class Recipes {
     }
     if (!description) {
       return res.status(400).json({ message: 'Add directions to prepare recipe' });
-    }
-
-    if (upvote !== '0') {
-      return res.status(400).json({ message: 'upvote must be 0' });
     }
 
     db.Recipe.findOne({

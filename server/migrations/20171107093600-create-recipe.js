@@ -30,13 +30,13 @@ module.exports = {
     downvote: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      defaultvalue: '0'
+      defaultValue: 0
     },
 
     upvote: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      defaultvalue: '0'
+      defaultValue: 0
     },
 
     createdAt: {
@@ -49,5 +49,5 @@ module.exports = {
       type: Sequelize.DATE
     },
   }),
-  down:(queryInterface /* , Sequelize */) => queryInterface.dropTable('Recipes')
+  down: queryInterface => queryInterface.dropTable('Recipes')
 };
