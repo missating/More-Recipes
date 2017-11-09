@@ -40,6 +40,7 @@ describe('API Endpoints testing', () => {
         username: 'vanessa',
         email: 'email@gmail.com',
         password: 'password12345',
+        confirmPassword: 'password12345'
       };
     });
     it('Should return 201 for successfull user creation.', () => {
@@ -233,7 +234,7 @@ describe('API Endpoints testing', () => {
         .get('/api/v1/recipes/13')
         .set('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RuYW1lIjoiRnJlZCIsImxhc3RuYW1lIjoiQWRld29sZSIsImVtYWlsIjoiRnJlZGFkZXdvbGVAZ21haWwuY29tIiwiaWF0IjoxNTA3MjIxNzkzLCJleHAiOjE1MDczMDgxOTN9.qYQEzG5IxW1kzChOX45brdm3Srqvbwdmo68uJDURvp0')
         .end((err, res) => {
-          expect(res.status).to.not.equal(401);
+          expect(res.status).to.not.equal(403);
           done();
         });
     });

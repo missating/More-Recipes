@@ -24,10 +24,10 @@ export default class Favourite {
             .json({ message: 'recipe does not exist in catalogue' });
         }
 
-        db.Favourite.findAll({
+        db.Favourite.findOne({
           where: {
-            recipeId: req.body.recipeId,
-            userId: req.userId
+            recipeId: req.params.recipeId,
+            $and: { userId: req.userId }
           }
         })
           .then((foundRecipe) => {
@@ -67,7 +67,7 @@ export default class Favourite {
    * @memberof Favourite
    */
   static getAllFavourites(req, res) {
-    db.Favourite.findOne({
+    db.Favourite.findAll({
       where: {
         userId: req.userId,
       },

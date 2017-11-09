@@ -1,4 +1,3 @@
-import Sequelize from 'sequelize';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import db from '../models/index';
