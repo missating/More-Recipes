@@ -183,7 +183,13 @@ export default class Recipes {
  */
   static getAllRecipes(req, res) {
     if (!req.query.sort) {
-      db.Recipe.findAll()
+      db.Recipe.findAll({
+        include: [
+          {
+            model: db.Review, attributes: ['content']
+          }
+        ]
+      })
         .then((recipes) => {
           if (recipes) {
             return res.status(200)
@@ -203,7 +209,13 @@ export default class Recipes {
           }));
     }
     if (req.query.sort) {
-      db.Recipe.findAll()
+      db.Recipe.findAll({
+        include: [
+          {
+            model: db.Review, attributes: ['content']
+          }
+        ]
+      })
         .then((recipes) => {
           if (recipes) {
             const sorted = recipes.sort((a, b) => b.upvote - a.upvote);
@@ -237,15 +249,9 @@ export default class Recipes {
  * @memberof Recipes
  */
   static getAllUserRecipes(req, res) {
-    const userId = req.headers.id;
-
-    if (!userId) {
-      return res.status(400).json({ message: 'UserId field is empty' });
-    }
-
     db.Recipe.findOne({
       where: {
-        userId
+        userId: req.userId
       }
     }).then((existing) => {
       if (!existing) {
@@ -253,33 +259,29 @@ export default class Recipes {
           status: 'Not found',
           message: 'A user with that Id is not found',
         });
-      }  db.Recipe.findAll({
+      } db.Recipe.findAll({
         where: {
-          userId
+          userId: req.userId
         },
         include: [
           { model: db.Review, attributes: ['content'] }
         ]
       })
-      .then((all) => {
-        if (!all) {
-          return res.status(404)
-            .json({ message: 'You currently have no recipes' });
-        }
-        if (all) {
-          return res.status(200)
-            .json({
-              status: 'Success',
-              recipes: all
-            });
-        }
-      })
-      .catch(() => { return res.status(500)
-        .json({ message: 'Unable to find all recipes by you' });
-      });
-
+        .then((all) => {
+          if (!all) {
+            return res.status(404)
+              .json({ message: 'You currently have no recipes' });
+          }
+          if (all) {
+            return res.status(200)
+              .json({
+                status: 'Success',
+                recipes: all
+              });
+          }
+        })
+        .catch(() => res.status(500)
+          .json({ message: 'Unable to find all recipes by you' }));
     });
-
   }
-
 }

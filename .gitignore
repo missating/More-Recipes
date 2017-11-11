@@ -6,3 +6,5 @@ node_modules/
 server/dist
 
 .nyc_output
+
+dist/
