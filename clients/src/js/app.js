@@ -1,7 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../components/App';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 
 import '../css/style.css';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+import keenImage from '../assets/keen.png';
+
+export default class Hello extends Component {
+  render() {
+    return (
+      <div>
+        Hello from react
+         {/* ADDED IN THIS STEP */}
+         <img src={ keenImage } alt='Commander Keen' />
+      </div>
+    );
+  }
+}
+render(<Hello />, document.getElementById('app'));
