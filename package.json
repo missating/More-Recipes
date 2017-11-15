@@ -14,7 +14,7 @@
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "build:client": "webpack",
     "dev": "webpack-dev-server",
-    "clean":  "rimraf dist"
+    "clean": "rimraf dist"
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,11 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "bootstrap": "^4.0.0-beta",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "coveralls": "^3.0.0",
@@ -48,8 +49,10 @@
     "nyc": "^11.2.1",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "sequelize": "^4.19.0"
   },
   "devDependencies": {
