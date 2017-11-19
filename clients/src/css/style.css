@@ -1,7 +1,54 @@
+
 body {
-    background: #e11340;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    margin: 0;
-    padding: 30px;
+  width: 100%;
+  height: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+  background: ghostwhite;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+.size {
+  width: 655px;
+  margin: 30px auto;
+}
+
+#media {
+  margin: 65px auto;
+  margin-left: -50px;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  #media {
+      margin-left: 0;
+      margin: 0 auto;
+      margin-bottom: 10px;
   }
+
+}
+
+#mainImage {
+  margin-top: 35px;
+}
+
+.btn-dark {
+  font-size: 20px;
+  color: #fff;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.form-horizontal {
+  width: 600px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  .form-horizontal {
+      width: 300px;
+  }
+
+}
