@@ -1,6 +1,6 @@
 import React from 'react';
+import RecipeCard from './RecipeCard';
 import banner1 from '../assets/banner1.jpg';
-import seven from '../assets/seven.jpg';
 import eight from '../assets/eight.jpg';
 import seventen from '../assets/seventen.jpg';
 
@@ -57,165 +57,34 @@ const Home = () => (
         </div>
     </section>
 
-<section className="container" style={{ marginTop: '56px' }} id="explore">
+<section className="container" style={{ marginTop: '56px' }}>
   <h2 className="text-center"> Featured Recipes </h2>
   <hr/>
-  <div className="container">
-    <div className="row">
-        <div className="col-md-4">
-            <div className="card">
-                <div className="card-header">Recipe 1</div>
-                <div className="card-main">
-                <img src={seven} alt="..." className="img-thumbnail"/>
-                    <div className="main-description">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
-                    </div>
-
-                    <div className="mainBtn">
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
-
-                        <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> 6</button>
-
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
-                    </div>
-                    <a href="">                           
-                    <button type="button" className="btn btn-outline-primary">Details</button></a>
-                </div>
-            </div>
-
-        </div>
-        <div className="col-md-4">
-            <div className="card">
-                <div className="card-header">
-                    Recipe 2
-                </div>
-                <div className="card-main">
-                <img src={eight} alt="..." className="img-thumbnail"/>
-                    <div className="main-description">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
-                    </div>
-                    <div className="mainBtn">
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
-
-                        <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> 6</button>
-
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
-                    </div>
-
-                    <a href="">                           
-                    <button type="button" className="btn btn-outline-primary">Details</button></a>
-                </div>
-            </div>
-        </div>
-        <div className="col-md-4">
-            <div className="card">
-                <div className="card-header">
-                    Recipe 3
-                </div>
-                <div className="card-main">
-                <img src={seventen} alt="..." className="img-thumbnail"/>
-                    <div className="main-description">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
-                    </div>
-                    <div className="mainBtn">
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
-
-                        <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> 6</button>
-
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
-                    </div>
-
-                    <a href="">
-                    <button type="button" className="btn btn-outline-primary">Details</button></a>
-
-                </div>
-            </div>
-        </div>
+  <div className="row">
+      <div className="col-md-4">
+      <RecipeCard />
+      </div>
+      <div className="col-md-4">
+      <RecipeCard />
+      </div>
+      <div className="col-md-4">
+      <RecipeCard />
+      </div>
     </div>
-  </div>
 
-    </section>
-
-    
-<section className="container" style={{ marginTop: '56px' }} id="explore">
-<h2 className="text-center"> Popular Recipes </h2>
-<hr/>
-<div className="container">
     <div className="row">
-        <div className="col-md-4">
-            <div className="card">
-                <div className="card-header">Recipe 1</div>
-                <div className="card-main">
-                <img src={seven} alt="..." className="img-thumbnail"/>
-                    <div className="main-description">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
-                    </div>
-
-                    <div className="mainBtn">
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
-
-                        <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> 6</button>
-
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
-                    </div>
-                    <a href="">                           
-                    <button type="button" className="btn btn-outline-primary">Details</button></a>
-                </div>
-            </div>
-
-        </div>
-        <div className="col-md-4">
-            <div className="card">
-                <div className="card-header">
-                    Recipe 2
-                </div>
-                <div className="card-main">
-                <img src={eight} alt="..." className="img-thumbnail"/>
-                    <div className="main-description">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
-                    </div>
-                    <div className="mainBtn">
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
-
-                        <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> 6</button>
-
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
-                    </div>
-
-                    <a href="">                           
-                    <button type="button" className="btn btn-outline-primary">Details</button></a>
-                </div>
-            </div>
-        </div>
-        <div className="col-md-4">
-            <div className="card">
-                <div className="card-header">
-                    Recipe 3
-                </div>
-                <div className="card-main">
-                <img src={seventen} alt="..." className="img-thumbnail"/>
-                    <div className="main-description">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat </p>
-                    </div>
-                    <div className="mainBtn">
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
-
-                        <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> 6</button>
-
-                        <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
-                    </div>
-
-                    <a href="">
-                    <button type="button" className="btn btn-outline-primary">Details</button></a>
-
-                </div>
-            </div>
-        </div>
+    <div className="col-md-4">
+      <RecipeCard />
+      </div>
+      <div className="col-md-4">
+      <RecipeCard />
+      </div>
+      <div className="col-md-4">
+      <RecipeCard />
+      </div> 
     </div>
-</div>
-
     </section>
-  </div>
+    </div>
 )
 
 export default Home
