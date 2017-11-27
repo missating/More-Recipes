@@ -67,14 +67,20 @@ export default class Users {
             email,
             password: bcrypt.hashSync(req.body.password, 10),
           })
-          .then(newUser => res.status(201)
-            .json({
-              status: 'success',
-              message: 'Account created',
-              username: newUser.username,
-              fullname: newUser.fullname,
-              email: newUser.email
-            }))
+          .then((newUser) => {
+            const token = jwt.sign({ id: newUser.id }, 'secretkeyhere', { expiresIn: '3h' });
+            res.status(201)
+              .json({
+                status: 'success',
+                message: 'Account created',
+                user: {
+                  username: newUser.username,
+                  fullname: newUser.fullname,
+                  email: newUser.email,
+                },
+                token
+              });
+          })
           .catch(error => res.status(400).send(error.message));
       }).catch(error => res.status(400).send(error.message));
   }

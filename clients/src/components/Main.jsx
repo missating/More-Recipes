@@ -9,14 +9,18 @@ import SingleRecipe from './SingleRecipe'
 // and /schedule routes will match any pathname that starts
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
-const Main = () => (
-  <main>
-    <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route path='/recipes' component={Recipes}/>
-      <Route path='/SingleRecipe' component={SingleRecipe}/>
-    </Switch>
-  </main>
-)
+class Main extends React.Component {
+  render() {
+    return (
+    <main>
+      <Switch>
+        <Route exact path='/' component={Home}/>
+        <Route path='/recipes' component={Recipes}/>
+        <Route path='/SingleRecipe' component={SingleRecipe}/>
+      </Switch>
+    </main>
+    )
+  }
+}
 
 export default Main
