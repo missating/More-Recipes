@@ -1,16 +1,14 @@
 import express from 'express';
+import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import cors from 'cors';
+
 import router from './routes/routes';
-
-
-
-
 
 // Set up the express app
 const app = express();
-
-
+app.use(cors());
 
 // Log requests to the console
 app.use(logger('dev'));
@@ -26,6 +24,11 @@ router(app);
 // returns 404 for unknown routes
 app.all('*', (req, res) => {
   res.status(404).send('The api route you requested does not exist');
+});
+
+
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 export default app;

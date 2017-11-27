@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import '../css/style.css';
 import thirteen from '../assets/thirteen.jpg';
 
-const RecipeGallery = () => (
-  <div>
+class RecipeGallery extends React.Component {
+  render() {
+    return (
+    <div>
       <div className="zoom-container">
             <Link to='/SingleRecipe'>
               <span className="zoom-caption">
@@ -22,6 +24,8 @@ const RecipeGallery = () => (
             <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
         </div>
     </div>
-);
+    )
+  }
+}
 
 export default RecipeGallery;

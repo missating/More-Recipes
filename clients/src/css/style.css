@@ -72,7 +72,7 @@ p {
 
 @media only screen and (min-height: 320px) and ( max-width: 768px) {
   .form-horizontal {
-      width: 300px;
+      width: 250px;
   }
 
 }

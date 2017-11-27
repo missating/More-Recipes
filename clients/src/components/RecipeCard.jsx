@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import seven from '../assets/seven.jpg';
 import '../css/style.css';
 
-const RecipeCard = () => (
+class RecipeCard extends React.Component {
+    render() {
+        return (
 <div>
     <div className="card">
         <div className="card-header">Recipe 1</div>
@@ -24,6 +26,8 @@ const RecipeCard = () => (
         </div>
       </div>
   </div>
-);
+        )
+    }
+}
 
 export default RecipeCard;
