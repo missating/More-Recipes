@@ -12,13 +12,11 @@ import SingleRecipe from './SingleRecipe'
 class Main extends React.Component {
   render() {
     return (
-    <main>
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route path='/recipes' component={Recipes}/>
         <Route path='/SingleRecipe' component={SingleRecipe}/>
       </Switch>
-    </main>
     )
   }
 }

@@ -48,6 +48,7 @@ export default class Users {
     if (typeof email !== 'string') {
       return res.status(400).json({ message: 'Invalid Email' });
     }
+
     db.User.findOne({
       where: {
         email
@@ -84,6 +85,7 @@ export default class Users {
           .catch(error => res.status(400).send(error.message));
       }).catch(error => res.status(400).send(error.message));
   }
+
 
   /**
  *
