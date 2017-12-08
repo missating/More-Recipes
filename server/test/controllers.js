@@ -131,7 +131,6 @@ describe('API Endpoints testing', () => {
       };
     });
 
-    // yoyoy
     it('Should sign in a user', (done) => {
       chai.request(app).post('/api/v1/users/signin')
         .send(user)
@@ -180,7 +179,7 @@ describe('API Endpoints testing', () => {
   });
 
   describe('Add Recipe', () => {
-    // const recipeUrl = '/api/v1/recipes';
+    const recipeUrl = '/api/v1/recipes';
     beforeEach(() => {
       recipe = {
         name: 'Test Recipe',
@@ -192,7 +191,7 @@ describe('API Endpoints testing', () => {
     it('Should return 400 if no recipe name is provided.', (done) => {
       const noName = Object.assign({}, recipe);
       delete noName.name;
-      chai.request(app).post(`/api/v1/recipes?token=${userToken}`)
+      chai.request(app).post(`${recipeUrl}?token=${userToken}`)
         .send(noName)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -203,7 +202,7 @@ describe('API Endpoints testing', () => {
     it('Should return 400 if no description is provided', (done) => {
       const noDescription = Object.assign({}, recipe);
       delete noDescription.description;
-      chai.request(app).post(`/api/v1/recipes?token=${userToken}`)
+      chai.request(app).post(`${recipeUrl}?token=${userToken}`)
         .send(noDescription)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -214,7 +213,7 @@ describe('API Endpoints testing', () => {
     it('Should return 400 if Ingredients are not provided', (done) => {
       const noIngredient = Object.assign({}, recipe);
       delete noIngredient.ingredients;
-      chai.request(app).post(`/api/v1/recipes?token=${userToken}`)
+      chai.request(app).post(`${recipeUrl}?token=${userToken}`)
         .send(noIngredient)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -223,11 +222,22 @@ describe('API Endpoints testing', () => {
     });
 
     it('return 201 for a successful recipe creation', (done) => {
-      chai.request(app).post(`/api/v1/recipes?token=${userToken}`)
+      chai.request(app).post(`${recipeUrl}?token=${userToken}`)
         .send(recipe)
         .end((err, res) => {
           recipeId = res.body.recipe.id;
           expect(res.status).to.equal(201);
+          done();
+        });
+    });
+  });
+
+  describe('Get all recipe', () => {
+    it('Should get all recipe', (done) => {
+      chai.request(app)
+        .get('/api/v1/recipes')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
           done();
         });
     });
