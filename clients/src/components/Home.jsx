@@ -1,6 +1,6 @@
 import React from 'react';
 import RecipeCard from './RecipeCard';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import  userSignupRequest  from '../actions/signupActions'
 import Signup from './Signup';
@@ -24,7 +24,7 @@ class Home extends React.Component {
                         <p>More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.</p>
                         <p>Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.</p>
                         <p><strong>Don't have an account ? </strong><a href="#myModal" data-toggle="modal" data-target="#myModal"><button type="button" className="btn btn-dark btn-sm fa fa-sign-in"> Sign Up</button></a></p>
-                        <Signup userSignupRequest={userSignupRequest} />
+                        <Signup userSignupRequest={userSignupRequest} {...this.props}/>
                     </div>
                 </div>
             </section>
@@ -61,8 +61,8 @@ class Home extends React.Component {
     }
 }
 
-Home.PropTypes = {
-	userSignupRequest: PropTypes.func.isRequired
+Home.propTypes = {
+	userSignupRequest: propTypes.func.isRequired
 }
 
 export default connect((state) => { return {} }, { userSignupRequest })(Home);

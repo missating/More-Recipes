@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import signupValidator from '../validation/signupValidator';
 import { browserHistory } from 'react-router';
 import '../css/style.css';
@@ -8,12 +8,13 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        fullname: '',
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        fullname: 'jjajaja  ',
+        username: 'sjsjjss',
+        email: 'jjsjs@ssks.com',
+        password: '123456',
+        confirmPassword: '123456',
         errors: {},
+        serverError: null,
         isLoading: false
     }
 		this.onChange = this.onChange.bind(this);
@@ -37,24 +38,36 @@ class Signup extends React.Component {
     event.preventDefault();
     if (this.isValid()) {
 			this.setState({ errors: {}, isLoading: true });
-			this.props.userSignupRequest(this.state).then(
-        () => {
-          
-        },
-        ({ err }) => this.setState({ errors: err.response.data, isLoading: false })
-      );
+			this.props.userSignupRequest(this.state).then(response => {
+        console.log(response);
+        $("#myModal").modal('hide');
+        this.props.history.push('/recipes');
+      }).catch(errors => {
+        console.log(errors);
+        this.setState({
+          serverError: errors.data.message
+        });
+      });
 		}
   }
 
 	
   render() {
     const { errors } = this.state;
+    let serverErrorBag;
+    if (this.state.serverError) {
+      serverErrorBag = (
+        <span className="help-block">{this.state.serverError}</span>
+      );
+    }
     return (
       <div> 
         <div id="myModal" className="modal fade" tabIndex="-1" role="dialog" aria-hidden="true">
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
                   <div className="modal-body">
+
+                      {serverErrorBag}
 
                       <div className="row">
                           <div className="col-sm-12">
@@ -115,8 +128,8 @@ class Signup extends React.Component {
     }
 }
 
-Signup.PropTypes = {
-	userSignupRequest: PropTypes.func.i
+Signup.propTypes = {
+	userSignupRequest: propTypes.func.isRequired
 }
 
 export default Signup;

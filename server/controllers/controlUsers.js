@@ -1,7 +1,9 @@
+import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import db from '../models/index';
 
+dotenv.config();
 
 /**
  *
@@ -69,7 +71,7 @@ export default class Users {
             password: bcrypt.hashSync(req.body.password, 10),
           })
           .then((newUser) => {
-            const token = jwt.sign({ id: newUser.id }, 'secretkeyhere', { expiresIn: '3h' });
+            const token = jwt.sign({ id: newUser.id }, process.env.MY_SECRET, { expiresIn: '24h' });
             res.status(201)
               .json({
                 status: 'success',
@@ -98,7 +100,7 @@ export default class Users {
  */
   static userLogin(req, res) {
     const { email, password } = req.body;
-
+    
     if (!password) {
       return res.status(400).json({ message: 'Password field is empty' });
     }
@@ -116,22 +118,20 @@ export default class Users {
         if (match) {
           const token = jwt.sign({
             id: foundUser.id
-          }, 'secretkeyhere', {
-            expiresIn: '3h'
+          }, process.env.MY_SECRET, {
+            expiresIn: '24h'
           });
           return res.status(200).send({
             status: 'Success.',
-            token: {
-              token
-            }
+            token
           });
         }
-        return res.status(400).send({
+        return res.status(401).send({
           status: 'Failed',
-          message: 'Invalid password.'
+          message: 'Wrong password'
         });
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
         status: 'Failed',
         message: error.message
       }));
