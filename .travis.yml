@@ -13,7 +13,7 @@ services:
   - postgresql
 
 before_script:
-   - createuser vanessa -s -U postgres
+  - createuser vanessa -s -U postgres
   - createdb more-recipes_test --username=vanessa
   - sequelize db:migrate
   
