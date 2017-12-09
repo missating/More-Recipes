@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - stable
+env:
+  - NODE_ENV=test
+script:
+  - npm run test:travis
 install:
   - npm install sequelize
   - npm install sequelize-cli
@@ -12,9 +16,6 @@ services:
 before_script:
   - psql -c 'create database travis;' -U postgres
   - sequelize db:migrate
-
-script:
-  - npm run test:travis
   
 after_success: 
   - npm run coverage

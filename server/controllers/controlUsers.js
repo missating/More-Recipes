@@ -100,7 +100,7 @@ export default class Users {
  */
   static userLogin(req, res) {
     const { email, password } = req.body;
-    
+
     if (!password) {
       return res.status(400).json({ message: 'Password field is empty' });
     }
