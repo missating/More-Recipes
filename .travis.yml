@@ -3,19 +3,19 @@ node_js:
   - stable
 env:
   - NODE_ENV=test
-script:
-  - npm run test:travis
 install:
   - npm install sequelize
   - npm install sequelize-cli
   - npm install pg
   - npm install pg-hstore
+script:
+  - npm run test
+
 services:
   - postgresql
 
 before_script:
   - psql -c 'create database travis;' -U postgres
-  - sequelize db:migrate
   
 after_success: 
   - npm run coverage
