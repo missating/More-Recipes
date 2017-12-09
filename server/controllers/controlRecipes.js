@@ -157,13 +157,6 @@ export default class Recipes {
             .catch(error => res.status(500)
               .json({ message: error }));
         }
-        if (!foundRecipe) {
-          return res.status(404)
-            .json({
-              status: 'Fail',
-              message: `Can't find recipe with id ${req.params.recipeId} by you`
-            });
-        }
       })
       .catch(error => res.status(500)
         .json({
@@ -200,7 +193,7 @@ export default class Recipes {
           }
           if (!recipes) {
             return res.status(404)
-              .json({ message: 'No recipes found' });
+              .json({ message: 'Currently no recipes' });
           }
         })
         .catch(error => res.status(500)
@@ -226,7 +219,7 @@ export default class Recipes {
               });
           }
           if (!recipes) {
-            return res.status(200)
+            return res.status(400)
               .json({ message: 'Currently no recipes' });
           }
         })

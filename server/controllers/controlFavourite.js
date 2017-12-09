@@ -42,7 +42,7 @@ export default class Favourite {
               userId: req.userId,
               recipeId: req.params.recipeId
             })
-              .then(() => res.status(201)
+              .then(() => res.status(200)
                 .json({
                   status: 'Success',
                   message: 'Recipe added to favourites'
