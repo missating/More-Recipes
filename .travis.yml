@@ -5,16 +5,18 @@ node_js:
 services:
   - postgresql
 
-before_script:
-  - psql -c 'create database recipes_test;' -U postgres 
 install:
   - npm install sequelize
   - npm install sequelize-cli
   - npm install pg
   - npm install pg-hstore
 
+before_script:
+  - psql -c 'create database recipes_test;' -U postgres 
+  - sequelize db:migrate
+
 script:
-    - sequelize db:migrate --env test
+    - npm run test
   
 after_success: 
   - npm run coverage
