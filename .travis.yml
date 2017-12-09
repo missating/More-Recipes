@@ -12,6 +12,7 @@ services:
 
 install:
   - npm install sequelize
+  - npm install sequelize-cli
 
 before_script:
   - psql -c 'create database recipes_test;' -U postgres
