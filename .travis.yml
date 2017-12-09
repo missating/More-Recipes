@@ -2,18 +2,15 @@ language: node_js
 node_js:
   - stable
 
-install:
-  - npm install sequelize
-  - npm install sequelize-cli
-
-script:
-  - npm run test
-
 services:
   - postgresql
 
 before_script:
   - psql -c 'create database travis;' -U postgres
+  - npm run migrate:test
+
+script:
+  - npm run test
   
 after_success: 
   - npm run coverage
