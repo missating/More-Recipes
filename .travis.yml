@@ -3,21 +3,16 @@ node_js:
   - stable
 env:
   - NODE_ENV=test
+
+script:
+  - npm run test
+
 services:
   - postgresql
-
-install:
-  - npm install sequelize
-  - npm install sequelize-cli
-  - npm install pg
-  - npm install pg-hstore
 
 before_script:
   - psql -c 'create database recipes_test;' -U postgres
   - sequelize db:migrate
-  
-script:
-    - npm run test
   
 after_success: 
   - npm run coverage
