@@ -14,11 +14,6 @@ before_script:
   - psql -c 'create database recipes_test;' -U postgres 
   - sequelize db:migrate
 
-before_script:
-  - createuser vanessa -s -U postgres
-  - createdb more-recipes_test --username=vanessa
-  - sequelize db:migrate
-
 script:
    - npm run test
   
