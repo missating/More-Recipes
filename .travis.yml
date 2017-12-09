@@ -1,18 +1,16 @@
 language: node_js
 node_js:
   - stable
-env:
-  - NODE_ENV=test
+
+install:
+  - npm install sequelize
+  - npm install sequelize-cli
 
 script:
   - npm run test
 
 services:
   - postgresql
-
-install:
-  - npm install sequelize
-  - npm install sequelize-cli
 
 before_script:
   - psql -c 'create database recipes_test;' -U postgres
