@@ -10,6 +10,9 @@ script:
 services:
   - postgresql
 
+install:
+  - npm install sequelize
+
 before_script:
   - psql -c 'create database recipes_test;' -U postgres
   - sequelize db:migrate
