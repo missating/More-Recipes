@@ -11,10 +11,10 @@ services:
 
 before_script:
   - psql -c 'create database travis;' -U postgres
-  - npm run migrate:test
+  - sequelize db:migrate
 
 script:
-  - npm run test
+  - npm run test:travis
   
 after_success: 
   - npm run coverage

@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/bin/www",
     "test": "cross-env NODE_ENV=test npm run migrate:test && cross-env NODE_ENV=test mocha server/test/*.js --exit --require babel-register --reporter spec",
+    "test:travis": "cross-env NODE_ENV=test mocha server/test/*.js --exit --require babel-register --reporter spec",
     "build": "babel ./server/ -d dist/server",
     "start": "babel-node server/bin/www",
     "heroku-postbuild": "npm run build",
