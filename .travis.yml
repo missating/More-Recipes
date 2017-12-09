@@ -1,18 +1,23 @@
 language: node_js
 node_js:
   - stable
-services:
-  - postgresql
 env:
   - NODE_ENV=test
+
+script:
+   - npm run test
+
+services:
+  - postgresql
+
 before_script:
   - psql -c 'create database recipes_test;' -U postgres 
   - sequelize db:migrate
-install:
-  - npm install sequelize
-  - npm install sequelize-cli
-  - npm install pg
-  - npm install pg-hstore
+
+before_script:
+  - createuser vanessa -s -U postgres
+  - createdb more-recipes_test --username=vanessa
+  - sequelize db:migrate
 
 script:
    - npm run test
