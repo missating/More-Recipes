@@ -16,7 +16,6 @@ install:
   - npm install pg-hstore
 
 script:
-    - sequelize db:migrate
     - npm run test
   
 after_success: 
