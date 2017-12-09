@@ -13,7 +13,7 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'create database recipes_test;' -U postgres
+  - psql -c 'create database travis;' -U postgres
   - sequelize db:migrate
   
 after_success: 
