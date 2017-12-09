@@ -1,7 +1,11 @@
 language: node_js
 node_js:
   - stable
-
+install:
+  - npm install sequelize
+  - npm install sequelize-cli
+  - npm install pg
+  - npm install pg-hstore
 services:
   - postgresql
 
