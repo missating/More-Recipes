@@ -1,20 +1,14 @@
+sudo: required
 language: node_js
 node_js:
-  - stable
-env:
-  - NODE_ENV=test
-
-script:
-  - npm run test:travis
-
+  - "6"
 services:
   - postgresql
-
 before_script:
-  - "psql -c 'create database travis;' -U postgres"
-  - npm run migrate:test
-
-  
-after_success: 
-  - npm run coverage
+  - psql -c 'drop database if exists travis;' -U postgres
+  - psql -c 'create database travis;' -U postgres
+script:
+  - npm run coveralls 
+addons:
+  postgresql: "9.3"
 
