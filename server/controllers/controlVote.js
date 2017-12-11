@@ -52,7 +52,7 @@ export default class Vote {
                     }
                     if (found) {
                       found.increment('upvote', { where: { id: req.params.recipeId } });
-                      return res.status(201).json({ message: 'upvote success' });
+                      return res.status(200).json({ message: 'upvote success' });
                     }
                   }).catch(error =>
                     // can't increment recipe value
@@ -77,8 +77,8 @@ export default class Vote {
                     db.Recipe.findById(req.params.recipeId).then((found) => {
                       if (found) {
                         found.increment('upvote', { where: { id: req.params.recipeId } });
-                        found.decrement('downvote', { where: { id: req.params.recipeId } });
-                        return res.status(201).json({ message: 'recipe upvoted' });
+                        found.increment('downvote', { where: { id: req.params.recipeId } });
+                        return res.status(200).json({ message: 'recipe upvoted' });
                       }
                       if (!found) {
                         return res.status(500).json({ message: 'Cannot find recipe to increment' });
@@ -121,7 +121,7 @@ export default class Vote {
   static downVote(req, res) {
     db.Recipe.findById(req.params.recipeId).then((foundRecipe) => {
       if (!foundRecipe) {
-        return res.json({ message: 'recipe with that Id not found' });
+        return res.status(404).json({ message: 'recipe with that Id not found' });
       }
       if (foundRecipe) {
         db.Downvote.findOne({
@@ -153,8 +153,8 @@ export default class Vote {
                       return res.status(500).json({ message: 'could not upvote recipe' });
                     }
                     if (found) {
-                      found.decrement('downvote', { where: { id: req.params.recipeId } });
-                      return res.status(201).json({ message: 'downvote success' });
+                      found.increment('downvote', { where: { id: req.params.recipeId } });
+                      return res.status(200).json({ message: 'downvote success' });
                     }
                   }).catch(error =>
                     // can't find recipe after creating downvote
@@ -178,8 +178,8 @@ export default class Vote {
                     db.Recipe.findById(req.params.recipeId).then((found) => {
                       if (found) {
                         found.increment('upvote', { where: { id: req.params.recipeId } });
-                        found.decrement('downvote', { where: { id: req.params.recipeId } });
-                        return res.status(201).json({ message: 'recipe downvoted' });
+                        found.increment('downvote', { where: { id: req.params.recipeId } });
+                        return res.status(200).json({ message: 'recipe downvoted' });
                       }
                       if (!found) {
                         return res.status(500).json({ message: 'Cannot find recipe to increment' });
