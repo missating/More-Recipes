@@ -157,13 +157,6 @@ export default class Recipes {
             .catch(error => res.status(500)
               .json({ message: error }));
         }
-        if (!foundRecipe) {
-          return res.status(404)
-            .json({
-              status: 'Fail',
-              message: `Can't find recipe with id ${req.params.recipeId} by you`
-            });
-        }
       })
       .catch(error => res.status(500)
         .json({
@@ -200,7 +193,7 @@ export default class Recipes {
           }
           if (!recipes) {
             return res.status(404)
-              .json({ message: 'No recipes found' });
+              .json({ message: 'Currently no recipes' });
           }
         })
         .catch(error => res.status(500)
@@ -226,7 +219,7 @@ export default class Recipes {
               });
           }
           if (!recipes) {
-            return res.status(200)
+            return res.status(400)
               .json({ message: 'Currently no recipes' });
           }
         })
@@ -245,19 +238,58 @@ export default class Recipes {
  * @static
  * @param {any} req
  * @param {any} res
+ * @returns { json } gets all recipes
+ * @memberof Recipes
+ */
+  static getOneRecipe(req, res) {
+    db.Recipe.findAll({
+      where: {
+        id: req.params.recipeId
+      },
+      include: [
+        {
+          model: db.Review, attributes: ['content']
+        }
+      ]
+    }).then((existing) => {
+      if (!existing) {
+        return res.status(404).send({
+          status: 'Not found',
+          message: 'A recipe with that Id is not found',
+        });
+      }
+      if (existing) {
+        return res.status(200)
+          .json({
+            status: 'Success',
+            recipes: existing
+          });
+      }
+    })
+      .catch(() => res.status(500)
+        .json({ message: 'Unable to find a user with that id' }));
+  }
+
+
+  /**
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
  * @returns { json } gets details of a user
  * @memberof Recipes
  */
   static getAllUserRecipes(req, res) {
-    db.Recipe.findOne({
+    db.User.findOne({
       where: {
-        userId: req.userId
+        id: req.userId
       }
     }).then((existing) => {
       if (!existing) {
         return res.status(404).send({
           status: 'Not found',
-          message: 'A user with that Id is not found',
+          message: 'no user with this id',
         });
       } db.Recipe.findAll({
         where: {
@@ -268,17 +300,16 @@ export default class Recipes {
         ]
       })
         .then((all) => {
-          if (!all) {
+          const userRecipes = all.length;
+          if (userRecipes === 0) {
             return res.status(404)
               .json({ message: 'You currently have no recipes' });
           }
-          if (all) {
-            return res.status(200)
-              .json({
-                status: 'Success',
-                recipes: all
-              });
-          }
+          return res.status(200)
+            .json({
+              status: 'Success',
+              recipes: all
+            });
         })
         .catch(() => res.status(500)
           .json({ message: 'Unable to find all recipes by you' }));
