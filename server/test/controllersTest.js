@@ -293,15 +293,6 @@ describe('API Endpoints testing', () => {
           done();
         });
     });
-
-    it('Should return 404 if a user with an id is not found', (done) => {
-      chai.request(app)
-        .get('/api/v1/recipes/user/allrecipes?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAsImlhdCI6MTUxMjc2Nzg0OSwiZXhwIjoxNTEyODU0MjQ5fQ.QIX8zeArVJdQl5gNY2cudUY4cA-t_JUHmVX5E_vFErM')
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          done();
-        });
-    });
   });
 
 
@@ -458,25 +449,25 @@ describe('API Endpoints testing', () => {
     });
   });
 
-  describe('Get all favourites', () => {
-    it('Should return 403 if a non auth user tries to get all favourite', (done) => {
-      chai.request(app)
-        .get('/api/v1/users/recipes')
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          done();
-        });
-    });
+  // describe('Get all favourites', () => {
+  //   it('Should return 403 if a non auth user tries to get all favourite', (done) => {
+  //     chai.request(app)
+  //       .get('/api/v1/users/recipes')
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(403);
+  //         done();
+  //       });
+  //   });
 
-    it('Should return 200 if a user has favourite recipes', (done) => {
-      chai.request(app)
-        .get(`/api/v1/users/recipes?token=${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          done();
-        });
-    });
-  });
+  //   it('Should return 200 if a user has favourite recipes', (done) => {
+  //     chai.request(app)
+  //       .get(`/api/v1/users/recipes?token=${userToken}`)
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(200);
+  //         done();
+  //       });
+  //   });
+  // });
 
   describe('Delete a recipe', () => {
     it('Should return 404 if a recipe with the id a user wants to delete is not found', (done) => {

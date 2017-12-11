@@ -238,6 +238,45 @@ export default class Recipes {
  * @static
  * @param {any} req
  * @param {any} res
+ * @returns { json } gets all recipes
+ * @memberof Recipes
+ */
+  static getOneRecipe(req, res) {
+    db.Recipe.findAll({
+      where: {
+        id: req.params.recipeId
+      },
+      include: [
+        {
+          model: db.Review, attributes: ['content']
+        }
+      ]
+    }).then((existing) => {
+      if (!existing) {
+        return res.status(404).send({
+          status: 'Not found',
+          message: 'A recipe with that Id is not found',
+        });
+      }
+      if (existing) {
+        return res.status(200)
+          .json({
+            status: 'Success',
+            recipes: existing
+          });
+      }
+    })
+      .catch(() => res.status(500)
+        .json({ message: 'Unable to find a user with that id' }));
+  }
+
+
+  /**
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
  * @returns { json } gets details of a user
  * @memberof Recipes
  */
