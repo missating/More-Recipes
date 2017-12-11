@@ -24,7 +24,7 @@ const router = (app) => {
   app.get('/api/v1/recipes', Recipe.getAllRecipes); // anybody can view all recipe
   app.get('/api/v1/recipes/:recipeId', Recipe.getOneRecipe); // anybody can view one recipe
   app.post('/api/v1/users/:recipeId/favourite', extractToken, verifyToken, Favourite.addFavourite); // user can add recipe as fav
-  app.get('/api/v1/users/recipes', extractToken, verifyToken, Favourite.getAllFavourites); // user can get all fav recipe
+  app.get('/api/v1/users/:userId/favourite', extractToken, verifyToken, Favourite.getAllFavourites); // user can get all fav recipe
   app.post('/api/v1/recipes/:recipeId/upvote', extractToken, verifyToken, Vote.upvote); // user can upvote a recipe
   app.post('/api/v1/recipes/:recipeId/downvote', extractToken, verifyToken, Vote.downVote); // user can downvote a recipe
 };

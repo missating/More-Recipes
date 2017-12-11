@@ -227,7 +227,6 @@ describe('API Endpoints testing', () => {
         .send(recipe)
         .end((err, res) => {
           recipeId = res.body.recipe.id;
-          console.log('RECIPEID', recipeId);
           expect(res.status).to.equal(201);
           done();
         });
@@ -449,25 +448,25 @@ describe('API Endpoints testing', () => {
     });
   });
 
-  // describe('Get all favourites', () => {
-  //   it('Should return 403 if a non auth user tries to get all favourite', (done) => {
-  //     chai.request(app)
-  //       .get('/api/v1/users/recipes')
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(403);
-  //         done();
-  //       });
-  //   });
+  describe('Get all favourites', () => {
+    it('Should return 403 if a non auth user tries to get all favourite', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/recipes')
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          done();
+        });
+    });
 
-  //   it('Should return 200 if a user has favourite recipes', (done) => {
-  //     chai.request(app)
-  //       .get(`/api/v1/users/recipes?token=${userToken}`)
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(200);
-  //         done();
-  //       });
-  //   });
-  // });
+    it('Should return 200 if a user has favourite recipes', (done) => {
+      chai.request(app)
+        .get(`/api/v1/users/recipes?token=${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+  });
 
   describe('Delete a recipe', () => {
     it('Should return 404 if a recipe with the id a user wants to delete is not found', (done) => {

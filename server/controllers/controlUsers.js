@@ -131,9 +131,9 @@ export default class Users {
           message: 'Wrong password'
         });
       })
-      .catch(error => res.status(500).send({
+      .catch(() => res.status(500).send({
         status: 'Failed',
-        message: error.message
+        message: 'This user does not exist'
       }));
   }
 

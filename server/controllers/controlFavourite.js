@@ -57,19 +57,23 @@ export default class Favourite {
         .json({ message: 'error, please try again later' }));
   }
 
-
   /**
-   *
-   *
-   * @param {any} req
-   * @param {any} res
-   * @returns {json} gets all favourite
-   * @memberof Favourite
-   */
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
+ * @returns {json} all favourite recipes for a user
+ * @memberof Favourite
+ */
   static getAllFavourites(req, res) {
+    const { userId } = req.params;
+    if (req.userId !== parseInt(userId, 10)) {
+      return res.status(400).send({ message: 'User does not exist' });
+    }
     db.Favourite.findAll({
       where: {
-        userId: req.userId,
+        userId: req.params.userId,
       },
       include: [
         {
@@ -78,10 +82,11 @@ export default class Favourite {
       ]
     })
       .then((found) => {
-        if (!found) {
+        const userFavs = found.length;
+        if (userFavs === 0) {
           return res.status(404)
             .json({
-              status: 'success',
+              status: 'Not found',
               message: 'You have no recipes added as favourites'
             });
         }
