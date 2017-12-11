@@ -100,7 +100,7 @@ export default class Users {
  */
   static userLogin(req, res) {
     const { email, password } = req.body;
-    
+
     if (!password) {
       return res.status(400).json({ message: 'Password field is empty' });
     }
@@ -131,9 +131,105 @@ export default class Users {
           message: 'Wrong password'
         });
       })
-      .catch(error => res.status(500).send({
+      .catch(() => res.status(500).send({
         status: 'Failed',
-        message: error.message
+        message: 'This user does not exist'
       }));
+  }
+
+
+  /**
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
+ * @returns {json} all users with their recipes
+ * @memberof Users
+ */
+  static getUserProfile(req, res) {
+    db.User.findOne({
+      where: {
+        id: req.params.userId
+      }
+    }).then((existing) => {
+      if (!existing) {
+        return res.status(404).send({
+          status: 'Not found',
+          message: 'A user with that Id is not found',
+        });
+      }
+      if (existing) {
+        return res.status(200)
+          .json({
+            status: 'Success',
+            user: {
+              fullname: existing.fullname,
+              username: existing.username,
+              email: existing.email,
+              joined: new Date(existing.createdAt).toDateString()
+            }
+          });
+      }
+    })
+      .catch(() => res.status(500)
+        .json({ message: 'Unable to find a user with that id' }));
+  }
+
+
+  /**
+ *
+ *
+ * @static
+ * @param {any} req
+ * @param {any} res
+ * @returns {json} all users with their recipes
+ * @memberof Users
+ */
+  static updateUserProfile(req, res) {
+    const { fullname, username, email } = req.body;
+
+    db.User.findOne({
+      where: {
+        id: req.userId
+      }
+    })
+      .then((foundUser) => {
+        if (foundUser) {
+          const update = {
+            fullname: fullname ? fullname.toLowerCase() : foundUser.fullname,
+            username: username ? username.toLowerCase() : foundUser.username,
+            email: email ? email.toLowerCase() : foundUser.email
+          };
+          foundUser.update(update)
+            .then(updatedUser => res.status(200)
+              .json({
+                status: 'Update successful',
+                user: {
+                  fullname: updatedUser.fullname,
+                  username: updatedUser.username,
+                  email: updatedUser.email,
+                  joined: new Date(updatedUser.createdAt).toDateString()
+                }
+              }))
+            .catch(error => res.status(500)
+              .json({
+                status: 'Fail',
+                message: error
+              }));
+        }
+        if (!foundUser) {
+          return res.status(404)
+            .json({
+              status: 'Fail',
+              message: `Can't find user with id ${req.userId}`
+            });
+        }
+      })
+      .catch(error => res.status(500)
+        .json({
+          status: 'Fail',
+          error,
+        }));
   }
 }

@@ -1,7 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import signupValidator from '../validation/signupValidator';
+import userSignupRequest from '../actions/signupActions';
 import { browserHistory } from 'react-router';
+
+import { connect } from 'react-redux';
+
 import '../css/style.css';
 
 class Signup extends React.Component {
@@ -36,19 +40,20 @@ class Signup extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    if (this.isValid()) {
-			this.setState({ errors: {}, isLoading: true });
-			this.props.userSignupRequest(this.state).then(response => {
-        console.log(response);
-        $("#myModal").modal('hide');
-        this.props.history.push('/recipes');
-      }).catch(errors => {
-        console.log(errors);
-        this.setState({
-          serverError: errors.data.message
-        });
-      });
-		}
+    this.props.dispatch(userSignupRequest(this.state));
+    // if (this.isValid()) {
+		// 	this.setState({ errors: {}, isLoading: true });
+		// 	this.props.userSignupRequest(this.state).then(response => {
+    //     console.log(response);
+    //     $("#myModal").modal('hide');
+    //     this.props.history.push('/recipes');
+    //   }).catch(errors => {
+    //     console.log(errors);
+    //     this.setState({
+    //       serverError: errors.data.message
+    //     });
+    //   });
+		// }
   }
 
 	
@@ -132,4 +137,4 @@ Signup.propTypes = {
 	userSignupRequest: propTypes.func.isRequired
 }
 
-export default Signup;
+export default connect(null)(Signup);

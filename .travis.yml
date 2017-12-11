@@ -1,19 +1,14 @@
+sudo: required
 language: node_js
 node_js:
-  - stable
+  - "6"
 services:
   - postgresql
 before_script:
-  - psql -c 'create database recipes_test;' -U postgres 
-install:
-  - npm install sequelize
-  - npm install sequelize-cli
-  - npm install pg
-  - npm install pg-hstore
-
+  - psql -c 'drop database if exists travis;' -U postgres
+  - psql -c 'create database travis;' -U postgres
 script:
-  - sequelize db:migrate --env test
-  
-after_success: 
-  - npm run coverage
+  - npm run coveralls 
+addons:
+  postgresql: "9.3"
 
