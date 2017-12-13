@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import '../css/style.css';
 
@@ -26,11 +27,20 @@ class Header extends React.Component {
           <Link className="nav-link" to='/recipes'>Recipes</Link>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
+        {
+          !this.props.auth.isAuthenticated &&
+          <form className="form-inline my-2 my-lg-0">
+            <input className="form-control mr-sm-2" type="email" placeholder="Email" aria-label="Email" />
+            <input className="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" />
+            <button className="btn btn-primary my-2 my-sm-0" type="submit">Sign In</button>
+          </form>
+        }
+        {/* <form className="form-inline my-2 my-lg-0">
           <input className="form-control mr-sm-2" type="email" placeholder="Email" aria-label="Email" />
           <input className="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" />
           <button className="btn btn-primary my-2 my-sm-0" type="submit">Sign In</button>
-        </form>
+        </form> */}
+        <p> my profile </p>
       </div>
   </nav>
 </header>
@@ -38,4 +48,12 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+const mapStateToProps = ({auth}) => {
+  return {
+    auth
+  };
+}
+
+
+export default connect(mapStateToProps)(Header);
+

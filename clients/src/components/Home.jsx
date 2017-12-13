@@ -23,7 +23,10 @@ class Home extends React.Component {
                     <div className="col-md-4" id="media">
                         <p>More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.</p>
                         <p>Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.</p>
+                        {
+                            !this.props.auth.isAuthenticated &&
                         <p><strong>Don't have an account ? </strong><a href="#myModal" data-toggle="modal" data-target="#myModal"><button type="button" className="btn btn-dark btn-sm fa fa-sign-in"> Sign Up</button></a></p>
+                        }
                         <Signup userSignupRequest={userSignupRequest} {...this.props}/>
                     </div>
                 </div>
@@ -61,8 +64,10 @@ class Home extends React.Component {
     }
 }
 
-Home.propTypes = {
-	userSignupRequest: propTypes.func.isRequired
-}
+const mapStateToProps = ({auth}) => {
+    return {
+      auth
+    };
+  }
 
-export default connect((state) => { return {} }, { userSignupRequest })(Home);
+export default connect(mapStateToProps)(Home);

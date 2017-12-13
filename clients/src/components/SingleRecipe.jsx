@@ -4,6 +4,9 @@ import eleven from '../assets/eleven.jpg'
 import '../css/style.css';
 
 class SingleRecipe extends React.Component {
+    // in component did mount
+    // make request to get single recipe details
+    // 
     render() {
         return (
             <div>
