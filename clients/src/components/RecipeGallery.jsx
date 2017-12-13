@@ -8,9 +8,9 @@ class RecipeGallery extends React.Component {
     return (
     <div>
       <div className="zoom-container">
-            <Link to='/SingleRecipe'>
+            <Link to={`/SingleRecipe/${this.props.id}`} >
               <span className="zoom-caption">
-                  <span>Recipe 1  <br/> 
+                  <span>{this.props.name}<br/> 
                     <small> Rice and beans </small>
                    </span>
               </span>
@@ -19,8 +19,8 @@ class RecipeGallery extends React.Component {
           </div>
 
         <div className="mainBtn" style={{ marginLeft: '95px' }}>
-            <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> 2</button>
-            <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> 6</button>
+            <button className="btn btn-danger btn-sm"><span><i className="fa fa-thumbs-down" aria-hidden="true"></i></span> {this.props.downvote}</button>
+            <button className="btn btn-success btn-sm"><span><i className="fa fa-thumbs-up" aria-hidden="true"></i></span> {this.props.upvote}</button>
             <button className="btn btn-danger btn-sm"><span><i className="fa fa-heart" aria-hidden="true"></i></span> 10</button>
         </div>
     </div>

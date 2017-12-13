@@ -1,7 +1,12 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import signupValidator from '../validation/signupValidator';
+import userSignupRequest from '../actions/signupActions';
 import { browserHistory } from 'react-router';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+
 import '../css/style.css';
 
 class Signup extends React.Component {
@@ -13,9 +18,7 @@ class Signup extends React.Component {
         email: 'jjsjs@ssks.com',
         password: '123456',
         confirmPassword: '123456',
-        errors: {},
-        serverError: null,
-        isLoading: false
+        errors: {}
     }
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -36,28 +39,21 @@ class Signup extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    if (this.isValid()) {
-			this.setState({ errors: {}, isLoading: true });
-			this.props.userSignupRequest(this.state).then(response => {
-        console.log(response);
+      this.props.dispatch(userSignupRequest(this.state))
+      .then(() => {
         $("#myModal").modal('hide');
-        this.props.history.push('/recipes');
-      }).catch(errors => {
-        console.log(errors);
-        this.setState({
-          serverError: errors.data.message
-        });
+      }).catch(() => {
+        return;
       });
-		}
   }
 
 	
   render() {
     const { errors } = this.state;
     let serverErrorBag;
-    if (this.state.serverError) {
+    if (this.props.auth.errorMessage) {
       serverErrorBag = (
-        <span className="help-block">{this.state.serverError}</span>
+        <span className="help-block">{this.props.auth.errorMessage}</span>
       );
     }
     return (
@@ -118,7 +114,7 @@ class Signup extends React.Component {
                       </div>
                     </div>
                       <div className="modal-footer">
-                              <button disabled={this.state.isLoading} className="btn btn-danger btn-sm" data-dismiss="modal">close</button>
+                              <button className="btn btn-danger btn-sm" data-dismiss="modal">close</button>
                           </div>
                       </div>
                         </div>
@@ -128,8 +124,9 @@ class Signup extends React.Component {
     }
 }
 
-Signup.propTypes = {
-	userSignupRequest: propTypes.func.isRequired
-}
 
-export default Signup;
+const mapDispatchToProps = (dispatch) => ({
+  signUp: (userDetails) => bindActionCreators(userSignupRequest, dispatch)
+});
+
+export default connect(null)(Signup);

@@ -1,0 +1,8 @@
+export const SET_FETCHING = 'SET_FETCHING';
+export const UNSET_FETCHING = 'UNSET_FETCHING';
+
+export const GET_AUTH = 'GET_AUTH';
+export const AUTH_ERROR = 'AUTH_ERROR';
+
+export const GET_RECIPE_SUCCESS = 'GET_RECIPE_SUCCESS';
+export const GET_RECIPE_FAILURE = 'GET_RECIPE_FAILURE';
