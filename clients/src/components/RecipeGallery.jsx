@@ -11,7 +11,7 @@ class RecipeGallery extends React.Component {
             <Link to={`/SingleRecipe/${this.props.id}`} >
               <span className="zoom-caption">
                   <span>{this.props.name}<br/> 
-                    <small> Rice and beans </small>
+                    <small> {this.props.ingredients} </small>
                    </span>
               </span>
               <img src={thirteen} />

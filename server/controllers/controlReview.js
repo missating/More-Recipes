@@ -22,6 +22,7 @@ export default class Review {
     if (!content) {
       return res.status(400).json({ message: 'Add review content' });
     }
+
     db.Recipe.findById(req.params.recipeId)
       .then((foundRecipe) => {
         if (!foundRecipe) {
