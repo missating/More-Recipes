@@ -203,6 +203,10 @@ export default class Recipes {
     }
     if (req.query.sort) {
       db.Recipe.findAll({
+
+        limit: 6,
+
+        order: [['upvote', 'DESC']],
         include: [
           {
             model: db.Review, attributes: ['content']
@@ -211,11 +215,10 @@ export default class Recipes {
       })
         .then((recipes) => {
           if (recipes) {
-            const sorted = recipes.sort((a, b) => b.upvote - a.upvote);
             return res.status(200)
               .json({
                 status: 'Success',
-                sorted,
+                recipes,
               });
           }
           if (!recipes) {
@@ -242,7 +245,7 @@ export default class Recipes {
  * @memberof Recipes
  */
   static getOneRecipe(req, res) {
-    db.Recipe.findAll({
+    db.Recipe.findOne({
       where: {
         id: req.params.recipeId
       },
@@ -262,12 +265,12 @@ export default class Recipes {
         return res.status(200)
           .json({
             status: 'Success',
-            recipes: existing
+            recipe: existing
           });
       }
     })
       .catch(() => res.status(500)
-        .json({ message: 'Unable to find a user with that id' }));
+        .json({ message: 'server error' }));
   }
 
 
