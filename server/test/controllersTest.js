@@ -206,7 +206,7 @@ describe('API Endpoints testing', () => {
   describe('View a user\'s profile', () => {
     it('Should return 200 if anybody views a user\'s profile', (done) => {
       chai.request(app)
-        .get('/api/v1/users/1')
+        .get(`/api/v1/users/profile?token=${userToken}`)
         .end((err, res) => {
           expect(res.status).to.equal(200);
           done();
