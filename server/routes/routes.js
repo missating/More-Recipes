@@ -14,7 +14,7 @@ const router = (app) => {
   });
   app.post('/api/v1/users/signup', User.createUser); // create a user
   app.post('/api/v1/users/signin', User.userLogin); // user signs in
-  app.get('/api/v1/users/:userId', User.getUserProfile); // anybody can view a user profile
+  app.get('/api/v1/users/profile', extractToken, verifyToken, User.getUserProfile); // anybody can view a user profile
   app.put('/api/v1/users/profile', extractToken, verifyToken, User.updateUserProfile); // auth user can update their profile
   app.post('/api/v1/recipes', extractToken, verifyToken, Recipe.addRecipe); // user adds recipe
   app.put('/api/v1/recipes/:recipeId', extractToken, verifyToken, Recipe.updateRecipe); // user updates recipe

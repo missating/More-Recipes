@@ -6,12 +6,7 @@ import receiveRecipeRequest from '../actions/recipes';
 
 
 class Recipes extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        }
-    }
-
+    
     componentWillMount () {
         this.props.receiveRecipe();
         console.log('props are----', this.props);

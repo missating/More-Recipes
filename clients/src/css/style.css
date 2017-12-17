@@ -162,6 +162,45 @@ a .btn-outline-primary{
   margin-bottom: 20px;
 }
 
+#profile {
+  display: block;
+  margin-top: 20px;
+}
+
+.rounded {
+  width: 200px;
+  margin: 20px;
+}
+
+.bord {
+  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.5);
+  width: 600px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  .bord {
+      width: 300px;
+  }
+}
+
+.userButtons {
+  width: 400px;
+  margin: 20px auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  .userButtons  .btn{
+    margin-bottom: 20px;
+    margin-left: 100px;
+  }
+}
+
+a .fa {
+  margin: 10px;
+  cursor: pointer;
+}
+
 .pagination {
   display: inline-block;
 }
@@ -175,6 +214,17 @@ a .btn-outline-primary{
   border: 1px solid #bdc4cf;
   margin: 0 4px;
   font-size: 16px;
+}
+
+
+.bord2 {
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  display: none;
 }
 
 .pagination a.active {

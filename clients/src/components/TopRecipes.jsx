@@ -6,11 +6,6 @@ import RecipeCard from './RecipeCard';
 
 
 class TopRecipes extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        }
-    }
 
     componentWillMount () {
         this.props.recieveTopRecipes();
@@ -19,6 +14,7 @@ class TopRecipes extends React.Component {
 
     render() {
         console.log('The top recipes -- ', this.props.recipes);
+        
         const topRecipe = (this.props.recipes) ? this.props.recipes : [];
 
         const topRecipeList = topRecipe.map((recipe, i) => {
