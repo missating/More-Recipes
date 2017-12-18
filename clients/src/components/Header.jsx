@@ -19,14 +19,22 @@ class Header extends React.Component {
               
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
+                    <li className="nav-item">
                       <Link className="nav-link" to='/'>Home</Link> 
                       <span className="sr-only">(current)</span>
                     </li>
                     <li className="nav-item">
                     <Link className="nav-link" to='/recipes'>Recipes</Link>
                     </li>
+
+                    {
+                    this.props.auth.isAuthenticated &&
+                    <li className="nav-item">
+                    <Link className="nav-link" to='/profile'>Profile</Link>
+                    </li>
+                  }
                   </ul>
+                  
                   {
                     !this.props.auth.isAuthenticated &&
                     <form className="form-inline my-2 my-lg-0">
@@ -34,11 +42,6 @@ class Header extends React.Component {
                       <input className="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" />
                       <button className="btn btn-primary my-2 my-sm-0" type="submit">Sign In</button>
                     </form>
-                  }
-
-                  {
-                    this.props.auth.isAuthenticated &&
-                    <p> profile </p>
                   }
                 </div>
           </nav>

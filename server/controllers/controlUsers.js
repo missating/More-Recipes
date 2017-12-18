@@ -152,7 +152,7 @@ export default class Users {
   static getUserProfile(req, res) {
     db.User.findOne({
       where: {
-        id: req.params.userId
+        id: req.userId
       }
     }).then((existing) => {
       if (!existing) {

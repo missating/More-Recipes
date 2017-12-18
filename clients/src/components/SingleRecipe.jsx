@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import eleven from '../assets/eleven.jpg';
@@ -14,6 +13,7 @@ class SingleRecipe extends React.Component {
   }
 
     render() {
+        console.log('single recipe', this.props.recipeDetails);
         let ingredientsList;
             if (this.props.recipeDetails.ingredients) {
                 ingredientsList = this.props.recipeDetails.ingredients.split(',').map((item, index) => {
