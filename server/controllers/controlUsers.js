@@ -123,7 +123,7 @@ export default class Users {
         if (!match) {
           return res.status(401).send({
             status: 'Failed',
-            message: 'Wrong password'
+            message: 'email or password is incorrect'
           });
         }
         const token = jwt.sign({

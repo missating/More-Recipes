@@ -4,7 +4,7 @@ import validator from 'validator';
 const signupvalidator = (data) => {
   const errors = {};
   if (validator.isEmpty(data.fullname)) {
-    errors.email = 'Email is required';
+    errors.fullname = 'fullname is required';
   }
 
   if (validator.isEmpty(data.username)) {
