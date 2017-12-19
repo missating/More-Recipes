@@ -3,6 +3,7 @@ export const UNSET_FETCHING = 'UNSET_FETCHING';
 
 export const GET_AUTH = 'GET_AUTH';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const AUTH_SIGN_IN_ERROR = 'AUTH_SIGN_IN_ERROR';
 export const RECEIVE_USER_PROFILE = 'RECEIVE_USER_PROFILE';
 
 export const RECEIVE_ALL_RECIPE = 'RECEIVE_ALL_RECIPE';
