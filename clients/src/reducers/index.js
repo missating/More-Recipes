@@ -6,6 +6,8 @@ import isFetching from './isFetching';
 import receiveRecipe from './recipes';
 import singleRecipe from './singleRecipe';
 import topRecipe from './topRecipe';
+import addRecipe from './addRecipe';
+import userRecipes from './userRecipes';
 
 const rootReducer = combineReducers({
   auth,
@@ -13,7 +15,9 @@ const rootReducer = combineReducers({
   isFetching,
   receiveRecipe,
   singleRecipe,
-  topRecipe
+  topRecipe,
+  addRecipe,
+  userRecipes
 });
 
 export default rootReducer;
