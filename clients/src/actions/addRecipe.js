@@ -18,7 +18,7 @@ const addRecipe = recipe => (dispatch) => {
   console.log('before axios');
   dispatch(setFetching());
   const token = localStorage.getItem('token');
-  axios({
+  return axios({
     method: 'POST',
     url: 'http://localhost:3000/api/v1/recipes',
     headers: {

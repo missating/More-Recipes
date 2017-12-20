@@ -1,8 +1,7 @@
 import { RECEIVE_ALL_RECIPE } from '../actions/actionTypes';
 
 const initialState = {
-  recipes: {
-  }
+  recipes: {}
 };
 
 const allRecipe = (state = initialState.recipes, action) => {

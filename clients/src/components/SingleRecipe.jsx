@@ -80,7 +80,7 @@ class SingleRecipe extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 <h4 className="text-center"> Reviews </h4>
-                <div>{allReviews}</div>``
+                <div>{allReviews}</div>
                 <p> To add review, You must <Link to="/Home">Sign In</Link></p>
               </div>
             </div>
