@@ -6,25 +6,25 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case GET_AUTH:
-      return Object.assign({}, state, {
-        isAuthenticated: true,
-        errorMessage: '',
-        user: action.user,
-        token: action.token
-      });
-    case AUTH_ERROR:
-      return Object.assign({}, state, {
-        isAuthenticated: false,
-        errorMessage: action.message
-      });
-    case AUTH_SIGN_IN_ERROR:
-      return Object.assign({}, state, {
-        isAuthenticated: false,
-        errorMessageSignin: action.message
-      });
-    default:
-      return state;
+  case GET_AUTH:
+    return Object.assign({}, state, {
+      isAuthenticated: true,
+      errorMessage: '',
+      user: action.user,
+      token: action.token
+    });
+  case AUTH_ERROR:
+    return Object.assign({}, state, {
+      isAuthenticated: false,
+      errorMessage: action.message
+    });
+  case AUTH_SIGN_IN_ERROR:
+    return Object.assign({}, state, {
+      isAuthenticated: false,
+      errorMessageSignin: action.message
+    });
+  default:
+    return state;
   }
 };
 
