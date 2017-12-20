@@ -35,10 +35,10 @@ class Profile extends React.Component {
         <div className="container userButtons">
           <div className="row">
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary" to="">Add Recipe</Link>
+              <Link className="btn btn-outline-primary" to="/AddRecipe">Add Recipe</Link>
             </div>
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary" to="">My Recipes</Link>
+              <Link className="btn btn-outline-primary" to="/UserRecipes">My Recipes</Link>
             </div>
             <div className="col-md-4">
               <Link className="btn btn-outline-primary" to="">My Favourite Recipes</Link>

@@ -64,7 +64,6 @@ class Signin extends React.Component {
     if (!this.isValid()) {
       return;
     }
-    event.preventDefault();
     this.props.dispatch(userSigninRequest(this.state));
   }
 

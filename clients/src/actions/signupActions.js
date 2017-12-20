@@ -17,13 +17,6 @@ export const authError = message => ({
   message
 });
 
-/**
- *
- *
- * @export
- * @param {any} formData
- * @returns {promise} axios promise
- */
 
 // actions for user signup
 const userSignupRequest = formData => (dispatch) => {

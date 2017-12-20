@@ -20,14 +20,11 @@ export default class Recipes {
   static addRecipe(req, res) {
     const { name, ingredients, description } = req.body;
 
-    if (!ingredients) {
-      return res.status(400).json({ message: 'Ingredients field is empty' });
-    }
     if (!name) {
       return res.status(400).json({ message: 'Recipe name is empty' });
     }
-    if (name.length < 5) {
-      return res.status(400).json({ message: 'Recipe name should be at least 6 characters' });
+    if (!ingredients) {
+      return res.status(400).json({ message: 'Ingredients field is empty' });
     }
     if (!description) {
       return res.status(400).json({ message: 'Add directions to prepare recipe' });
