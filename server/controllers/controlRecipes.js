@@ -176,7 +176,8 @@ export default class Recipes {
       db.Recipe.findAll({
         include: [
           {
-            model: db.Review, attributes: ['content']
+            model: db.Review,
+            attributes: ['content']
           }
         ]
       })
@@ -248,7 +249,12 @@ export default class Recipes {
       },
       include: [
         {
-          model: db.Review, attributes: ['content']
+          model: db.Review,
+          attributes: ['content'],
+          include: [{
+            model: db.User,
+            attributes: ['fullname']
+          }]
         }
       ]
     }).then((existing) => {

@@ -1,18 +1,19 @@
 import { RECEIVE_ALL_RECIPE } from '../actions/actionTypes';
 
 const initialState = {
-  recipes: {}
+  recipes: []
 };
 
-const allRecipe = (state = initialState.recipes, action) => {
+const allRecipes = (state = initialState, action) => {
   switch (action.type) {
   case RECEIVE_ALL_RECIPE:
-    return Object.assign({}, state, {
-      allRecipes: action.allRecipes,
-    });
+    return {
+      ...state,
+      recipes: action.allRecipes,
+    };
   default:
     return state;
   }
 };
 
-export default allRecipe;
+export default allRecipes;

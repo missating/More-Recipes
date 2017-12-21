@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import eleven from '../assets/eleven.jpg';
 
 // actions
-import receiveSingleRecipeRequest from '../actions/singleRecipe';
+import fetchSingleRecipe from '../actions/singleRecipe';
 
 /**
  *
@@ -20,7 +20,7 @@ class SingleRecipe extends React.Component {
    *
    * @memberof SingleRecipe
    */
-  componentDidMount() {
+  componentWillMount() {
     const recipeId = this.props.match.params.id;
     this.props.getRecipeDetails(recipeId);
   }
@@ -31,24 +31,24 @@ class SingleRecipe extends React.Component {
  * @memberof SingleRecipe
  */
   render() {
-    console.log('single recipe', this.props.recipeDetails);
+    let allReviews;
     let ingredientsList;
-    if (this.props.recipeDetails.ingredients) {
-      ingredientsList = this.props.recipeDetails.ingredients.split(',').map((item, index) => (<li className="list-group-item" key={index}>{item}</li>));
-      console.log(ingredientsList);
+    if (this.props.singleRecipe.ingredients) {
+      if (this.props.singleRecipe.ingredients) {
+        ingredientsList = this.props.singleRecipe.ingredients.split(',').map((item, index) => (<li className="list-group-item" key={index}>{item}</li>));
+      }
+
+      const reviews = (this.props.singleRecipe.Reviews) ? (this.props.singleRecipe.Reviews) : [];
+      allReviews = reviews.map((review, i) => (
+        <p key={`review ${review.id}`}>
+          {review.User.fullname} : {review.content}
+        </p>
+      ));
     }
-
-    const reviews = (this.props.recipeDetails.Reviews) ? (this.props.recipeDetails.Reviews) : [];
-    const allReviews = reviews.map((review, i) => (
-      <p key={'review ' + `${review.id}`}>
-        {review.content}
-      </p>
-    ));
-
     return (
       <div>
         <section className="container text-center" id="oneRecipe">
-          <h3 className="styles">{this.props.recipeDetails.name}</h3>
+          <h3 className="styles">{this.props.singleRecipe.name}</h3>
           <div className="row">
             <div className="col-md-12">
               <img src={eleven} alt="Recipe Image" className="img-thumbnail" />
@@ -58,20 +58,20 @@ class SingleRecipe extends React.Component {
             <div className="col-md-12">
               <h4>Ingredients</h4>
               <ul className="list-group">
-                {ingredientsList}
+                { ingredientsList }
               </ul>
 
               <h4>Direction for cooking</h4>
-              <p>{this.props.recipeDetails.description}</p>
+              <p>{this.props.singleRecipe.description}</p>
 
               <div className="mainBtn">
                 <button className="btn btn-danger" style={{ margin: '5px' }}>
                   <span><i className="fa fa-thumbs-down" aria-hidden="true" /></span>
-                  {this.props.recipeDetails.downvote}
+                  {this.props.singleRecipe.downvote}
                 </button>
                 <button className="btn btn-success" style={{ margin: '5px' }}>
                   <span><i className="fa fa-thumbs-up" aria-hidden="true" /></span>
-                  {this.props.recipeDetails.upvote}
+                  {this.props.singleRecipe.upvote}
                 </button>
               </div>
             </div>
@@ -80,7 +80,7 @@ class SingleRecipe extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 <h4 className="text-center"> Reviews </h4>
-                <div>{allReviews}</div>
+                <div>{ allReviews }</div>
                 <p> To add review, You must <Link to="/Home">Sign In</Link></p>
               </div>
             </div>
@@ -92,10 +92,11 @@ class SingleRecipe extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  recipeDetails: state.singleRecipe
+  singleRecipe: state.singleRecipe
 });
+
 const mapDispatchToProps = dispatch => ({
-  getRecipeDetails: id => dispatch(receiveSingleRecipeRequest(id))
+  getRecipeDetails: id => dispatch(fetchSingleRecipe(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleRecipe);

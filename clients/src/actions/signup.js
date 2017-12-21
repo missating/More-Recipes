@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { GET_AUTH, AUTH_ERROR } from './actionTypes';
+import { RECEIVE_AUTH, AUTH_ERROR } from '../actions/actionTypes';
 
 
 // action creators for user ignup
 export const getAuth = (user, token) => ({
-  type: GET_AUTH,
+  type: RECEIVE_AUTH,
   isAuthenticated: true,
   user,
   token
@@ -19,7 +19,7 @@ export const authError = message => ({
 
 
 // actions for user signup
-const userSignupRequest = formData => (dispatch) => {
+const fetchUserSignup = formData => (dispatch) => {
   dispatch(setFetching());
   return axios.post('http://localhost:3000/api/v1/users/signup', formData)
     .then((response) => {
@@ -27,14 +27,12 @@ const userSignupRequest = formData => (dispatch) => {
       localStorage.setItem('token', token);
       dispatch(getAuth(user, token));
       dispatch(unsetFetching());
-      return Promise.resolve();
     }).catch((error) => {
       const { message } = error.response.data;
       dispatch(authError(message));
       dispatch(unsetFetching());
-      return Promise.reject();
     });
 };
 
 
-export default userSignupRequest;
+export default fetchUserSignup;

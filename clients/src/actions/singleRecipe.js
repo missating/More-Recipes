@@ -3,19 +3,19 @@ import { setFetching, unsetFetching } from './fetching';
 import { RECEIVE_SINGLE_RECIPE } from './actionTypes';
 
 // action creators for get all recipes
-export const receiveSingleRecipe = recipe => ({
+export const getSingleRecipe = recipe => ({
   type: RECEIVE_SINGLE_RECIPE,
   recipe
 });
 
 
 // action for get all recipes
-const receiveSingleRecipeRequest = id => (dispatch) => {
+const fetchSingleRecipe = id => (dispatch) => {
   dispatch(setFetching());
   return axios.get(`http://localhost:3000/api/v1/recipes/${id}`)
     .then((response) => {
       const { recipe } = response.data;
-      dispatch(receiveSingleRecipe(recipe));
+      dispatch(getSingleRecipe(recipe));
       dispatch(unsetFetching());
     }).catch((error) => {
       console.log('Single recipe error', error);
@@ -23,4 +23,4 @@ const receiveSingleRecipeRequest = id => (dispatch) => {
     });
 };
 
-export default receiveSingleRecipeRequest;
+export default fetchSingleRecipe;

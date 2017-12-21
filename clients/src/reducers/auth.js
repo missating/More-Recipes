@@ -1,4 +1,4 @@
-import { GET_AUTH, AUTH_ERROR, AUTH_SIGN_IN_ERROR } from '../actions/actionTypes';
+import { RECEIVE_AUTH, AUTH_ERROR, SIGN_IN_USER, SIGN_OUT } from '../actions/actionTypes';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('token'),
@@ -6,23 +6,35 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-  case GET_AUTH:
-    return Object.assign({}, state, {
+  case RECEIVE_AUTH:
+    return {
+      ...state,
       isAuthenticated: true,
       errorMessage: '',
       user: action.user,
       token: action.token
-    });
+    };
   case AUTH_ERROR:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       isAuthenticated: false,
       errorMessage: action.message
-    });
-  case AUTH_SIGN_IN_ERROR:
-    return Object.assign({}, state, {
+    };
+  case SIGN_IN_USER:
+    return {
+      ...state,
+      isAuthenticated: true,
+      errorMessage: '',
+      user: action.user,
+      token: action.token
+    };
+  case SIGN_OUT:
+    return {
+      ...state,
       isAuthenticated: false,
-      errorMessageSignin: action.message
-    });
+      user: '',
+      token: ''
+    };
   default:
     return state;
   }
