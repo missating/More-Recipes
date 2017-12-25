@@ -1,23 +1,23 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { GET_AUTH, AUTH_SIGN_IN_ERROR } from './actionTypes';
+import { SIGN_IN_USER, AUTH_ERROR } from '../actions/actionTypes';
 
 // action creators for user signin
 export const getAuth = (user, token) => ({
-  type: GET_AUTH,
+  type: SIGN_IN_USER,
   isAuthenticated: true,
   user,
   token
 });
 
-export const authSigninError = message => ({
-  type: AUTH_SIGN_IN_ERROR,
+export const authError = message => ({
+  type: AUTH_ERROR,
   isAuthenticated: false,
   message
 });
 
 // actions for user signin
-const userSigninRequest = formData => (dispatch) => {
+const fetchUserSignin = formData => (dispatch) => {
   dispatch(setFetching());
   return axios.post('http://localhost:3000/api/v1/users/signin', formData)
     .then((response) => {
@@ -27,10 +27,10 @@ const userSigninRequest = formData => (dispatch) => {
       dispatch(unsetFetching());
     }).catch((error) => {
       const { message } = error.response.data;
-      dispatch(authSigninError(message));
+      dispatch(authError(message));
       dispatch(unsetFetching());
     });
 };
 
 
-export default userSigninRequest;
+export default fetchUserSignin;

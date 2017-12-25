@@ -3,19 +3,19 @@ import { setFetching, unsetFetching } from './fetching';
 import { ADD_RECIPE, ADD_RECIPE_ERROR } from '../actions/actionTypes';
 
 // action creators
-const createRecipe = recipe => ({
+export const createRecipe = newRecipe => ({
   type: ADD_RECIPE,
-  newRecipe: recipe
+  newRecipe
 });
 
-const recipeError = message => ({
+export const recipeError = message => ({
   type: ADD_RECIPE_ERROR,
-  addRecipeErrorMessage: message
+  message
 });
 
 
+// actions for add recipe
 const addRecipe = recipe => (dispatch) => {
-  console.log('before axios');
   dispatch(setFetching());
   const token = localStorage.getItem('token');
   return axios({
@@ -31,12 +31,14 @@ const addRecipe = recipe => (dispatch) => {
       console.log('new recipe', newRecipe);
       dispatch(createRecipe(newRecipe));
       dispatch(unsetFetching());
+      return response;
     })
     .catch((error) => {
-      const message = error.response.data.Message;
+      const { message } = error.response.data;
       console.log('error', message);
       dispatch(recipeError(message));
       dispatch(unsetFetching());
     });
 };
+
 export default addRecipe;

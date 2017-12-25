@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
 
 // validations
 import signupValidator from '../validation/signupValidator';
 
 // actions
-import userSignupRequest from '../actions/signupActions';
+import fetchUserSignup from '../actions/signup';
 
 
 /**
@@ -24,26 +23,23 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullname: 'jjajaja  ',
-      username: 'sjsjjss',
-      email: 'jjsjs@ssks.com',
-      password: '123456',
-      confirmPassword: '123456',
+      fullname: '',
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       errors: {}
     };
-    this.isValid = this.isValid.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  /**
- * @description handles form change events
- * @returns {null} null
- * @param {any} event
- * @memberof Signup
- */
-  onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated && nextProps.auth.errorMessage.length === 0) {
+      $("#myModal").modal('hide');
+    }
   }
+
   /**
  *
  *
@@ -59,6 +55,16 @@ class Signup extends React.Component {
   }
 
   /**
+ * @description handles form change events
+ * @returns {null} null
+ * @param {any} event
+ * @memberof Signup
+ */
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  /**
  *
  *
  * @param {any} event
@@ -68,13 +74,9 @@ class Signup extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const isValid = this.isValid();
-    if (!isValid) {
-      return;
+    if (isValid) {
+      this.props.signupUser(this.state);
     }
-    this.props.userSignupRequest(this.state)
-      .then(() => {
-        $("#myModal").modal('hide');
-      }).catch(() => {});
   }
 
   /**
@@ -85,9 +87,10 @@ class Signup extends React.Component {
    */
   render() {
     const { errors } = this.state;
-    let serverErrorBag;
+
+    let signupError;
     if (this.props.auth.errorMessage) {
-      serverErrorBag = (
+      signupError = (
         <span className="help-block">{this.props.auth.errorMessage}</span>
       );
     }
@@ -98,7 +101,7 @@ class Signup extends React.Component {
             <div className="modal-content">
               <div className="modal-body">
 
-                {serverErrorBag}
+                {signupError}
 
                 <div className="row">
                   <div className="col-sm-12">
@@ -159,8 +162,14 @@ class Signup extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  signUp: (userDetails) => bindActionCreators(userSignupRequest, dispatch)
+const mapDispatchToProps = dispatch => ({
+  signupUser: (userDetails) => {
+    dispatch(fetchUserSignup(userDetails));
+  }
 });
 
-export default connect(mapDispatchToProps)(Signup);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

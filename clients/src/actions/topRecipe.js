@@ -2,27 +2,27 @@ import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
 import { RECEIVE_TOP_RECIPES } from './actionTypes';
 
-const recieveTopRecipes = recipes => ({
+
+// action creates for get toprecipes
+const getTopRecipes = recipes => ({
   type: RECEIVE_TOP_RECIPES,
   recipes
 });
 
 
-export const receiveTopRecipeRequest = () => (dispatch) => {
+// actions for toprecipes
+export const fetchTopRecipes = () => (dispatch) => {
   dispatch(setFetching());
-  console.log('before axios');
   return axios.get('http://localhost:3000/api/v1/recipes?sort=upvotes&order=descending')
     .then((response) => {
       const topRecipes = response.data.recipes;
-      console.log('top recipes', topRecipes);
-      console.log('after axios');
-      dispatch(recieveTopRecipes(topRecipes));
+      dispatch(getTopRecipes(topRecipes));
       dispatch(unsetFetching());
     })
     .catch((error) => {
-      console.log(error.response.data.message);
+      console.log('Top Reipes error', error.response.data.message);
       dispatch(unsetFetching());
     });
 };
 
-export default receiveTopRecipeRequest;
+export default fetchTopRecipes;

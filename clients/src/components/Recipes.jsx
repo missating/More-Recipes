@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import RecipeGallery from './RecipeGallery';
 
 // actions
-import receiveRecipeRequest from '../actions/recipes';
+import fetchAllRecipes from '../actions/recipes';
 
 /**
  *
@@ -20,7 +20,7 @@ class Recipes extends React.Component {
    * @memberof Recipes
    */
   componentWillMount() {
-    this.props.receiveRecipe();
+    this.props.getAllRecipes();
   }
   /**
    *
@@ -29,9 +29,9 @@ class Recipes extends React.Component {
    * @memberof Recipes
    */
   render() {
-    const recipe = (this.props.allRecipes) ? this.props.allRecipes : [];
+    const recipes = (this.props.allRecipes) ? this.props.allRecipes : [];
 
-    const recipeList = recipe.map((recipe, i) => (
+    const recipeList = recipes.map((recipe, i) => (
       <div className="col-md-4" key={`recipe${i + 1}`}>
         <RecipeGallery
           name={recipe.name}
@@ -55,11 +55,11 @@ class Recipes extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  allRecipes: state.receiveRecipe.allRecipes
+  allRecipes: state.allRecipes.recipes
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveRecipe: () => dispatch(receiveRecipeRequest())
+  getAllRecipes: () => dispatch(fetchAllRecipes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import receiveTopRecipeRequest from '../actions/topRecipe';
+import fetchTopRecipes from '../actions/topRecipe';
 import RecipeCard from './RecipeCard';
 
 
@@ -13,11 +13,11 @@ import RecipeCard from './RecipeCard';
 class TopRecipes extends React.Component {
   /**
    *
-   *
+   *@returns {null} null
    * @memberof TopRecipes
    */
   componentWillMount() {
-    this.props.recieveTopRecipes();
+    this.props.getTopRecipes();
   }
   /**
  *
@@ -31,13 +31,7 @@ class TopRecipes extends React.Component {
     const topRecipeList = topRecipe.map((recipe, i) => (
       <div className="col-md-4" key={`topRecipe${i + 1}`}>
         <RecipeCard
-          name={recipe.name}
-          ingredients={recipe.ingredients}
-          descriptions={recipe.description}
-          upvote={recipe.upvote}
-          downvote={recipe.downvote}
-          id={recipe.id}
-          userId={recipe.userId}
+          {...recipe}
         />
 
       </div>
@@ -61,7 +55,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  recieveTopRecipes: () => dispatch(receiveTopRecipeRequest())
+  getTopRecipes: () => dispatch(fetchTopRecipes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopRecipes);

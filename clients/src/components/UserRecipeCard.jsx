@@ -7,12 +7,26 @@ import eleven from '../assets/eleven.jpg';
 
 const UserRecipeCard = (props) => (
   <div>
-    <img src={eleven} alt="Recipe Image" className="img-thumbnail" />
+    <div className="card">
+      <div className="card-header">{props.name}</div>
+      <div className="card-main">
+        <img src={eleven} alt="Recipe Image" className="img-thumbnail" />
+        <div className="main-description">
+          <p> {props.description} </p>
+        </div>
+        <div className="container text-center">
+          <Link className="btn btn-outline-primary" style={{ marginRight: '10px' }} to={`/SingleRecipe/${props.id}`}>Details</Link>
 
-    <h5><Link to={`/SingleRecipe/${props.id}`}>{props.name}</Link></h5>
-    <p />{props.descriptions}
-    <button type="button" className="btn btn-outline-info">Edit</button>
-    <button type="button" className="btn btn-outline-danger">Delete</button>
+          <button type="button" className="btn btn-outline-primary"style={{ marginRight: '10px' }} >
+            <i className="fa fa-pencil" /> Edit
+          </button>
+
+          <button type="button" className="btn btn-danger">
+            <i className="fa fa-trash" />
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 );
 

@@ -3,7 +3,8 @@
     "extends": ["airbnb-base", "react"],
     "env": {
         "node": true,
-        "es6": true
+        "es6": true,
+        "browser": true
     },
     "settings": {
         "import/resolver":{

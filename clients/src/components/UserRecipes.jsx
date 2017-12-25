@@ -33,8 +33,6 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   render() {
-    // console.log(this.props.userRecipes);
-    console.log(this.props);
     const userRecipes = (this.props.userRecipes) ? this.props.userRecipes : [];
     const userRecipesList = userRecipes.map((recipe, i) => {
       console.log('recipe number: ', i);

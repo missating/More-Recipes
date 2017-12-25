@@ -9,14 +9,16 @@ const initialState = {
 const addRecipe = (state = initialState.recipes, action) => {
   switch (action.type) {
   case ADD_RECIPE:
-    return Object.assign({}, state, {
-      addRecipeErrorMessage: '',
-      newRecipe: action.newRecipe
-    });
+    return {
+      ...state,
+      newRecipe: action.newRecipe,
+      errorMessage: ''
+    };
   case ADD_RECIPE_ERROR:
-    return Object.assign({}, state, {
-      addRecipeErrorMessage: action.addRecipeErrorMessage
-    });
+    return {
+      ...state,
+      errorMessage: action.message
+    };
   default:
     return state;
   }

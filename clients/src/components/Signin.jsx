@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// actions
-import userSigninRequest from '../actions/userSignIn';
-
 // validations
 import signinValidator from '../validation/signinValidator';
+
+// actions
+import fetchUserSignin from '../actions/userSignIn';
+
 
 /**
  *
@@ -22,8 +23,8 @@ class Signin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'nessa@test.com',
-      password: 'passosklfkfmf',
+      email: '',
+      password: '',
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -61,10 +62,10 @@ class Signin extends React.Component {
  */
   onSubmit(event) {
     event.preventDefault();
-    if (!this.isValid()) {
-      return;
+    const isValid = this.isValid();
+    if (isValid) {
+      this.props.signinUser(this.state);
     }
-    this.props.dispatch(userSigninRequest(this.state));
   }
 
   /**
@@ -75,16 +76,19 @@ class Signin extends React.Component {
    */
   render() {
     const { errors } = this.state;
-    let serverErrorBag;
-    if (this.props.auth.errorMessageSignin) {
-      serverErrorBag = (
-        <span className="help-block">{this.props.auth.errorMessageSignin}</span>
+
+    let signinError;
+    if (this.props.auth.errorMessage) {
+      signinError = (
+        <span className="help-block">{this.props.auth.errorMessage}</span>
       );
     }
     return (
       <div>
         <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
-          {serverErrorBag}
+
+          {signinError}
+
           <div className="form-group">
             <input type="email" placeholder="Email" name="email"
               value={this.state.email}
@@ -111,5 +115,14 @@ class Signin extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  signinUser: (userDetails) => {
+    dispatch(fetchUserSignin(userDetails));
+  }
+});
 
-export default connect(null)(Signin);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

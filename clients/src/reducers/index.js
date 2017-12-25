@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import userProfile from './userProfile';
 import isFetching from './isFetching';
-import receiveRecipe from './recipes';
+import allRecipes from './recipes';
 import singleRecipe from './singleRecipe';
 import topRecipe from './topRecipe';
 import addRecipe from './addRecipe';
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   auth,
   userProfile,
   isFetching,
-  receiveRecipe,
+  allRecipes,
   singleRecipe,
   topRecipe,
   addRecipe,
