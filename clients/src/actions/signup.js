@@ -34,5 +34,4 @@ const fetchUserSignup = formData => (dispatch) => {
     });
 };
 
-
 export default fetchUserSignup;

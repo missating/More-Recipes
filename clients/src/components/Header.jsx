@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import signUserOut from './../actions/signout';
 
@@ -27,19 +26,16 @@ const Header = (props) => (
 
           {
             props.authenticated &&
-                    <span>
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/profile">Profile</Link>
+              <li className="nav-item">
+                <Link className="nav-link" to="/profile">Profile</Link>
+              </li>
+          }
 
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link"
-                          onClick={() => {
-                            props.signUserOut();
-                          }}
-                        >Sign out</a>
-                      </li>
-                    </span>
+          {
+            props.authenticated &&
+              <li className="nav-item">
+                <a className="nav-link" onClick={() => { props.signUserOut(); }}>Sign out</a>
+              </li>
           }
         </ul>
 

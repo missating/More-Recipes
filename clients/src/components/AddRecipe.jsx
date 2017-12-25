@@ -22,9 +22,11 @@ class AddRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      ingredients: '',
-      description: '',
+      newRecipe: {
+        name: '',
+        ingredients: '',
+        description: ''
+      },
       errors: {}
     };
 
@@ -38,7 +40,12 @@ class AddRecipe extends React.Component {
  * @memberof AddRecipe
  */
   onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({
+      newRecipe: {
+        ...this.state.newRecipe,
+        [event.target.name]: event.target.value
+      }
+    });
   }
   /**
  *
@@ -47,7 +54,7 @@ class AddRecipe extends React.Component {
  * @memberof AddRecipe
  */
   isValid() {
-    const { errors, isValid } = recipeValidator(this.state);
+    const { errors, isValid } = recipeValidator(this.state.newRecipe);
     if (!isValid) {
       this.setState({ errors });
     }
@@ -62,11 +69,20 @@ class AddRecipe extends React.Component {
  */
   onSubmit(event) {
     event.preventDefault();
-    if (!this.isValid()) {
-      return;
+    const isValid = this.isValid();
+    if (isValid) {
+      this.props.addNewRecipe(this.state.newRecipe).then(() => {
+        this.setState({
+          newRecipe: {
+            name: '',
+            ingredients: '',
+            description: ''
+          }
+        });
+      });
     }
-    this.props.dispatch(addRecipe(this.state));
   }
+
   /**
    * @description react render method
    *
@@ -74,7 +90,14 @@ class AddRecipe extends React.Component {
    * @memberof AddRecipe
    */
   render() {
-    const { errors } = this.state;
+    const { errors, newRecipe } = this.state;
+
+    let addRecipeError;
+    if (this.props.addRecipe.errorMessage) {
+      addRecipeError = (
+        <span className="help-block">{this.props.addRecipe.errorMessage}</span>
+      );
+    }
     return (
       <div>
         <section className="section" id="add">
@@ -84,11 +107,13 @@ class AddRecipe extends React.Component {
           <div className="row">
             <div className="col-md-12">
 
-              <form method="" className="form-horizontal" onSubmit={this.onSubmit}>
+              {addRecipeError}
+
+              <form method="" className="form-horizontal" onSubmit={this.onSubmit} id="addRecipe">
 
                 <div className="form-group">
                   <input type="text" name="name" className="form-control" placeholder="Recipe Name"
-                    value={this.state.name}
+                    value={newRecipe.name}
                     onChange={this.onChange} />
                   {errors.name && <span className="help-block">{errors.name}</span>}
                 </div>
@@ -96,7 +121,7 @@ class AddRecipe extends React.Component {
 
                 <div className="form-group">
                   <input type="text" name="ingredients" className="form-control" placeholder="Ingredients"
-                    value={this.state.ingredients}
+                    value={newRecipe.ingredients}
                     onChange={this.onChange} />
                   {errors.ingredients && <span className="help-block">{errors.ingredients}</span>}
                 </div>
@@ -109,7 +134,7 @@ class AddRecipe extends React.Component {
                     className="form-control"
                     placeholder="Description"
                     name="description"
-                    value={this.state.description}
+                    value={newRecipe.description}
                     onChange={this.onChange}
                   />
                   {errors.description && <span className="help-block">{errors.description}</span>}
@@ -132,4 +157,10 @@ class AddRecipe extends React.Component {
   }
 }
 
-export default connect(null)(AddRecipe);
+const mapStateToProps = state => ({
+  addRecipe: state.addRecipe
+});
+
+export default connect(mapStateToProps, {
+  addNewRecipe: addRecipe
+})(AddRecipe);

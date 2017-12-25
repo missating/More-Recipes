@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 
 // image
 import eleven from '../assets/eleven.jpg';
@@ -81,7 +81,6 @@ class SingleRecipe extends React.Component {
               <div className="col-md-12">
                 <h4 className="text-center"> Reviews </h4>
                 <div>{ allReviews }</div>
-                <p> To add review, You must <Link to="/Home">Sign In</Link></p>
               </div>
             </div>
           </div>
@@ -92,7 +91,7 @@ class SingleRecipe extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  singleRecipe: state.singleRecipe
+  singleRecipe: state.singleRecipe,
 });
 
 const mapDispatchToProps = dispatch => ({

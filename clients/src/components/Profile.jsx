@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // image
 import prof from '../assets/prof.jpg';
@@ -32,6 +32,11 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
+        {
+          !this.props.authenticated &&
+          <Redirect to="/" />
+        }
+
         <div className="container userButtons">
           <div className="row">
             <div className="col-md-4">
@@ -84,11 +89,10 @@ Profile.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userDetails: state.userProfile
+  userDetails: state.userProfile,
+  authenticated: state.auth.isAuthenticated
 });
 
-const mapDispatchToProps = dispatch => ({
-  receiveUserProfile: () => dispatch(receiveUserProfileRequest())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, {
+  receiveUserProfile: receiveUserProfileRequest
+})(Profile);
