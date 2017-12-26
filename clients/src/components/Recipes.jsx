@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // components
 import RecipeGallery from './RecipeGallery';
@@ -54,6 +55,16 @@ class Recipes extends React.Component {
     );
   }
 }
+
+Recipes.propTypes = {
+  getAllRecipes: PropTypes.func.isRequired,
+  allRecipes: PropTypes.array.isRequired
+};
+
+Recipes.defaultProps = {
+  allRecipes: ''
+};
+
 const mapStateToProps = state => ({
   allRecipes: state.allRecipes.recipes
 });

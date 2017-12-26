@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 // image
@@ -17,7 +18,7 @@ import fetchSingleRecipe from '../actions/singleRecipe';
 class SingleRecipe extends React.Component {
   /**
    *
-   *
+   * @returns {json} with recipe details
    * @memberof SingleRecipe
    */
   componentWillMount() {
@@ -27,7 +28,7 @@ class SingleRecipe extends React.Component {
   /**
  *
  *
- * @returns
+ * @return {jsx} - a list of items to be rendered
  * @memberof SingleRecipe
  */
   render() {
@@ -35,10 +36,13 @@ class SingleRecipe extends React.Component {
     let ingredientsList;
     if (this.props.singleRecipe.ingredients) {
       if (this.props.singleRecipe.ingredients) {
-        ingredientsList = this.props.singleRecipe.ingredients.split(',').map((item, index) => (<li className="list-group-item" key={index}>{item}</li>));
+        ingredientsList = this.props.singleRecipe.ingredients.split(',')
+          .map((item, index) =>
+            (<li className="list-group-item" key={index}>{item}</li>));
       }
 
-      const reviews = (this.props.singleRecipe.Reviews) ? (this.props.singleRecipe.Reviews) : [];
+      const reviews = (this.props.singleRecipe.Reviews) ?
+        (this.props.singleRecipe.Reviews) : [];
       allReviews = reviews.map((review, i) => (
         <p key={`review ${review.id}`}>
           {review.User.fullname} : {review.content}
@@ -66,11 +70,17 @@ class SingleRecipe extends React.Component {
 
               <div className="mainBtn">
                 <button className="btn btn-danger" style={{ margin: '5px' }}>
-                  <span><i className="fa fa-thumbs-down" aria-hidden="true" /></span>
+                  <span>
+                    <i className="fa fa-thumbs-down"
+                      aria-hidden="true" />
+                  </span>
                   {this.props.singleRecipe.downvote}
                 </button>
                 <button className="btn btn-success" style={{ margin: '5px' }}>
-                  <span><i className="fa fa-thumbs-up" aria-hidden="true" /></span>
+                  <span>
+                    <i className="fa fa-thumbs-up"
+                      aria-hidden="true" />
+                  </span>
                   {this.props.singleRecipe.upvote}
                 </button>
               </div>
@@ -89,6 +99,16 @@ class SingleRecipe extends React.Component {
     );
   }
 }
+
+SingleRecipe.propTypes = {
+  singleRecipe: PropTypes.object.isRequired,
+  getRecipeDetails: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
+};
+
+SingleRecipe.defaultProps = {
+  singleRecipe: ''
+};
 
 const mapStateToProps = state => ({
   singleRecipe: state.singleRecipe,

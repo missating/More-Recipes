@@ -22,7 +22,6 @@ const receiveUserRecipes = () => (dispatch) => {
   })
     .then((response) => {
       const userRecipes = response.data.recipes;
-
       dispatch(receiveUserRecipe(userRecipes));
       dispatch(unsetFetching());
     }).catch((error) => {
