@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+// actions
 import signUserOut from './../actions/signout';
 
 // components
@@ -10,7 +13,13 @@ const Header = (props) => (
   <header>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#">More Recipes</a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
         <span className="navbar-toggler-icon" />
       </button>
 
@@ -34,19 +43,31 @@ const Header = (props) => (
           {
             props.authenticated &&
               <li className="nav-item">
-                <a className="nav-link" onClick={() => { props.signUserOut(); }}>Sign out</a>
+                <a className="nav-link"
+                  onClick={() => { props.signUserOut(); }}>
+                Sign out
+                </a>
               </li>
           }
         </ul>
 
         {
           !props.authenticated &&
-                    <Signin />
+            <Signin />
         }
       </div>
     </nav>
   </header>
 );
+
+Header.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  signUserOut: PropTypes.func.isRequired
+};
+
+Header.defaultProps = {
+  authenticated: {}
+};
 
 
 const mapStateToProps = state => ({

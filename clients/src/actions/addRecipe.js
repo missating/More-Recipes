@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { ADD_RECIPE, ADD_RECIPE_ERROR } from '../actions/actionTypes';
+import { ADD_RECIPE, ADD_RECIPE_ERROR } from './actionTypes';
 
 // action creators
 export const createRecipe = newRecipe => ({

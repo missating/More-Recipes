@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // validations
 import signupValidator from '../validation/signupValidator';
@@ -33,7 +34,12 @@ class Signup extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  /**
+ *
+ * @returns {json} with nextProps details
+ * @param {any} nextProps
+ * @memberof Signup
+ */
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated && nextProps.auth.errorMessage.length === 0) {
       $("#myModal").modal('hide');
@@ -96,7 +102,11 @@ class Signup extends React.Component {
     }
     return (
       <div>
-        <div id="myModal" className="modal fade" tabIndex="-1" role="dialog" aria-hidden="true">
+        <div id="myModal"
+          className="modal fade"
+          tabIndex="-1"
+          role="dialog"
+          aria-hidden="true">
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
               <div className="modal-body">
@@ -108,39 +118,79 @@ class Signup extends React.Component {
                     <form className="form-horizontal" onSubmit={this.onSubmit}>
 
                       <div className="form-group">
-                        <input type="text" name="fullname" className="form-control" placeholder="Full Name"
+                        <input type="text"
+                          name="fullname"
+                          className="form-control"
+                          placeholder="Full Name"
                           value={this.state.fullname}
                           onChange={this.onChange} />
-                        {errors.fullname && <span className="help-block">{errors.fullname}</span>}
+                        {
+                          errors.fullname &&
+                        <span className="help-block">
+                          {errors.fullname}
+                        </span>
+                        }
                       </div>
 
                       <div className="form-group">
-                        <input type="text" name="username" className="form-control" placeholder="User Name"
+                        <input type="text"
+                          name="username"
+                          className="form-control"
+                          placeholder="User Name"
                           value={this.state.username}
                           onChange={this.onChange} />
-                        {errors.username && <span className="help-block">{errors.username}</span>}
+                        {
+                          errors.username &&
+                          <span className="help-block">
+                            {errors.username}
+                          </span>
+                        }
                       </div>
 
                       <div className="form-group">
-                        <input type="email" name="email" className="form-control" placeholder="Email Address"
+                        <input type="email"
+                          name="email"
+                          className="form-control"
+                          placeholder="Email Address"
                           value={this.state.email}
                           onChange={this.onChange} />
-                        {errors.email && <span className="help-block">{errors.email}</span>}
+                        {
+                          errors.email &&
+                          <span className="help-block">
+                            {errors.email}
+                          </span>
+                        }
                       </div>
 
                       <div className="form-group">
-                        <input type="password" name="password" className="form-control" placeholder="Password"
+                        <input type="password"
+                          name="password"
+                          className="form-control"
+                          placeholder="Password"
                           value={this.state.password}
                           onChange={this.onChange} />
-                        {errors.password && <span className="help-block">{errors.password}</span>}
+                        {
+                          errors.password &&
+                          <span className="help-block">
+                            {errors.password}
+                          </span>
+                        }
                       </div>
 
 
                       <div className="form-group">
-                        <input type="password" name="confirmPassword" className="form-control" placeholder="Confirm Password"
+                        <input type="password"
+                          name="confirmPassword"
+                          className="form-control"
+                          placeholder="Confirm Password"
                           value={this.state.confirmPassword}
                           onChange={this.onChange} />
-                        {errors.confirmPassword && <span className="help-block">{errors.confirmPassword}</span>}
+                        {
+                          errors.confirmPassword &&
+                          <span className="help-block">
+                            {errors.confirmPassword}
+                          </span>
+                        }
                       </div>
                       <br/>
 
@@ -152,7 +202,10 @@ class Signup extends React.Component {
                 </div>
               </div>
               <div className="modal-footer">
-                <button className="btn btn-danger btn-sm" data-dismiss="modal">close</button>
+                <button className="btn btn-danger btn-sm"
+                  data-dismiss="modal">
+                close
+                </button>
               </div>
             </div>
           </div>
@@ -161,6 +214,15 @@ class Signup extends React.Component {
     );
   }
 }
+
+Signup.propTypes = {
+  auth: PropTypes.object.isRequired,
+  signupUser: PropTypes.func.isRequired
+};
+
+Signup.defaultProps = {
+  auth: ''
+};
 
 const mapDispatchToProps = dispatch => ({
   signupUser: (userDetails) => {

@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+// components
 import UserRecipeCard from '../components/UserRecipeCard';
+
+// actions
 import receiveUserRecipes from '../actions/userRecipes';
 /**
  *
@@ -34,18 +39,15 @@ class UserRecipes extends React.Component {
    */
   render() {
     const userRecipes = (this.props.userRecipes) ? this.props.userRecipes : [];
-    const userRecipesList = userRecipes.map((recipe, i) => {
-      console.log('recipe number: ', i);
-      return (
-        <div className="col-md-4" key={`recipe${i + 1}`}>
-          <UserRecipeCard
-            name={recipe.name}
-            description={recipe.description}
-            id={recipe.id}
-          />
-        </div>
-      );
-    });
+    const userRecipesList = userRecipes.map((recipe, i) => (
+      <div className="col-md-4" key={`recipe${i + 1}`}>
+        <UserRecipeCard
+          name={recipe.name}
+          description={recipe.description}
+          id={recipe.id}
+        />
+      </div>
+    ));
     return (
       <div>
         <section className="section" id="view">
@@ -60,6 +62,14 @@ class UserRecipes extends React.Component {
     );
   }
 }
+
+UserRecipes.propTypes = {
+  receiveUserRecipe: PropTypes.func.isRequired
+};
+
+UserRecipes.defaultProps = {
+  userRecipes: ''
+};
 
 const mapStateToProps = state => ({
   userRecipes: state.userRecipes.allUserRecipes

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // validations
@@ -95,7 +96,9 @@ class AddRecipe extends React.Component {
     let addRecipeError;
     if (this.props.addRecipe.errorMessage) {
       addRecipeError = (
-        <span className="help-block">{this.props.addRecipe.errorMessage}</span>
+        <div className="alert alert-danger alert-dismissible">
+          {this.props.addRecipe.errorMessage}
+        </div>
       );
     }
     return (
@@ -107,23 +110,39 @@ class AddRecipe extends React.Component {
           <div className="row">
             <div className="col-md-12">
 
+              {
+                this.props.addRecipe.errorMessage === "" &&
+                <div className="alert alert-success alert-dismissible"
+                  role="alert">
+              Recipe Added
+                </div>
+              }
+
               {addRecipeError}
 
-              <form method="" className="form-horizontal" onSubmit={this.onSubmit} id="addRecipe">
+              <form className="form-horizontal" onSubmit={this.onSubmit}>
 
                 <div className="form-group">
-                  <input type="text" name="name" className="form-control" placeholder="Recipe Name"
+                  <input type="text"
+                    name="name"
+                    className="form-control"
+                    placeholder="Recipe Name"
                     value={newRecipe.name}
                     onChange={this.onChange} />
-                  {errors.name && <span className="help-block">{errors.name}</span>}
+                  {errors.name &&
+                  <span className="help-block">{errors.name}</span>}
                 </div>
 
 
                 <div className="form-group">
-                  <input type="text" name="ingredients" className="form-control" placeholder="Ingredients"
+                  <input type="text"
+                    name="ingredients"
+                    className="form-control"
+                    placeholder="Ingredients"
                     value={newRecipe.ingredients}
                     onChange={this.onChange} />
-                  {errors.ingredients && <span className="help-block">{errors.ingredients}</span>}
+                  {errors.ingredients &&
+                  <span className="help-block">{errors.ingredients}</span>}
                 </div>
 
                 <div className="form-group">
@@ -137,7 +156,8 @@ class AddRecipe extends React.Component {
                     value={newRecipe.description}
                     onChange={this.onChange}
                   />
-                  {errors.description && <span className="help-block">{errors.description}</span>}
+                  {errors.description &&
+                  <span className="help-block">{errors.description}</span>}
                 </div>
 
                 <div className="form-group">
@@ -156,6 +176,14 @@ class AddRecipe extends React.Component {
     );
   }
 }
+
+AddRecipe.propTypes = {
+  addNewRecipe: PropTypes.func.isRequired,
+  addRecipe: PropTypes.object.isRequired
+};
+AddRecipe.defaultProps = {
+  addRecipe: ''
+};
 
 const mapStateToProps = state => ({
   addRecipe: state.addRecipe

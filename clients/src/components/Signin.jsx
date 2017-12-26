@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // validations
 import signinValidator from '../validation/signinValidator';
@@ -94,7 +95,12 @@ class Signin extends React.Component {
               value={this.state.email}
               onChange={this.onChange}
               className="form-control"/>
-            {errors.email && <span className="help-block">{errors.email}</span>}
+            {
+              errors.email &&
+            <span className="help-block">
+              {errors.email}
+            </span>
+            }
           </div>
 
           <div className="form-group">
@@ -102,7 +108,12 @@ class Signin extends React.Component {
               value={this.state.password}
               onChange={this.onChange}
               className="form-control"/>
-            {errors.password && <span className="help-block">{errors.password}</span>}
+            {
+              errors.password &&
+              <span className="help-block">
+                {errors.password}
+              </span>
+            }
           </div>
 
           <button
@@ -114,6 +125,15 @@ class Signin extends React.Component {
     );
   }
 }
+
+Signin.propTypes = {
+  auth: PropTypes.object.isRequired,
+  signinUser: PropTypes.func.isRequired
+};
+
+Signin.defaultProps = {
+  auth: ''
+};
 
 const mapDispatchToProps = dispatch => ({
   signinUser: (userDetails) => {

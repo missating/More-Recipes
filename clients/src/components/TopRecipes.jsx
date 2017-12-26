@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+// actions
 import fetchTopRecipes from '../actions/topRecipe';
+
+// components
 import RecipeCard from './RecipeCard';
 
 
@@ -22,7 +27,7 @@ class TopRecipes extends React.Component {
   /**
  *
  *
- * @returns
+ * @return {jsx} - a list of items to be rendered
  * @memberof TopRecipes
  */
   render() {
@@ -49,6 +54,14 @@ class TopRecipes extends React.Component {
     );
   }
 }
+
+TopRecipes.propTypes = {
+  getTopRecipes: PropTypes.func.isRequired
+};
+
+TopRecipes.defaultProps = {
+  recipes: ''
+};
 
 const mapStateToProps = state => ({
   recipes: state.topRecipe.recipes
