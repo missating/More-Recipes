@@ -1,7 +1,15 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import rootReducer from './reducers/index';
+import appReducer from './reducers/index';
+import SIGN_OUT from '../src/actions/actionTypes';
+
+const rootReducer = (state, action) => {
+  if (action.type === SIGN_OUT) {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
 
 const store = createStore(
   rootReducer,

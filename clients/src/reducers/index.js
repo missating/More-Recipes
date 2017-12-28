@@ -9,7 +9,7 @@ import topRecipe from './topRecipe';
 import addRecipe from './addRecipe';
 import userRecipes from './userRecipes';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth,
   userProfile,
   isFetching,
@@ -20,4 +20,4 @@ const rootReducer = combineReducers({
   userRecipes
 });
 
-export default rootReducer;
+export default appReducer;

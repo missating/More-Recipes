@@ -1,4 +1,8 @@
-import { RECEIVE_AUTH, AUTH_ERROR, SIGN_IN_USER, SIGN_OUT } from '../actions/actionTypes';
+import { RECEIVE_AUTH,
+  AUTH_ERROR,
+  SIGN_IN_USER,
+  SIGN_OUT }
+  from '../actions/actionTypes';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('token'),

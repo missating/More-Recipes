@@ -35,13 +35,7 @@ class Recipes extends React.Component {
     const recipeList = recipes.map((recipe, i) => (
       <div className="col-md-4" key={`recipe${i + 1}`}>
         <RecipeGallery
-          name={recipe.name}
-          ingredients={recipe.ingredients}
-          descriptions={recipe.descriptions}
-          upvote={recipe.upvote}
-          downvote={recipe.downvote}
-          id={recipe.id}
-          userId={recipe.userId}
+          {...recipe}
         />
       </div>
     ));

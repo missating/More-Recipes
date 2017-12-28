@@ -102,8 +102,9 @@ class EditRecipe extends React.Component {
             this.props.singleRecipe.editRecipeSuccess &&
               <div className="alert alert-success alert-dismissible"
                 role="alert">
-            Recipe Updated
-                {/* <Redirect to={`/SingleRecipe/${this.props.singleRecipe.id}`}/> */}
+                  Recipe Updated
+                {/* <Redirect to=
+                {`/SingleRecipe/${this.props.singleRecipe.id}`}/> */}
               </div>
           }
 
@@ -180,7 +181,7 @@ EditRecipe.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  singleRecipe: state.singleRecipe,
+  singleRecipe: state.singleRecipe
 });
 
 const mapDispatchToProps = dispatch => ({

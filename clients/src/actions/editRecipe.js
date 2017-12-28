@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { EDIT_RECIPE, EDIT_RECIPE_ERROR } from './actionTypes';
+import { EDIT_RECIPE } from './actionTypes';
 import { setFetching, unsetFetching } from './fetching';
 
 const editRecipeSuccess = recipe => ({
@@ -7,9 +7,6 @@ const editRecipeSuccess = recipe => ({
   recipe
 });
 
-const editRecipeError = () => ({
-  type: EDIT_RECIPE_ERROR
-});
 
 const editRecipe = (recipe, recipeId) => (dispatch) => {
   const { name, ingredients, description } = recipe;
@@ -32,8 +29,7 @@ const editRecipe = (recipe, recipeId) => (dispatch) => {
       dispatch(unsetFetching());
     })
     .catch((error) => {
-      const { message } = error.response.data;
-      dispatch(editRecipeError(message));
+      console.log('Edit recipes error', error.response.data.message);
       dispatch(unsetFetching());
     });
 };
