@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 // image
 import eleven from '../assets/eleven.jpg';
 
+// actions
+import deleteRecipe from '../actions/deleteRecipe';
 
 const UserRecipeCard = (props) => (
+
   <div>
     <div className="card">
       <div className="card-header">{props.name}</div>
@@ -28,7 +32,8 @@ const UserRecipeCard = (props) => (
             Edit
           </Link>
 
-          <button type="button" className="btn btn-danger">
+          <button type="button" className="btn btn-danger"
+            onClick={() => { props.deleteRecipe(props.id); }}>
             <i className="fa fa-trash" />
           </button>
         </div>
@@ -40,7 +45,14 @@ const UserRecipeCard = (props) => (
 UserRecipeCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
+  deleteRecipe: PropTypes.func.isRequired
 };
 
-export default UserRecipeCard;
+const mapDispatchToProps = (dispatch) => ({
+  deleteRecipe: (recipeId) => {
+    dispatch(deleteRecipe(recipeId));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(UserRecipeCard);

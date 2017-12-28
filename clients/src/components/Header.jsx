@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // actions
-import signUserOut from './../actions/signout';
+import signUserOut from '../actions/signout';
 
 // components
 import Signin from './Signin';
@@ -68,7 +68,6 @@ Header.propTypes = {
 Header.defaultProps = {
   authenticated: {}
 };
-
 
 const mapStateToProps = state => ({
   authenticated: state.auth.isAuthenticated

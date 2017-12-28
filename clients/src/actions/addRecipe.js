@@ -28,14 +28,12 @@ const addRecipe = recipe => (dispatch) => {
   })
     .then((response) => {
       const newRecipe = response.data.recipe;
-      console.log('new recipe', newRecipe);
       dispatch(createRecipe(newRecipe));
       dispatch(unsetFetching());
       return response;
     })
     .catch((error) => {
       const { message } = error.response.data;
-      console.log('error', message);
       dispatch(recipeError(message));
       dispatch(unsetFetching());
     });

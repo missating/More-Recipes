@@ -1,11 +1,18 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { RECEIVE_USER_RECIPES } from './actionTypes';
+import { RECEIVE_USER_RECIPES,
+  RECEIVE_USER_RECIPES_ERROR }
+  from './actionTypes';
 
 // action creators for get all recipes
 export const receiveUserRecipe = userRecipes => ({
   type: RECEIVE_USER_RECIPES,
   userRecipes
+});
+
+export const receiveUserRecipeError = message => ({
+  type: RECEIVE_USER_RECIPES_ERROR,
+  message
 });
 
 
@@ -25,7 +32,8 @@ const receiveUserRecipes = () => (dispatch) => {
       dispatch(receiveUserRecipe(userRecipes));
       dispatch(unsetFetching());
     }).catch((error) => {
-      console.log('user recipes error', error);
+      const { message } = error.response.data;
+      dispatch(receiveUserRecipeError(message));
       dispatch(unsetFetching());
     });
 };

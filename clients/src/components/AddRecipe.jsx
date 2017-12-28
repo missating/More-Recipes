@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 
 // validations
 import recipeValidator from '../validation/recipeValidator';
@@ -102,75 +103,102 @@ class AddRecipe extends React.Component {
       );
     }
     return (
-      <div>
-        <section className="section" id="add">
+      <div> {
+        !this.props.authenticated &&
+        <Redirect to="/" />
+      }
 
-          <h3 className="text-center bottom">Add New Recipe</h3>
+      <div className="container userButtons">
+        <div className="row">
+          <div className="col-md-4">
+            <Link className="btn btn-outline-primary"
+              to="/profile">
+             My Profile
+            </Link>
+          </div>
+          <div className="col-md-4">
+            <Link className="btn btn-outline-primary"
+              to="/UserRecipes">
+              My Recipes
+            </Link>
+          </div>
+          <div className="col-md-4">
+            <Link className="btn btn-outline-primary"
+              to="">
+              My Favourite Recipes
+            </Link>
+          </div>
+        </div>
+      </div>
 
-          <div className="row">
-            <div className="col-md-12">
+      <section className="section" id="add">
 
-              {
-                this.props.addRecipe.errorMessage === "" &&
+        <h3 className="text-center bottom">Add New Recipe</h3>
+
+        <div className="row">
+          <div className="col-md-12">
+
+            {
+              this.props.addRecipe.errorMessage === "" &&
                 <div className="alert alert-success alert-dismissible"
                   role="alert">
               Recipe Added
                 </div>
-              }
+            }
 
-              {addRecipeError}
+            {addRecipeError}
 
-              <form className="form-horizontal" onSubmit={this.onSubmit}>
+            <form className="form-horizontal" onSubmit={this.onSubmit}>
 
-                <div className="form-group">
-                  <input type="text"
-                    name="name"
-                    className="form-control"
-                    placeholder="Recipe Name"
-                    value={newRecipe.name}
-                    onChange={this.onChange} />
-                  {errors.name &&
+              <div className="form-group">
+                <input type="text"
+                  name="name"
+                  className="form-control"
+                  placeholder="Recipe Name"
+                  value={newRecipe.name}
+                  onChange={this.onChange} />
+                {errors.name &&
                   <span className="help-block">{errors.name}</span>}
-                </div>
+              </div>
 
 
-                <div className="form-group">
-                  <input type="text"
-                    name="ingredients"
-                    className="form-control"
-                    placeholder="Ingredients"
-                    value={newRecipe.ingredients}
-                    onChange={this.onChange} />
-                  {errors.ingredients &&
+              <div className="form-group">
+                <input type="text"
+                  name="ingredients"
+                  className="form-control"
+                  placeholder="Ingredients"
+                  value={newRecipe.ingredients}
+                  onChange={this.onChange} />
+                {errors.ingredients &&
                   <span className="help-block">{errors.ingredients}</span>}
-                </div>
+              </div>
 
-                <div className="form-group">
-                  <textarea
-                    type="text"
-                    rows="5"
-                    id="recipeDescription"
-                    className="form-control"
-                    placeholder="Description"
-                    name="description"
-                    value={newRecipe.description}
-                    onChange={this.onChange}
-                  />
-                  {errors.description &&
+              <div className="form-group">
+                <textarea
+                  type="text"
+                  rows="5"
+                  id="recipeDescription"
+                  className="form-control"
+                  placeholder="Description"
+                  name="description"
+                  value={newRecipe.description}
+                  onChange={this.onChange}
+                />
+                {errors.description &&
                   <span className="help-block">{errors.description}</span>}
-                </div>
+              </div>
 
-                <div className="form-group">
-                  <button className="btn btn-primary">Add Recipe</button>
-                </div>
+              <div className="form-group">
+                <button className="btn btn-primary">Add Recipe</button>
+              </div>
 
-              </form>
-
-            </div>
+            </form>
 
           </div>
 
-        </section>
+        </div>
+
+      </section>
       </div>
 
     );
@@ -179,14 +207,17 @@ class AddRecipe extends React.Component {
 
 AddRecipe.propTypes = {
   addNewRecipe: PropTypes.func.isRequired,
-  addRecipe: PropTypes.object.isRequired
+  addRecipe: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired
 };
+
 AddRecipe.defaultProps = {
   addRecipe: ''
 };
 
 const mapStateToProps = state => ({
-  addRecipe: state.addRecipe
+  addRecipe: state.addRecipe,
+  authenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, {
