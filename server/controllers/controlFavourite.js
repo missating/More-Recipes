@@ -42,19 +42,21 @@ export default class Favourite {
               userId: req.userId,
               recipeId: req.params.recipeId
             })
-              .then(() => res.status(200)
-                .json({
-                  status: 'Success',
-                  message: 'Recipe added to favourites'
-                }))
-              .catch(() => res.status(500)
-                .json({ message: 'Unable to add to favourites, server error' }));
-          })
-          .catch(() => res.status(500)
-            .json({ messahe: 'a server error ocurred' }));
-      })
-      .catch(() => res.status(500)
-        .json({ message: 'error, please try again later' }));
+              .then(() => {
+                db.Recipe.findById(req.params.recipeId).then(() => {
+                  if (found) {
+                    found.increment('favourite', { where: { id: req.params.recipeId } });
+                    return res.status(200).json({ message: 'recipe favourited' });
+                  }
+                  if (!found) {
+                    return res.status(500).json({ message: 'Cannot find recipe to favourite' });
+                  }
+                }).catch(error =>
+                  res.status(500).json({ message: error }));
+              });
+          }).catch(() => res.status(500)
+            .json({ message: 'error, please try again later' }));
+      });
   }
 
   /**
@@ -99,6 +101,6 @@ export default class Favourite {
         }
       })
       .catch(() => res.status(500)
-        .json({ message: 'server error' }));
+        .json({ message: 'error, please try again later' }));
   }
 }

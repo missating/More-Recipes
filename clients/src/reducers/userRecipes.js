@@ -1,6 +1,7 @@
 import { RECEIVE_USER_RECIPES,
   RECEIVE_USER_RECIPES_ERROR,
-  DELETE_RECIPE }
+  DELETE_RECIPE,
+  EDIT_RECIPE }
   from '../actions/actionTypes';
 
 const initialState = {
@@ -19,6 +20,12 @@ const userRecipe = (state = initialState.recipes, action) => {
       ...state,
       allUserRecipes: '',
       errorMessage: action.message
+    };
+  case EDIT_RECIPE:
+    return {
+      ...state,
+      singleRecipe: action.recipe,
+      editRecipeSuccess: true
     };
   case DELETE_RECIPE: {
     return {

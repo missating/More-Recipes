@@ -220,7 +220,7 @@ export default class Recipes {
               });
           }
           if (!recipes) {
-            return res.status(400)
+            return res.status(404)
               .json({ message: 'Currently no recipes' });
           }
         })

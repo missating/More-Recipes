@@ -18,18 +18,6 @@ const RecipeGallery = (props) => (
         <img src={thirteen} />
       </Link>
     </div>
-
-    <div className="mainBtn" style={{ marginLeft: '95px' }}>
-      <button className="btn btn-danger btn-sm">
-        <span><i className="fa fa-thumbs-down" aria-hidden="true" /></span>
-        {props.downvote}
-      </button>
-
-      <button className="btn btn-success btn-sm">
-        <span><i className="fa fa-thumbs-up" aria-hidden="true" /></span>
-        {props.upvote}
-      </button>
-    </div>
   </div>
 );
 
