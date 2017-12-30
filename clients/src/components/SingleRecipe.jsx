@@ -2,12 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-
 // image
 import eleven from '../assets/eleven.jpg';
 
 // actions
 import fetchSingleRecipe from '../actions/singleRecipe';
+import addFavourite from '../actions/addFavourite';
+
+// components
+import ActionButtons from './ActionButtons';
 
 /**
  *
@@ -17,6 +20,19 @@ import fetchSingleRecipe from '../actions/singleRecipe';
  */
 class SingleRecipe extends React.Component {
   /**
+ * Creates an instance of SingleRecipe.
+ * @param {any} props
+ * @memberof Recipe
+ */
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipe: {},
+      reviews: []
+    };
+    this.onFavourite = this.onFavourite.bind(this);
+  }
+  /**
    *
    * @returns {json} with recipe details
    * @memberof SingleRecipe
@@ -24,6 +40,15 @@ class SingleRecipe extends React.Component {
   componentWillMount() {
     const recipeId = this.props.match.params.id;
     this.props.getRecipeDetails(recipeId);
+  }
+  /**
+ *
+ *@returns {json} with the id of favourite recipe
+ * @memberof SingleRecipe
+ */
+  onFavourite() {
+    const recipeId = this.props.match.params.id;
+    this.props.favourite(recipeId);
   }
   /**
  *
@@ -49,6 +74,15 @@ class SingleRecipe extends React.Component {
         </p>
       ));
     }
+
+    let addFavouriteError;
+    if (this.props.singleRecipe.errorMessage) {
+      addFavouriteError = (
+        <div className="alert alert-danger alert-dismissible">
+          {this.props.singleRecipe.errorMessage}
+        </div>
+      );
+    }
     return (
       <div>
         <section className="container text-center" id="oneRecipe">
@@ -68,22 +102,49 @@ class SingleRecipe extends React.Component {
               <h4>Direction for cooking</h4>
               <p>{this.props.singleRecipe.description}</p>
 
-              <div className="mainBtn">
-                <button className="btn btn-danger" style={{ margin: '5px' }}>
-                  <span>
-                    <i className="fa fa-thumbs-down"
-                      aria-hidden="true" />
-                  </span>
-                  {this.props.singleRecipe.downvote}
-                </button>
-                <button className="btn btn-success" style={{ margin: '5px' }}>
-                  <span>
-                    <i className="fa fa-thumbs-up"
-                      aria-hidden="true" />
-                  </span>
-                  {this.props.singleRecipe.upvote}
-                </button>
-              </div>
+              {
+                !this.props.authenticated &&
+                  <ActionButtons />
+              }
+              {
+                this.props.authenticated &&
+                <div className="mainBtn">
+
+                  {addFavouriteError}
+
+                  <button className="btn btn-outline-danger"
+                    style={{ margin: '5px' }}>
+                    <span>
+                      <i className="fa fa-thumbs-down"
+                        aria-hidden="true" />
+                    </span>
+                    {this.props.singleRecipe.downvote}
+                  </button>
+
+                  <button className="btn btn-outline-success"
+                    style={{ margin: '5px' }}>
+                    <span>
+                      <i className="fa fa-thumbs-up"
+                        aria-hidden="true" />
+                    </span>
+                    {this.props.singleRecipe.upvote}
+                  </button>
+                  {
+                    this.props.singleRecipe.errorMessage === "" &&
+                <div className="alert alert-success alert-dismissible"
+                  role="alert">
+                      Recipe Favourited
+                </div>
+                  }
+                  <button className="btn btn-outline-danger"
+                    onClick={this.onFavourite}>
+                    <span>
+                      <i className="fa fa-heart" />
+                    </span>
+                    {this.props.singleRecipe.favourite}
+                  </button>
+                </div>
+              }
             </div>
           </div>
           <div className="container top">
@@ -103,7 +164,9 @@ class SingleRecipe extends React.Component {
 SingleRecipe.propTypes = {
   singleRecipe: PropTypes.object.isRequired,
   getRecipeDetails: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired
+  favourite: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired
 };
 
 SingleRecipe.defaultProps = {
@@ -112,10 +175,12 @@ SingleRecipe.defaultProps = {
 
 const mapStateToProps = state => ({
   singleRecipe: state.singleRecipe,
+  authenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  getRecipeDetails: id => dispatch(fetchSingleRecipe(id))
+  getRecipeDetails: id => dispatch(fetchSingleRecipe(id)),
+  favourite: recipeId => dispatch(addFavourite(recipeId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleRecipe);

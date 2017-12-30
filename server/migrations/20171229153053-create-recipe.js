@@ -39,6 +39,12 @@ module.exports = {
       defaultValue: 0
     },
 
+    favourite: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE
@@ -51,3 +57,4 @@ module.exports = {
   }),
   down: queryInterface => queryInterface.dropTable('Recipes')
 };
+

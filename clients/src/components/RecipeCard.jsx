@@ -14,24 +14,12 @@ const RecipeCard = (props) => (
         <div className="main-description">
           <p>{props.description} </p>
         </div>
-
         <div className="mainBtn">
-          <button className="btn btn-danger btn-sm">
-            <span><i className="fa fa-thumbs-down" aria-hidden="true" />
-            </span>
-            {props.downvote}
-          </button>
-
-          <button className="btn btn-success btn-sm">
-            <span><i className="fa fa-thumbs-up" aria-hidden="true" />
-            </span>
-            {props.upvote}
-          </button>
-        </div>
-        <Link className="btn btn-outline-primary"
-          to={`/SingleRecipe/${props.id}`}>
+          <Link className="btn btn-outline-primary"
+            to={`/SingleRecipe/${props.id}`}>
             Details
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   </div>

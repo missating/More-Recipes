@@ -1,16 +1,22 @@
 import { RECEIVE_SINGLE_RECIPE,
-  EDIT_RECIPE }
+  ADD_FAVOURITE,
+  ADD_FAVOURITE_ERROR }
   from '../actions/actionTypes';
 
 const singleRecipe = (state = {}, action) => {
   switch (action.type) {
   case RECEIVE_SINGLE_RECIPE:
     return action.recipe;
-  case EDIT_RECIPE:
+  case ADD_FAVOURITE:
     return {
       ...state,
       singleRecipe: action.recipe,
-      editRecipeSuccess: true
+      errorMessage: ''
+    };
+  case ADD_FAVOURITE_ERROR:
+    return {
+      ...state,
+      errorMessage: action.message
     };
   default:
     return state;
