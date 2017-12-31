@@ -118,13 +118,13 @@ class AddRecipe extends React.Component {
           </div>
           <div className="col-md-4">
             <Link className="btn btn-outline-primary"
-              to="/UserRecipes">
+              to="/user/recipes">
               My Recipes
             </Link>
           </div>
           <div className="col-md-4">
             <Link className="btn btn-outline-primary"
-              to="">
+              to="/user/favourites">
               My Favourite Recipes
             </Link>
           </div>

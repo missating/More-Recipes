@@ -69,13 +69,9 @@ export default class Favourite {
  * @memberof Favourite
  */
   static getAllFavourites(req, res) {
-    const { userId } = req.params;
-    if (req.userId !== parseInt(userId, 10)) {
-      return res.status(400).send({ message: 'User does not exist' });
-    }
     db.Favourite.findAll({
       where: {
-        userId: req.params.userId,
+        userId: req.userId,
       },
       include: [
         {

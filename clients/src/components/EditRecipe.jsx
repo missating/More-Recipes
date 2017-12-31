@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import fetchSingleRecipe from '../actions/singleRecipe';
 import editRecipe from '../actions/editRecipe';
@@ -104,7 +104,7 @@ class EditRecipe extends React.Component {
                 role="alert">
                   Recipe Updated
                 {/* <Redirect to=
-                {`/SingleRecipe/${this.props.singleRecipe.id}`}/> */}
+                  {`/SingleRecipe/${this.props.singleRecipe.id}`}/> */}
               </div>
           }
 
