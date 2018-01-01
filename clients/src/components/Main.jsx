@@ -7,6 +7,7 @@ import Profile from './Profile';
 import AddRecipe from './AddRecipe';
 import UserRecipes from './UserRecipes';
 import EditRecipe from './EditRecipe';
+import UserFavourites from './UserFavourites';
 
 
 const Main = () => (
@@ -15,9 +16,10 @@ const Main = () => (
     <Route path="/recipes" component={Recipes} />
     <Route path="/SingleRecipe/:id" component={SingleRecipe} />
     <Route path="/profile" component={Profile} />
-    <Route path="/AddRecipe" component={AddRecipe} />
-    <Route path="/UserRecipes" component={UserRecipes} />
+    <Route path="/recipe/add" component={AddRecipe} />
+    <Route path="/user/recipes" component={UserRecipes} />
     <Route path="/recipe/edit/:id" component={EditRecipe} />
+    <Route path="/user/favourites" component={UserFavourites} />
   </Switch>
 );
 

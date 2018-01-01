@@ -4,22 +4,23 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 
 // components
-import UserRecipeCard from './UserRecipeCard';
+import UserFavouritesCard from './UserFavouritesCard';
 
 // actions
-import receiveUserRecipes from '../actions/userRecipes';
+import receiveUserFavourites from '../actions/userFavourites';
+
 /**
  *
  *
- * @className UserRecipe
+ * @class UserFavourites
  * @extends {React.Component}
  */
-class UserRecipes extends React.Component {
+class UserFavourites extends React.Component {
   /**
- * Creates an instance of UserRecipes.
- * @param {any} props
- * @memberof UserRecipes
- */
+     * Creates an instance of UserFavourites.
+     * @param {any} props
+     * @memberof UserFavourites
+     */
   constructor(props) {
     super(props);
     this.state = {};
@@ -27,40 +28,44 @@ class UserRecipes extends React.Component {
   /**
  *
  *@returns {null} null
- * @memberof UserRecipes
+ * @memberof UserFavourites
  */
   componentWillMount() {
-    this.props.receiveUserRecipe();
+    this.props.receiveUserFavourite();
   }
   /**
-   * @description react render method
    *
-   * @returns {component} react component
-   * @memberof UserRecipes
+   *
+   * @returns {jsx} - a list of items to be rendered
+   * @memberof UserFavourites
    */
   render() {
-    let userRecipeError;
-    if (this.props.userRecipes.errorMessage) {
-      userRecipeError = (
-        <span className="help-block">
-          {this.props.userRecipes.errorMessage}
-        </span>
-      );
-    }
+    // let userFavouriteError;
+    // if (this.props.userFavourites.errorMessage) {
+    //   userFavouriteError = (
+    //     <span className="help-block">
+    //       {this.props.userFavourites.errorMessage}
+    //     </span>
+    //   );
+    // }
 
-    const userRecipes =
-    (this.props.userRecipes.allUserRecipes) ?
-      this.props.userRecipes.allUserRecipes : [];
-    const userRecipesList = userRecipes.map((recipe, i) => (
-      <div className="col-md-4" key={`recipe${i + 1}`}>
-        <UserRecipeCard
-          {...recipe}
+    const userFavourites =
+    (this.props.userFavourites) ?
+      this.props.userFavourites : [];
+    const userFavouritesList = userFavourites.map((favourites, i) => (
+      <div className="col-md-4" key={`favourites${i + 1}`}>
+        <UserFavouritesCard
+          name={favourites.Recipe.name}
+          description={favourites.Recipe.description}
+          id={favourites.recipeId}
         />
       </div>
     ));
-    if (userRecipes.length) {
+
+    if (userFavourites.length) {
       return (
         <div>
+
           {
             !this.props.authenticated &&
             <Redirect to="/" />
@@ -89,9 +94,9 @@ class UserRecipes extends React.Component {
           </div>
           <section className="section" id="view">
             <div className="container">
-              <h3 className="text-center bottom">My Recipes</h3>
+              <h3 className="text-center bottom">My Favourite Recipes</h3>
               <div className="row">
-                {userRecipesList}
+                {userFavouritesList}
               </div>
             </div>
           </section>
@@ -128,9 +133,9 @@ class UserRecipes extends React.Component {
         </div>
         <section className="section" id="view">
           <div className="container">
-            <h3 className="text-center bottom">My Recipes</h3>
+            <h3 className="text-center bottom">My Favourite Recipes</h3>
             <br />
-            <h4> {userRecipeError} </h4>
+            {/* <h4> {userFavouriteError} </h4> */}
           </div>
         </section>
       </div>
@@ -138,22 +143,23 @@ class UserRecipes extends React.Component {
   }
 }
 
-UserRecipes.propTypes = {
-  receiveUserRecipe: PropTypes.func.isRequired,
+UserFavourites.propTypes = {
+  receiveUserFavourite: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired
 };
 
-UserRecipes.defaultProps = {
-  userRecipes: []
+UserFavourites.defaultProps = {
+  userFavourites: []
 };
 
 const mapStateToProps = state => ({
-  userRecipes: state.userRecipes,
+  userFavourites: state.userFavourites.allUserFavourites,
   authenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveUserRecipe: () => dispatch(receiveUserRecipes())
+  receiveUserFavourite: () => dispatch(receiveUserFavourites())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserFavourites);
