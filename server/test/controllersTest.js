@@ -525,7 +525,7 @@ describe('API Endpoints testing', () => {
   describe('Get all favourites', () => {
     it('Should return 403 if a non auth user tries to get all favourite', (done) => {
       chai.request(app)
-        .get('/api/v1/users/1/favourite')
+        .get('/api/v1/users/favourites')
         .end((err, res) => {
           expect(res.status).to.equal(403);
           done();
@@ -534,7 +534,7 @@ describe('API Endpoints testing', () => {
 
     it('Should return 200 if a user has favourite recipes', (done) => {
       chai.request(app)
-        .get(`/api/v1/users/1/favourite?token=${userToken}`)
+        .get(`/api/v1/users/favourites?token=${userToken}`)
         .end((err, res) => {
           expect(res.status).to.equal(200);
           done();
@@ -543,7 +543,7 @@ describe('API Endpoints testing', () => {
 
     it('Should return 404 if a user has no favourite recipes', (done) => {
       chai.request(app)
-        .get(`/api/v1/users/2/favourite?token=${userToken2}`)
+        .get(`/api/v1/users/favourites?token=${userToken2}`)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();
