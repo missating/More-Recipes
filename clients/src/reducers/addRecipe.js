@@ -5,7 +5,6 @@ const initialState = {
   }
 };
 
-
 const addRecipe = (state = initialState.recipes, action) => {
   switch (action.type) {
   case ADD_RECIPE:
@@ -23,4 +22,5 @@ const addRecipe = (state = initialState.recipes, action) => {
     return state;
   }
 };
+
 export default addRecipe;

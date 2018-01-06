@@ -11,6 +11,7 @@ import addFavourite from '../actions/addFavourite';
 
 // components
 import ActionButtons from './ActionButtons';
+import AddReview from './AddReview';
 
 /**
  *
@@ -152,6 +153,7 @@ class SingleRecipe extends React.Component {
               <div className="col-md-12">
                 <h4 className="text-center"> Reviews </h4>
                 <div>{ allReviews }</div>
+                {this.props.authenticated && <AddReview recipeId={this.props.match.params.id} />}
               </div>
             </div>
           </div>

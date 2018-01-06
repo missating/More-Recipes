@@ -20,7 +20,7 @@ export default class Review {
     const { content } = req.body;
 
     if (!content) {
-      return res.status(400).json({ message: 'Add review content' });
+      return res.status(400).json({ message: 'Please add a review' });
     }
 
     db.Recipe.findById(req.params.recipeId)
@@ -30,40 +30,23 @@ export default class Review {
             .json({ message: `No recipe with id ${req.params.recipeId}` });
         }
         if (foundRecipe) {
-          db.Review.findOne({
-            where: {
-              id: req.params.recipeId,
-              userId: req.userId
-            }
-          })
-            .then((foundReview) => {
-              if (!foundReview) {
-                const newReview = {
-                  content: req.body.content,
-                  userId: req.userId,
-                  recipeId: req.params.recipeId
-                };
-                db.Review.create(newReview)
-                  .then(createdReview => res.status(201)
-                    .json({
-                      status: 'Success',
-                      createdReview,
-                    }))
-                  .catch(error => res.status(500)
-                    .json({
-                      status: 'Fail. Unable to add review',
-                      error,
-                    }));
-              }
-            })
+          const newReview = {
+            content,
+            userId: req.userId,
+            recipeId: req.params.recipeId
+          };
+          db.Review.create(newReview)
+            .then(createdReview => res.status(201)
+              .json({
+                status: 'Success',
+                createdReview
+              }))
             .catch(error => res.status(500)
               .json({
                 status: 'Fail. Unable to add review',
-                error,
+                error
               }));
         }
-      })
-      .catch(() => res.status(500)
-        .json({ message: 'Internal error ocurred. Please try again later' }));
+      });
   }
 }

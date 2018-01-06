@@ -27,7 +27,7 @@ export default class Favourite {
         db.Favourite.findOne({
           where: {
             recipeId: req.params.recipeId,
-            $and: { userId: req.userId }
+            userId: req.userId 
           }
         })
           .then((foundRecipe) => {
@@ -46,7 +46,10 @@ export default class Favourite {
                 db.Recipe.findById(req.params.recipeId).then(() => {
                   if (found) {
                     found.increment('favourite', { where: { id: req.params.recipeId } });
-                    return res.status(200).json({ message: 'recipe favourited' });
+                    return res.status(200).json({ 
+                      message: 'recipe favourited',
+                      addedFavourite: found
+                    });
                   }
                   if (!found) {
                     return res.status(500).json({ message: 'Cannot find recipe to favourite' });

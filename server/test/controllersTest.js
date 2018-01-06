@@ -379,7 +379,7 @@ describe('API Endpoints testing', () => {
       const noContent = Object.assign({}, review);
       delete noContent.content;
       chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/reviews?token=${userToken}`)
+        .post(`/api/v1/recipes/${recipeId}/review?token=${userToken}`)
         .send(noContent)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -389,7 +389,7 @@ describe('API Endpoints testing', () => {
 
     it('Should return 403 if a non auth user tries to add a review', (done) => {
       chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/reviews`)
+        .post(`/api/v1/recipes/${recipeId}/review`)
         .send(review)
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -399,86 +399,10 @@ describe('API Endpoints testing', () => {
 
     it('Should return 201 if an auth user successfully adds a review', (done) => {
       chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/reviews?token=${userToken}`)
+        .post(`/api/v1/recipes/${recipeId}/review?token=${userToken}`)
         .send(review)
         .end((err, res) => {
           expect(res.status).to.equal(201);
-          done();
-        });
-    });
-  });
-
-  describe('Upvote', () => {
-    it('Should return 403 if a non auth user tries to upvote a recipe', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/upvote`)
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          done();
-        });
-    });
-
-    it('Should return 404 if a recipe is not found', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/4/upvote?token=${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          done();
-        });
-    });
-
-    it('Should return 200 if an auth user successfully upvotes a recipe', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/upvote?token=${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          done();
-        });
-    });
-
-    it('Should return 403 if a user tries to upvote a recipe again', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/upvote?token=${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          done();
-        });
-    });
-  });
-
-  describe('Downvote', () => {
-    it('Should return 403 if a non auth user tries to downvote a recipe', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/downvote`)
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          done();
-        });
-    });
-
-    it('Should return 404 if a recipe is not found', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/6/downvote?token=${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          done();
-        });
-    });
-
-    it('Should return 200 if an auth user successfully downvotes a recipe', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/downvote?token=${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          done();
-        });
-    });
-
-    it('Should return 403 if a user tries to downvote a recipe again', (done) => {
-      chai.request(app)
-        .post(`/api/v1/recipes/${recipeId}/downvote?token=${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
           done();
         });
     });

@@ -30,7 +30,6 @@ const addRecipe = recipe => (dispatch) => {
       const newRecipe = response.data.recipe;
       dispatch(createRecipe(newRecipe));
       dispatch(unsetFetching());
-      return response;
     })
     .catch((error) => {
       const { message } = error.response.data;
