@@ -39,7 +39,7 @@ export default class Review {
             .then(createdReview => res.status(201)
               .json({
                 status: 'Success',
-                createdReview
+                review: createdReview
               }))
             .catch(error => res.status(500)
               .json({

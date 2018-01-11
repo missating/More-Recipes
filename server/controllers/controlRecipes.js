@@ -1,18 +1,16 @@
 import db from '../models/index';
 
-const updateRecipeAttributes  = (arrayOfRecipes) => {
-  return arrayOfRecipes.map(recipe => {
+const updateRecipeAttributes = (arrayOfRecipes) => arrayOfRecipes.map(recipe => {
     return updateOneRecipeAttribute(recipe);
   });
-};
 
-const updateOneRecipeAttribute = recipe => {
-  const recipeObj =  recipe.get();
+const updateOneRecipeAttribute = (recipe) => {
+  const recipeObj = recipe.get();
 
   recipeObj.upvote = 0;
   recipeObj.downvote = 0;
 
-  recipeObj.Votes.forEach(vote => {
+  recipeObj.Votes.forEach((vote) => {
     recipeObj.upvote += vote.upvote;
     recipeObj.downvote += vote.downvote;
   });
@@ -278,7 +276,7 @@ export default class Recipes {
       include: [
         {
           model: db.Review,
-          attributes: ['content'],
+          attributes: ['content', 'createdAt'],
           include: [{
             model: db.User,
             attributes: ['fullname']

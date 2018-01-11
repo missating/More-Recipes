@@ -1,4 +1,6 @@
 import db from '../models/index';
+import "babel-core/register";
+import "babel-polyfill";
 
 /**
  *

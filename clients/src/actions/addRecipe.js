@@ -1,4 +1,6 @@
 import axios from 'axios';
+import toastr from 'toastr';
+
 import { setFetching, unsetFetching } from './fetching';
 import { ADD_RECIPE, ADD_RECIPE_ERROR } from './actionTypes';
 
@@ -30,11 +32,25 @@ const addRecipe = recipe => (dispatch) => {
       const newRecipe = response.data.recipe;
       dispatch(createRecipe(newRecipe));
       dispatch(unsetFetching());
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: "1000",
+        positionClass: "toast-top-right",
+        hideMethod: "fadeOut"
+      };
+      toastr.success('Recipe added succesfully');
     })
     .catch((error) => {
       const { message } = error.response.data;
       dispatch(recipeError(message));
       dispatch(unsetFetching());
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: "1000",
+        positionClass: "toast-top-right",
+        hideMethod: "fadeOut"
+      };
+      toastr.error(message);
     });
 };
 

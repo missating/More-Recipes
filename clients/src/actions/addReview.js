@@ -1,8 +1,10 @@
 import axios from 'axios';
+import toastr from 'toastr';
+
 import { setFetching, unsetFetching } from './fetching';
 import { ADD_REVIEW, ADD_REVIEW_ERROR } from './actionTypes';
 
-export const createReview = review => ({
+export const addReviewSuccess = review => ({
   type: ADD_REVIEW,
   review
 });
@@ -21,18 +23,31 @@ const addReview = (content, recipeId) => (dispatch) => {
     headers: {
       token
     },
-    data: content
+    data: { content }
   })
     .then((response) => {
-      console.log('response from server is', response);
-      const { createdReview } = response.data;
-      console.log('Review in addReview is', createdReview);
-      dispatch(createReview(createdReview));
+      const { review } = response.data;
+      dispatch(addReviewSuccess(review));
+      dispatch(unsetFetching());
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: "1000",
+        positionClass: "toast-top-right",
+        hideMethod: "fadeOut"
+      };
+      toastr.success('Review added succesfully');
     })
     .catch((error) => {
       const { message } = error.response.data;
       dispatch(addReviewError(message));
       dispatch(unsetFetching());
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: "1000",
+        positionClass: "toast-top-right",
+        hideMethod: "fadeOut"
+      };
+      toastr.error(message);
     });
 };
 

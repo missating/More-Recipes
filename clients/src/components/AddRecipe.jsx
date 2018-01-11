@@ -93,15 +93,6 @@ class AddRecipe extends React.Component {
    */
   render() {
     const { errors, newRecipe } = this.state;
-
-    let addRecipeError;
-    if (this.props.addRecipe.errorMessage) {
-      addRecipeError = (
-        <div className="alert alert-danger alert-dismissible">
-          {this.props.addRecipe.errorMessage}
-        </div>
-      );
-    }
     return (
       <div> {
         !this.props.authenticated &&
@@ -137,17 +128,6 @@ class AddRecipe extends React.Component {
 
         <div className="row">
           <div className="col-md-12">
-
-            {
-              this.props.addRecipe.errorMessage === "" &&
-                <div className="alert alert-success alert-dismissible"
-                  role="alert">
-              Recipe Added
-                </div>
-            }
-
-            {addRecipeError}
-
             <form className="form-horizontal" onSubmit={this.onSubmit}>
 
               <div className="form-group">

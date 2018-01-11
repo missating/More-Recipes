@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// actions
 import addReview from '../actions/addReview';
 /**
  *
@@ -41,13 +42,8 @@ class AddReview extends React.Component {
   onSubmit(event) {
     const { content } = this.state;
     const { recipeId } = this.props;
-    console.log('res', recipeId);
     event.preventDefault();
-    console.log(`submitting ${content} for recipe with id ${recipeId}`);
-    if (content.trim().length) {
-      this.props.postReview(content, recipeId);
-      console.log(`posted review for recipe with id  ${recipeId}`);
-    }
+    this.props.addNewReview(content, recipeId);
   }
   /**
    *
@@ -89,12 +85,13 @@ class AddReview extends React.Component {
   }
 }
 AddReview.propTypes = {
-  postReview: PropTypes.func.isRequired,
-  recipeId: PropTypes.string
+  addNewReview: PropTypes.func.isRequired,
 };
 
 
 const mapDispatchToProps = dispatch => ({
-  postReview: (review, recipeId) => dispatch(addReview(review, recipeId))
+  addNewReview: (content, recipeId) => dispatch(addReview(content, recipeId))
 });
+
 export default connect(null, mapDispatchToProps)(AddReview);
+
