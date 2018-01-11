@@ -2,35 +2,32 @@ import axios from 'axios';
 import toastr from 'toastr';
 
 import { setFetching, unsetFetching } from './fetching';
-import { ADD_RECIPE, ADD_RECIPE_ERROR } from './actionTypes';
+import { ADD_REVIEW, ADD_REVIEW_ERROR } from './actionTypes';
 
-// action creators
-export const createRecipe = newRecipe => ({
-  type: ADD_RECIPE,
-  newRecipe
+export const addReviewSuccess = review => ({
+  type: ADD_REVIEW,
+  review
 });
 
-export const recipeError = message => ({
-  type: ADD_RECIPE_ERROR,
+const addReviewError = message => ({
+  type: ADD_REVIEW_ERROR,
   message
 });
 
-
-// actions for add recipe
-const addRecipe = recipe => (dispatch) => {
+const addReview = (content, recipeId) => (dispatch) => {
   dispatch(setFetching());
   const token = localStorage.getItem('token');
   return axios({
     method: 'POST',
-    url: 'http://localhost:3000/api/v1/recipes',
+    url: `http://localhost:3000/api/v1/recipes/${recipeId}/review`,
     headers: {
       token
     },
-    data: recipe
+    data: { content }
   })
     .then((response) => {
-      const newRecipe = response.data.recipe;
-      dispatch(createRecipe(newRecipe));
+      const { review } = response.data;
+      dispatch(addReviewSuccess(review));
       dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
@@ -38,11 +35,11 @@ const addRecipe = recipe => (dispatch) => {
         positionClass: "toast-top-right",
         hideMethod: "fadeOut"
       };
-      toastr.success('Recipe added succesfully');
+      toastr.success('Review added succesfully');
     })
     .catch((error) => {
       const { message } = error.response.data;
-      dispatch(recipeError(message));
+      dispatch(addReviewError(message));
       dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
@@ -54,4 +51,5 @@ const addRecipe = recipe => (dispatch) => {
     });
 };
 
-export default addRecipe;
+export default addReview;
+

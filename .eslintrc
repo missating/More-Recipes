@@ -9,10 +9,19 @@
         "es6": true,
         "mocha": true
     },
+    "settings": {
+        "import/resolver":{
+            "node": {
+                "extensions": [".js", ".jsx"]
+            }
+        }
+    },
     "rules": {
         "one-var": 0,
         "one-var-declaration-per-line": 0,
         "new-cap": 0,
+        "indent": ["error", 2],
+        "max-len": ["error", 80],
         "consistent-return": 0,
         "no-param-reassign": 0,
         "comma-dangle": 0,

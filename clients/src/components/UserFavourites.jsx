@@ -40,15 +40,6 @@ class UserFavourites extends React.Component {
    * @memberof UserFavourites
    */
   render() {
-    // let userFavouriteError;
-    // if (this.props.userFavourites.errorMessage) {
-    //   userFavouriteError = (
-    //     <span className="help-block">
-    //       {this.props.userFavourites.errorMessage}
-    //     </span>
-    //   );
-    // }
-
     const userFavourites =
     (this.props.userFavourites) ?
       this.props.userFavourites : [];
@@ -135,7 +126,6 @@ class UserFavourites extends React.Component {
           <div className="container">
             <h3 className="text-center bottom">My Favourite Recipes</h3>
             <br />
-            {/* <h4> {userFavouriteError} </h4> */}
           </div>
         </section>
       </div>

@@ -1,5 +1,23 @@
 import db from '../models/index';
 
+const updateRecipeAttributes = (arrayOfRecipes) => arrayOfRecipes.map(recipe => {
+    return updateOneRecipeAttribute(recipe);
+  });
+
+const updateOneRecipeAttribute = (recipe) => {
+  const recipeObj = recipe.get();
+
+  recipeObj.upvote = 0;
+  recipeObj.downvote = 0;
+
+  recipeObj.Votes.forEach((vote) => {
+    recipeObj.upvote += vote.upvote;
+    recipeObj.downvote += vote.downvote;
+  });
+  delete recipeObj.Votes;
+  return recipeObj;
+};
+
 
 /**
  *
@@ -178,6 +196,10 @@ export default class Recipes {
           {
             model: db.Review,
             attributes: ['content']
+          },
+          {
+            model: db.Vote,
+            attributes: ['upvote', 'downvote']
           }
         ]
       })
@@ -186,7 +208,7 @@ export default class Recipes {
             return res.status(200)
               .json({
                 status: 'Success',
-                recipes,
+                recipes: updateRecipeAttributes(recipes),
               });
           }
           if (!recipes) {
@@ -208,6 +230,10 @@ export default class Recipes {
         include: [
           {
             model: db.Review, attributes: ['content']
+          },
+          {
+            model: db.Vote,
+            attributes: ['upvote', 'downvote']
           }
         ]
       })
@@ -250,11 +276,15 @@ export default class Recipes {
       include: [
         {
           model: db.Review,
-          attributes: ['content'],
+          attributes: ['content', 'createdAt'],
           include: [{
             model: db.User,
             attributes: ['fullname']
           }]
+        },
+        {
+          model: db.Vote,
+          attributes: ['upvote', 'downvote']
         }
       ]
     }).then((existing) => {
@@ -268,12 +298,14 @@ export default class Recipes {
         return res.status(200)
           .json({
             status: 'Success',
-            recipe: existing
+            recipe: updateOneRecipeAttribute(existing)
           });
       }
     })
-      .catch(() => res.status(500)
-        .json({ message: 'server error' }));
+      .catch((error) => {
+        console.log(error);
+        return res.status(500).json({ message: 'server error' });
+      });
   }
 
 
@@ -302,7 +334,8 @@ export default class Recipes {
           userId: req.userId
         },
         include: [
-          { model: db.Review, attributes: ['content'] }
+          { model: db.Review, attributes: ['content'] },
+          { model: db.Vote }
         ]
       })
         .then((all) => {

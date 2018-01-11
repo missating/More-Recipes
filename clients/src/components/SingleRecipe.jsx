@@ -11,6 +11,8 @@ import addFavourite from '../actions/addFavourite';
 
 // components
 import ActionButtons from './ActionButtons';
+import AddReview from './AddReview';
+import ViewReviews from './ViewReviews';
 
 /**
  *
@@ -27,7 +29,7 @@ class SingleRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipe: {},
+      singleRecipe: {},
       reviews: []
     };
     this.onFavourite = this.onFavourite.bind(this);
@@ -41,13 +43,26 @@ class SingleRecipe extends React.Component {
     const recipeId = this.props.match.params.id;
     this.props.getRecipeDetails(recipeId);
   }
+
+  /**
+   *
+   * @return {null} null
+   * @param {any} nextProps
+   * @memberof Recipe
+   */
+  componentWillReceiveProps(nextProps) {
+    const singleRecipe = (nextProps.singleRecipe) ? (nextProps.singleRecipe) : {};
+    const reviews = (singleRecipe.Reviews) ? (singleRecipe.Reviews) : [];
+    this.setState({ singleRecipe, reviews });
+  }
+
   /**
  *
  *@returns {json} with the id of favourite recipe
  * @memberof SingleRecipe
  */
   onFavourite() {
-    const recipeId = this.props.match.params.id;
+    const recipeId = this.props.singleRecipe.id;
     this.props.favourite(recipeId);
   }
   /**
@@ -57,23 +72,21 @@ class SingleRecipe extends React.Component {
  * @memberof SingleRecipe
  */
   render() {
-    let allReviews;
-    let ingredientsList;
-    if (this.props.singleRecipe.ingredients) {
-      if (this.props.singleRecipe.ingredients) {
-        ingredientsList = this.props.singleRecipe.ingredients.split(',')
-          .map((item, index) =>
-            (<li className="list-group-item" key={index}>{item}</li>));
-      }
+    const ingredients = (this.state.singleRecipe.ingredients) ? (this.state.singleRecipe.ingredients) : '';
+    const ingredientsList = ingredients.split(',').map((item, i) => (
+      <li className="list-group-item" key={i}>{item}</li>
+    ));
 
-      const reviews = (this.props.singleRecipe.Reviews) ?
-        (this.props.singleRecipe.Reviews) : [];
-      allReviews = reviews.map((review, i) => (
-        <p key={`review ${review.id}`}>
-          {review.User.fullname} : {review.content}
-        </p>
-      ));
-    }
+    const { reviews } = this.state;
+    const allReviews = reviews.map((review, i) => (
+      <div key={`review ${i + 1}`} className="container">
+        <ViewReviews
+          user={review.User.fullname}
+          content={review.content}
+          created={new Date(review.createdAt).toDateString()}
+        />
+      </div>
+    ));
 
     let addFavouriteError;
     if (this.props.singleRecipe.errorMessage) {
@@ -86,7 +99,7 @@ class SingleRecipe extends React.Component {
     return (
       <div>
         <section className="container text-center" id="oneRecipe">
-          <h3 className="styles">{this.props.singleRecipe.name}</h3>
+          <h3 className="styles">{this.state.singleRecipe.name}</h3>
           <div className="row">
             <div className="col-md-12">
               <img src={eleven} alt="Recipe Image" className="img-thumbnail" />
@@ -100,7 +113,7 @@ class SingleRecipe extends React.Component {
               </ul>
 
               <h4>Direction for cooking</h4>
-              <p>{this.props.singleRecipe.description}</p>
+              <p>{this.state.singleRecipe.description}</p>
 
               {
                 !this.props.authenticated &&
@@ -129,19 +142,13 @@ class SingleRecipe extends React.Component {
                     </span>
                     {this.props.singleRecipe.upvote}
                   </button>
-                  {
-                    this.props.singleRecipe.errorMessage === "" &&
-                <div className="alert alert-success alert-dismissible"
-                  role="alert">
-                      Recipe Favourited
-                </div>
-                  }
+
                   <button className="btn btn-outline-danger"
                     onClick={this.onFavourite}>
                     <span>
                       <i className="fa fa-heart" />
                     </span>
-                    {this.props.singleRecipe.favourite}
+                    {this.state.singleRecipe.favourite}
                   </button>
                 </div>
               }
@@ -151,7 +158,14 @@ class SingleRecipe extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 <h4 className="text-center"> Reviews </h4>
-                <div>{ allReviews }</div>
+                {this.props.authenticated && <AddReview recipeId={this.state.singleRecipe.id} />}
+                <br />
+                { allReviews.length > 0 && <div>
+                  {allReviews}
+                </div>}
+                { !allReviews.length && <div className="container">
+                  <h2>There are currently no reviews for this recipe.</h2>
+                </div>}
               </div>
             </div>
           </div>
@@ -170,7 +184,7 @@ SingleRecipe.propTypes = {
 };
 
 SingleRecipe.defaultProps = {
-  singleRecipe: ''
+  singleRecipe: {}
 };
 
 const mapStateToProps = state => ({

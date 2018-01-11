@@ -20,18 +20,6 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     },
 
-    downvote: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-
-    upvote: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-
     favourite: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -44,10 +32,8 @@ export default (sequelize, DataTypes) => {
     // associations defined here
     Recipe.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
     Recipe.hasMany(models.Review, { foreignKey: 'recipeId' });
-    Recipe.hasMany(models.Upvote, { foreignKey: 'recipeId' });
-    Recipe.hasMany(models.Downvote, { foreignKey: 'recipeId' });
+    Recipe.hasMany(models.Vote, { foreignKey: 'recipeId' });
     Recipe.hasMany(models.Favourite, { foreignKey: 'recipeId' });
   };
   return Recipe;
 };
-

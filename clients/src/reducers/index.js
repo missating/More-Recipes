@@ -10,7 +10,6 @@ import addRecipe from './addRecipe';
 import userRecipes from './userRecipes';
 import userFavourites from './userFavourites';
 
-
 const appReducer = combineReducers({
   auth,
   userProfile,
