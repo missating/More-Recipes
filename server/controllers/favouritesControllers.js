@@ -11,30 +11,37 @@ export default class Favourite {
   /**
    *
    *
-   * @param {any} req
-   * @param {any} res
-   * @returns {json} add recipe to favourite
+   * @param {obj} req
+   * @param {obj} res
+   * @returns {obj} with recipe added as favourite
    * @memberof Favourite
    */
   static addFavourite(req, res) {
+    if (typeof parseInt(req.params.recipeId, 10) !== 'number') {
+      return res.status(400).json({ message: 'RecipeId must be a number' });
+    }
+
     db.Recipe.findById(req.params.recipeId)
-      .then((found) => {
-        if (!found) {
+      .then((foundRecipe) => {
+        if (!foundRecipe) {
           return res.status(404)
-            .json({ message: 'recipe does not exist in catalogue' });
+            .json({
+              status: 'fail',
+              message: 'recipe does not exist in catalogue'
+            });
         }
 
         db.Favourite.findOne({
           where: {
             recipeId: req.params.recipeId,
-            userId: req.userId 
+            userId: req.userId
           }
         })
-          .then((foundRecipe) => {
-            if (foundRecipe) {
+          .then((foundFavourite) => {
+            if (foundFavourite) {
               return res.status(403)
                 .json({
-                  status: 'Fail',
+                  status: 'fail',
                   message: 'Already added this recipe to your favourites'
                 });
             }
@@ -43,32 +50,32 @@ export default class Favourite {
               recipeId: req.params.recipeId
             })
               .then(() => {
-                db.Recipe.findById(req.params.recipeId).then(() => {
-                  if (found) {
-                    found.increment('favourite', { where: { id: req.params.recipeId } });
-                    return res.status(200).json({ 
-                      message: 'recipe favourited',
-                      addedFavourite: found
-                    });
-                  }
-                  if (!found) {
-                    return res.status(500).json({ message: 'Cannot find recipe to favourite' });
-                  }
-                }).catch(error =>
-                  res.status(500).json({ message: error }));
+                foundRecipe.increment(
+                  'favourite',
+                  { where: { id: req.params.recipeId } }
+                );
+                return res.status(201).json({
+                  status: 'success',
+                  message: 'recipe favourited',
+                  addedFavourite: foundRecipe
+                });
               });
-          }).catch(() => res.status(500)
-            .json({ message: 'error, please try again later' }));
+          })
+          .catch(() => res.status(500).json({
+            status: 'error',
+            message: 'Internal server error'
+          }));
       });
   }
+
 
   /**
  *
  *
  * @static
- * @param {any} req
- * @param {any} res
- * @returns {json} all favourite recipes for a user
+ * @param {obj} req
+ * @param {obj} res
+ * @returns {obj} with all favourite recipes for a user
  * @memberof Favourite
  */
   static getAllFavourites(req, res) {
@@ -87,7 +94,7 @@ export default class Favourite {
         if (userFavs === 0) {
           return res.status(404)
             .json({
-              status: 'Not found',
+              status: 'fail',
               message: 'You have no recipes added as favourites'
             });
         }
@@ -99,7 +106,9 @@ export default class Favourite {
             });
         }
       })
-      .catch(() => res.status(500)
-        .json({ message: 'error, please try again later' }));
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 }

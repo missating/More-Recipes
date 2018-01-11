@@ -11,9 +11,9 @@ export default class Review {
   /**
    *
    *
-   * @param {any} req
-   * @param {any} res
-   * @returns { json } review for recipe
+   * @param {obj} req
+   * @param {obj} res
+   * @returns {obj} with the review for a particular recipe
    * @memberof Review
    */
   static addReview(req, res) {
@@ -27,7 +27,10 @@ export default class Review {
       .then((foundRecipe) => {
         if (!foundRecipe) {
           return res.status(404)
-            .json({ message: `No recipe with id ${req.params.recipeId}` });
+            .json({
+              status: 'fail',
+              message: `No recipe with id ${req.params.recipeId}`
+            });
         }
         if (foundRecipe) {
           const newReview = {
@@ -40,13 +43,12 @@ export default class Review {
               .json({
                 status: 'Success',
                 review: createdReview
-              }))
-            .catch(error => res.status(500)
-              .json({
-                status: 'Fail. Unable to add review',
-                error
               }));
         }
-      });
+      })
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 }

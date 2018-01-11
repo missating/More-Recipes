@@ -16,9 +16,9 @@ export default class Users {
    *
    *
    * @static
-   * @param {any} req
-   * @param {any} res
-   * @returns {json} creates a user
+   * @param {obj} req
+   * @param {obj} res
+   * @returns {obj} with the new user details
    * @memberof User
    */
   static createUser(req, res) {
@@ -35,11 +35,13 @@ export default class Users {
     if (!password) {
       return res.status(400).json({ message: 'Password field is empty' });
     }
-    if (password.length < 6) {
-      return res.status(400).json({ message: 'Passwords should be at least 6 characters' });
+    if (password.length < 8) {
+      return res.status(400)
+        .json({ message: 'Passwords should be at least 8 characters' });
     }
     if (!confirmPassword) {
-      return res.status(400).json({ message: 'confirm Password field is empty' });
+      return res.status(400)
+        .json({ message: 'confirm Password field is empty' });
     }
     if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Passwords don\'t match' });
@@ -55,37 +57,44 @@ export default class Users {
       where: {
         email
       }
-    })
-      .then((existing) => {
-        if (existing) {
-          return res.status(403).send({
-            status: 'Forbidden',
-            message: 'Email already exists.',
+    }).then((existingUser) => {
+      if (existingUser) {
+        return res.status(409)
+          .json({
+            status: 'fail',
+            message: 'Email already exist',
           });
-        }
-        return db.User
-          .create({
-            fullname,
-            username,
-            email,
-            password: bcrypt.hashSync(req.body.password, 10),
-          })
-          .then((newUser) => {
-            const token = jwt.sign({ id: newUser.id }, process.env.MY_SECRET, { expiresIn: '24h' });
-            res.status(201)
-              .json({
-                status: 'success',
-                message: 'Account created',
-                user: {
-                  username: newUser.username,
-                  fullname: newUser.fullname,
-                  email: newUser.email,
-                },
-                token
-              });
-          })
-          .catch(error => res.status(400).send(error.message));
-      }).catch(error => res.status(400).send(error.message));
+      }
+      return db.User
+        .create({
+          fullname,
+          username,
+          email,
+          password: bcrypt.hashSync(req.body.password, 10),
+        })
+        .then((newUser) => {
+          const token = jwt.sign(
+            { id: newUser.id },
+            process.env.MY_SECRET,
+            { expiresIn: '24h' }
+          );
+          res.status(201)
+            .json({
+              status: 'success',
+              message: 'Account created',
+              user: {
+                username: newUser.username,
+                fullname: newUser.fullname,
+                email: newUser.email,
+              },
+              token
+            });
+        });
+    })
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 
@@ -93,9 +102,9 @@ export default class Users {
  *
  *
  * @static
- * @param {any} req
- * @param {any} res
- * @returns {json} with the user's token
+ * @param {obj} req
+ * @param {obj} res
+ * @returns {obj} with the user's token
  * @memberof Users
  */
   static userLogin(req, res) {
@@ -115,28 +124,35 @@ export default class Users {
     })
       .then((foundUser) => {
         if (!foundUser) {
-          return res.status(404).send({
-            message: 'This email does not exist. Sign up instead ?',
-          });
+          return res.status(404)
+            .json({
+              status: 'fail',
+              message: 'This email does not exist. Sign up instead ?',
+            });
         }
         const match = bcrypt.compareSync(req.body.password, foundUser.password);
         if (!match) {
-          return res.status(401).send({
-            status: 'Failed',
-            message: 'email or password is incorrect'
-          });
+          return res.status(401)
+            .json({
+              status: 'fail',
+              message: 'Email or Password is incorrect'
+            });
         }
         const token = jwt.sign({
           id: foundUser.id
         }, process.env.MY_SECRET, {
           expiresIn: '24h'
         });
-        return res.status(200).send({
-          status: 'Success.',
-          token
-        });
+        return res.status(200)
+          .json({
+            status: 'success',
+            token
+          });
       })
-      .catch(() => res.status(500).send('Internal server error.'));
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 
@@ -146,7 +162,7 @@ export default class Users {
  * @static
  * @param {any} req
  * @param {any} res
- * @returns {json} all users with their recipes
+ * @returns {obj} with the users profile details
  * @memberof Users
  */
   static getUserProfile(req, res) {
@@ -154,28 +170,31 @@ export default class Users {
       where: {
         id: req.userId
       }
-    }).then((existing) => {
-      if (!existing) {
-        return res.status(404).send({
-          status: 'Not found',
-          message: 'A user with that Id is not found',
-        });
+    }).then((existingUser) => {
+      if (!existingUser) {
+        return res.status(404)
+          .json({
+            status: 'fail',
+            message: 'A user with that Id is not found',
+          });
       }
-      if (existing) {
+      if (existingUser) {
         return res.status(200)
           .json({
-            status: 'Success',
+            status: 'success',
             user: {
-              fullname: existing.fullname,
-              username: existing.username,
-              email: existing.email,
-              joined: new Date(existing.createdAt).toDateString()
+              fullname: existingUser.fullname,
+              username: existingUser.username,
+              email: existingUser.email,
+              joined: new Date(existingUser.createdAt).toDateString()
             }
           });
       }
     })
-      .catch(() => res.status(500)
-        .json({ message: 'server error' }));
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 
@@ -185,7 +204,7 @@ export default class Users {
  * @static
  * @param {any} req
  * @param {any} res
- * @returns {json} all users with their recipes
+ * @returns {obj} with the updated user details
  * @memberof Users
  */
   static updateUserProfile(req, res) {
@@ -199,39 +218,33 @@ export default class Users {
       .then((foundUser) => {
         if (foundUser) {
           const update = {
-            fullname: fullname ? fullname.toLowerCase() : foundUser.fullname,
-            username: username ? username.toLowerCase() : foundUser.username,
-            email: email ? email.toLowerCase() : foundUser.email
+            fullname: fullname || foundUser.fullname,
+            username: username || foundUser.username,
+            email: email || foundUser.email
           };
           foundUser.update(update)
             .then(updatedUser => res.status(200)
               .json({
-                status: 'Update successful',
+                status: 'success',
                 user: {
                   fullname: updatedUser.fullname,
                   username: updatedUser.username,
                   email: updatedUser.email,
                   joined: new Date(updatedUser.createdAt).toDateString()
                 }
-              }))
-            .catch(error => res.status(500)
-              .json({
-                status: 'Fail',
-                message: error
               }));
         }
         if (!foundUser) {
           return res.status(404)
             .json({
-              status: 'Fail',
+              status: 'success',
               message: `Can't find user with id ${req.userId}`
             });
         }
       })
-      .catch(error => res.status(500)
-        .json({
-          status: 'Fail',
-          error,
-        }));
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 }
