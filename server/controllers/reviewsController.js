@@ -11,9 +11,9 @@ export default class Review {
   /**
    *
    *
-   * @param {obj} req
-   * @param {obj} res
-   * @returns {obj} with the review for a particular recipe
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} with the review for a particular recipe
    * @memberof Review
    */
   static addReview(req, res) {

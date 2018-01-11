@@ -28,9 +28,9 @@ export default class Recipes {
    *
    *
    * @static
-   * @param {obj} req
-   * @param {obj} res
-   * @returns {obj} with the new recipe details
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} with the new recipe details
    * @memberof Recipes
    */
   static addRecipe(req, res) {
@@ -90,7 +90,7 @@ export default class Recipes {
  * @static
  * @param {object} req
  * @param {object} res
- * @returns {obj} with the updated recipe
+ * @returns {object} with the updated recipe
  * @memberof Recipes
  */
   static updateRecipe(req, res) {
@@ -140,9 +140,9 @@ export default class Recipes {
  *
  *
  * @static
- * @param {obj} req
- * @param {obj} res
- * @returns {obj} with a message for successful delete action
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with a message for successful delete action
  * @memberof Recipes
  */
   static deleteRecipe(req, res) {
@@ -188,9 +188,9 @@ export default class Recipes {
  *
  *
  * @static
- * @param {obj} req
- * @param {obj} res
- * @returns {obj} with all recipes
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with all recipes
  * @memberof Recipes
  */
   static getAllRecipes(req, res) {
@@ -270,9 +270,9 @@ export default class Recipes {
  *
  *
  * @static
- * @param {obj} req
- * @param {obj} res
- * @returns {obj} with one recipe
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with one recipe
  * @memberof Recipes
  */
   static getOneRecipe(req, res) {
@@ -324,9 +324,9 @@ export default class Recipes {
  *
  *
  * @static
- * @param {obj} req
- * @param {obj} res
- * @returns {obj} with all user recipes
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with all user recipes
  * @memberof Recipes
  */
   static getAllUserRecipes(req, res) {

@@ -1,11 +1,15 @@
-const extractToken = (req, res, next) => {
+const getToken = (req, res, next) => {
   req.token = req.body.token || req.headers.token || req.query.token;
+
   if (!req.token) {
-    const err = res.status(403).send({ status: 'Forbidden.', message: 'Please sign in.' });
-    return next(err);
+    return res.status(401)
+      .send({
+        status: 'fail',
+        message: 'Unauthorized'
+      });
   }
   return next();
 };
 
-export default extractToken;
+export default getToken;
 

@@ -11,9 +11,9 @@ export default class Favourite {
   /**
    *
    *
-   * @param {obj} req
-   * @param {obj} res
-   * @returns {obj} with recipe added as favourite
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} with recipe added as favourite
    * @memberof Favourite
    */
   static addFavourite(req, res) {
@@ -73,32 +73,27 @@ export default class Favourite {
  *
  *
  * @static
- * @param {obj} req
- * @param {obj} res
- * @returns {obj} with all favourite recipes for a user
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with all favourite recipes for a user
  * @memberof Favourite
  */
   static getAllFavourites(req, res) {
     db.Favourite.findAll({
-      where: {
-        userId: req.userId,
-      },
-      include: [
-        {
-          model: db.Recipe, attributes: ['name', 'ingredients', 'description']
-        }
-      ]
+      where: { userId: req.userId },
+      include: [{
+        model: db.Recipe, attributes: ['name', 'ingredients', 'description']
+      }]
     })
       .then((found) => {
-        const userFavs = found.length;
-        if (userFavs === 0) {
+        const userFavourites = found.length;
+        if (userFavourites === 0) {
           return res.status(404)
             .json({
               status: 'fail',
               message: 'You have no recipes added as favourites'
             });
-        }
-        if (found) {
+        } else {
           return res.status(200)
             .json({
               status: 'Success',

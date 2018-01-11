@@ -14,9 +14,9 @@ export default class Vote {
    *
    *
    * @static
-   * @param {obj} req
-   * @param {obj} res
-   * @returns {obj} with a successful message and recipe with the vote
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} with a successful message and recipe with the vote
    * @memberof Vote
    */
   static async voteRecipe(req, res) {
@@ -73,5 +73,10 @@ export default class Vote {
           vote: updatedVote
         });
     }
+    return res.status(500)
+      .json({
+        status: 'error',
+        message: 'Internal server error'
+      });
   }
 }

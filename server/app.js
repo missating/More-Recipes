@@ -4,7 +4,7 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-import router from './routes/routes';
+import routes from './routes/index';
 
 // Set up the express app
 const app = express();
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-router(app);
+routes(app);
 
 // returns 404 for unknown routes
 app.all('*', (req, res) => {

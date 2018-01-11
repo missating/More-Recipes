@@ -16,9 +16,9 @@ export default class Users {
    *
    *
    * @static
-   * @param {obj} req
-   * @param {obj} res
-   * @returns {obj} with the new user details
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} with the new user details
    * @memberof User
    */
   static createUser(req, res) {
@@ -102,9 +102,9 @@ export default class Users {
  *
  *
  * @static
- * @param {obj} req
- * @param {obj} res
- * @returns {obj} with the user's token
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with the user's token
  * @memberof Users
  */
   static userLogin(req, res) {
@@ -162,7 +162,7 @@ export default class Users {
  * @static
  * @param {any} req
  * @param {any} res
- * @returns {obj} with the users profile details
+ * @returns {object} with the users profile details
  * @memberof Users
  */
   static getUserProfile(req, res) {
@@ -204,7 +204,7 @@ export default class Users {
  * @static
  * @param {any} req
  * @param {any} res
- * @returns {obj} with the updated user details
+ * @returns {object} with the updated user details
  * @memberof Users
  */
   static updateUserProfile(req, res) {
