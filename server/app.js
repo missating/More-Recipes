@@ -3,8 +3,11 @@ import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
-import router from './routes/routes';
+import routes from './routes';
+
+dotenv.config();
 
 // Set up the express app
 const app = express();
@@ -19,7 +22,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-router(app);
+routes(app);
 
 // returns 404 for unknown routes
 app.all('*', (req, res) => {

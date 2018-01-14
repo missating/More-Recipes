@@ -1,9 +1,5 @@
 import db from '../models/index';
 
-const updateRecipeAttributes = (arrayOfRecipes) => arrayOfRecipes.map(recipe => {
-    return updateOneRecipeAttribute(recipe);
-  });
-
 const updateOneRecipeAttribute = (recipe) => {
   const recipeObj = recipe.get();
 
@@ -14,62 +10,49 @@ const updateOneRecipeAttribute = (recipe) => {
     recipeObj.upvote += vote.upvote;
     recipeObj.downvote += vote.downvote;
   });
-  delete recipeObj.Votes;
+  Reflect.deleteProperty(recipeObj, 'Votes');
   return recipeObj;
 };
 
+const updateRecipeAttributes = arrayOfRecipes =>
+  arrayOfRecipes.map(recipe => updateOneRecipeAttribute(recipe));
 
 /**
- *
- *
+ * This handles recipe creation, updating and deleting recipes
  * @export
  * @class Recipes
  */
-export default class Recipes {
+export default class recipesController {
   /**
-   *
-   *
    * @static
-   * @param {any} req
-   * @param {any} res
-   * @returns {json} adds a recipe
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} with the new recipe details
    * @memberof Recipes
    */
   static addRecipe(req, res) {
     const { name, ingredients, description } = req.body;
 
-    if (!name) {
-      return res.status(400).json({ message: 'Recipe name is empty' });
-    }
-    if (!ingredients) {
-      return res.status(400).json({ message: 'Ingredients field is empty' });
-    }
-    if (!description) {
-      return res.status(400).json({ message: 'Add directions to prepare recipe' });
-    }
-
     db.Recipe.findOne({
       where: {
-        name: req.body.name.toLowerCase(),
+        name,
         userId: req.userId
       }
     })
       .then((foundRecipe) => {
         if (foundRecipe) {
-          return res.status(403)
+          return res.status(409)
             .json({
-              status: 'Fail',
+              status: 'fail',
               message: 'You already have a recipe with this name'
             });
         }
         if (!foundRecipe) {
           db.Recipe.create({
-            name: req.body.name.toLowerCase(),
+            name,
             userId: req.userId,
-            ingredients: req.body.ingredients.toLowerCase(),
-            description: req.body.description.toLowerCase(),
-            upvote: req.body.upvote,
-            downvote: req.body.downvote
+            ingredients,
+            description
           })
             .then(newRecipe => res.status(201)
               .json({
@@ -77,17 +60,19 @@ export default class Recipes {
                 recipe: newRecipe
               }));
         }
-      }).catch(error => res.status(400).send(error.message));
+      })
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 
   /**
- *
- *
  * @static
- * @param {any} req
- * @param {any} res
- * @returns {json} updates a recipe
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with the updated recipe
  * @memberof Recipes
  */
   static updateRecipe(req, res) {
@@ -102,14 +87,15 @@ export default class Recipes {
       .then((foundRecipe) => {
         if (foundRecipe) {
           const update = {
-            name: name ? name.toLowerCase() : foundRecipe.name,
-            ingredients: ingredients ? ingredients.toLowerCase() : foundRecipe.ingredients,
-            description: description ? description.toLowerCase() : foundRecipe.description
+            name: name || foundRecipe.name,
+            ingredients: ingredients || foundRecipe.ingredients,
+            description: description || foundRecipe.description
           };
           foundRecipe.update(update)
             .then(updatedRecipe => res.status(200)
               .json({
-                status: 'Update successful',
+                status: 'success',
+                message: 'Update successful',
                 recipe: updatedRecipe
               }))
             .catch(error => res.status(500)
@@ -121,28 +107,29 @@ export default class Recipes {
         if (!foundRecipe) {
           return res.status(404)
             .json({
-              status: 'Fail',
+              status: 'fail',
               message: `Can't find recipe with id ${req.params.recipeId} by you`
             });
         }
       })
-      .catch(error => res.status(500)
-        .json({
-          status: 'Fail',
-          error,
-        }));
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
   /**
- *
- *
  * @static
- * @param {any} req
- * @param {any} res
- * @returns { json } deletes a recipe
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with a message for successful delete action
  * @memberof Recipes
  */
   static deleteRecipe(req, res) {
+    if (isNaN(parseInt(req.params.recipeId, 10))) {
+      return res.status(400).json({ message: 'RecipeId must be a number' });
+    }
+
     db.Recipe.findOne({
       where: {
         id: req.params.recipeId,
@@ -153,7 +140,7 @@ export default class Recipes {
         if (!foundRecipe) {
           return res.status(404)
             .json({
-              status: 'Fail',
+              status: 'fail',
               message: `Can't find recipe with id ${req.params.recipeId} by you`
             });
         }
@@ -166,31 +153,28 @@ export default class Recipes {
           })
             .then(() => res.status(200)
               .json({
-                status: 'Success',
+                status: 'success',
                 message: 'recipe deleted'
-              }))
-            .catch(error => res.status(500)
-              .json({ message: error }));
+              }));
         }
       })
-      .catch(error => res.status(500)
-        .json({
-          status: 'Fail',
-          error,
-        }));
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
   /**
- *
- *
  * @static
- * @param {any} req
- * @param {any} res
- * @returns { json } gets all recipes
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with all recipes
  * @memberof Recipes
  */
   static getAllRecipes(req, res) {
-    if (!req.query.sort) {
+    let { sort } = req.query;
+
+    if (!sort) {
       db.Recipe.findAll({
         include: [
           {
@@ -212,63 +196,66 @@ export default class Recipes {
               });
           }
           if (!recipes) {
-            return res.status(404)
-              .json({ message: 'Currently no recipes' });
-          }
-        })
-        .catch(error => res.status(500)
-          .json({
-            error,
-          }));
-    }
-    if (req.query.sort) {
-      db.Recipe.findAll({
-
-        limit: 6,
-
-        order: [['upvote', 'DESC']],
-        include: [
-          {
-            model: db.Review, attributes: ['content']
-          },
-          {
-            model: db.Vote,
-            attributes: ['upvote', 'downvote']
-          }
-        ]
-      })
-        .then((recipes) => {
-          if (recipes) {
             return res.status(200)
               .json({
-                status: 'Success',
-                recipes,
+                status: 'success',
+                message: 'Currently no recipes'
               });
           }
-          if (!recipes) {
-            return res.status(404)
-              .json({ message: 'Currently no recipes' });
-          }
         })
-        .catch(error => res.status(500)
-          .json({
-            status: 'Fail',
-            error,
-          }));
+        .catch(() => res.status(500).json({
+          status: 'error',
+          message: 'Internal server error'
+        }));
+    }
+
+    if (sort) {
+      if (sort !== 'upvote' || sort !== 'downvote') {
+        sort = 'upvote';
+      }
+      db.Vote.findAll({
+        limit: 6,
+        order: [['upvote', 'DESC']]
+      }).then((votes) => {
+        const recipeIds = votes.map(vote => vote.recipeId);
+
+        db.Recipe.findAll({
+          where: {
+            id: {
+              [db.Sequelize.Op.in]: recipeIds,
+            }
+          },
+          include: [
+            {
+              model: db.Review, attributes: ['content']
+            },
+            {
+              model: db.Vote,
+              attributes: ['upvote', 'downvote']
+            }
+          ]
+        }).then(recipes => res.json({ recipes }));
+      })
+        .catch(() => res.status(500).json({
+          status: 'error',
+          message: 'Internal server error'
+        }));
     }
   }
 
 
   /**
- *
- *
  * @static
- * @param {any} req
- * @param {any} res
- * @returns { json } gets all recipes
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with one recipe
  * @memberof Recipes
  */
   static getOneRecipe(req, res) {
+    if (isNaN(parseInt(req.params.recipeId, 10))) {
+      return res.status(400).json({ message: 'RecipeId must be a number' });
+    }
+
     db.Recipe.findOne({
       where: {
         id: req.params.recipeId
@@ -287,35 +274,33 @@ export default class Recipes {
           attributes: ['upvote', 'downvote']
         }
       ]
-    }).then((existing) => {
-      if (!existing) {
+    }).then((existingRecipe) => {
+      if (!existingRecipe) {
         return res.status(404).send({
-          status: 'Not found',
+          status: 'fail',
           message: 'A recipe with that Id is not found',
         });
       }
-      if (existing) {
+      if (existingRecipe) {
         return res.status(200)
           .json({
-            status: 'Success',
-            recipe: updateOneRecipeAttribute(existing)
+            status: 'success',
+            recipe: updateOneRecipeAttribute(existingRecipe)
           });
       }
     })
-      .catch((error) => {
-        console.log(error);
-        return res.status(500).json({ message: 'server error' });
-      });
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 
   /**
- *
- *
  * @static
- * @param {any} req
- * @param {any} res
- * @returns { json } gets details of a user
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} with all user recipes
  * @memberof Recipes
  */
   static getAllUserRecipes(req, res) {
@@ -323,11 +308,11 @@ export default class Recipes {
       where: {
         id: req.userId
       }
-    }).then((existing) => {
-      if (!existing) {
+    }).then((existingUser) => {
+      if (!existingUser) {
         return res.status(404).send({
-          status: 'Not found',
-          message: 'no user with this id',
+          status: 'fail',
+          message: 'A user with that id is not found',
         });
       } db.Recipe.findAll({
         where: {
@@ -338,20 +323,25 @@ export default class Recipes {
           { model: db.Vote }
         ]
       })
-        .then((all) => {
-          const userRecipes = all.length;
+        .then((allRecipes) => {
+          const userRecipes = allRecipes.length;
           if (userRecipes === 0) {
-            return res.status(404)
-              .json({ message: 'You currently have no recipes' });
+            return res.status(200)
+              .json({
+                status: 'success',
+                message: 'You currently have no recipes'
+              });
           }
           return res.status(200)
             .json({
-              status: 'Success',
-              recipes: all
+              status: 'success',
+              recipes: allRecipes
             });
         })
-        .catch(() => res.status(500)
-          .json({ message: 'Unable to find all recipes by you' }));
+        .catch(() => res.status(500).json({
+          status: 'error',
+          message: 'Internal server error'
+        }));
     });
   }
 }

@@ -1,8 +1,8 @@
 {
     "root": true,
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base", "react"],
     "parserOptions": {
-        "ecmaVersion": 2017
+        "ecmaVersion": 6
     },
     "env": {
         "node": true,
@@ -42,4 +42,4 @@
             }
         }]
     }
-  }
+}
