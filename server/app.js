@@ -3,8 +3,11 @@ import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
-import routes from './routes/index';
+import routes from './routes';
+
+dotenv.config();
 
 // Set up the express app
 const app = express();

@@ -71,7 +71,7 @@
     "sequelize": "^4.19.0",
     "sequelize-cli": "^3.2.0",
     "toastr": "^2.1.4",
-    "validator": "^9.1.2",
+    "validator": "^9.2.0",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.1"
   },

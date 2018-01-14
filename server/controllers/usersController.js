@@ -1,20 +1,14 @@
-import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import db from '../models/index';
-
-dotenv.config();
+import generateToken from '../utils';
 
 /**
- *
- *
+ * This handles user sign up, sign in
  * @export
  * @class User
  */
-export default class Users {
+export default class usersController {
   /**
-   *
-   *
    * @static
    * @param {object} req
    * @param {object} res
@@ -23,35 +17,8 @@ export default class Users {
    */
   static createUser(req, res) {
     const {
-      email, password, confirmPassword, fullname, username
+      email, fullname, username, password
     } = req.body;
-
-    if (!fullname) {
-      return res.status(400).json({ message: 'Fullname field is empty' });
-    }
-    if (!username) {
-      return res.status(400).json({ message: 'Username field is empty' });
-    }
-    if (!password) {
-      return res.status(400).json({ message: 'Password field is empty' });
-    }
-    if (password.length < 8) {
-      return res.status(400)
-        .json({ message: 'Passwords should be at least 8 characters' });
-    }
-    if (!confirmPassword) {
-      return res.status(400)
-        .json({ message: 'confirm Password field is empty' });
-    }
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: 'Passwords don\'t match' });
-    }
-    if (!email) {
-      return res.status(400).json({ message: 'Email field is empty' });
-    }
-    if (typeof email !== 'string') {
-      return res.status(400).json({ message: 'Invalid Email' });
-    }
 
     db.User.findOne({
       where: {
@@ -70,14 +37,10 @@ export default class Users {
           fullname,
           username,
           email,
-          password: bcrypt.hashSync(req.body.password, 10),
+          password
         })
         .then((newUser) => {
-          const token = jwt.sign(
-            { id: newUser.id },
-            process.env.MY_SECRET,
-            { expiresIn: '24h' }
-          );
+          const token = generateToken(newUser);
           res.status(201)
             .json({
               status: 'success',
@@ -99,8 +62,6 @@ export default class Users {
 
 
   /**
- *
- *
  * @static
  * @param {object} req
  * @param {object} res
@@ -109,13 +70,6 @@ export default class Users {
  */
   static userLogin(req, res) {
     const { email, password } = req.body;
-
-    if (!password) {
-      return res.status(400).json({ message: 'Password field is empty' });
-    }
-    if (!email) {
-      return res.status(400).json({ message: 'Email field is empty' });
-    }
 
     db.User.findOne({
       where: {
@@ -130,19 +84,14 @@ export default class Users {
               message: 'This email does not exist. Sign up instead ?',
             });
         }
-        const match = bcrypt.compareSync(req.body.password, foundUser.password);
-        if (!match) {
+        if (!bcrypt.compareSync(password, foundUser.password)) {
           return res.status(401)
             .json({
               status: 'fail',
               message: 'Email or Password is incorrect'
             });
         }
-        const token = jwt.sign({
-          id: foundUser.id
-        }, process.env.MY_SECRET, {
-          expiresIn: '24h'
-        });
+        const token = generateToken(foundUser);
         return res.status(200)
           .json({
             status: 'success',
@@ -157,8 +106,6 @@ export default class Users {
 
 
   /**
- *
- *
  * @static
  * @param {any} req
  * @param {any} res
@@ -199,8 +146,6 @@ export default class Users {
 
 
   /**
- *
- *
  * @static
  * @param {any} req
  * @param {any} res
@@ -210,7 +155,7 @@ export default class Users {
   static updateUserProfile(req, res) {
     const { fullname, username, email } = req.body;
 
-    db.User.findOne({
+    return db.User.findOne({
       where: {
         id: req.userId
       }

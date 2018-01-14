@@ -2,9 +2,13 @@ import User from '../controllers/usersController';
 import Recipe from '../controllers/recipesController';
 import Review from '../controllers/reviewsController';
 import Vote from '../controllers/votesController';
-import Favourite from '../controllers/favouritesControllers';
-import getToken from '../middlewares/getToken';
-import verifyToken from '../middlewares/verifyToken';
+import Favourite from '../controllers/favouritesController';
+import {
+  verifyToken,
+  verifySignup,
+  verifySignin,
+  verifyNewRecipe
+} from '../middlewares/validation';
 
 
 const routes = (app) => {
@@ -14,75 +18,63 @@ const routes = (app) => {
   });
 
   // create a user
-  app.post('/api/v1/users/signup', User.createUser);
+  app.post('/api/v1/users/signup', verifySignup, User.createUser);
 
   // user signs in
-  app.post('/api/v1/users/signin', User.userLogin);
+  app.post('/api/v1/users/signin', verifySignin, User.userLogin);
 
-  // an auth user can view his/her profile
-  app.get(
-    '/api/v1/users/profile',
-    getToken, verifyToken, User.getUserProfile
-  );
-
+  //auth user can view their profile
   // auth user can update their profile
-  app.put(
-    '/api/v1/users/profile',
-    getToken, verifyToken, User.updateUserProfile
-  );
+  app.route('/api/v1/users/profile')
+    .get(verifyToken, User.getUserProfile)
+    .put(verifyToken, User.updateUserProfile);
 
   // user adds recipe
   app.post(
     '/api/v1/recipes',
-    getToken, verifyToken, Recipe.addRecipe
+    verifyToken, verifyNewRecipe, Recipe.addRecipe
   );
 
-  // user updates recipe
-  app.put(
-    '/api/v1/recipes/:recipeId',
-    getToken, verifyToken, Recipe.updateRecipe
-  );
-
-  // user delete recipe
-  app.delete(
-    '/api/v1/recipes/:recipeId',
-    getToken, verifyToken, Recipe.deleteRecipe
-  );
+  // auth user can delete their recipe
+  // auth user can edit their recipe
+  // anybody can view a recipe
+  app.route('/api/v1/recipes/:recipeId')
+    .put(verifyToken, Recipe.updateRecipe)
+    .delete(verifyToken, Recipe.deleteRecipe)
+    .get(Recipe.getOneRecipe);
 
   // user adds review for a recipe
   app.post(
     '/api/v1/recipes/:recipeId/review',
-    getToken, verifyToken, Review.addReview
+    verifyToken, Review.addReview
   );
 
   // user can get all their recipe
   app.get(
     '/api/v1/recipes/user/allrecipes',
-    getToken, verifyToken, Recipe.getAllUserRecipes
+    verifyToken, Recipe.getAllUserRecipes
   );
 
   // anybody can view all recipe
   app.get('/api/v1/recipes', Recipe.getAllRecipes);
 
-  // anybody can view one recipe
-  app.get('/api/v1/recipes/:recipeId', Recipe.getOneRecipe);
 
-  // user can add recipe as fav
+  // user can add recipe as favourite
   app.post(
     '/api/v1/users/:recipeId/favourite',
-    getToken, verifyToken, Favourite.addFavourite
+    verifyToken, Favourite.addFavourite
   );
 
   // user can get all fav recipe
   app.get(
     '/api/v1/users/favourites',
-    getToken, verifyToken, Favourite.getAllFavourites
+    verifyToken, Favourite.getAllFavourites
   );
 
   // user can vote a recipe with the right query parameter
   app.post(
     '/api/v1/recipes/:recipeId/vote',
-    getToken, verifyToken, Vote.voteRecipe
+    verifyToken, Vote.voteRecipe
   );
 };
 

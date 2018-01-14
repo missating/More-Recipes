@@ -2,26 +2,24 @@ import db from '../models/index';
 
 
 /**
- *
- *
+ * This handles favourite recipes
  * @export
  * @class Favourite
  */
-export default class Favourite {
+export default class favouritesController {
   /**
-   *
-   *
+   * @static
    * @param {object} req
    * @param {object} res
    * @returns {object} with recipe added as favourite
    * @memberof Favourite
    */
   static addFavourite(req, res) {
-    if (typeof parseInt(req.params.recipeId, 10) !== 'number') {
+    if (isNaN(parseInt(req.params.recipeId, 10))) {
       return res.status(400).json({ message: 'RecipeId must be a number' });
     }
 
-    db.Recipe.findById(req.params.recipeId)
+    return db.Recipe.findById(req.params.recipeId)
       .then((foundRecipe) => {
         if (!foundRecipe) {
           return res.status(404)
@@ -31,7 +29,7 @@ export default class Favourite {
             });
         }
 
-        db.Favourite.findOne({
+        return db.Favourite.findOne({
           where: {
             recipeId: req.params.recipeId,
             userId: req.userId
@@ -39,13 +37,13 @@ export default class Favourite {
         })
           .then((foundFavourite) => {
             if (foundFavourite) {
-              return res.status(403)
+              return res.status(409)
                 .json({
                   status: 'fail',
-                  message: 'Already added this recipe to your favourites'
+                  message: 'You already added this recipe as your favourite'
                 });
             }
-            db.Favourite.create({
+            return db.Favourite.create({
               userId: req.userId,
               recipeId: req.params.recipeId
             })
@@ -68,18 +66,15 @@ export default class Favourite {
       });
   }
 
-
   /**
- *
- *
- * @static
- * @param {object} req
- * @param {object} res
- * @returns {object} with all favourite recipes for a user
- * @memberof Favourite
- */
+   * @static
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} with all favourite recipes for a user
+   * @memberof Favourite
+   */
   static getAllFavourites(req, res) {
-    db.Favourite.findAll({
+    return db.Favourite.findAll({
       where: { userId: req.userId },
       include: [{
         model: db.Recipe, attributes: ['name', 'ingredients', 'description']

@@ -10,7 +10,7 @@ const updateOneRecipeAttribute = (recipe) => {
     recipeObj.upvote += vote.upvote;
     recipeObj.downvote += vote.downvote;
   });
-  delete recipeObj.Votes;
+  Reflect.deleteProperty(recipeObj, 'Votes');
   return recipeObj;
 };
 
@@ -18,15 +18,12 @@ const updateRecipeAttributes = arrayOfRecipes =>
   arrayOfRecipes.map(recipe => updateOneRecipeAttribute(recipe));
 
 /**
- *
- *
+ * This handles recipe creation, updating and deleting recipes
  * @export
  * @class Recipes
  */
-export default class Recipes {
+export default class recipesController {
   /**
-   *
-   *
    * @static
    * @param {object} req
    * @param {object} res
@@ -36,20 +33,9 @@ export default class Recipes {
   static addRecipe(req, res) {
     const { name, ingredients, description } = req.body;
 
-    if (!name) {
-      return res.status(400).json({ message: 'Recipe field is empty' });
-    }
-    if (!ingredients) {
-      return res.status(400).json({ message: 'Ingredients field is empty' });
-    }
-    if (!description) {
-      return res.status(400)
-        .json({ message: 'Add description on how to prepare recipe' });
-    }
-
     db.Recipe.findOne({
       where: {
-        name: req.body.name,
+        name,
         userId: req.userId
       }
     })
@@ -63,12 +49,10 @@ export default class Recipes {
         }
         if (!foundRecipe) {
           db.Recipe.create({
-            name: req.body.name,
+            name,
             userId: req.userId,
-            ingredients: req.body.ingredients,
-            description: req.body.description,
-            upvote: req.body.upvote,
-            downvote: req.body.downvote
+            ingredients,
+            description
           })
             .then(newRecipe => res.status(201)
               .json({
@@ -85,8 +69,6 @@ export default class Recipes {
 
 
   /**
- *
- *
  * @static
  * @param {object} req
  * @param {object} res
@@ -137,8 +119,6 @@ export default class Recipes {
   }
 
   /**
- *
- *
  * @static
  * @param {object} req
  * @param {object} res
@@ -146,7 +126,7 @@ export default class Recipes {
  * @memberof Recipes
  */
   static deleteRecipe(req, res) {
-    if (typeof parseInt(req.params.recipeId, 10) !== 'number') {
+    if (isNaN(parseInt(req.params.recipeId, 10))) {
       return res.status(400).json({ message: 'RecipeId must be a number' });
     }
 
@@ -185,8 +165,6 @@ export default class Recipes {
   }
 
   /**
- *
- *
  * @static
  * @param {object} req
  * @param {object} res
@@ -267,8 +245,6 @@ export default class Recipes {
 
 
   /**
- *
- *
  * @static
  * @param {object} req
  * @param {object} res
@@ -276,7 +252,7 @@ export default class Recipes {
  * @memberof Recipes
  */
   static getOneRecipe(req, res) {
-    if (typeof parseInt(req.params.recipeId, 10) !== 'number') {
+    if (isNaN(parseInt(req.params.recipeId, 10))) {
       return res.status(400).json({ message: 'RecipeId must be a number' });
     }
 
@@ -321,8 +297,6 @@ export default class Recipes {
 
 
   /**
- *
- *
  * @static
  * @param {object} req
  * @param {object} res
