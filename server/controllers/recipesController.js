@@ -76,6 +76,10 @@ export default class recipesController {
  * @memberof Recipes
  */
   static updateRecipe(req, res) {
+    if (isNaN(parseInt(req.params.recipeId, 10))) {
+      return res.status(400).json({ message: 'RecipeId must be a number' });
+    }
+
     const { name, ingredients, description } = req.body;
 
     db.Recipe.findOne({

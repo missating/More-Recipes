@@ -37,7 +37,7 @@ export const verifySignup = (req, res, next) => {
   } = req.body;
   const error = {};
 
-  if (Validator.isEmpty(fullname || '') || !Validator.isAlpha(fullname || '')) {
+  if (Validator.isEmpty(fullname || '')) {
     error.fullname = 'Fullname is required';
   }
 
@@ -52,7 +52,7 @@ export const verifySignup = (req, res, next) => {
   }
 
   if (!Validator.isEmail(email || '')) {
-    error.email = 'Please provide a valid email address';
+    error.email = 'Email address is empty or invalid';
   }
 
   if (isEmpty(error)) return next();
@@ -66,15 +66,15 @@ export const verifyNewRecipe = (req, res, next) => {
 
   const error = {};
 
-  if (Validator.isEmpty(name) || '') {
+  if (Validator.isEmpty(name || '')) {
     error.name = 'Recipe name is required';
   }
 
-  if (Validator.isEmpty(ingredients) || '') {
+  if (Validator.isEmpty(ingredients || '')) {
     error.ingredients = 'ingredients for recipe is required';
   }
 
-  if (Validator.isEmpty(description) || '') {
+  if (Validator.isEmpty(description || '')) {
     error.description = 'Description for recipe is required';
   }
 

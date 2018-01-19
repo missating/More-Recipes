@@ -8,7 +8,7 @@ import {
   verifySignup,
   verifySignin,
   verifyNewRecipe
-} from '../middlewares/validation';
+} from '../middleware/validation';
 
 
 const routes = (app) => {
@@ -29,11 +29,11 @@ const routes = (app) => {
     .get(verifyToken, User.getUserProfile)
     .put(verifyToken, User.updateUserProfile);
 
+  // anybody can view all recipe
   // user adds recipe
-  app.post(
-    '/api/v1/recipes',
-    verifyToken, verifyNewRecipe, Recipe.addRecipe
-  );
+  app.route('/api/v1/recipes')
+    .post(verifyToken, verifyNewRecipe, Recipe.addRecipe)
+    .get(Recipe.getAllRecipes);
 
   // auth user can delete their recipe
   // auth user can edit their recipe
@@ -54,9 +54,6 @@ const routes = (app) => {
     '/api/v1/recipes/user/allrecipes',
     verifyToken, Recipe.getAllUserRecipes
   );
-
-  // anybody can view all recipe
-  app.get('/api/v1/recipes', Recipe.getAllRecipes);
 
 
   // user can add recipe as favourite
