@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/bin/www",
-    "test": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/*.js --exit --require babel-register require babel-polyfill --reporter spec",
+    "test": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
     "build": "babel ./server/ -d dist/server",
     "start": "babel-node server/bin/www",
     "heroku-postbuild": "npm run build",

@@ -182,7 +182,7 @@ export default class usersController {
         if (!foundUser) {
           return res.status(404)
             .json({
-              status: 'success',
+              status: 'fail',
               message: `Can't find user with id ${req.userId}`
             });
         }

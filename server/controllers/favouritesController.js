@@ -52,7 +52,7 @@ export default class favouritesController {
                   'favourite',
                   { where: { id: req.params.recipeId } }
                 );
-                return res.status(201).json({
+                return res.status(200).json({
                   status: 'success',
                   message: 'recipe favourited',
                   addedFavourite: foundRecipe
@@ -83,7 +83,7 @@ export default class favouritesController {
       .then((found) => {
         const userFavourites = found.length;
         if (userFavourites === 0) {
-          return res.status(404)
+          return res.status(200)
             .json({
               status: 'fail',
               message: 'You have no recipes added as favourites'
