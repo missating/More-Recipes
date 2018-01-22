@@ -7,11 +7,10 @@ chai.use(chaiHttp);
 let userToken;
 let recipeId;
 
-describe('User sign up for add review test', () => {
-  const signupUrl = '/api/v1/users/signup';
-  it('Should register a new user with the correct credentails', (done) => {
+describe('REVIEW API', () => {
+  before((done) => {
     chai.request(app)
-      .post(signupUrl)
+      .post('/api/v1/users/signup')
       .send({
         fullname: 'test3',
         username: 'test3',
@@ -21,17 +20,13 @@ describe('User sign up for add review test', () => {
       })
       .end((error, response) => {
         userToken = response.body.token;
-        expect(response.status).to.equal(201);
         done();
       });
   });
-});
 
-describe('Add recipe for add review test', () => {
-  const recipeUrl = '/api/v1/recipes';
-  it('Should allow auth users to add recipe to catalog', (done) => {
+  before((done) => {
     chai.request(app)
-      .post(recipeUrl)
+      .post('/api/v1/recipes')
       .set('token', userToken)
       .send({
         name: 'Test Recipe 2',
@@ -49,64 +44,64 @@ describe('Add recipe for add review test', () => {
         done();
       });
   });
-});
 
-describe('Add review', () => {
-  it(
-    'Should not allow non auth user to add a review for a recipe',
-    (done) => {
+  describe('Add review', () => {
+    it(
+      'Should not allow non auth user to add a review for a recipe',
+      (done) => {
+        chai.request(app)
+          .post(`/api/v1/recipes/${recipeId}/review`)
+          .send({
+            content: 'Good stuff!'
+          })
+          .end((error, response) => {
+            expect(response.status).to.equal(401);
+            expect(response.body.message).to.equal('Unauthorized.');
+            done();
+          });
+      }
+    );
+
+    it('Should not add review with an empty content field', (done) => {
       chai.request(app)
         .post(`/api/v1/recipes/${recipeId}/review`)
+        .set('token', userToken)
         .send({
-          content: 'Good stuff!'
+          content: ''
         })
         .end((error, response) => {
-          expect(response.status).to.equal(401);
-          expect(response.body.message).to.equal('Unauthorized.');
+          expect(response.status).to.equal(400);
+          expect(response.body.message).to.equal('Please add a review');
           done();
         });
-    }
-  );
+    });
 
-  it('Should not add review with an empty content field', (done) => {
-    chai.request(app)
-      .post(`/api/v1/recipes/${recipeId}/review`)
-      .set('token', userToken)
-      .send({
-        content: ''
-      })
-      .end((error, response) => {
-        expect(response.status).to.equal(400);
-        expect(response.body.message).to.equal('Please add a review');
-        done();
-      });
-  });
+    it('Should allow auth user to add a review for a recipe', (done) => {
+      chai.request(app)
+        .post(`/api/v1/recipes/${recipeId}/review`)
+        .set('token', userToken)
+        .send({
+          content: 'Good stuff'
+        })
+        .end((error, response) => {
+          expect(response.status).to.equal(201);
+          expect(response.body.review.content).to.equal('Good stuff');
+          done();
+        });
+    });
 
-  it('Should allow auth user to add a review for a recipe', (done) => {
-    chai.request(app)
-      .post(`/api/v1/recipes/${recipeId}/review`)
-      .set('token', userToken)
-      .send({
-        content: 'Good stuff'
-      })
-      .end((error, response) => {
-        expect(response.status).to.equal(201);
-        expect(response.body.review.content).to.equal('Good stuff');
-        done();
-      });
-  });
-
-  it('Should not add review for a recipeId that is not a number', (done) => {
-    chai.request(app)
-      .post(`/api/v1/recipes/recipeId/review`)
-      .set('token', userToken)
-      .send({
-        content: 'Good stuff'
-      })
-      .end((error, response) => {
-        expect(response.status).to.equal(400);
-        expect(response.body.message).to.equal('RecipeId must be a number');
-        done();
-      });
+    it('Should not add review for a recipeId that is not a number', (done) => {
+      chai.request(app)
+        .post(`/api/v1/recipes/recipeId/review`)
+        .set('token', userToken)
+        .send({
+          content: 'Good stuff'
+        })
+        .end((error, response) => {
+          expect(response.status).to.equal(400);
+          expect(response.body.message).to.equal('RecipeId must be a number');
+          done();
+        });
+    });
   });
 });

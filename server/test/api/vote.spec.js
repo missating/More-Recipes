@@ -8,48 +8,41 @@ let userToken;
 let recipeId;
 
 describe('VOTE API', () => {
-  describe('User sign up for voting a recipe test', () => {
-    const signupUrl = '/api/v1/users/signup';
-    it('Should register a new user with the correct credentails', (done) => {
-      chai.request(app)
-        .post(signupUrl)
-        .send({
-          fullname: 'test5',
-          username: 'test5',
-          email: 'test5@test.com',
-          password: '1234567890',
-          confirmPassword: '1234567890'
-        })
-        .end((error, response) => {
-          userToken = response.body.token;
-          expect(response.status).to.equal(201);
-          done();
-        });
-    });
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send({
+        fullname: 'test5',
+        username: 'test5',
+        email: 'test5@test.com',
+        password: '1234567890',
+        confirmPassword: '1234567890'
+      })
+      .end((error, response) => {
+        userToken = response.body.token;
+        done();
+      });
   });
 
-  describe('Add recipe for voting a recipe test', () => {
-    const recipeUrl = '/api/v1/recipes';
-    it('Should allow auth users to add recipe to catalog', (done) => {
-      chai.request(app)
-        .post(recipeUrl)
-        .set('token', userToken)
-        .send({
-          name: 'Test Recipe 4',
-          ingredients: 'test, test, test',
-          description: 'For testing recipe 4'
-        })
-        .end((error, response) => {
-          recipeId = response.body.recipe.id;
-          expect(response.status).to.equal(201);
-          expect(response.body.recipe.name).to.equal('Test Recipe 4');
-          expect(response.body.recipe.ingredients)
-            .to.equal('test, test, test');
-          expect(response.body.recipe.description)
-            .to.equal('For testing recipe 4');
-          done();
-        });
-    });
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/recipes')
+      .set('token', userToken)
+      .send({
+        name: 'Test Recipe 4',
+        ingredients: 'test, test, test',
+        description: 'For testing recipe 4'
+      })
+      .end((error, response) => {
+        recipeId = response.body.recipe.id;
+        expect(response.status).to.equal(201);
+        expect(response.body.recipe.name).to.equal('Test Recipe 4');
+        expect(response.body.recipe.ingredients)
+          .to.equal('test, test, test');
+        expect(response.body.recipe.description)
+          .to.equal('For testing recipe 4');
+        done();
+      });
   });
 
   describe('Upvote a recipe', () => {
