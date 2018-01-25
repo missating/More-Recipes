@@ -16,7 +16,7 @@ const RecipeCard = (props) => (
         </div>
         <div className="mainBtn">
           <Link className="btn btn-outline-primary"
-            to={`/SingleRecipe/${props.id}`}>
+            to={`/recipes/view/${props.id}`}>
             Details
           </Link>
         </div>

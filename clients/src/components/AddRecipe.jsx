@@ -73,15 +73,17 @@ class AddRecipe extends React.Component {
     event.preventDefault();
     const isValid = this.isValid();
     if (isValid) {
-      this.props.addNewRecipe(this.state.newRecipe).then(() => {
-        this.setState({
-          newRecipe: {
-            name: '',
-            ingredients: '',
-            description: ''
-          }
+      this.props.addNewRecipe(this.state.newRecipe)
+        .then((recipe) => {
+          this.setState({
+            newRecipe: {
+              name: '',
+              ingredients: '',
+              description: ''
+            }
+          });
+          this.props.history.push('/users/recipes');
         });
-      });
     }
   }
 
@@ -109,13 +111,13 @@ class AddRecipe extends React.Component {
           </div>
           <div className="col-md-4">
             <Link className="btn btn-outline-primary"
-              to="/user/recipes">
+              to="/users/recipes">
               My Recipes
             </Link>
           </div>
           <div className="col-md-4">
             <Link className="btn btn-outline-primary"
-              to="/user/favourites">
+              to="/users/favourites">
               My Favourite Recipes
             </Link>
           </div>

@@ -1,24 +1,23 @@
 import {
   RECEIVE_USER_FAVOURITE,
-  RECEIVE_USER_FAVOURITE_ERROR,
+  RECEIVE_USER_FAVOURITE_ERROR
 } from '../actions/actionTypes';
 
 
 const initialState = {
-  recipes: {}
+  favourites: []
 };
 
-const userFavourites = (state = initialState.recipes, action) => {
+const favourites = (state = initialState, action) => {
   switch (action.type) {
   case RECEIVE_USER_FAVOURITE:
     return {
       ...state,
-      allUserFavourites: action.userFavourites
+      favourites: action.userFavourites
     };
   case RECEIVE_USER_FAVOURITE_ERROR:
     return {
       ...state,
-      allUserFavourites: '',
       errorMessage: action.message
     };
   default:
@@ -26,4 +25,4 @@ const userFavourites = (state = initialState.recipes, action) => {
   }
 };
 
-export default userFavourites;
+export default favourites;

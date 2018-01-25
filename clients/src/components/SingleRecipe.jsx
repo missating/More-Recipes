@@ -187,8 +187,10 @@ SingleRecipe.defaultProps = {
   singleRecipe: {}
 };
 
-const mapStateToProps = state => ({
-  singleRecipe: state.singleRecipe,
+const mapStateToProps = (state, ownProps) => ({
+  singleRecipe: state.recipes.recipes
+    .find(recipe =>
+      (parseInt(recipe.id, 10) === parseInt(ownProps.match.params.id, 10))),
   authenticated: state.auth.isAuthenticated
 });
 

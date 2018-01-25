@@ -32,6 +32,21 @@ class UserRecipes extends React.Component {
   componentWillMount() {
     this.props.receiveUserRecipe();
   }
+
+  /**
+   * @returns {undefined}
+   *
+   * @param {object} nextProps
+   *
+   * @memberof UserRecipes
+   */
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userRecipes !== nextProps.userRecipes) {
+      this.setState({
+        userRecipes: nextProps.userRecipes
+      });
+    }
+  }
   /**
    * @description react render method
    *
@@ -40,17 +55,17 @@ class UserRecipes extends React.Component {
    */
   render() {
     let userRecipeError;
-    if (this.props.userRecipes.errorMessage) {
+    if (this.props.userRecipesError) {
       userRecipeError = (
         <span className="help-block">
-          {this.props.userRecipes.errorMessage}
+          {this.props.userRecipesError}
         </span>
       );
     }
 
     const userRecipes =
-    (this.props.userRecipes.allUserRecipes) ?
-      this.props.userRecipes.allUserRecipes : [];
+    (this.state.userRecipes) ?
+      this.state.userRecipes : [];
     const userRecipesList = userRecipes.map((recipe, i) => (
       <div className="col-md-4" key={`recipe${i + 1}`}>
         <UserRecipeCard
@@ -120,7 +135,7 @@ class UserRecipes extends React.Component {
             </div>
             <div className="col-md-4">
               <Link className="btn btn-outline-primary"
-                to="/user/favourites">
+                to="/users/favourites">
               My Favourite Recipes
               </Link>
             </div>
@@ -148,7 +163,8 @@ UserRecipes.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  userRecipes: state.userRecipes,
+  userRecipes: state.recipes.recipes,
+  userRecipesError: state.recipes.errorMessage,
   authenticated: state.auth.isAuthenticated
 });
 

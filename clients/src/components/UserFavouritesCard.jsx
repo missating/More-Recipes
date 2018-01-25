@@ -17,7 +17,7 @@ const UserFavouritesCard = (props) => (
           <div className="container text-center">
             <Link className="btn btn-outline-primary"
               style={{ marginRight: '10px' }}
-              to={`/SingleRecipe/${props.id}`}>
+              to={`/recipes/view/${props.id}`}>
           Details
             </Link>
           </div>

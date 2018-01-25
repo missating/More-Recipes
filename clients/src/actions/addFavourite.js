@@ -31,10 +31,8 @@ const addFavouriteRecipe = recipeId => (dispatch) => {
     })
     .catch((error) => {
       const { message } = error.response.data;
-      console.log(message);
       dispatch(addFavouriteError(message));
       dispatch(unsetFetching());
-      console.log('after axios');
     });
 };
 

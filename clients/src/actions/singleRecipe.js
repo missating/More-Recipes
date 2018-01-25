@@ -5,7 +5,7 @@ import { RECEIVE_SINGLE_RECIPE } from './actionTypes';
 // action creators for get all recipes
 export const getSingleRecipe = recipe => ({
   type: RECEIVE_SINGLE_RECIPE,
-  recipe
+  recipe: [recipe]
 });
 
 

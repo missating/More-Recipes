@@ -47,13 +47,13 @@ class Profile extends React.Component {
             </div>
             <div className="col-md-4">
               <Link className="btn btn-outline-primary"
-                to="/user/recipes">
+                to="/users/recipes">
               My Recipes
               </Link>
             </div>
             <div className="col-md-4">
               <Link className="btn btn-outline-primary"
-                to="/user/favourites">
+                to="/users/favourites">
               My Favourite Recipes
               </Link>
             </div>

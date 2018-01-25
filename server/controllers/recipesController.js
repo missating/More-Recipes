@@ -225,9 +225,7 @@ export default class recipesController {
 
         db.Recipe.findAll({
           where: {
-            id: {
-              [db.Sequelize.Op.in]: recipeIds,
-            }
+            id: recipeIds
           },
           include: [
             {
@@ -238,7 +236,8 @@ export default class recipesController {
               attributes: ['upvote', 'downvote']
             }
           ]
-        }).then(recipes => res.json({ recipes }));
+        }).then(recipes => res
+          .json({ recipes: updateRecipeAttributes(recipes) }));
       })
         .catch(() => res.status(500).json({
           status: 'error',
@@ -330,7 +329,7 @@ export default class recipesController {
         .then((allRecipes) => {
           const userRecipes = allRecipes.length;
           if (userRecipes === 0) {
-            return res.status(200)
+            return res.status(404)
               .json({
                 status: 'success',
                 message: 'You currently have no recipes'

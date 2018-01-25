@@ -9,7 +9,7 @@ const RecipeGallery = (props) => (
 
   <div>
     <div className="zoom-container">
-      <Link to={`/SingleRecipe/${props.id}`} >
+      <Link to={`/recipes/view/${props.id}`} >
         <span className="zoom-caption">
           <span>{props.name}<br/>
             <small> {props.ingredients} </small>

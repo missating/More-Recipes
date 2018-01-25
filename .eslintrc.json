@@ -1,6 +1,6 @@
 {
     "root": true,
-    "extends": ["airbnb-base", "react"],
+    "extends": ["airbnb"],
     "parserOptions": {
         "ecmaVersion": 6
     },

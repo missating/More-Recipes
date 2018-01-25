@@ -13,13 +13,13 @@ import UserFavourites from './UserFavourites';
 const Main = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/recipes" component={Recipes} />
-    <Route path="/SingleRecipe/:id" component={SingleRecipe} />
-    <Route path="/profile" component={Profile} />
-    <Route path="/recipe/add" component={AddRecipe} />
-    <Route path="/user/recipes" component={UserRecipes} />
-    <Route path="/recipe/edit/:id" component={EditRecipe} />
-    <Route path="/user/favourites" component={UserFavourites} />
+    <Route path="/recipes" exact component={Recipes} />
+    <Route path="/recipes/view/:id" exact component={SingleRecipe} />
+    <Route path="/profile" exact component={Profile} />
+    <Route path="/recipe/add" exact component={AddRecipe} />
+    <Route path="/users/recipes" exact component={UserRecipes} />
+    <Route path="/recipe/edit/:id" exact component={EditRecipe} />
+    <Route path="/users/favourites" exact component={UserFavourites} />
   </Switch>
 );
 

@@ -1,4 +1,4 @@
-import { RECEIVE_USER_RECIPES,
+import {
   RECEIVE_USER_RECIPES_ERROR,
   DELETE_RECIPE,
   EDIT_RECIPE }
@@ -10,11 +10,6 @@ const initialState = {
 
 const userRecipe = (state = initialState.recipes, action) => {
   switch (action.type) {
-  case RECEIVE_USER_RECIPES:
-    return {
-      ...state,
-      allUserRecipes: action.userRecipes
-    };
   case RECEIVE_USER_RECIPES_ERROR:
     return {
       ...state,

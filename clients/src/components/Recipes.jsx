@@ -60,7 +60,7 @@ Recipes.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  allRecipes: state.allRecipes.recipes
+  allRecipes: state.recipes.recipes
 });
 
 const mapDispatchToProps = dispatch => ({
