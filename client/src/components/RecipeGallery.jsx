@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 // image
 import thirteen from '../assets/thirteen.jpg';
 
-const RecipeGallery = (props) => (
-
+const RecipeGallery = props => (
   <div>
     <div className="zoom-container">
-      <Link to={`/recipes/view/${props.id}`} >
+      <Link to={`/recipes/view/${props.id}`}>
         <span className="zoom-caption">
-          <span>{props.name}<br/>
+          <span>
+            {props.name}
+            <br />
             <small> {props.ingredients} </small>
           </span>
         </span>
@@ -24,9 +25,7 @@ const RecipeGallery = (props) => (
 RecipeGallery.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  ingredients: PropTypes.string.isRequired,
-  upvote: PropTypes.number.isRequired,
-  downvote: PropTypes.number.isRequired
+  ingredients: PropTypes.string.isRequired
 };
 
 export default RecipeGallery;

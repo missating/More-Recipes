@@ -1,13 +1,11 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import Enzyme, { shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
-import Adapter from 'enzyme-adapter-react-16';
 import Header from '../../components/Header';
 
 const mockStore = configureStore([]);
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('The Header component', () => {
   it('Should mount the Header component without errors', () => {
@@ -16,9 +14,7 @@ describe('The Header component', () => {
         isAuthenticated: false
       }
     });
-    const tree = shallow((
-      <Header store={store} />
-    ));
+    const tree = shallow(<Header store={store} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -29,11 +25,9 @@ describe('The Header component', () => {
         isAuthenticated: true
       }
     });
-    const tree = renderer.create((
-      <MemoryRouter>
-        <Header store={store} />
-      </MemoryRouter>
-    ));
+    const tree = renderer.create(<MemoryRouter>
+      <Header store={store} />
+    </MemoryRouter>);
     const linkToProfile = tree.root.findAllByProps({ to: '/profile' });
 
     expect(linkToProfile.length).toBe(1);
@@ -41,4 +35,3 @@ describe('The Header component', () => {
     expect(tree).toMatchSnapshot();
   });
 });
-

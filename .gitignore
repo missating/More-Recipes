@@ -10,3 +10,4 @@ server/dist
 .DS_Store
 
 client/dist
+build

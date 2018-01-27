@@ -1,12 +1,15 @@
 {
   "name": "more-recipes",
   "version": "1.0.0",
-  "description": "More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.\r Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.",
+  "description":
+    "More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.\r Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.",
   "main": "app.js",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/bin/www",
-    "test": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
-    "test:client": "jest --watch",
+    "start:dev":
+      "cross-env NODE_ENV=development nodemon --exec babel-node server/bin/www",
+    "test":
+      "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
+    "test:client": "jest client/src/__tests__/**/*.spec.js",
     "build": "babel ./server/ -d dist/server",
     "start": "babel-node server/bin/www",
     "heroku-postbuild": "npm run build",
@@ -14,8 +17,7 @@
     "reset-migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
-    "build:client": "webpack",
-    "dev": "webpack-dev-server",
+    "watch": "webpack --config ./webpack.config.js -w",
     "clean": "rimraf dist"
   },
   "repository": {
@@ -31,7 +33,6 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
@@ -49,6 +50,7 @@
     "cross-env": "^5.1.1",
     "dotenv": "^4.0.0",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eventsource-polyfill": "^0.9.6",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "jsonwebtoken": "^8.1.0",
@@ -74,11 +76,13 @@
     "toastr": "^2.1.4",
     "validator": "^9.2.0",
     "webpack": "^3.8.1",
-    "webpack-dev-middleware": "^1.12.1"
+    "webpack-dev-middleware": "^1.12.1",
+    "webpack-hot-middleware": "^2.21.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
+    "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
     "css-loader": "^0.28.7",
     "enzyme": "^3.3.0",
@@ -93,13 +97,27 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^22.1.4",
+    "jest-environment-jsdom": "^22.1.4",
+    "jest-localstorage-mock": "^2.2.0",
     "react-test-renderer": "^16.2.0",
     "redux-mock-store": "^1.4.0",
     "rimraf": "^2.6.2",
     "webpack-dev-server": "^2.9.4"
   },
   "jest": {
-    "testRegex": "client/src/test/.*\\.(js|jsx)$"
+    "setupTestFrameworkScriptFile": "jest-environment-jsdom",
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "jest-localstorage-mock",
+      "<rootDir>/client/src/__tests__/setupTest.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/client/src/__tests__/__mocks__/fileMock.js",
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "collectCoverage": true
   }
 }
