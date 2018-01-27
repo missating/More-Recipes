@@ -15,8 +15,8 @@ export const getFavouritesError = message => ({
 });
 
 const receiveUserFavourites = () => (dispatch) => {
-  const token = localStorage.getItem('token');
   dispatch(setFetching());
+  const token = localStorage.getItem('token');
   return axios({
     methiod: 'GET',
     url: 'http://localhost:3000/api/v1/users/favourites',

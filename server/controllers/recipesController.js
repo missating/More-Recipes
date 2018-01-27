@@ -225,7 +225,9 @@ export default class recipesController {
 
         db.Recipe.findAll({
           where: {
-            id: recipeIds
+            id: {
+              [db.Sequelize.Op.in]: recipeIds
+            }
           },
           include: [
             {

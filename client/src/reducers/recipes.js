@@ -57,7 +57,6 @@ const recipes = (state = initialState, action) => {
     };
   case ADD_FAVOURITE:
     if (index > -1) {
-      console.log(state.recipes[index].favourite + 1, '============');
       return {
         ...state,
         recipes: [{

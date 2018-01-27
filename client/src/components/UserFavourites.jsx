@@ -34,6 +34,19 @@ class UserFavourites extends React.Component {
     this.props.receiveUserFavourite();
   }
   /**
+ * @returns {undefined}
+ *
+ * @param {object} nextProps
+ * @memberof UserFavourites
+ */
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userFavourites !== nextProps.userFavourites) {
+      this.setState({
+        userFavourites: nextProps.userFavourites
+      });
+    }
+  }
+  /**
    *
    *
    * @returns {jsx} - a list of items to be rendered
@@ -41,8 +54,8 @@ class UserFavourites extends React.Component {
    */
   render() {
     const userFavourites =
-    (this.props.userFavourites) ?
-      this.props.userFavourites : [];
+    (this.state.userFavourites) ?
+      this.state.userFavourites : [];
     const userFavouritesList = userFavourites.map((favourites, i) => (
       <div className="col-md-4" key={`favourites${i + 1}`}>
         <UserFavouritesCard
@@ -64,20 +77,26 @@ class UserFavourites extends React.Component {
           <div className="container userButtons">
             <div className="row">
               <div className="col-md-4">
-                <Link className="btn btn-outline-primary"
-                  to="/profile">
+                <Link
+                  className="btn btn-outline-primary"
+                  to="/profile"
+                >
              My Profile
                 </Link>
               </div>
               <div className="col-md-4">
-                <Link className="btn btn-outline-primary"
-                  to="/recipe/add">
+                <Link
+                  className="btn btn-outline-primary"
+                  to="/recipe/add"
+                >
               Add Recipe
                 </Link>
               </div>
               <div className="col-md-4">
-                <Link className="btn btn-outline-primary"
-                  to="/user/favourites">
+                <Link
+                  className="btn btn-outline-primary"
+                  to="/user/favourites"
+                >
               My Favourite Recipes
                 </Link>
               </div>
@@ -103,20 +122,26 @@ class UserFavourites extends React.Component {
         <div className="container userButtons">
           <div className="row">
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/profile">
+              <Link
+                className="btn btn-outline-primary"
+                to="/profile"
+              >
              My Profile
               </Link>
             </div>
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/recipe/add">
+              <Link
+                className="btn btn-outline-primary"
+                to="/recipe/add"
+              >
               Add Recipe
               </Link>
             </div>
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/user/favourites">
+              <Link
+                className="btn btn-outline-primary"
+                to="/user/favourites"
+              >
               My Favourite Recipes
               </Link>
             </div>
@@ -138,12 +163,9 @@ UserFavourites.propTypes = {
   authenticated: PropTypes.bool.isRequired
 };
 
-UserFavourites.defaultProps = {
-  userFavourites: []
-};
 
 const mapStateToProps = state => ({
-  userFavourites: state.userFavourites.allUserFavourites,
+  userFavourites: state.favourites.favourites,
   authenticated: state.auth.isAuthenticated
 });
 

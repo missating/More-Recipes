@@ -5,7 +5,8 @@ import {
 
 
 const initialState = {
-  favourites: []
+  favourites: [],
+  errorMessage: ''
 };
 
 const favourites = (state = initialState, action) => {

@@ -83,20 +83,26 @@ class UserRecipes extends React.Component {
           <div className="container userButtons">
             <div className="row">
               <div className="col-md-4">
-                <Link className="btn btn-outline-primary"
-                  to="/profile">
+                <Link
+className="btn btn-outline-primary"
+                  to="/profile"
+                >
              My Profile
                 </Link>
               </div>
               <div className="col-md-4">
-                <Link className="btn btn-outline-primary"
-                  to="/recipe/add">
+                <Link
+className="btn btn-outline-primary"
+                  to="/recipe/add"
+                >
               Add Recipe
                 </Link>
               </div>
               <div className="col-md-4">
-                <Link className="btn btn-outline-primary"
-                  to="/user/favourites">
+                <Link
+className="btn btn-outline-primary"
+                  to="/user/favourites"
+                >
               My Favourite Recipes
                 </Link>
               </div>
@@ -122,20 +128,26 @@ class UserRecipes extends React.Component {
         <div className="container userButtons">
           <div className="row">
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/profile">
+              <Link
+className="btn btn-outline-primary"
+                to="/profile"
+              >
              My Profile
               </Link>
             </div>
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/recipe/add">
+              <Link
+className="btn btn-outline-primary"
+                to="/recipe/add"
+              >
               Add Recipe
               </Link>
             </div>
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/users/favourites">
+              <Link
+className="btn btn-outline-primary"
+                to="/users/favourites"
+              >
               My Favourite Recipes
               </Link>
             </div>
@@ -158,9 +170,6 @@ UserRecipes.propTypes = {
   authenticated: PropTypes.bool.isRequired
 };
 
-UserRecipes.defaultProps = {
-  userRecipes: []
-};
 
 const mapStateToProps = state => ({
   userRecipes: state.recipes.recipes,

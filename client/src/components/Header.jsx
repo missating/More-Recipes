@@ -9,17 +9,19 @@ import signUserOut from '../actions/signout';
 // components
 import Signin from './Signin';
 
-const Header = (props) => (
+const Header = props => (
   <header>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="#">More Recipes</a>
-      <button className="navbar-toggler"
+      <a className="navbar-brand" href="/">More Recipes</a>
+      <button
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
-        aria-label="Toggle navigation">
+        aria-label="Toggle navigation"
+      >
         <span className="navbar-toggler-icon" />
       </button>
 
@@ -35,7 +37,7 @@ const Header = (props) => (
 
           {
             props.authenticated &&
-              <li className="nav-item">
+              <li className="nav-item" >
                 <Link className="nav-link" to="/profile">Profile</Link>
               </li>
           }
@@ -43,8 +45,10 @@ const Header = (props) => (
           {
             props.authenticated &&
               <li className="nav-item">
-                <a className="nav-link"
-                  onClick={() => { props.signUserOut(); }}>
+                <a
+                  className="nav-link"
+                  onClick={() => { props.signUserOut(); }}
+                >
                 Sign out
                 </a>
               </li>
@@ -65,15 +69,12 @@ Header.propTypes = {
   signUserOut: PropTypes.func.isRequired
 };
 
-Header.defaultProps = {
-  authenticated: {}
-};
 
 const mapStateToProps = state => ({
   authenticated: state.auth.isAuthenticated
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   signUserOut: () => {
     dispatch(signUserOut());
   }
