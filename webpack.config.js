@@ -2,7 +2,6 @@
 // https://nodejs.org/api/path.html
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // Import our plugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
@@ -32,9 +31,6 @@ module.exports = {
   // Tell webpack to use html plugin
   // index.html is used as a template in which it'll inject bundled app.
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(paths.SRC, 'index.html'),
-    }),
     new ExtractTextPlugin('style.bundle.css'), // CSS will be extracted to this bundle file
     new webpack.HotModuleReplacementPlugin()
   ],

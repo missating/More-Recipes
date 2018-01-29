@@ -109,7 +109,7 @@ class SingleRecipe extends React.Component {
             <div className="col-md-12">
               <h4>Ingredients</h4>
               <ul className="list-group">
-                { ingredientsList }
+                {ingredientsList}
               </ul>
 
               <h4>Direction for cooking</h4>
@@ -117,7 +117,7 @@ class SingleRecipe extends React.Component {
 
               {
                 !this.props.authenticated &&
-                  <ActionButtons />
+                <ActionButtons singleRecipe={this.state.singleRecipe} />
               }
               {
                 this.props.authenticated &&
@@ -160,10 +160,10 @@ class SingleRecipe extends React.Component {
                 <h4 className="text-center"> Reviews </h4>
                 {this.props.authenticated && <AddReview recipeId={this.state.singleRecipe.id} />}
                 <br />
-                { allReviews.length > 0 && <div>
+                {allReviews.length > 0 && <div>
                   {allReviews}
                 </div>}
-                { !allReviews.length && <div className="container">
+                {!allReviews.length && <div className="container">
                   <h2>There are currently no reviews for this recipe.</h2>
                 </div>}
               </div>

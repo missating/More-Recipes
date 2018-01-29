@@ -1,5 +1,6 @@
 import axios from 'axios';
 import toastr from 'toastr';
+import Dropzone from 'react-dropzone';
 
 import { setFetching, unsetFetching } from './fetching';
 import { ADD_RECIPE, ADD_RECIPE_ERROR } from './actionTypes';
@@ -34,9 +35,9 @@ const addRecipe = recipe => (dispatch) => {
       dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
-        extendedTimeOut: "1000",
-        positionClass: "toast-top-right",
-        hideMethod: "fadeOut"
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
       };
       toastr.success('Recipe added succesfully');
     })
@@ -46,9 +47,9 @@ const addRecipe = recipe => (dispatch) => {
       dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
-        extendedTimeOut: "1000",
-        positionClass: "toast-top-right",
-        hideMethod: "fadeOut"
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
       };
       toastr.error(message);
     });

@@ -1,55 +1,70 @@
 {
-    "root": true,
-    "extends": ["airbnb"],
-    "parserOptions": {
-        "ecmaVersion": 6
-    },
-    "plugins": ["jest"],
-    "env": {
-        "node": true,
-        "es6": true,
-        "mocha": true,
-        "jest/globals": true
-    },
-    "settings": {
-        "import/resolver":{
-            "node": {
-                "extensions": [".js", ".jsx"]
-            }
-        }
-    },
-    "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "one-var": 0,
-        "one-var-declaration-per-line": 0,
-        "new-cap": 0,
-        "indent": ["error", 2],
-        "max-len": ["error", 80],
-        "consistent-return": 0,
-        "no-param-reassign": 0,
-        "comma-dangle": 0,
-        "max-nested-callbacks": 0,
-        "curly": ["error", "multi-line"],
-        "import/no-unresolved": [2, { "commonjs": true }],
-        "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
-        "valid-jsdoc": ["error", {
-            "requireReturn": true,
-            "requireReturnType": true,
-            "requireParamDescription": false,
-            "requireReturnDescription": true
-        }],
-        "require-jsdoc": ["error", {
-            "require": {
-                "FunctionDeclaration": true,
-                "MethodDefinition": true,
-                "ClassDeclaration": true
-            }
-        }],
-
-        "jsx-a11y/anchor-is-valid": [ "error", {
-            "components": [ "a", "Link" ],
-            "aspects": ["invalidHref", "preferButton" ],
-            "specialLink": [ "to" ]
-        }]
+  "root": true,
+  "extends": ["airbnb"],
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "plugins": ["jest"],
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true,
+    "jest/globals": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
     }
+  },
+  "globals": {
+    "shallow": true,
+    "mount": true,
+    "eventObject": true,
+    "token": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "one-var": 0,
+    "one-var-declaration-per-line": 0,
+    "new-cap": 0,
+    "indent": ["error", 2],
+    "max-len": ["error", 80],
+    "consistent-return": 0,
+    "no-param-reassign": 0,
+    "comma-dangle": 0,
+    "max-nested-callbacks": 0,
+    "curly": ["error", "multi-line"],
+    "import/no-unresolved": [2, { "commonjs": true }],
+    "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
+    "valid-jsdoc": [
+      "error",
+      {
+        "requireReturn": true,
+        "requireReturnType": true,
+        "requireParamDescription": false,
+        "requireReturnDescription": true
+      }
+    ],
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
+        }
+      }
+    ],
+
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["a", "Link"],
+        "aspects": ["invalidHref", "preferButton"],
+        "specialLink": ["to"]
+      }
+    ]
+  }
 }

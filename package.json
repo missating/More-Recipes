@@ -1,14 +1,11 @@
 {
   "name": "more-recipes",
   "version": "1.0.0",
-  "description":
-    "More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.\r Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.",
+  "description": "More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.\r Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.",
   "main": "app.js",
   "scripts": {
-    "start:dev":
-      "cross-env NODE_ENV=development nodemon --exec babel-node server/bin/www",
-    "test":
-      "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/bin/www",
+    "test": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
     "test:client": "jest client/src/__tests__/**/*.spec.js",
     "build": "babel ./server/ -d dist/server",
     "start": "babel-node server/bin/www",
@@ -58,6 +55,7 @@
     "lodash.isempty": "^4.4.0",
     "mocha": "^4.0.1",
     "morgan": "^1.9.0",
+    "moxios": "^0.4.0",
     "nodemon": "^1.12.1",
     "nyc": "^11.2.1",
     "path": "^0.12.7",
@@ -66,6 +64,7 @@
     "prop-types": "^15.6.0",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
+    "react-dropzone": "^4.2.7",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -114,8 +113,7 @@
       "<rootDir>/client/src/__tests__/setupTest.js"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/client/src/__tests__/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/client/src/__tests__/__mocks__/fileMock.js",
       "\\.(css|less|scss)$": "identity-obj-proxy"
     },
     "collectCoverage": true

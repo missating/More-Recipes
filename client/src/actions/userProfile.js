@@ -23,7 +23,7 @@ const receiveUserProfileRequest = () => (dispatch) => {
       dispatch(receiveUserProfile(userProfile));
       dispatch(unsetFetching());
     }).catch((error) => {
-      console.log('User profile error', error);
+      // console.log('User profile error', error);
       dispatch(unsetFetching());
     });
 };

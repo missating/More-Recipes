@@ -1,5 +1,4 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import { Recipes } from '../../components/Recipes';
 import RecipeGallery from '../../components/RecipeGallery';
@@ -40,7 +39,7 @@ describe('Recip component', () => {
     ];
     const wrapper = mount(<MemoryRouter>
       <Recipes fetchAllRecipes={fetchAllRecipes} allRecipes={allRecipes} />
-                          </MemoryRouter>);
+    </MemoryRouter>);
     expect(wrapper.find(RecipeGallery).length).toEqual(2);
   });
 });
