@@ -9,31 +9,38 @@ import eleven from '../assets/eleven.jpg';
 // actions
 import deleteRecipe from '../actions/deleteRecipe';
 
-const UserRecipeCard = (props) => (
+const UserRecipeCard = props => (
 
   <div>
     <div className="card">
       <div className="card-header">{props.name}</div>
       <div className="card-main">
-        <img src={eleven} alt="Recipe Image" className="img-thumbnail" />
+        <img src={props.recipeImage} alt={props.name} className="img-thumbnail" />
         <div className="main-description">
           <p> {props.description} </p>
         </div>
         <div className="container text-center">
-          <Link className="btn btn-outline-primary"
+          <Link
+            className="btn btn-outline-primary"
             style={{ marginRight: '10px' }}
-            to={`/recipes/view/${props.id}`}>
-          Details
+            to={`/recipes/view/${props.id}`}
+          >
+            Details
           </Link>
 
-          <Link className="btn btn-outline-primary"
+          <Link
+            className="btn btn-outline-primary"
             style={{ marginRight: '10px' }}
-            to={`/recipe/edit/${props.id}`}>
+            to={`/recipe/edit/${props.id}`}
+          >
             Edit
           </Link>
 
-          <button type="button" className="btn btn-danger"
-            onClick={() => { props.deleteRecipe(props.id); }}>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => { props.deleteRecipe(props.id); }}
+          >
             <i className="fa fa-trash" />
           </button>
         </div>
@@ -49,7 +56,7 @@ UserRecipeCard.propTypes = {
   deleteRecipe: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   deleteRecipe: (recipeId) => {
     dispatch(deleteRecipe(recipeId));
   }

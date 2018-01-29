@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-// image
-import thirteen from '../assets/thirteen.jpg';
-
 const RecipeGallery = props => (
   <div>
     <div className="zoom-container">
@@ -16,7 +13,7 @@ const RecipeGallery = props => (
             <small> {props.ingredients} </small>
           </span>
         </span>
-        <img src={thirteen} />
+        <img src={props.recipeImage} alt={props.name} />
       </Link>
     </div>
   </div>
@@ -25,7 +22,8 @@ const RecipeGallery = props => (
 RecipeGallery.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  ingredients: PropTypes.string.isRequired
+  ingredients: PropTypes.string.isRequired,
+  recipeImage: PropTypes.string.isRequired
 };
 
 export default RecipeGallery;

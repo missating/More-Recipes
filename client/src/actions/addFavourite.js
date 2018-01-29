@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toastr from 'toastr';
 
 import { setFetching, unsetFetching } from './fetching';
 import { ADD_FAVOURITE, ADD_FAVOURITE_ERROR } from './actionTypes';
@@ -25,14 +26,27 @@ const addFavouriteRecipe = recipeId => (dispatch) => {
     }
   })
     .then(() => {
-      console.log(`fav ${recipeId}`);
       dispatch(addFavouriteSuccess(recipeId));
       dispatch(unsetFetching());
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
+      };
+      toastr.success('Recipe favourited succesfully');
     })
     .catch((error) => {
       const { message } = error.response.data;
       dispatch(addFavouriteError(message));
       dispatch(unsetFetching());
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
+      };
+      toastr.error(message);
     });
 };
 

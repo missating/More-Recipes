@@ -40,11 +40,15 @@ export default class reviewsController {
           recipeId: req.params.recipeId
         };
         return db.Review.create(newReview)
-          .then(createdReview => res.status(201)
+          .then(createdReview => db.Review.findById(createdReview.id, {
+            include: [{
+              model: db.User, attributes: ['fullname']
+            }]
+          }).then(review => res.status(201)
             .json({
               status: 'Success',
-              review: createdReview
-            }));
+              review
+            })));
       })
       .catch(() => res.status(500).json({
         status: 'error',

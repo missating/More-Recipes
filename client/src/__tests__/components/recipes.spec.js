@@ -7,18 +7,27 @@ describe('Recip component', () => {
   const fetchAllRecipes = jest.fn(() => Promise.resolve());
 
   it('Should render', () => {
-    const wrapper = mount(<Recipes fetchAllRecipes={fetchAllRecipes} allRecipes={[]} />);
+    const wrapper = mount(<Recipes
+      fetchAllRecipes={fetchAllRecipes}
+      allRecipes={[]}
+    />);
     expect(wrapper.find(RecipeGallery).exists).toBeTruthy();
     expect(wrapper.find('#recipe-container').exists).toBeTruthy();
   });
 
   it('Should not render recipes if allRecipes is an empty array', () => {
-    const wrapper = mount(<Recipes fetchAllRecipes={fetchAllRecipes} allRecipes={[]} />);
+    const wrapper = mount(<Recipes
+      fetchAllRecipes={fetchAllRecipes}
+      allRecipes={[]}
+    />);
     expect(wrapper.find(RecipeGallery).length).toEqual(0);
   });
 
   it('Should not render recipes if allRecipes is an empty array', () => {
-    const wrapper = mount(<Recipes fetchAllRecipes={fetchAllRecipes} allRecipes={[]} />);
+    const wrapper = mount(<Recipes
+      fetchAllRecipes={fetchAllRecipes}
+      allRecipes={[]}
+    />);
     expect(wrapper.find(RecipeGallery).length).toEqual(0);
   });
 
@@ -39,7 +48,7 @@ describe('Recip component', () => {
     ];
     const wrapper = mount(<MemoryRouter>
       <Recipes fetchAllRecipes={fetchAllRecipes} allRecipes={allRecipes} />
-    </MemoryRouter>);
+                          </MemoryRouter>);
     expect(wrapper.find(RecipeGallery).length).toEqual(2);
   });
 });

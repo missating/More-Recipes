@@ -64,8 +64,8 @@ class UserRecipes extends React.Component {
     }
 
     const userRecipes =
-    (this.state.userRecipes) ?
-      this.state.userRecipes : [];
+      (this.state.userRecipes) ?
+        this.state.userRecipes : [];
     const userRecipesList = userRecipes.map((recipe, i) => (
       <div className="col-md-4" key={`recipe${i + 1}`}>
         <UserRecipeCard
@@ -84,26 +84,26 @@ class UserRecipes extends React.Component {
             <div className="row">
               <div className="col-md-4">
                 <Link
-className="btn btn-outline-primary"
+                  className="btn btn-outline-primary"
                   to="/profile"
                 >
-             My Profile
+                  My Profile
                 </Link>
               </div>
               <div className="col-md-4">
                 <Link
-className="btn btn-outline-primary"
+                  className="btn btn-outline-primary"
                   to="/recipe/add"
                 >
-              Add Recipe
+                  Add Recipe
                 </Link>
               </div>
               <div className="col-md-4">
                 <Link
-className="btn btn-outline-primary"
+                  className="btn btn-outline-primary"
                   to="/user/favourites"
                 >
-              My Favourite Recipes
+                  My Favourite Recipes
                 </Link>
               </div>
             </div>
@@ -129,26 +129,26 @@ className="btn btn-outline-primary"
           <div className="row">
             <div className="col-md-4">
               <Link
-className="btn btn-outline-primary"
+                className="btn btn-outline-primary"
                 to="/profile"
               >
-             My Profile
+                My Profile
               </Link>
             </div>
             <div className="col-md-4">
               <Link
-className="btn btn-outline-primary"
+                className="btn btn-outline-primary"
                 to="/recipe/add"
               >
-              Add Recipe
+                Add Recipe
               </Link>
             </div>
             <div className="col-md-4">
               <Link
-className="btn btn-outline-primary"
+                className="btn btn-outline-primary"
                 to="/users/favourites"
               >
-              My Favourite Recipes
+                My Favourite Recipes
               </Link>
             </div>
           </div>

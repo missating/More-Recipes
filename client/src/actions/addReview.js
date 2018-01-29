@@ -31,9 +31,9 @@ const addReview = (content, recipeId) => (dispatch) => {
       dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
-        extendedTimeOut: "1000",
-        positionClass: "toast-top-right",
-        hideMethod: "fadeOut"
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
       };
       toastr.success('Review added succesfully');
     })
@@ -43,9 +43,9 @@ const addReview = (content, recipeId) => (dispatch) => {
       dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
-        extendedTimeOut: "1000",
-        positionClass: "toast-top-right",
-        hideMethod: "fadeOut"
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
       };
       toastr.error(message);
     });

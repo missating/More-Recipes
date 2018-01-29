@@ -61,7 +61,7 @@ export const verifySignup = (req, res, next) => {
 
 export const verifyNewRecipe = (req, res, next) => {
   const {
-    name, ingredients, description
+    name, ingredients, description, recipeImage
   } = req.body;
 
   const error = {};
@@ -76,6 +76,10 @@ export const verifyNewRecipe = (req, res, next) => {
 
   if (Validator.isEmpty(description || '')) {
     error.description = 'Description for recipe is required';
+  }
+
+  if (Validator.isEmpty(recipeImage || '')) {
+    error.recipeImage = 'recipeImage for recipe is required';
   }
 
   if (isEmpty(error)) return next();

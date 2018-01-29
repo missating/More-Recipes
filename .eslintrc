@@ -1,10 +1,14 @@
 {
   "root": true,
-  "extends": ["airbnb"],
+  "extends": [
+    "airbnb"
+  ],
   "parserOptions": {
     "ecmaVersion": 6
   },
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "env": {
     "node": true,
     "es6": true,
@@ -14,7 +18,10 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx"]
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
     }
   },
@@ -25,19 +32,54 @@
     "token": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "mport/extensions": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
     "one-var": 0,
     "one-var-declaration-per-line": 0,
     "new-cap": 0,
-    "indent": ["error", 2],
-    "max-len": ["error", 80],
+    "indent": [
+      "error",
+      2
+    ],
+    "max-len": [
+      "error",
+      80
+    ],
     "consistent-return": 0,
     "no-param-reassign": 0,
     "comma-dangle": 0,
     "max-nested-callbacks": 0,
-    "curly": ["error", "multi-line"],
-    "import/no-unresolved": [2, { "commonjs": true }],
-    "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
+    "class-methods-use-this": 0,
+    "curly": [
+      "error",
+      "multi-line"
+    ],
+    "import/no-unresolved": [
+      2,
+      {
+        "commonjs": true
+      }
+    ],
+    "no-shadow": [
+      "error",
+      {
+        "allow": [
+          "req",
+          "res",
+          "err"
+        ]
+      }
+    ],
     "valid-jsdoc": [
       "error",
       {
@@ -57,13 +99,20 @@
         }
       }
     ],
-
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
-        "components": ["a", "Link"],
-        "aspects": ["invalidHref", "preferButton"],
-        "specialLink": ["to"]
+        "components": [
+          "a",
+          "Link"
+        ],
+        "aspects": [
+          "invalidHref",
+          "preferButton"
+        ],
+        "specialLink": [
+          "to"
+        ]
       }
     ]
   }

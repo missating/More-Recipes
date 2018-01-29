@@ -26,8 +26,8 @@ describe('The Header component', () => {
       }
     });
     const tree = renderer.create(<MemoryRouter>
-      <Header store={store} />
-    </MemoryRouter>);
+        <Header store={store} />
+      </MemoryRouter>);
     const linkToProfile = tree.root.findAllByProps({ to: '/profile' });
 
     expect(linkToProfile.length).toBe(1);

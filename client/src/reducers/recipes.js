@@ -7,7 +7,8 @@ import {
   RECEIVE_USER_RECIPES_ERROR,
   ADD_RECIPE,
   ADD_RECIPE_ERROR,
-  ADD_FAVOURITE
+  ADD_FAVOURITE,
+  ADD_REVIEW
 }
   from '../actions/actionTypes';
 
@@ -69,7 +70,16 @@ const recipes = (state = initialState, action) => {
       };
     }
     return state;
-
+  case ADD_REVIEW:
+    return {
+      recipes: [{
+        ...state.recipes[0],
+        Reviews: [
+          ...state.recipes[0].Reviews,
+          action.review
+        ]
+      }]
+    };
   default:
     return state;
   }

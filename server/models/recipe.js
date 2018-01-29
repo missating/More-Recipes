@@ -20,6 +20,12 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     },
 
+    recipeImage: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+
+
     favourite: {
       type: DataTypes.INTEGER,
       allowNull: false,

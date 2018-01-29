@@ -10,20 +10,20 @@ const initialState = {
 
 const userRecipe = (state = initialState.recipes, action) => {
   switch (action.type) {
-    case EDIT_RECIPE:
-      return {
-        ...state,
-        singleRecipe: action.recipe,
-        editRecipeSuccess: true
-      };
-    case DELETE_RECIPE: {
-      return {
-        allUserRecipes:
+  case EDIT_RECIPE:
+    return {
+      ...state,
+      singleRecipe: action.recipe,
+      editRecipeSuccess: true
+    };
+  case DELETE_RECIPE: {
+    return {
+      allUserRecipes:
           state.allUserRecipes.filter(recipe => recipe.id !== action.recipeId)
-      };
-    }
-    default:
-      return state;
+    };
+  }
+  default:
+    return state;
   }
 };
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
@@ -9,9 +11,7 @@ import recipeValidator from '../validation/recipeValidator';
 // action
 import addRecipe from '../actions/addRecipe';
 
-
-// image
-import eleven from '../assets/noImage.png';
+import eleven from '../assets/eleven.jpg';
 
 /**
  *
@@ -34,11 +34,12 @@ class AddRecipe extends React.Component {
         description: '',
         recipeImage: '',
       },
-      errors: {}
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
   }
   /**
  *
@@ -66,18 +67,57 @@ class AddRecipe extends React.Component {
     event.preventDefault();
     const isValid = this.isValid();
     if (isValid) {
-      this.props.addNewRecipe(this.state.newRecipe)
-        .then(() => {
-          this.setState({
-            newRecipe: {
-              name: '',
-              ingredients: '',
-              description: ''
-            }
+      //  upload to cloudinary, then create recipe
+      // this.uploadToClourinary().then();
+      this.uploadToCloudinary().then((response) => {
+        const secureUrl = response.data.secure_url;
+        const recipeData = this.state.newRecipe;
+        recipeData.recipeImage = secureUrl;
+
+        this.props.addNewRecipe(recipeData)
+          .then(() => {
+            this.setState({
+              newRecipe: {
+                name: '',
+                ingredients: '',
+                description: '',
+                recipeImage: ''
+              }
+            });
+            this.props.history.push('/users/recipes');
           });
-          this.props.history.push('/users/recipes');
-        });
+      });
     }
+  }
+
+  /**
+   * Handle image drop
+   * @param {array} files
+   * @returns {null} null
+   */
+  handleDrop(files) {
+    this.setState({
+      newRecipe: {
+        recipeImage: files[0]
+      }
+    });
+  }
+  /**
+   * Handle image upload
+   * @returns {null} null
+   */
+  uploadToCloudinary() {
+    const formData = new FormData();
+    formData.append('file', this.state.newRecipe.recipeImage);
+    formData.append('upload_preset', 'moreRecipes');
+    formData.append('api_key', '462882972372719');
+
+    return axios.post(
+      'https://api.cloudinary.com/v1_1/dxayftnxb/image/upload',
+      formData, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      }
+    );
   }
 
   /**
@@ -116,7 +156,7 @@ class AddRecipe extends React.Component {
                 className="btn btn-outline-primary"
                 to="/profile"
               >
-             My Profile
+                My Profile
               </Link>
             </div>
             <div className="col-md-4">
@@ -124,7 +164,7 @@ class AddRecipe extends React.Component {
                 className="btn btn-outline-primary"
                 to="/users/recipes"
               >
-              My Recipes
+                My Recipes
               </Link>
             </div>
             <div className="col-md-4">
@@ -132,7 +172,7 @@ class AddRecipe extends React.Component {
                 className="btn btn-outline-primary"
                 to="/users/favourites"
               >
-              My Favourite Recipes
+                My Favourite Recipes
               </Link>
             </div>
           </div>
@@ -145,13 +185,21 @@ class AddRecipe extends React.Component {
           <div className="row">
             <div className="col-md-12">
               <form className="form-horizontal" onSubmit={this.onSubmit}>
-
-                <div className="recipe-image form-group" >
-                  <img className="img-thumbnail" src={eleven} alt="recipe" id="img-preview" />
-                  <label className="file-upload-container" htmlFor="file-upload">
-                    <input id="file-upload" type="file" style={{ display: 'none' }} />
-                  </label>
-                </div>
+                <Dropzone
+                  style={{ border: 'none', cursor: 'pointer' }}
+                  accept="image/*"
+                  onDrop={this.handleDrop}
+                >
+                  <div className="recipe-image form-group" >
+                    <img
+                      style={{ maxHeight: '150px' }}
+                      className="img-thumbnail"
+                      src={newRecipe.recipeImage.preview || eleven}
+                      alt="recipe"
+                      id="img-preview"
+                    />
+                  </div>
+                </Dropzone>
 
                 <div className="form-group">
                   <input
@@ -172,7 +220,7 @@ class AddRecipe extends React.Component {
                     onChange={this.onChange}
                   />
                   {errors.name &&
-                  <span className="help-block">{errors.name}</span>}
+                    <span className="help-block">{errors.name}</span>}
                 </div>
 
 
@@ -186,7 +234,7 @@ class AddRecipe extends React.Component {
                     onChange={this.onChange}
                   />
                   {errors.ingredients &&
-                  <span className="help-block">{errors.ingredients}</span>}
+                    <span className="help-block">{errors.ingredients}</span>}
                 </div>
 
                 <div className="form-group">
@@ -201,7 +249,7 @@ class AddRecipe extends React.Component {
                     onChange={this.onChange}
                   />
                   {errors.description &&
-                  <span className="help-block">{errors.description}</span>}
+                    <span className="help-block">{errors.description}</span>}
                 </div>
 
                 <div className="form-group">
@@ -223,7 +271,10 @@ class AddRecipe extends React.Component {
 
 AddRecipe.propTypes = {
   addNewRecipe: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  authenticated: PropTypes.bool.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 

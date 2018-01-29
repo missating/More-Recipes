@@ -27,6 +27,11 @@ module.exports = {
       allowNull: false
     },
 
+    recipeImage: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+
     favourite: {
       type: Sequelize.INTEGER,
       allowNull: false,

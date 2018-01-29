@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// image
-import eleven from '../assets/eleven.jpg';
 
 // actions
 import fetchSingleRecipe from '../actions/singleRecipe';
@@ -51,7 +49,8 @@ class SingleRecipe extends React.Component {
    * @memberof Recipe
    */
   componentWillReceiveProps(nextProps) {
-    const singleRecipe = (nextProps.singleRecipe) ? (nextProps.singleRecipe) : {};
+    const singleRecipe = (nextProps.singleRecipe) ? (
+      nextProps.singleRecipe) : {};
     const reviews = (singleRecipe.Reviews) ? (singleRecipe.Reviews) : [];
     this.setState({ singleRecipe, reviews });
   }
@@ -72,7 +71,8 @@ class SingleRecipe extends React.Component {
  * @memberof SingleRecipe
  */
   render() {
-    const ingredients = (this.state.singleRecipe.ingredients) ? (this.state.singleRecipe.ingredients) : '';
+    const ingredients = (this.state.singleRecipe.ingredients) ?
+      (this.state.singleRecipe.ingredients) : '';
     const ingredientsList = ingredients.split(',').map((item, i) => (
       <li className="list-group-item" key={i}>{item}</li>
     ));
@@ -102,7 +102,11 @@ class SingleRecipe extends React.Component {
           <h3 className="styles">{this.state.singleRecipe.name}</h3>
           <div className="row">
             <div className="col-md-12">
-              <img src={eleven} alt="Recipe Image" className="img-thumbnail" />
+              <img
+                src={this.state.singleRecipe.recipeImage}
+                alt={this.state.singleRecipe.name}
+                className="img-thumbnail"
+              />
             </div>
           </div>
           <div className="row">
@@ -125,26 +129,36 @@ class SingleRecipe extends React.Component {
 
                   {addFavouriteError}
 
-                  <button className="btn btn-outline-danger"
-                    style={{ margin: '5px' }}>
+                  <button
+                    className="btn btn-outline-danger"
+                    style={{ margin: '5px' }}
+                  >
                     <span>
-                      <i className="fa fa-thumbs-down"
-                        aria-hidden="true" />
+                      <i
+                        className="fa fa-thumbs-down"
+                        aria-hidden="true"
+                      />
                     </span>
                     {this.props.singleRecipe.downvote}
                   </button>
 
-                  <button className="btn btn-outline-success"
-                    style={{ margin: '5px' }}>
+                  <button
+                    className="btn btn-outline-success"
+                    style={{ margin: '5px' }}
+                  >
                     <span>
-                      <i className="fa fa-thumbs-up"
-                        aria-hidden="true" />
+                      <i
+                        className="fa fa-thumbs-up"
+                        aria-hidden="true"
+                      />
                     </span>
                     {this.props.singleRecipe.upvote}
                   </button>
 
-                  <button className="btn btn-outline-danger"
-                    onClick={this.onFavourite}>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={this.onFavourite}
+                  >
                     <span>
                       <i className="fa fa-heart" />
                     </span>
@@ -158,14 +172,22 @@ class SingleRecipe extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 <h4 className="text-center"> Reviews </h4>
-                {this.props.authenticated && <AddReview recipeId={this.state.singleRecipe.id} />}
+                {this.props.authenticated &&
+                  <AddReview recipeId={this.state.singleRecipe.id} />
+                }
                 <br />
-                {allReviews.length > 0 && <div>
-                  {allReviews}
-                </div>}
-                {!allReviews.length && <div className="container">
-                  <h2>There are currently no reviews for this recipe.</h2>
-                </div>}
+                {
+                  allReviews.length > 0 &&
+                  <div>
+                    {allReviews}
+                  </div>
+                }
+                {
+                  !allReviews.length &&
+                  <div className="container">
+                    <h2>There are currently no reviews for this recipe.</h2>
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -176,16 +198,13 @@ class SingleRecipe extends React.Component {
 }
 
 SingleRecipe.propTypes = {
-  singleRecipe: PropTypes.object.isRequired,
+  singleRecipe: PropTypes.objectOf.isRequired,
   getRecipeDetails: PropTypes.func.isRequired,
   favourite: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
+  match: PropTypes.objectOf.isRequired,
   authenticated: PropTypes.bool.isRequired
 };
 
-SingleRecipe.defaultProps = {
-  singleRecipe: {}
-};
 
 const mapStateToProps = (state, ownProps) => ({
   singleRecipe: state.recipes.recipes
