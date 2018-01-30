@@ -83,18 +83,17 @@ export default class favouritesController {
       .then((found) => {
         const userFavourites = found.length;
         if (userFavourites === 0) {
-          return res.status(200)
+          return res.status(404)
             .json({
               status: 'fail',
               message: 'You have no recipes added as favourites'
             });
-        } else {
-          return res.status(200)
-            .json({
-              status: 'Success',
-              favourites: found
-            });
         }
+        return res.status(200)
+          .json({
+            status: 'Success',
+            favourites: found
+          });
       })
       .catch(() => res.status(500).json({
         status: 'error',

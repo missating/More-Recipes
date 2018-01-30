@@ -31,7 +31,9 @@ export default class recipesController {
    * @memberof Recipes
    */
   static addRecipe(req, res) {
-    const { name, ingredients, description } = req.body;
+    const {
+      name, ingredients, description, recipeImage
+    } = req.body;
 
     db.Recipe.findOne({
       where: {
@@ -52,7 +54,8 @@ export default class recipesController {
             name,
             userId: req.userId,
             ingredients,
-            description
+            description,
+            recipeImage
           })
             .then(newRecipe => res.status(201)
               .json({
@@ -80,7 +83,9 @@ export default class recipesController {
       return res.status(400).json({ message: 'RecipeId must be a number' });
     }
 
-    const { name, ingredients, description } = req.body;
+    const {
+      name, ingredients, description, recipeImage
+    } = req.body;
 
     db.Recipe.findOne({
       where: {
@@ -93,7 +98,8 @@ export default class recipesController {
           const update = {
             name: name || foundRecipe.name,
             ingredients: ingredients || foundRecipe.ingredients,
-            description: description || foundRecipe.description
+            description: description || foundRecipe.description,
+            recipeImage: recipeImage || foundRecipe.recipeImage
           };
           foundRecipe.update(update)
             .then(updatedRecipe => res.status(200)
@@ -225,7 +231,9 @@ export default class recipesController {
 
         db.Recipe.findAll({
           where: {
-            id: recipeIds
+            id: {
+              [db.Sequelize.Op.in]: recipeIds
+            }
           },
           include: [
             {

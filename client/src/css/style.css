@@ -1,0 +1,345 @@
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+  background: ghostwhite;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+
+h1,
+h2,
+h3,
+h5,
+h6 {
+    color: #2c3e50;
+    font-size: 2.3rem;
+}
+
+h4 {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #222;
+}
+
+.size {
+  width: 655px;
+  margin: 30px auto;
+}
+
+a {
+  cursor: pointer;
+}
+
+#media {
+  margin: 65px auto;
+  margin-left: -50px;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  #media {
+      margin-left: 0;
+      margin: 0 auto;
+      margin-bottom: 10px;
+  }
+
+}
+
+#mainImage {
+  margin-top: 35px;
+}
+
+.btn-dark {
+  font-size: 20px;
+  color: #fff;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.form-horizontal {
+  width: 600px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  .form-horizontal {
+      width: 250px;
+  }
+
+}
+
+.card {
+  width: 300px;
+  /* Set width of cards */
+  border: 1px solid #2c3e50;
+  /* Set up Border */
+  border-radius: 4px;
+  /* Slightly Curve edges */
+  overflow: hidden;
+  /* Fixes the corners */
+  display: flex;
+  /* Children use Flexbox */
+  flex-direction: column;
+  /* Rotate Axis */
+  margin: 20px;
+}
+
+
+.card-header {
+  color: #3498db;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #2c3e50;
+  background-color: #f5f5f5;
+  padding: 5px 0;
+}
+
+.card-main {
+  display: flex;
+  /* Children use Flexbox */
+  flex-direction: column;
+  /* Rotate Axis to Vertical */
+  justify-content: center;
+  /* Group Children in Center */
+  align-items: center;
+  /* Group Children in Center (+axis) */
+  padding: 15px 0;
+  /* Add padding to the top/bottom */
+}
+
+.mainBtn .btn-sm {
+  margin: 5px;
+  display: inline-block;
+}
+
+.main-description {
+  color: #222;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+}
+
+a .btn-outline-primary{
+	margin: 20px;
+	padding: 5px 15px;
+	border-radius: 4px;
+  border: 1px solid #000;
+  color: #3498db;
+  cursor: pointer;
+}
+
+.btn-primary {
+  cursor: pointer;
+}
+
+#right {
+  margin-left: 250px;
+}
+
+#bottom {
+  margin: 0 0 5px 5px;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  #right {
+      margin: 5px 0 0 0;
+  }
+
+}
+
+.center {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#profile {
+  display: block;
+  margin-top: 20px;
+}
+
+.rounded {
+  width: 200px;
+  margin: 20px;
+}
+
+.bord {
+  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.5);
+  width: 600px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  .bord {
+      width: 300px;
+  }
+}
+
+.userButtons {
+  width: 400px;
+  margin: 20px auto;
+}
+
+@media only screen and (min-height: 320px) and ( max-width: 768px) {
+  .userButtons  .btn{
+    margin-bottom: 20px;
+    margin-left: 100px;
+  }
+}
+
+a .fa {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #bdc4cf;
+  margin: 0 4px;
+  font-size: 16px;
+}
+
+
+.bord2 {
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  display: none;
+}
+
+.pagination a.active {
+  background-color: #3498db;
+  color: white;
+  border: 1px solid #3498db;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #bdc4cf;
+}
+
+
+#oneRecipe {
+  max-width: 700px;
+margin: 70px auto;
+font-family: 'Source Sans Pro', sans-serif;
+box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.5);
+padding: 20px;
+}
+
+#oneRecipe img {
+width: 100%;
+margin-bottom: 30px;
+}
+
+.styles {
+text-align: center;
+padding-bottom: 50px;
+color: #2c3e50;
+font-weight: bolder;
+
+}
+
+.top {
+  margin-top: 30px;
+}
+
+.help-block {
+  display: inline;
+  color: red;
+}
+
+.recipe-image {
+  display:block;
+  height: 300px;
+  width: 100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(127, 127, 131);
+}
+
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------Zoom-Effect---------------------------------- */
+/* ---------------------------------------------------------------------------- */	
+.zoom-container {
+	position: relative;
+	overflow: hidden;
+  margin: 30px;
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.zoom-container img {
+	display: block;
+	width: 100%;
+	height: auto;
+	-webkit-transition: all .5s ease; /* Safari and Chrome */
+    -moz-transition: all .5s ease; /* Firefox */
+    -ms-transition: all .5s ease; /* IE 9 */
+    -o-transition: all .5s ease; /* Opera */
+    transition: all .5s ease;
+	
+}
+.zoom-container .zoom-caption {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+	background: rgba(0, 0, 0, .5);
+	-webkit-transition: all .5s ease; /* Safari and Chrome */
+    -moz-transition: all .5s ease; /* Firefox */
+    -ms-transition: all .5s ease; /* IE 9 */
+    -o-transition: all .5s ease; /* Opera */
+    transition: all .5s ease;
+}
+.zoom-container .zoom-caption span {
+	display: block;
+	text-align: center;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 20px;
+	font-weight: 900;
+	letter-spacing: -1px;
+	text-transform: uppercase;
+	color: #fff;
+	margin: 23% 0 0;
+	padding: 10px 0;
+	border-top: 5px solid rgba(255, 255, 255, .15);
+	border-bottom: 5px solid rgba(255, 255, 255, .15);
+}
+.zoom-container:hover img {
+	-webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+}
+.zoom-container:hover .zoom-caption {
+	background: none;
+}	

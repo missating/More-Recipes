@@ -23,7 +23,7 @@ const routes = (app) => {
   // user signs in
   app.post('/api/v1/users/signin', verifySignin, User.userLogin);
 
-  //auth user can view their profile
+  // auth user can view their profile
   // auth user can update their profile
   app.route('/api/v1/users/profile')
     .get(verifyToken, User.getUserProfile)

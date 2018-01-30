@@ -9,4 +9,7 @@ server/dist
 
 .DS_Store
 
-clients/dist
+client/dist
+build
+
+coverage
