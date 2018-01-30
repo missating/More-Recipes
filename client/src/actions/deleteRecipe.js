@@ -9,7 +9,6 @@ const deleteRecipeSuccess = recipeId => ({
 
 const deleteRecipe = recipeId => (dispatch) => {
   const token = localStorage.getItem('token');
-  console.log('befor axios');
   dispatch(setFetching());
   return axios({
     method: 'DELETE',
@@ -19,10 +18,7 @@ const deleteRecipe = recipeId => (dispatch) => {
     }
   })
     .then(() => {
-      console.log(`Deleted ${recipeId}`);
       dispatch(deleteRecipeSuccess(recipeId));
-      dispatch(unsetFetching());
-      console.log('after axios');
     })
     .catch((error) => {
       console.log('Delete recipe error', error);

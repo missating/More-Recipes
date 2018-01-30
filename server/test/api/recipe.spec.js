@@ -33,7 +33,8 @@ describe('RECIPE CONTROLLER', () => {
         .send({
           name: '',
           ingredients: 'test, test, test',
-          description: 'For testing the recipe'
+          description: 'For testing the recipe',
+          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
           expect(response.status).to.equal(400);
@@ -50,7 +51,8 @@ describe('RECIPE CONTROLLER', () => {
         .send({
           name: 'Test Recipe',
           ingredients: 'test, test, test',
-          description: ''
+          description: '',
+          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
           expect(response.status).to.equal(400);
@@ -67,7 +69,8 @@ describe('RECIPE CONTROLLER', () => {
         .send({
           name: 'Test Recipe',
           ingredients: '',
-          description: 'For testing the recipe'
+          description: 'For testing the recipe',
+          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
           expect(response.status).to.equal(400);
@@ -77,6 +80,25 @@ describe('RECIPE CONTROLLER', () => {
         });
     });
 
+    it('Should not add a recipe with an empty image field', (done) => {
+      chai.request(app)
+        .post(recipeUrl)
+        .set('token', userToken)
+        .send({
+          name: 'Test Recipe',
+          ingredients: 'test, test, test',
+          description: 'For testing the recipe',
+          recipeImage: ''
+        })
+        .end((error, response) => {
+          expect(response.status).to.equal(400);
+          expect(response.body.error.recipeImage)
+            .to.include('Image for recipe is required');
+          done();
+        });
+    });
+
+
     it('Should allow auth users to add recipe to catalog', (done) => {
       chai.request(app)
         .post(recipeUrl)
@@ -84,7 +106,8 @@ describe('RECIPE CONTROLLER', () => {
         .send({
           name: 'Test Recipe',
           ingredients: 'test, test, test',
-          description: 'For testing the recipe'
+          description: 'For testing the recipe',
+          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
           recipeId = response.body.recipe.id;
@@ -104,7 +127,8 @@ describe('RECIPE CONTROLLER', () => {
         .send({
           name: 'Test Recipe',
           ingredients: 'test, test, test',
-          description: 'For testing the recipe'
+          description: 'For testing the recipe',
+          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
           expect(response.status).to.equal(401);
@@ -122,7 +146,8 @@ describe('RECIPE CONTROLLER', () => {
         .send({
           name: 'Another Test Recipe',
           ingredients: 'testing, testing, testing',
-          description: 'For testing the recipe again'
+          description: 'For testing the recipe again',
+          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
           expect(response.status).to.equal(404);
@@ -138,7 +163,8 @@ describe('RECIPE CONTROLLER', () => {
           .send({
             name: 'Another Test Recipe',
             ingredients: 'testing, testing, testing',
-            description: 'For testing the recipe again'
+            description: 'For testing the recipe again',
+            recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
           })
           .end((error, response) => {
             expect(response.status).to.equal(401);
@@ -155,7 +181,8 @@ describe('RECIPE CONTROLLER', () => {
         .send({
           name: 'Another Test Recipe',
           ingredients: 'testing, testing, testing',
-          description: 'For testing the recipe again'
+          description: 'For testing the recipe again',
+          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
           expect(response.status).to.equal(200);
@@ -172,7 +199,14 @@ describe('RECIPE CONTROLLER', () => {
       'Should not update a particular recipe for recipeId that is not a number',
       (done) => {
         chai.request(app)
-          .get('/api/v1/recipes/recipeId')
+          .put('/api/v1/recipes/recipeId')
+          .set('token', userToken)
+          .send({
+            name: 'Another Test Recipe',
+            ingredients: 'testing, testing, testing',
+            description: 'For testing the recipe again',
+            recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
+          })
           .end((error, response) => {
             expect(response).to.have.status(400);
             expect(response.body.message).to.equal('RecipeId must be a number');

@@ -79,7 +79,7 @@ export const verifyNewRecipe = (req, res, next) => {
   }
 
   if (Validator.isEmpty(recipeImage || '')) {
-    error.recipeImage = 'recipeImage for recipe is required';
+    error.recipeImage = 'Image for recipe is required';
   }
 
   if (isEmpty(error)) return next();
