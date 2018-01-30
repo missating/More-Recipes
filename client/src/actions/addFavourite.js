@@ -16,7 +16,6 @@ const addFavouriteError = message => ({
 
 const addFavouriteRecipe = recipeId => (dispatch) => {
   const token = localStorage.getItem('token');
-  console.log('before axios');
   dispatch(setFetching());
   return axios({
     method: 'POST',

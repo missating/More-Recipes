@@ -31,7 +31,8 @@ describe('VOTE API', () => {
       .send({
         name: 'Test Recipe 4',
         ingredients: 'test, test, test',
-        description: 'For testing recipe 4'
+        description: 'For testing recipe 4',
+        recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
       })
       .end((error, response) => {
         recipeId = response.body.recipe.id;

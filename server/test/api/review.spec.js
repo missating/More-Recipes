@@ -31,7 +31,8 @@ describe('REVIEW API', () => {
       .send({
         name: 'Test Recipe 2',
         ingredients: 'test, test, test',
-        description: 'For testing recipe 2'
+        description: 'For testing recipe 2',
+        recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
       })
       .end((error, response) => {
         recipeId = response.body.recipe.id;
@@ -92,7 +93,7 @@ describe('REVIEW API', () => {
 
     it('Should not add review for a recipeId that is not a number', (done) => {
       chai.request(app)
-        .post(`/api/v1/recipes/recipeId/review`)
+        .post('/api/v1/recipes/recipeId/review')
         .set('token', userToken)
         .send({
           content: 'Good stuff'

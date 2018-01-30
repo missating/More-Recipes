@@ -29,7 +29,7 @@ module.exports = {
 
     recipeImage: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: false
     },
 
     favourite: {
