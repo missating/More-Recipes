@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // image
 import eleven from '../assets/eleven.jpg';
 
-const UserFavouritesCard = (props) => (
+const UserFavouritesCard = props => (
   <div>
     <div className="col-md-4">
       <div className="card">
@@ -15,10 +15,12 @@ const UserFavouritesCard = (props) => (
             <p> {props.description} </p>
           </div>
           <div className="container text-center">
-            <Link className="btn btn-outline-primary"
+            <Link
+              className="btn btn-outline-primary"
               style={{ marginRight: '10px' }}
-              to={`/recipes/view/${props.id}`}>
-          Details
+              to={`/recipes/view/${props.id}`}
+            >
+              Details
             </Link>
           </div>
         </div>

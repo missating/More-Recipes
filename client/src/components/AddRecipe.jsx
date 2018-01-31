@@ -11,7 +11,6 @@ import recipeValidator from '../validation/recipeValidator';
 // action
 import addRecipe from '../actions/addRecipe';
 
-import noImage from '../assets/noImage.png';
 
 /**
  *

@@ -33,7 +33,7 @@ class TopRecipes extends React.Component {
   render() {
     const topRecipe = (this.props.topRecipes) ? this.props.topRecipes : [];
 
-    const topRecipeList = topRecipe.map((recipe, i) => (
+    let topRecipeList = topRecipe.map((recipe, i) => (
       <div className="col-md-4" key={`topRecipe${i + 1}`}>
         <RecipeCard
           {...recipe}
@@ -41,12 +41,17 @@ class TopRecipes extends React.Component {
 
       </div>
     ));
+
+    if (topRecipe.length < 1) {
+      topRecipeList =
+        <p className="text-center display-5">Currently no featured recipes.</p>;
+    }
     return (
       <div>
         <section className="container">
-          <h2 className="text-center"> Featured Recipes </h2>
+          <h2 className="text-center mt-5"> Featured Recipes </h2>
           <hr />
-          <div className="row">
+          <div className="row justify-content-center py-3">
             {topRecipeList}
           </div>
         </section>

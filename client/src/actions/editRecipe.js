@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toastr from 'toastr';
 import { EDIT_RECIPE } from './actionTypes';
 import { setFetching, unsetFetching } from './fetching';
 
@@ -9,9 +10,7 @@ const editRecipeSuccess = recipe => ({
 
 
 const editRecipe = (recipe, recipeId) => (dispatch) => {
-  const {
-    name, ingredients, description, recipeImage
-  } = recipe;
+  const { name, ingredients, description } = recipe;
   const token = localStorage.getItem('token');
   dispatch(setFetching());
   return axios({
@@ -21,17 +20,22 @@ const editRecipe = (recipe, recipeId) => (dispatch) => {
       token
     },
     data: {
-      name, ingredients, description, recipeImage
+      name, ingredients, description
     }
   })
     .then((response) => {
       const updatedRecipe = response.data.recipe;
-      console.log('update recipe', updatedRecipe);
       dispatch(editRecipeSuccess(updatedRecipe));
       dispatch(unsetFetching());
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
+      };
+      toastr.success('Recipe updated succesfully');
     })
     .catch((error) => {
-      console.log(error);
       console.log('Edit recipes error', error.response.data.message);
       dispatch(unsetFetching());
     });

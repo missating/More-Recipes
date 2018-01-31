@@ -157,7 +157,7 @@ class UserRecipes extends React.Component {
           <div className="container">
             <h3 className="text-center bottom">My Recipes</h3>
             <br />
-            <h4 className="text-center"> {userRecipeError} </h4>
+            <h4 className="text-center m-5"> {userRecipeError} </h4>
           </div>
         </section>
       </div>
