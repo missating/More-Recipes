@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// actions
-import fetchTopRecipes from '../actions/topRecipe';
-
 // components
 import RecipeCard from './RecipeCard';
+
+// actions
+import getTopRecipes from '../actions/getTopRecipes';
 
 
 /**
@@ -22,7 +22,7 @@ class TopRecipes extends React.Component {
    * @memberof TopRecipes
    */
   componentWillMount() {
-    this.props.getTopRecipes();
+    this.props.recipes();
   }
   /**
  *
@@ -31,7 +31,7 @@ class TopRecipes extends React.Component {
  * @memberof TopRecipes
  */
   render() {
-    const topRecipe = (this.props.recipes) ? this.props.recipes : [];
+    const topRecipe = (this.props.topRecipes) ? this.props.topRecipes : [];
 
     const topRecipeList = topRecipe.map((recipe, i) => (
       <div className="col-md-4" key={`topRecipe${i + 1}`}>
@@ -43,9 +43,9 @@ class TopRecipes extends React.Component {
     ));
     return (
       <div>
-        <section className="container" style={{ marginTop: '56px' }}>
+        <section className="container">
           <h2 className="text-center"> Featured Recipes </h2>
-          <hr/>
+          <hr />
           <div className="row">
             {topRecipeList}
           </div>
@@ -56,19 +56,16 @@ class TopRecipes extends React.Component {
 }
 
 TopRecipes.propTypes = {
-  getTopRecipes: PropTypes.func.isRequired
+  recipes: PropTypes.func.isRequired
 };
 
-TopRecipes.defaultProps = {
-  recipes: ''
-};
 
 const mapStateToProps = state => ({
-  recipes: state.topRecipe.recipes
+  topRecipes: state.topRecipes.recipes
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTopRecipes: () => dispatch(fetchTopRecipes())
+  recipes: () => dispatch(getTopRecipes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopRecipes);

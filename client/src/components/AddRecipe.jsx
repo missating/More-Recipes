@@ -11,7 +11,7 @@ import recipeValidator from '../validation/recipeValidator';
 // action
 import addRecipe from '../actions/addRecipe';
 
-import eleven from '../assets/eleven.jpg';
+import noImage from '../assets/noImage.png';
 
 /**
  *
@@ -186,29 +186,24 @@ class AddRecipe extends React.Component {
             <div className="col-md-12">
               <form className="form-horizontal" onSubmit={this.onSubmit}>
                 <Dropzone
-                  style={{ border: 'none', cursor: 'pointer' }}
-                  accept="image/*"
                   onDrop={this.handleDrop}
+                  accept="image/*"
+                  multiple={false}
+                  style={{ border: '1px solid #000' }}
                 >
-                  <div className="recipe-image form-group" >
+                  {!newRecipe.recipeImage.preview &&
+                    <p className="text-center">Click here to upload</p>
+                  }
+                  {
+                    newRecipe.recipeImage.preview &&
                     <img
-                      style={{ maxHeight: '150px' }}
-                      className="img-thumbnail"
-                      src={newRecipe.recipeImage.preview || eleven}
-                      alt="recipe"
-                      id="img-preview"
+                      src={newRecipe.recipeImage.preview}
+                      alt=""
+                      style={{ width: '300px' }}
+                      className="img-responsive"
                     />
-                  </div>
+                  }
                 </Dropzone>
-
-                <div className="form-group">
-                  <input
-                    style={{ display: 'none' }}
-                    type="file"
-                    name="file"
-                    id="file-upload"
-                  />
-                </div>
 
                 <div className="form-group">
                   <input

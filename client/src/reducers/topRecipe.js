@@ -1,8 +1,8 @@
-import { RECEIVE_TOP_RECIPES } from '../actions/actionTypes';
+import { GET_TOP_RECIPES } from '../actions/actionTypes';
 
 const topRecipe = (state = {}, action) => {
   switch (action.type) {
-  case RECEIVE_TOP_RECIPES:
+  case GET_TOP_RECIPES:
     return {
       ...state,
       recipes: action.recipes

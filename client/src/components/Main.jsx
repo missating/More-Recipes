@@ -6,7 +6,6 @@ import SingleRecipe from './SingleRecipe';
 import Profile from './Profile';
 import AddRecipe from './AddRecipe';
 import UserRecipes from './UserRecipes';
-import EditRecipe from './EditRecipe';
 import UserFavourites from './UserFavourites';
 
 
@@ -18,7 +17,7 @@ const Main = () => (
     <Route path="/profile" exact component={Profile} />
     <Route path="/recipe/add" exact component={AddRecipe} />
     <Route path="/users/recipes" exact component={UserRecipes} />
-    <Route path="/recipe/edit/:id" exact component={EditRecipe} />
+    {/* <Route path="/recipe/edit/:id" exact component={EditRecipe} /> */}
     <Route path="/users/favourites" exact component={UserFavourites} />
   </Switch>
 );

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import Dropzone from 'react-dropzone';
 
 import { setFetching, unsetFetching } from './fetching';
 import { ADD_RECIPE, ADD_RECIPE_ERROR } from './actionTypes';

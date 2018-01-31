@@ -11,17 +11,16 @@ import banner1 from '../assets/banner1.jpg';
 
 const Home = props => (
   <div>
-    <section className="container" style={{ marginTop: '50px' }}>
+    <section className="container">
       <div className="row">
         <div className="col-md-8">
           <img
             src={banner1}
             alt="..."
-            className="img-thumbnail size"
-            id="mainImage"
+            className="img-thumbnail"
           />
         </div>
-        <div className="col-md-4" id="media">
+        <div className="col-md-4 intro-text">
           <p>
             More-Recipes provides a platform for users to share the awesome and
             exciting recipe ideas they have invented or learnt.

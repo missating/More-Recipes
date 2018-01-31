@@ -9,7 +9,9 @@ const editRecipeSuccess = recipe => ({
 
 
 const editRecipe = (recipe, recipeId) => (dispatch) => {
-  const { name, ingredients, description } = recipe;
+  const {
+    name, ingredients, description, recipeImage
+  } = recipe;
   const token = localStorage.getItem('token');
   dispatch(setFetching());
   return axios({
@@ -19,7 +21,7 @@ const editRecipe = (recipe, recipeId) => (dispatch) => {
       token
     },
     data: {
-      name, ingredients, description
+      name, ingredients, description, recipeImage
     }
   })
     .then((response) => {
@@ -29,6 +31,7 @@ const editRecipe = (recipe, recipeId) => (dispatch) => {
       dispatch(unsetFetching());
     })
     .catch((error) => {
+      console.log(error);
       console.log('Edit recipes error', error.response.data.message);
       dispatch(unsetFetching());
     });
