@@ -13,7 +13,7 @@ const receiveUserProfileRequest = () => (dispatch) => {
   const token = localStorage.getItem('token');
   return axios({
     method: 'GET',
-    url: 'http://localhost:3000/api/v1/users/profile',
+    url: '/api/v1/users/profile',
     headers: {
       token
     }

@@ -11,7 +11,7 @@ export const allRecipes = recipes => ({
 // action for get all recipes
 const getAllRecipes = () => (dispatch) => {
   dispatch(setFetching());
-  return axios.get('http://localhost:3000/api/v1/recipes')
+  return axios.get('/api/v1/recipes')
     .then((response) => {
       const { recipes } = response.data;
       dispatch(allRecipes(recipes));

@@ -22,7 +22,7 @@ const addRecipe = recipe => (dispatch) => {
   const token = localStorage.getItem('token');
   return axios({
     method: 'POST',
-    url: 'http://localhost:3000/api/v1/recipes',
+    url: '/api/v1/recipes',
     headers: {
       token
     },

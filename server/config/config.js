@@ -16,7 +16,8 @@ const config = {
     dialect: 'postgres'
   },
   production: {
-    connection_uri: process.env.DATABASE_URL,
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres'
   }
 };
 

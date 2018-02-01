@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
@@ -13,9 +12,10 @@ import routes from './routes';
 
 dotenv.config();
 
+const port = (process.env.PORT || 3000);
+
 // Set up the express app
 const app = express();
-app.use(cors());
 
 // Log requests to the console
 app.use(logger('dev'));
@@ -32,12 +32,14 @@ app.use(bodyParser.urlencoded({
 
 const compiler = webpack(webpackConfig);
 
-app.use(webpackMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  noInfo: true
-}));
+if (process.env.NODE_ENV === 'development') {
+  app.use(webpackMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+  }));
 
-app.use(webpackHotMiddleware(compiler));
+  app.use(webpackHotMiddleware(compiler));
+}
 
 routes(app);
 
@@ -48,6 +50,10 @@ app.get('/*', (req, res) => {
 // returns 404 for unknown routes
 app.all('*', (req, res) => {
   res.status(404).send('The api route you requested does not exist');
+});
+
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
 });
 
 export default app;

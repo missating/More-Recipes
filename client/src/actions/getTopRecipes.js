@@ -13,7 +13,7 @@ const topRecipes = recipes => ({
 // actions for toprecipes
 export const fetchTopRecipes = () => (dispatch) => {
   dispatch(setFetching());
-  return axios.get('http://localhost:3000/api/v1/recipes?sort=upvote')
+  return axios.get('/api/v1/recipes?sort=upvote')
     .then((response) => {
       const { recipes } = response.data;
       dispatch(topRecipes(recipes));
