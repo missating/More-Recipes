@@ -166,7 +166,8 @@ class UserRecipes extends React.Component {
 
 UserRecipes.propTypes = {
   recipes: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  authenticated: PropTypes.bool.isRequired,
+  userRecipesError: PropTypes.string.isRequired
 };
 
 

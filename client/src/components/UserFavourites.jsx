@@ -171,7 +171,8 @@ class UserFavourites extends React.Component {
 
 UserFavourites.propTypes = {
   favourites: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  authenticated: PropTypes.bool.isRequired,
+  userFavouritesError: PropTypes.string.isRequired
 };
 
 
