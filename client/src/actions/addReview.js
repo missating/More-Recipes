@@ -41,13 +41,6 @@ const addReview = (content, recipeId) => (dispatch) => {
       const { message } = error.response.data;
       dispatch(addReviewError(message));
       dispatch(unsetFetching());
-      toastr.options = {
-        closeButton: true,
-        extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
-        hideMethod: 'fadeOut'
-      };
-      toastr.error(message);
     });
 };
 

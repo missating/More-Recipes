@@ -119,7 +119,7 @@ class Signup extends React.Component {
 
                 <div className="row">
                   <div className="col-sm-12">
-                    <form className="form-horizontal" onSubmit={this.onSubmit}>
+                    <form onSubmit={this.onSubmit}>
 
                       <div className="form-group">
                         <input
@@ -232,9 +232,15 @@ class Signup extends React.Component {
     );
   }
 }
+const authProps = {
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.object,
+  token: PropTypes.string,
+  errorMessage: PropTypes.string
+};
 
 Signup.propTypes = {
-  auth: PropTypes.objectOf.isRequired,
+  auth: PropTypes.shape(authProps).isRequired,
   signupUser: PropTypes.func.isRequired
 };
 

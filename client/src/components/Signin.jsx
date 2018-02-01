@@ -137,8 +137,15 @@ class Signin extends React.Component {
   }
 }
 
+const authProps = {
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.object,
+  token: PropTypes.string,
+  errorMessage: PropTypes.string
+};
+
 Signin.propTypes = {
-  auth: PropTypes.objectOf.isRequired,
+  auth: PropTypes.shape(authProps).isRequired,
   signinUser: PropTypes.func.isRequired
 };
 

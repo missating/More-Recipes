@@ -50,7 +50,7 @@ const Header = props => (
                 onClick={() => { props.signUserOut(); }}
               >
                 Sign out
-                </a>
+              </a>
             </li>
           }
         </ul>
