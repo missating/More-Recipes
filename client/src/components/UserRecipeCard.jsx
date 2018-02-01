@@ -47,6 +47,7 @@ UserRecipeCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   ingredients: PropTypes.string.isRequired,
+  recipeImage: PropTypes.string.isRequired,
   deleteRecipe: PropTypes.func.isRequired
 };
 

@@ -19,7 +19,6 @@ const userRecipe = (state = initialState.recipes, action) => {
     };
   case GET_USER_RECIPES_ERROR:
     return {
-      ...state,
       errorMessage: action.message
     };
   case EDIT_RECIPE:

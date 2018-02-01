@@ -1,32 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-// image
-import eleven from '../assets/eleven.jpg';
 
 const UserFavouritesCard = props => (
   <div>
-    <div className="col-md-4">
-      <div className="card">
-        <div className="card-header">{props.name}</div>
-        <div className="card-main">
-          <img src={eleven} alt="Recipe Image" className="img-thumbnail" />
-          <div className="main-description">
-            <p> {props.description} </p>
-          </div>
-          <div className="container text-center">
-            <Link
-              className="btn btn-outline-primary"
-              style={{ marginRight: '10px' }}
-              to={`/recipes/view/${props.id}`}
-            >
-              Details
-            </Link>
-          </div>
-        </div>
-      </div>
+    <div className="card">
+      <img src={props.recipeImage} alt={props.name} className="card-img-top" />
+      <div className="card-body" />
+      <h4 className="card-title">{props.name}</h4>
+      <p className="card-text">{props.ingredients}</p>
+
+      <Link
+        className="btn btn-outline-primary"
+        style={{ marginRight: '10px' }}
+        to={`/recipes/view/${props.id}`}
+      >
+        Details
+      </Link>
     </div>
   </div>
 );
+
+
+UserFavouritesCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  ingredients: PropTypes.string.isRequired,
+  recipeImage: PropTypes.string.isRequired
+};
 
 export default UserFavouritesCard;

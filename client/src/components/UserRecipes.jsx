@@ -37,7 +37,6 @@ class UserRecipes extends React.Component {
    * @returns {undefined}
    *
    * @param {object} nextProps
-   *
    * @memberof UserRecipes
    */
   componentWillReceiveProps(nextProps) {
@@ -101,7 +100,7 @@ class UserRecipes extends React.Component {
               <div className="col-md-4">
                 <Link
                   className="btn btn-outline-primary"
-                  to="/user/favourites"
+                  to="/users/favourites"
                 >
                   My Favourite Recipes
                 </Link>

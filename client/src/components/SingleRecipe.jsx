@@ -188,10 +188,10 @@ class SingleRecipe extends React.Component {
 }
 
 SingleRecipe.propTypes = {
-  singleRecipe: PropTypes.objectOf.isRequired,
+  singleRecipe: PropTypes.shape({}).isRequired,
   recipe: PropTypes.func.isRequired,
   favourite: PropTypes.func.isRequired,
-  match: PropTypes.objectOf.isRequired,
+  match: PropTypes.shape({}).isRequired,
   authenticated: PropTypes.bool.isRequired
 };
 
