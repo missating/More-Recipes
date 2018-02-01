@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import UserFavouritesCard from './UserFavouritesCard';
 
 // actions
-import receiveUserFavourites from '../actions/userFavourites';
+import getUserFavourites from '../actions/getUserFavourites';
 
 /**
  *
@@ -31,7 +31,7 @@ class UserFavourites extends React.Component {
  * @memberof UserFavourites
  */
   componentWillMount() {
-    this.props.receiveUserFavourite();
+    this.props.favourites();
   }
   /**
  * @returns {undefined}
@@ -53,14 +53,24 @@ class UserFavourites extends React.Component {
    * @memberof UserFavourites
    */
   render() {
+    let userFavouritesError;
+    if (this.props.userFavouritesError) {
+      userFavouritesError = (
+        <span className="help-block">
+          {this.props.userFavouritesError}
+        </span>
+      );
+    }
+
     const userFavourites =
-    (this.state.userFavourites) ?
-      this.state.userFavourites : [];
+      (this.state.userFavourites) ?
+        this.state.userFavourites : [];
     const userFavouritesList = userFavourites.map((favourites, i) => (
       <div className="col-md-4" key={`favourites${i + 1}`}>
         <UserFavouritesCard
+          recipeImage={favourites.Recipe.recipeImage}
           name={favourites.Recipe.name}
-          description={favourites.Recipe.description}
+          ingredients={favourites.Recipe.ingredients}
           id={favourites.recipeId}
         />
       </div>
@@ -81,7 +91,7 @@ class UserFavourites extends React.Component {
                   className="btn btn-outline-primary"
                   to="/profile"
                 >
-             My Profile
+                  My Profile
                 </Link>
               </div>
               <div className="col-md-4">
@@ -89,7 +99,7 @@ class UserFavourites extends React.Component {
                   className="btn btn-outline-primary"
                   to="/recipe/add"
                 >
-              Add Recipe
+                  Add Recipe
                 </Link>
               </div>
               <div className="col-md-4">
@@ -97,7 +107,7 @@ class UserFavourites extends React.Component {
                   className="btn btn-outline-primary"
                   to="/user/favourites"
                 >
-              My Favourite Recipes
+                  My Favourite Recipes
                 </Link>
               </div>
             </div>
@@ -126,7 +136,7 @@ class UserFavourites extends React.Component {
                 className="btn btn-outline-primary"
                 to="/profile"
               >
-             My Profile
+                My Profile
               </Link>
             </div>
             <div className="col-md-4">
@@ -134,7 +144,7 @@ class UserFavourites extends React.Component {
                 className="btn btn-outline-primary"
                 to="/recipe/add"
               >
-              Add Recipe
+                Add Recipe
               </Link>
             </div>
             <div className="col-md-4">
@@ -142,7 +152,7 @@ class UserFavourites extends React.Component {
                 className="btn btn-outline-primary"
                 to="/user/favourites"
               >
-              My Favourite Recipes
+                My Favourite Recipes
               </Link>
             </div>
           </div>
@@ -151,6 +161,7 @@ class UserFavourites extends React.Component {
           <div className="container">
             <h3 className="text-center bottom">My Favourite Recipes</h3>
             <br />
+            <h4 className="text-center m-5"> {userFavouritesError} </h4>
           </div>
         </section>
       </div>
@@ -159,18 +170,20 @@ class UserFavourites extends React.Component {
 }
 
 UserFavourites.propTypes = {
-  receiveUserFavourite: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  favourites: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  userFavouritesError: PropTypes.string.isRequired
 };
 
 
 const mapStateToProps = state => ({
-  userFavourites: state.favourites.favourites,
+  userFavourites: state.userFavourites.favourites,
+  userFavouritesError: state.userFavourites.errorMessage,
   authenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveUserFavourite: () => dispatch(receiveUserFavourites())
+  favourites: () => dispatch(getUserFavourites())
 });
 
 

@@ -1,4 +1,6 @@
 import {
+  GET_USER_RECIPES,
+  GET_USER_RECIPES_ERROR,
   DELETE_RECIPE,
   EDIT_RECIPE
 }
@@ -10,16 +12,24 @@ const initialState = {
 
 const userRecipe = (state = initialState.recipes, action) => {
   switch (action.type) {
+  case GET_USER_RECIPES:
+    return {
+      ...state,
+      recipes: action.recipes
+    };
+  case GET_USER_RECIPES_ERROR:
+    return {
+      errorMessage: action.message
+    };
   case EDIT_RECIPE:
     return {
       ...state,
-      singleRecipe: action.recipe,
-      editRecipeSuccess: true
+      singleRecipe: action.recipe
     };
   case DELETE_RECIPE: {
     return {
-      allUserRecipes:
-          state.allUserRecipes.filter(recipe => recipe.id !== action.recipeId)
+      recipes:
+          state.recipes.filter(recipe => recipe.id !== action.recipeId)
     };
   }
   default:

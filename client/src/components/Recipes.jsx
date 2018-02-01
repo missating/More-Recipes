@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import RecipeGallery from './RecipeGallery';
 
 // actions
-import fetchAllRecipes from '../actions/recipes';
+import getAllRecipes from '../actions/getAllRecipes';
 
 /**
  *
@@ -21,7 +21,7 @@ export class Recipes extends React.Component {
    * @memberof Recipes
    */
   componentWillMount() {
-    this.props.fetchAllRecipes();
+    this.props.recipes();
   }
   /**
    *
@@ -47,12 +47,16 @@ export class Recipes extends React.Component {
 }
 
 Recipes.propTypes = {
-  fetchAllRecipes: PropTypes.func.isRequired,
+  recipes: PropTypes.func.isRequired,
   allRecipes: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 const mapStateToProps = state => ({
-  allRecipes: state.recipes.recipes
+  allRecipes: state.recipes.allrecipes
 });
 
-export default connect(mapStateToProps, { fetchAllRecipes })(Recipes);
+const mapDispatchToProps = dispatch => ({
+  recipes: () => dispatch(getAllRecipes())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

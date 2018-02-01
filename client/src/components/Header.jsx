@@ -11,7 +11,7 @@ import Signin from './Signin';
 
 const Header = props => (
   <header>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark mb-5 bg-dark">
       <a className="navbar-brand" href="/">More Recipes</a>
       <button
         className="navbar-toggler"
@@ -37,27 +37,27 @@ const Header = props => (
 
           {
             props.authenticated &&
-              <li className="nav-item" >
-                <Link className="nav-link" to="/profile">Profile</Link>
-              </li>
+            <li className="nav-item" >
+              <Link className="nav-link" to="/profile">Profile</Link>
+            </li>
           }
 
           {
             props.authenticated &&
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  onClick={() => { props.signUserOut(); }}
-                >
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                onClick={() => { props.signUserOut(); }}
+              >
                 Sign out
                 </a>
-              </li>
+            </li>
           }
         </ul>
 
         {
           !props.authenticated &&
-            <Signin />
+          <Signin />
         }
       </div>
     </nav>

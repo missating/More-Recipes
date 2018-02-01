@@ -12,6 +12,9 @@ const recipeValidator = (recipe) => {
   if (Validator.isEmpty(recipe.ingredients)) {
     errors.ingredients = 'Ingredients field cannot be empty';
   }
+  // if (Validator.isEmpty(recipe.recipeImage)) {
+  //   errors.recipeImage = 'Please select an image';
+  // }
   return {
     errors,
     isValid: isEmpty(errors)

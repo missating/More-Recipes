@@ -4,16 +4,12 @@ import PropTypes from 'prop-types';
 
 const RecipeGallery = props => (
   <div>
-    <div className="zoom-container">
+    <div className="image-container">
       <Link to={`/recipes/view/${props.id}`}>
-        <span className="zoom-caption">
-          <span>
-            {props.name}
-            <br />
-            <small> {props.ingredients} </small>
-          </span>
-        </span>
-        <img src={props.recipeImage} alt={props.name} />
+        <img src={props.recipeImage} alt={props.name} className="image" />
+        <div className="middle">
+          <div className="text">{props.name}</div>
+        </div>
       </Link>
     </div>
   </div>
@@ -22,7 +18,6 @@ const RecipeGallery = props => (
 RecipeGallery.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  ingredients: PropTypes.string.isRequired,
   recipeImage: PropTypes.string.isRequired
 };
 

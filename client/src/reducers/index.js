@@ -1,19 +1,22 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
-import userProfile from './userProfile';
+
 import isFetching from './isFetching';
 import recipes from './recipes';
-import topRecipe from './topRecipe';
-import favourites from './favourites';
+import topRecipes from './topRecipe';
+import userProfile from './userProfile';
+import userRecipes from './userRecipes';
+import userFavourites from './userFavourites';
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   auth,
-  userProfile,
   isFetching,
   recipes,
-  topRecipe,
-  favourites
+  topRecipes,
+  userProfile,
+  userRecipes,
+  userFavourites
 });
 
-export default appReducer;
+export default rootReducer;

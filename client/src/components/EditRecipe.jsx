@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import fetchSingleRecipe from '../actions/singleRecipe';
+import getSingleRecipe from '../actions/getSingleRecipe';
 import editRecipe from '../actions/editRecipe';
 
 
@@ -23,11 +22,9 @@ class EditRecipe extends React.Component {
     this.state = {
       name: '',
       ingredients: '',
-      description: '',
-      toggleEdit: true
+      description: ''
     };
     this.onChange = this.onChange.bind(this);
-    this.onToggleEdit = this.onToggleEdit.bind(this);
     this.onEdit = this.onEdit.bind(this);
   }
   /**
@@ -64,16 +61,6 @@ class EditRecipe extends React.Component {
   }
   /**
  *
- *@returns {json} with the new edited recipe
- * @param {any} event
- * @memberof EditRecipe
- */
-  onToggleEdit(event) {
-    event.preventDefault();
-    this.setState({ toggleEdit: !this.state.toggleEdit });
-  }
-  /**
- *
  *@returns {josn} updates the recipe
  * @param {any} event
  * @memberof EditRecipe
@@ -84,6 +71,7 @@ class EditRecipe extends React.Component {
       id, name, description, ingredients
     } = this.state;
     this.props.updateRecipe({ name, description, ingredients, }, id);
+    this.props.history.push('/users/recipes');
   }
   /**
    * @description react render method
@@ -98,44 +86,33 @@ class EditRecipe extends React.Component {
 
           <h3 className="text-center bottom">Edit Recipe</h3>
 
-          {
-            this.props.singleRecipe.editRecipeSuccess &&
-              <div className="alert alert-success alert-dismissible"
-                role="alert">
-                  Recipe Updated
-                {/* <Redirect to=
-                  {`/SingleRecipe/${this.props.singleRecipe.id}`}/> */}
-              </div>
-          }
 
           <form className="form-horizontal">
 
             <div className="form-group">
-              <label htmlFor="recipeName">Name</label>
+              Name
               <input
                 type="text"
                 className="form-control"
                 name="name"
                 value={this.state.name}
                 onChange={this.onChange}
-                disabled={this.state.toggleEdit}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="recipeDescription">Ingredients</label>
+              Ingredients
               <input
                 type="text"
                 className="form-control"
                 name="ingredients"
                 value={this.state.ingredients}
                 onChange={this.onChange}
-                disabled={this.state.toggleEdit}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="recipeingredients">Description</label>
+              Description
               <textarea
                 type="text"
                 rows="5"
@@ -143,7 +120,6 @@ class EditRecipe extends React.Component {
                 name="description"
                 value={this.state.description}
                 onChange={this.onChange}
-                disabled={this.state.toggleEdit}
               />
             </div>
 
@@ -152,16 +128,12 @@ class EditRecipe extends React.Component {
                 className="btn btn-primary fa fa-pencil"
                 style={{ marginRight: '20px' }}
                 onClick={this.onEdit}
-              >Update Recipe</button>
-
-              <button
-                className="btn btn-success fa fa-check"
-                onClick={this.onToggleEdit}
-              >Edit Recipe</button>
+              >Update Recipe
+              </button>
             </div>
           </form>
         </section>
-      </div>
+      </div >
 
     );
   }
@@ -169,23 +141,21 @@ class EditRecipe extends React.Component {
 
 
 EditRecipe.propTypes = {
-  match: PropTypes.object.isRequired,
-  singleRecipe: PropTypes.object.isRequired,
+  match: PropTypes.objectOf.isRequired,
   getRecipeDetails: PropTypes.func.isRequired,
-  updateRecipe: PropTypes.func.isRequired
+  updateRecipe: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
-EditRecipe.defaultProps = {
-  getRecipeDetails: {},
-  singleRecipe: false
-};
 
 const mapStateToProps = state => ({
-  singleRecipe: state.singleRecipe
+  singleRecipe: state.recipes.singleRecipe
 });
 
 const mapDispatchToProps = dispatch => ({
-  getRecipeDetails: id => dispatch(fetchSingleRecipe(id)),
+  getRecipeDetails: id => dispatch(getSingleRecipe(id)),
   updateRecipe: (recipe, id) => dispatch(editRecipe(recipe, id))
 });
 

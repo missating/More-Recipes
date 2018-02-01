@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 // actions
-import fetchSingleRecipe from '../actions/singleRecipe';
+import getSingleRecipe from '../actions/getSingleRecipe';
 import addFavourite from '../actions/addFavourite';
 
 // components
@@ -39,7 +39,7 @@ class SingleRecipe extends React.Component {
    */
   componentWillMount() {
     const recipeId = this.props.match.params.id;
-    this.props.getRecipeDetails(recipeId);
+    this.props.recipe(recipeId);
   }
 
   /**
@@ -88,14 +88,6 @@ class SingleRecipe extends React.Component {
       </div>
     ));
 
-    let addFavouriteError;
-    if (this.props.singleRecipe.errorMessage) {
-      addFavouriteError = (
-        <div className="alert alert-danger alert-dismissible">
-          {this.props.singleRecipe.errorMessage}
-        </div>
-      );
-    }
     return (
       <div>
         <section className="container text-center" id="oneRecipe">
@@ -127,8 +119,6 @@ class SingleRecipe extends React.Component {
                 this.props.authenticated &&
                 <div className="mainBtn">
 
-                  {addFavouriteError}
-
                   <button
                     className="btn btn-outline-danger"
                     style={{ margin: '5px' }}
@@ -139,7 +129,7 @@ class SingleRecipe extends React.Component {
                         aria-hidden="true"
                       />
                     </span>
-                    {this.props.singleRecipe.downvote}
+                    {this.state.singleRecipe.downvote}
                   </button>
 
                   <button
@@ -152,7 +142,7 @@ class SingleRecipe extends React.Component {
                         aria-hidden="true"
                       />
                     </span>
-                    {this.props.singleRecipe.upvote}
+                    {this.state.singleRecipe.upvote}
                   </button>
 
                   <button
@@ -198,23 +188,21 @@ class SingleRecipe extends React.Component {
 }
 
 SingleRecipe.propTypes = {
-  singleRecipe: PropTypes.objectOf.isRequired,
-  getRecipeDetails: PropTypes.func.isRequired,
+  singleRecipe: PropTypes.shape({}).isRequired,
+  recipe: PropTypes.func.isRequired,
   favourite: PropTypes.func.isRequired,
-  match: PropTypes.objectOf.isRequired,
+  match: PropTypes.shape({}).isRequired,
   authenticated: PropTypes.bool.isRequired
 };
 
 
-const mapStateToProps = (state, ownProps) => ({
-  singleRecipe: state.recipes.recipes
-    .find(recipe =>
-      (parseInt(recipe.id, 10) === parseInt(ownProps.match.params.id, 10))),
+const mapStateToProps = state => ({
+  singleRecipe: state.recipes.singleRecipe,
   authenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  getRecipeDetails: id => dispatch(fetchSingleRecipe(id)),
+  recipe: id => dispatch(getSingleRecipe(id)),
   favourite: recipeId => dispatch(addFavourite(recipeId))
 });
 

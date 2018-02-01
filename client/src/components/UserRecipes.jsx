@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import UserRecipeCard from './UserRecipeCard';
 
 // actions
-import receiveUserRecipes from '../actions/userRecipes';
+import getUserRecipes from '../actions/getUserRecipes';
 /**
  *
  *
@@ -30,14 +30,13 @@ class UserRecipes extends React.Component {
  * @memberof UserRecipes
  */
   componentWillMount() {
-    this.props.receiveUserRecipe();
+    this.props.recipes();
   }
 
   /**
    * @returns {undefined}
    *
    * @param {object} nextProps
-   *
    * @memberof UserRecipes
    */
   componentWillReceiveProps(nextProps) {
@@ -101,7 +100,7 @@ class UserRecipes extends React.Component {
               <div className="col-md-4">
                 <Link
                   className="btn btn-outline-primary"
-                  to="/user/favourites"
+                  to="/users/favourites"
                 >
                   My Favourite Recipes
                 </Link>
@@ -110,7 +109,7 @@ class UserRecipes extends React.Component {
           </div>
           <section className="section" id="view">
             <div className="container">
-              <h3 className="text-center bottom">My Recipes</h3>
+              <h3 className="text-center">My Recipes</h3>
               <div className="row">
                 {userRecipesList}
               </div>
@@ -157,7 +156,7 @@ class UserRecipes extends React.Component {
           <div className="container">
             <h3 className="text-center bottom">My Recipes</h3>
             <br />
-            <h4> {userRecipeError} </h4>
+            <h4 className="text-center m-5"> {userRecipeError} </h4>
           </div>
         </section>
       </div>
@@ -166,19 +165,20 @@ class UserRecipes extends React.Component {
 }
 
 UserRecipes.propTypes = {
-  receiveUserRecipe: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  recipes: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  userRecipesError: PropTypes.string.isRequired
 };
 
 
 const mapStateToProps = state => ({
-  userRecipes: state.recipes.recipes,
-  userRecipesError: state.recipes.errorMessage,
+  userRecipes: state.userRecipes.recipes,
+  userRecipesError: state.userRecipes.errorMessage,
   authenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveUserRecipe: () => dispatch(receiveUserRecipes())
+  recipes: () => dispatch(getUserRecipes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);

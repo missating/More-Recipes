@@ -77,7 +77,8 @@ export default class favouritesController {
     return db.Favourite.findAll({
       where: { userId: req.userId },
       include: [{
-        model: db.Recipe, attributes: ['name', 'ingredients', 'description']
+        model: db.Recipe,
+        attributes: ['name', 'ingredients', 'description', 'recipeImage']
       }]
     })
       .then((found) => {

@@ -1,23 +1,25 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { RECEIVE_USER_RECIPES,
-  RECEIVE_USER_RECIPES_ERROR }
+import {
+  GET_USER_RECIPES,
+  GET_USER_RECIPES_ERROR
+}
   from './actionTypes';
 
 // action creators for get all recipes
-export const receiveUserRecipe = userRecipes => ({
-  type: RECEIVE_USER_RECIPES,
-  userRecipes
+export const userRecipes = recipes => ({
+  type: GET_USER_RECIPES,
+  recipes
 });
 
-export const receiveUserRecipeError = message => ({
-  type: RECEIVE_USER_RECIPES_ERROR,
+export const userRecipesError = message => ({
+  type: GET_USER_RECIPES_ERROR,
   message
 });
 
 
 // action for get all user recipes
-const receiveUserRecipes = () => (dispatch) => {
+const getUserRecipes = () => (dispatch) => {
   dispatch(setFetching());
   const token = localStorage.getItem('token');
   return axios({
@@ -28,14 +30,14 @@ const receiveUserRecipes = () => (dispatch) => {
     }
   })
     .then((response) => {
-      const userRecipes = response.data.recipes;
-      dispatch(receiveUserRecipe(userRecipes));
+      const { recipes } = response.data;
+      dispatch(userRecipes(recipes));
       dispatch(unsetFetching());
     }).catch((error) => {
       const { message } = error.response.data;
-      dispatch(receiveUserRecipeError(message));
+      dispatch(userRecipesError(message));
       dispatch(unsetFetching());
     });
 };
 
-export default receiveUserRecipes;
+export default getUserRecipes;

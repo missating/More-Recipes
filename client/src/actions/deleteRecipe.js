@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toastr from 'toastr';
 import { DELETE_RECIPE } from './actionTypes';
 import { setFetching, unsetFetching } from './fetching';
 
@@ -19,6 +20,13 @@ const deleteRecipe = recipeId => (dispatch) => {
   })
     .then(() => {
       dispatch(deleteRecipeSuccess(recipeId));
+      toastr.options = {
+        closeButton: true,
+        extendedTimeOut: '1000',
+        positionClass: 'toast-top-right',
+        hideMethod: 'fadeOut'
+      };
+      toastr.success('Recipe deleted succesfully');
     })
     .catch((error) => {
       console.log('Delete recipe error', error);

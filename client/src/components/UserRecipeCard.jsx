@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// image
-import eleven from '../assets/eleven.jpg';
-
 // actions
 import deleteRecipe from '../actions/deleteRecipe';
 
@@ -13,37 +10,34 @@ const UserRecipeCard = props => (
 
   <div>
     <div className="card">
-      <div className="card-header">{props.name}</div>
-      <div className="card-main">
-        <img src={props.recipeImage} alt={props.name} className="img-thumbnail" />
-        <div className="main-description">
-          <p> {props.description} </p>
-        </div>
-        <div className="container text-center">
-          <Link
-            className="btn btn-outline-primary"
-            style={{ marginRight: '10px' }}
-            to={`/recipes/view/${props.id}`}
-          >
-            Details
-          </Link>
+      <img src={props.recipeImage} alt={props.name} className="card-img-top" />
+      <div className="card-body">
+        <h4 className="card-title">{props.name}</h4>
+        <p className="card-text">{props.ingredients}</p>
 
-          <Link
-            className="btn btn-outline-primary"
-            style={{ marginRight: '10px' }}
-            to={`/recipe/edit/${props.id}`}
-          >
-            Edit
-          </Link>
+        <Link
+          className="btn btn-outline-primary"
+          style={{ marginRight: '10px' }}
+          to={`/recipes/view/${props.id}`}
+        >
+          Details
+        </Link>
 
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={() => { props.deleteRecipe(props.id); }}
-          >
-            <i className="fa fa-trash" />
-          </button>
-        </div>
+        <Link
+          className="btn btn-outline-primary"
+          style={{ marginRight: '10px' }}
+          to={`/recipe/edit/${props.id}`}
+        >
+          Edit
+        </Link>
+
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => { props.deleteRecipe(props.id); }}
+        >
+          <i className="fa fa-trash" />
+        </button>
       </div>
     </div>
   </div>
@@ -52,7 +46,8 @@ const UserRecipeCard = props => (
 UserRecipeCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  ingredients: PropTypes.string.isRequired,
+  recipeImage: PropTypes.string.isRequired,
   deleteRecipe: PropTypes.func.isRequired
 };
 

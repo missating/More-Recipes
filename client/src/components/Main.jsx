@@ -2,11 +2,11 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Recipes from './Recipes';
+import EditRecipe from './EditRecipe';
 import SingleRecipe from './SingleRecipe';
 import Profile from './Profile';
 import AddRecipe from './AddRecipe';
 import UserRecipes from './UserRecipes';
-import EditRecipe from './EditRecipe';
 import UserFavourites from './UserFavourites';
 
 
