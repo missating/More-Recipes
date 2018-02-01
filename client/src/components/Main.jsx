@@ -20,6 +20,7 @@ const Main = () => (
     <Route path="/users/recipes" exact component={UserRecipes} />
     <Route path="/recipe/edit/:id" exact component={EditRecipe} />
     <Route path="/users/favourites" exact component={UserFavourites} />
+    {/* <Route component={NotFound} /> */}
   </Switch>
 );
 

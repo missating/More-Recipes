@@ -32,8 +32,11 @@ const ActionButtons = props => (
       {props.singleRecipe.favourite}
     </button>
   </div>
-
 );
+
+ActionButtons.propTypes = {
+  singleRecipe: PropTypes.objectOf.isRequired
+};
 
 export default ActionButtons;
 

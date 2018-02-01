@@ -15,7 +15,7 @@ const editRecipe = (recipe, recipeId) => (dispatch) => {
   dispatch(setFetching());
   return axios({
     method: 'PUT',
-    url: `http://localhost:3000/api/v1/recipes/${recipeId}`,
+    url: `/api/v1/recipes/${recipeId}`,
     headers: {
       token
     },

@@ -1,6 +1,3 @@
-
-import findIndex from 'lodash/findIndex';
-
 import {
   GET_ALL_RECIPES,
   GET_SINGLE_RECIPE,
@@ -17,11 +14,6 @@ const initialState = {
 };
 
 const recipes = (state = initialState.recipes, action) => {
-  const index = findIndex(
-    state.singleRecipe,
-    recipe => parseInt(recipe.id, 10) === parseInt(action.recipe, 10)
-  );
-
   switch (action.type) {
   case GET_ALL_RECIPES:
     return {
@@ -40,16 +32,12 @@ const recipes = (state = initialState.recipes, action) => {
       }
     };
   case ADD_FAVOURITE:
-    if (index > -1) {
-      return {
-        ...state,
-        singleRecipe: {
-          ...state.singleRecipe[index],
-          favourite: parseInt(state.singleRecipe[index].favourite, 10) + 1,
-        }
-      };
-    }
-    return state;
+    return {
+      singleRecipe: {
+        ...state.singleRecipe,
+        favourite: state.singleRecipe.favourite + 1,
+      }
+    };
   case ADD_RECIPE:
     return {
       newRecipe: action.newRecipe

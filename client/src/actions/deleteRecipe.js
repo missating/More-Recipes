@@ -13,7 +13,7 @@ const deleteRecipe = recipeId => (dispatch) => {
   dispatch(setFetching());
   return axios({
     method: 'DELETE',
-    url: `http://localhost:3000/api/v1/recipes/${recipeId}`,
+    url: `/api/v1/recipes/${recipeId}`,
     headers: {
       token
     }

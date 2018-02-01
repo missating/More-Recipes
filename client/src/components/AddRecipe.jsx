@@ -66,8 +66,6 @@ class AddRecipe extends React.Component {
     event.preventDefault();
     const isValid = this.isValid();
     if (isValid) {
-      //  upload to cloudinary, then create recipe
-      // this.uploadToClourinary().then();
       this.uploadToCloudinary().then((response) => {
         const secureUrl = response.data.secure_url;
         const recipeData = this.state.newRecipe;

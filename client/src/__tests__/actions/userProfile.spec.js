@@ -29,7 +29,7 @@ describe('User profile action', () => {
         email: 'test@test.com',
         joined: new Date().toDateString()
       };
-      moxios.stubRequest('http://localhost:3000/api/v1/users/profile', {
+      moxios.stubRequest('/api/v1/users/profile', {
         status: 200,
         response: {
           status: 'success',
@@ -49,7 +49,7 @@ describe('User profile action', () => {
   );
 
   it('Should dispatch error message if request fails', (done) => {
-    moxios.stubRequest('http://localhost:3000/api/v1/users/profile', {
+    moxios.stubRequest('/api/v1/users/profile', {
       status: 400
     });
 

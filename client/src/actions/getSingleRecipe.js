@@ -12,7 +12,7 @@ export const singleRecipe = recipe => ({
 // action for get all recipes
 const getSingleRecipe = id => (dispatch) => {
   dispatch(setFetching());
-  return axios.get(`http://localhost:3000/api/v1/recipes/${id}`)
+  return axios.get(`/api/v1/recipes/${id}`)
     .then((response) => {
       const { recipe } = response.data;
       dispatch(singleRecipe(recipe));

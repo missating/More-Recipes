@@ -1,4 +1,5 @@
 import React from 'react';
+import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
@@ -40,21 +41,27 @@ class Profile extends React.Component {
         <div className="container userButtons">
           <div className="row">
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/recipe/add">
-              Add Recipe
+              <Link
+                className="btn btn-outline-primary"
+                to="/recipe/add"
+              >
+                Add Recipe
               </Link>
             </div>
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/users/recipes">
-              My Recipes
+              <Link
+                className="btn btn-outline-primary"
+                to="/users/recipes"
+              >
+                My Recipes
               </Link>
             </div>
             <div className="col-md-4">
-              <Link className="btn btn-outline-primary"
-                to="/users/favourites">
-              My Favourite Recipes
+              <Link
+                className="btn btn-outline-primary"
+                to="/users/favourites"
+              >
+                My Favourite Recipes
               </Link>
             </div>
           </div>
@@ -65,8 +72,11 @@ class Profile extends React.Component {
             <div className="row text-center bord">
               <div className="col-md-12">
 
-                <img src={prof} className="rounded mx-auto d-block" alt="..."/>
-
+                <Gravatar
+                  className="img rounded"
+                  email={this.props.userDetails.email}
+                />
+                <br />
                 <strong> Full Name </strong>
                 <p>{this.props.userDetails.fullname}</p>
 
@@ -94,7 +104,7 @@ class Profile extends React.Component {
 
 Profile.propTypes = {
   receiveUserProfile: PropTypes.func.isRequired,
-  userDetails: PropTypes.object.isRequired,
+  userDetails: PropTypes.objectOf.isRequired,
   authenticated: PropTypes.bool.isRequired
 };
 

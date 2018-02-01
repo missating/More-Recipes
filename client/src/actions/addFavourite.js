@@ -19,7 +19,7 @@ const addFavouriteRecipe = recipeId => (dispatch) => {
   dispatch(setFetching());
   return axios({
     method: 'POST',
-    url: `http://localhost:3000/api/v1/users/${recipeId}/favourite`,
+    url: `/api/v1/users/${recipeId}/favourite`,
     headers: {
       token
     }

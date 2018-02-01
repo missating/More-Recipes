@@ -7,6 +7,10 @@ const signinValidator = (data) => {
     errors.email = 'Email is required';
   }
 
+  if (!validator.isEmail(data.email)) {
+    errors.email = 'Email is invalid';
+  }
+
   if (validator.isEmpty(data.password)) {
     errors.password = 'Password is required';
   }

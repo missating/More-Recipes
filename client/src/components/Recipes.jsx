@@ -48,7 +48,7 @@ export class Recipes extends React.Component {
 
 Recipes.propTypes = {
   recipes: PropTypes.func.isRequired,
-  allRecipes: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  allRecipes: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 const mapStateToProps = state => ({

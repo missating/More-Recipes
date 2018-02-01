@@ -87,7 +87,7 @@ class EditRecipe extends React.Component {
           <h3 className="text-center bottom">Edit Recipe</h3>
 
 
-          <form className="form-horizontal">
+          <form>
 
             <div className="form-group">
               Name
@@ -142,6 +142,7 @@ class EditRecipe extends React.Component {
 
 EditRecipe.propTypes = {
   match: PropTypes.objectOf.isRequired,
+  singleRecipe: PropTypes.objectOf.isRequired,
   getRecipeDetails: PropTypes.func.isRequired,
   updateRecipe: PropTypes.func.isRequired,
   history: PropTypes.shape({

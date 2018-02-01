@@ -19,7 +19,7 @@ const addReview = (content, recipeId) => (dispatch) => {
   const token = localStorage.getItem('token');
   return axios({
     method: 'POST',
-    url: `http://localhost:3000/api/v1/recipes/${recipeId}/review`,
+    url: `/api/v1/recipes/${recipeId}/review`,
     headers: {
       token
     },
@@ -41,13 +41,6 @@ const addReview = (content, recipeId) => (dispatch) => {
       const { message } = error.response.data;
       dispatch(addReviewError(message));
       dispatch(unsetFetching());
-      toastr.options = {
-        closeButton: true,
-        extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
-        hideMethod: 'fadeOut'
-      };
-      toastr.error(message);
     });
 };
 

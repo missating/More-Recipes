@@ -19,7 +19,7 @@ export const authError = message => ({
 // actions for user signin
 const fetchUserSignin = formData => (dispatch) => {
   dispatch(setFetching());
-  return axios.post('http://localhost:3000/api/v1/users/signin', formData)
+  return axios.post('/api/v1/users/signin', formData)
     .then((response) => {
       const { token, user } = response.data;
       localStorage.setItem('token', token);

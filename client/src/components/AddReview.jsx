@@ -11,11 +11,11 @@ import addReview from '../actions/addReview';
  * @extends {React.Component}
  */
 class AddReview extends React.Component {
-/**
- * Creates an instance of AddReview.
- * @param {any} props
- * @memberof AddReview
- */
+  /**
+   * Creates an instance of AddReview.
+   * @param {any} props
+   * @memberof AddReview
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +43,12 @@ class AddReview extends React.Component {
     const { content } = this.state;
     const { recipeId } = this.props;
     event.preventDefault();
-    this.props.addNewReview(content, recipeId);
+    this.props.addNewReview(content, recipeId)
+      .then(() => {
+        this.setState({
+          content: ''
+        });
+      });
   }
   /**
    *
@@ -68,13 +73,17 @@ class AddReview extends React.Component {
                   value={this.state.content}
                 />
                 <br />
-                <button className="btn btn-primary"
-                  id="add-review-button">
+                <button
+                  className="btn btn-primary"
+                  id="add-review-button"
+                >
                   <span>
-                    <i className="fa fa-paper-plane-o"
-                      aria-hidden="true" />
+                    <i
+                      className="fa fa-paper-plane-o"
+                      aria-hidden="true"
+                    />
                   </span>
-                    comment
+                  comment
                 </button>
               </form>
             </div>
@@ -85,6 +94,7 @@ class AddReview extends React.Component {
   }
 }
 AddReview.propTypes = {
+  recipeId: PropTypes.number.isRequired,
   addNewReview: PropTypes.func.isRequired,
 };
 
