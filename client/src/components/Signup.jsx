@@ -34,6 +34,7 @@ class Signup extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
   /**
  *
  * @returns {json} with nextProps details
@@ -41,31 +42,18 @@ class Signup extends React.Component {
  * @memberof Signup
  */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated && nextProps.auth.errorMessage.length === 0) {
-      $("#myModal").modal('hide');
+    if (nextProps.auth.isAuthenticated &&
+      nextProps.auth.errorMessage.length === 0) {
+      $('#myModal').modal('hide');
     }
   }
 
   /**
- *
- *
- * @returns {boolean} boolean
- * @memberof Signup
- */
-  isValid() {
-    const { isValid, errors } = signupValidator(this.state);
-    if (!isValid) {
-      this.setState({ errors });
-    }
-    return isValid;
-  }
-
-  /**
- * @description handles form change events
- * @returns {null} null
- * @param {any} event
- * @memberof Signup
- */
+* @description handles form change events
+* @returns {null} null
+* @param {any} event
+* @memberof Signup
+*/
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -86,6 +74,20 @@ class Signup extends React.Component {
   }
 
   /**
+ *
+ *
+ * @returns {boolean} boolean
+ * @memberof Signup
+ */
+  isValid() {
+    const { isValid, errors } = signupValidator(this.state);
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+
+  /**
    * @description react render method
    *
    * @returns {component} react component
@@ -102,11 +104,13 @@ class Signup extends React.Component {
     }
     return (
       <div>
-        <div id="myModal"
+        <div
+          id="myModal"
           className="modal fade"
           tabIndex="-1"
           role="dialog"
-          aria-hidden="true">
+          aria-hidden="true"
+        >
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
               <div className="modal-body">
@@ -118,27 +122,31 @@ class Signup extends React.Component {
                     <form className="form-horizontal" onSubmit={this.onSubmit}>
 
                       <div className="form-group">
-                        <input type="text"
+                        <input
+                          type="text"
                           name="fullname"
                           className="form-control"
                           placeholder="Full Name"
                           value={this.state.fullname}
-                          onChange={this.onChange} />
+                          onChange={this.onChange}
+                        />
                         {
                           errors.fullname &&
-                        <span className="help-block">
-                          {errors.fullname}
-                        </span>
+                          <span className="help-block">
+                            {errors.fullname}
+                          </span>
                         }
                       </div>
 
                       <div className="form-group">
-                        <input type="text"
+                        <input
+                          type="text"
                           name="username"
                           className="form-control"
                           placeholder="User Name"
                           value={this.state.username}
-                          onChange={this.onChange} />
+                          onChange={this.onChange}
+                        />
                         {
                           errors.username &&
                           <span className="help-block">
@@ -148,12 +156,14 @@ class Signup extends React.Component {
                       </div>
 
                       <div className="form-group">
-                        <input type="email"
+                        <input
+                          type="email"
                           name="email"
                           className="form-control"
                           placeholder="Email Address"
                           value={this.state.email}
-                          onChange={this.onChange} />
+                          onChange={this.onChange}
+                        />
                         {
                           errors.email &&
                           <span className="help-block">
@@ -163,12 +173,14 @@ class Signup extends React.Component {
                       </div>
 
                       <div className="form-group">
-                        <input type="password"
+                        <input
+                          type="password"
                           name="password"
                           className="form-control"
                           placeholder="Password"
                           value={this.state.password}
-                          onChange={this.onChange} />
+                          onChange={this.onChange}
+                        />
                         {
                           errors.password &&
                           <span className="help-block">
@@ -179,12 +191,14 @@ class Signup extends React.Component {
 
 
                       <div className="form-group">
-                        <input type="password"
+                        <input
+                          type="password"
                           name="confirmPassword"
                           className="form-control"
                           placeholder="Confirm Password"
                           value={this.state.confirmPassword}
-                          onChange={this.onChange} />
+                          onChange={this.onChange}
+                        />
                         {
                           errors.confirmPassword &&
                           <span className="help-block">
@@ -192,19 +206,23 @@ class Signup extends React.Component {
                           </span>
                         }
                       </div>
-                      <br/>
+                      <br />
 
                       <button
-                        className="btn btn-primary btn-sm" type="submit"> Submit
+                        className="btn btn-primary btn-sm"
+                        type="submit"
+                      > Submit
                       </button>
                     </form>
                   </div>
                 </div>
               </div>
               <div className="modal-footer">
-                <button className="btn btn-danger btn-sm"
-                  data-dismiss="modal">
-                close
+                <button
+                  className="btn btn-danger btn-sm"
+                  data-dismiss="modal"
+                >
+                  close
                 </button>
               </div>
             </div>
@@ -216,12 +234,8 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.objectOf.isRequired,
   signupUser: PropTypes.func.isRequired
-};
-
-Signup.defaultProps = {
-  auth: ''
 };
 
 const mapDispatchToProps = dispatch => ({

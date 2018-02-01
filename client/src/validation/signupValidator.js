@@ -8,7 +8,7 @@ const signupvalidator = (data) => {
   }
 
   if (validator.isEmpty(data.username)) {
-    errors.email = 'Email is required';
+    errors.username = 'Email is required';
   }
 
   if (validator.isEmpty(data.email)) {
@@ -20,7 +20,7 @@ const signupvalidator = (data) => {
   }
 
   if (validator.isEmpty(data.password)) {
-    errors.email = 'Email is required';
+    errors.password = 'Email is required';
   }
 
   if (!validator.isLength(data.password, {
@@ -30,7 +30,7 @@ const signupvalidator = (data) => {
   }
 
   if (validator.isEmpty(data.confirmPassword)) {
-    errors.email = 'Email is required';
+    errors.confirmPassword = 'Please confirm your password';
   }
 
   if (!validator.equals(data.password, data.confirmPassword)) {

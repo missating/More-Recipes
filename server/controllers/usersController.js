@@ -54,13 +54,10 @@ export default class usersController {
             });
         });
     })
-      .catch((error) => {
-        console.log(error);
-        return res.status(500).json({
-          status: 'error',
-          message: 'Internal server error'
-        });
-      });
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 

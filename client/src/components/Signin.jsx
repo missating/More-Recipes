@@ -40,19 +40,6 @@ class Signin extends React.Component {
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-  /**
- *
- *
- * @returns {boolean} boolean
- * @memberof Signin
- */
-  isValid() {
-    const { isValid, errors } = signinValidator(this.state);
-    if (!isValid) {
-      this.setState({ errors });
-    }
-    return isValid;
-  }
 
   /**
  *
@@ -67,6 +54,20 @@ class Signin extends React.Component {
     if (isValid) {
       this.props.signinUser(this.state);
     }
+  }
+
+  /**
+*
+*
+* @returns {boolean} boolean
+* @memberof Signin
+*/
+  isValid() {
+    const { isValid, errors } = signinValidator(this.state);
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
   }
 
   /**
@@ -91,33 +92,43 @@ class Signin extends React.Component {
           {signinError}
 
           <div className="form-group">
-            <input type="email" placeholder="Email" name="email"
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
               value={this.state.email}
               onChange={this.onChange}
-              className="form-control"/>
+              className="form-control"
+            />
             {
               errors.email &&
-            <span className="help-block">
-              {errors.email}
-            </span>
+              <span className="help-block text-danger">
+                {errors.email}
+              </span>
             }
           </div>
 
           <div className="form-group">
-            <input type="password" placeholder="Password" name="password"
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
               value={this.state.password}
               onChange={this.onChange}
-              className="form-control"/>
+              className="form-control"
+            />
             {
               errors.password &&
-              <span className="help-block">
+              <span className="help-block text-danger">
                 {errors.password}
               </span>
             }
           </div>
 
           <button
-            className="btn btn-primary my-2 my-sm-0" type="submit">Sign In
+            className="btn btn-primary my-2 my-sm-0"
+            type="submit"
+          >Sign In
           </button>
 
         </form>
@@ -127,12 +138,8 @@ class Signin extends React.Component {
 }
 
 Signin.propTypes = {
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.objectOf.isRequired,
   signinUser: PropTypes.func.isRequired
-};
-
-Signin.defaultProps = {
-  auth: ''
 };
 
 const mapDispatchToProps = dispatch => ({
