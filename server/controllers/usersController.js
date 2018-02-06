@@ -95,7 +95,8 @@ export default class usersController {
         return res.status(200)
           .json({
             status: 'success',
-            token
+            token,
+            foundUser
           });
       })
       .catch(() => res.status(500).json({

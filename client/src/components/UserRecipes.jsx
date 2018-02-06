@@ -74,92 +74,35 @@ class UserRecipes extends React.Component {
     ));
     if (userRecipes.length) {
       return (
+        <section className="container" id="recipes">
+          <div>
+            {
+              !this.props.authenticated &&
+              <Redirect to="/" />
+            }
+
+            <h3 className="text-center">My Recipes</h3>
+            <br />
+            <div className="row">
+              {userRecipesList}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    return (
+      <section className="section" id="recipes">
         <div>
           {
             !this.props.authenticated &&
             <Redirect to="/" />
           }
-          <div className="container userButtons">
-            <div className="row">
-              <div className="col-md-4">
-                <Link
-                  className="btn btn-outline-primary"
-                  to="/profile"
-                >
-                  My Profile
-                </Link>
-              </div>
-              <div className="col-md-4">
-                <Link
-                  className="btn btn-outline-primary"
-                  to="/recipe/add"
-                >
-                  Add Recipe
-                </Link>
-              </div>
-              <div className="col-md-4">
-                <Link
-                  className="btn btn-outline-primary"
-                  to="/users/favourites"
-                >
-                  My Favourite Recipes
-                </Link>
-              </div>
-            </div>
-          </div>
-          <section className="section" id="view">
-            <div className="container">
-              <h3 className="text-center">My Recipes</h3>
-              <div className="row">
-                {userRecipesList}
-              </div>
-            </div>
-          </section>
+
+          <h3 className="text-center">My Recipes</h3>
+          <br />
+          <h4 className="text-center m-5"> {userRecipeError} </h4>
         </div>
-      );
-    }
-    return (
-      <div>
-        {
-          !this.props.authenticated &&
-          <Redirect to="/" />
-        }
-        <div className="container userButtons">
-          <div className="row">
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/profile"
-              >
-                My Profile
-              </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/recipe/add"
-              >
-                Add Recipe
-              </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/users/favourites"
-              >
-                My Favourite Recipes
-              </Link>
-            </div>
-          </div>
-        </div>
-        <section className="section" id="view">
-          <div className="container">
-            <h3 className="text-center bottom">My Recipes</h3>
-            <br />
-            <h4 className="text-center m-5"> {userRecipeError} </h4>
-          </div>
-        </section>
-      </div>
+      </section>
     );
   }
 }
@@ -167,7 +110,6 @@ class UserRecipes extends React.Component {
 UserRecipes.propTypes = {
   recipes: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
-  userRecipesError: PropTypes.string.isRequired
 };
 
 

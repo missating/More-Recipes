@@ -277,7 +277,7 @@ export default class recipesController {
           attributes: ['content', 'createdAt'],
           include: [{
             model: db.User,
-            attributes: ['fullname']
+            attributes: ['fullname', 'email']
           }]
         },
         {

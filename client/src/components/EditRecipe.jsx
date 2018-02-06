@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link, Redirect } from 'react-router-dom';
+
+// action
 import getSingleRecipe from '../actions/getSingleRecipe';
 import editRecipe from '../actions/editRecipe';
 
@@ -82,59 +85,72 @@ class EditRecipe extends React.Component {
   render() {
     return (
       <div>
-        <section className="section">
+        {
+          !this.props.authenticated &&
+          <Redirect to="/" />
+        }
 
-          <h3 className="text-center bottom">Edit Recipe</h3>
+        <section className="container" id="recipes">
 
+          <h3 className="text-center mb-4">Edit Recipe</h3>
 
-          <form>
+          <div className="row">
+            <div className="col-md-12 col-sm-12">
+              <form>
+                <div className="form-group form-width">
+                  <h5> Name </h5>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.onChange}
+                  />
+                </div>
 
-            <div className="form-group">
-              Name
-              <input
-                type="text"
-                className="form-control"
-                name="name"
-                value={this.state.name}
-                onChange={this.onChange}
-              />
+                <div className="form-group form-width">
+                  <h5> Ingredients </h5>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="ingredients"
+                    value={this.state.ingredients}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className="form-group form-width">
+                  <h5> Description </h5>
+                  <textarea
+                    type="text"
+                    rows="5"
+                    className="form-control"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className="form-group form-width">
+                  <button
+                    className="btn btn-secondary"
+                    onClick={this.onEdit}
+                  >
+                    Update Recipe
+                  </button>
+
+                  <Link
+                    className="btn btn-secondary"
+                    to="/users/recipes"
+                  >
+                    Cancel
+              </Link>
+                </div>
+              </form>
             </div>
-
-            <div className="form-group">
-              Ingredients
-              <input
-                type="text"
-                className="form-control"
-                name="ingredients"
-                value={this.state.ingredients}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className="form-group">
-              Description
-              <textarea
-                type="text"
-                rows="5"
-                className="form-control"
-                name="description"
-                value={this.state.description}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className="container text-center">
-              <button
-                className="btn btn-primary fa fa-pencil"
-                style={{ marginRight: '20px' }}
-                onClick={this.onEdit}
-              >Update Recipe
-              </button>
-            </div>
-          </form>
+          </div>
         </section>
-      </div >
-
+      </div>
     );
   }
 }
@@ -152,7 +168,8 @@ EditRecipe.propTypes = {
 
 
 const mapStateToProps = state => ({
-  singleRecipe: state.recipes.singleRecipe
+  singleRecipe: state.recipes.singleRecipe,
+  authenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({

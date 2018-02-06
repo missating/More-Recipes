@@ -51,7 +51,7 @@ class TopRecipes extends React.Component {
         <section className="container">
           <h2 className="text-center mt-5"> Featured Recipes </h2>
           <hr />
-          <div className="row justify-content-center py-3">
+          <div className="row justify-content-center">
             {topRecipeList}
           </div>
         </section>

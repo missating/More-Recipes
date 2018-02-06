@@ -8,6 +8,7 @@ const signOut = () => ({
 
 const signUserOut = () => (dispatch) => {
   localStorage.removeItem('token');
+  localStorage.removeItem('user');
   dispatch(signOut());
   toastr.options = {
     closeButton: true,

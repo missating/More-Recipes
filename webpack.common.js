@@ -3,6 +3,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
+const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 
 // Constant with our paths
@@ -28,7 +29,10 @@ module.exports = {
   plugins: [
     // CSS will be extracted to this bundle file
     new ExtractTextPlugin('style.bundle.css'),
-    new cleanWebpackPlugin(['build'])
+    new cleanWebpackPlugin(['build']),
+    new TransferWebpackPlugin([
+      { from: 'client/src/assets' }
+    ])
   ],
   // Loaders configuration
   // We are telling webpack to use "babel-loader" for .js and .jsx files
@@ -50,13 +54,20 @@ module.exports = {
           use: 'css-loader',
         }),
       },
-      // File loader for image assets
-      // We'll add only image extensions, but you can things like svgs, fonts and videos
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: 'url-loader?limit=10000',
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        use: 'file-loader',
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
-          'file-loader',
-        ],
+          'file-loader?name=images/[name].[ext]',
+          'image-webpack-loader?bypassOnDebug'
+        ]
       },
     ],
   },

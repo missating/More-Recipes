@@ -10,34 +10,38 @@ const UserRecipeCard = props => (
 
   <div>
     <div className="card">
-      <img src={props.recipeImage} alt={props.name} className="card-img-top" />
-      <div className="card-body">
-        <h4 className="card-title">{props.name}</h4>
-        <p className="card-text">{props.ingredients}</p>
+      <img src={props.recipeImage}
+        alt={props.recipeImage}
+        className="image-width"
+      />
 
-        <Link
-          className="btn btn-outline-primary"
-          style={{ marginRight: '10px' }}
-          to={`/recipes/view/${props.id}`}
-        >
-          Details
-        </Link>
+      <div className="container p-3 recipedetails-column">
+        <h2>{props.name}</h2>
+        <p><small>{props.description}</small></p>
+        <div className="container">
+          <Link
+            className="btn btn-secondary recipe-button"
+            to={`/recipes/view/${props.id}`}
+          >
+            DETAILS
+         </Link>
 
-        <Link
-          className="btn btn-outline-primary"
-          style={{ marginRight: '10px' }}
-          to={`/recipe/edit/${props.id}`}
-        >
-          Edit
-        </Link>
+          <Link
+            className="btn btn-secondary recipe-button"
+            to={`/recipe/edit/${props.id}`}
+          >
+            EDIT
+          </Link>
 
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => { props.deleteRecipe(props.id); }}
-        >
-          <i className="fa fa-trash" />
-        </button>
+          <button className="btn"
+            onClick={() => { props.deleteRecipe(props.id); }}
+          >
+            <span>
+              <i className="far fa-trash-alt" />
+            </span>
+          </button>
+
+        </div>
       </div>
     </div>
   </div>

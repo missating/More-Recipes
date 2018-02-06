@@ -8,6 +8,7 @@ import Profile from './Profile';
 import AddRecipe from './AddRecipe';
 import UserRecipes from './UserRecipes';
 import UserFavourites from './UserFavourites';
+import NotFound from './NotFound'
 
 
 const Main = () => (
@@ -20,7 +21,7 @@ const Main = () => (
     <Route path="/users/recipes" exact component={UserRecipes} />
     <Route path="/recipe/edit/:id" exact component={EditRecipe} />
     <Route path="/users/favourites" exact component={UserFavourites} />
-    {/* <Route component={NotFound} /> */}
+    <Route component={NotFound} />
   </Switch>
 );
 

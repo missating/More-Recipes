@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 
-// image
-import prof from '../assets/prof.jpg';
 
 // actions
 import receiveUserProfileRequest from '../actions/userProfile';
@@ -32,71 +30,59 @@ class Profile extends React.Component {
    */
   render() {
     return (
-      <div>
-        {
-          !this.props.authenticated &&
-          <Redirect to="/" />
-        }
+      <div className="container">
+        <div className="sidenav">
+          <Link
+            className="btn btn-secondary"
+            to="/recipe/add"
+          >
+            Add Recipe
+              </Link>
 
-        <div className="container userButtons">
-          <div className="row">
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/recipe/add"
-              >
-                Add Recipe
+          <Link
+            className="btn btn-secondary"
+            to="/users/recipes"
+          >
+            My Recipes
               </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/users/recipes"
-              >
-                My Recipes
+
+          <Link
+            className="btn btn-secondary"
+            to="/users/favourites"
+          >
+            My Favourite Recipes
               </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/users/favourites"
-              >
-                My Favourite Recipes
-              </Link>
-            </div>
-          </div>
         </div>
 
-        <section className="section bord2" id="profile">
-          <div className="container">
-            <div className="row text-center bord">
-              <div className="col-md-12">
-
-                <Gravatar
-                  className="img rounded"
-                  email={this.props.userDetails.email}
-                />
-                <br />
-                <strong> Full Name </strong>
-                <p>{this.props.userDetails.fullname}</p>
-
-                <strong> Username </strong>
-                <p> {this.props.userDetails.username} </p>
-
-                <strong> Email </strong>
-                <p> {this.props.userDetails.email}</p>
-
-                <strong> Joined </strong>
-                <p> {this.props.userDetails.joined} </p>
-
-                <div className="container">
-                  <a><i className="btn btn-primary fa fa-pencil"> Edit </i></a>
-                  <a><i className="btn btn-success fa fa-check"> Update </i></a>
-                </div>
-              </div>
+        <div className="container profile">
+          <div className="row">
+            <div className="col-md-6 col-sm-12">
+              <Gravatar
+                className="img-fluid mx-auto d-block"
+                width="400"
+                height="200"
+                email={this.props.userDetails.email}
+              />
             </div>
+
+            <div className="col-md-6 col-sm-12">
+
+              <h5 className="pt-3"> Name </h5>
+              <p>{this.props.userDetails.fullname}</p>
+
+              <h5 className="pt-3"> Username </h5>
+              <p> {this.props.userDetails.username} </p>
+
+              <h5 className="pt-3"> Email </h5>
+              <p> {this.props.userDetails.email}</p>
+
+              <h5 className="pt-3"> Joined </h5>
+              <p> {this.props.userDetails.joined} </p>
+
+            </div>
+
           </div>
-        </section>
+        </div>
       </div>
     );
   }

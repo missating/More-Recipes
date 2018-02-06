@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 
 // components
-import UserFavouritesCard from './UserFavouritesCard';
+import RecipeCard from './RecipeCard';
 
 // actions
 import getUserFavourites from '../actions/getUserFavourites';
@@ -67,10 +67,10 @@ class UserFavourites extends React.Component {
         this.state.userFavourites : [];
     const userFavouritesList = userFavourites.map((favourites, i) => (
       <div className="col-md-4" key={`favourites${i + 1}`}>
-        <UserFavouritesCard
+        <RecipeCard
           recipeImage={favourites.Recipe.recipeImage}
           name={favourites.Recipe.name}
-          ingredients={favourites.Recipe.ingredients}
+          description={favourites.Recipe.description}
           id={favourites.recipeId}
         />
       </div>
@@ -78,93 +78,36 @@ class UserFavourites extends React.Component {
 
     if (userFavourites.length) {
       return (
-        <div>
+        <section className="container" id="recipes">
+          <div>
+            {
+              !this.props.authenticated &&
+              <Redirect to="/" />
+            }
 
+            <h3 className="text-center">My Favourite Recipes</h3>
+            <br />
+            <div className="row">
+              {userFavouritesList}
+            </div>
+          </div>
+        </section>
+
+      );
+    }
+    return (
+      <section className="container" id="recipes">
+        <div>
           {
             !this.props.authenticated &&
             <Redirect to="/" />
           }
-          <div className="container userButtons">
-            <div className="row">
-              <div className="col-md-4">
-                <Link
-                  className="btn btn-outline-primary"
-                  to="/profile"
-                >
-                  My Profile
-                </Link>
-              </div>
-              <div className="col-md-4">
-                <Link
-                  className="btn btn-outline-primary"
-                  to="/recipe/add"
-                >
-                  Add Recipe
-                </Link>
-              </div>
-              <div className="col-md-4">
-                <Link
-                  className="btn btn-outline-primary"
-                  to="/user/favourites"
-                >
-                  My Favourite Recipes
-                </Link>
-              </div>
-            </div>
-          </div>
-          <section className="section" id="view">
-            <div className="container">
-              <h3 className="text-center bottom">My Favourite Recipes</h3>
-              <div className="row">
-                {userFavouritesList}
-              </div>
-            </div>
-          </section>
+
+          <h3 className="text-center">My Favourite Recipes</h3>
+          <br />
+          <h4 className="text-center m-5"> {userFavouritesError} </h4>
         </div>
-      );
-    }
-    return (
-      <div>
-        {
-          !this.props.authenticated &&
-          <Redirect to="/" />
-        }
-        <div className="container userButtons">
-          <div className="row">
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/profile"
-              >
-                My Profile
-              </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/recipe/add"
-              >
-                Add Recipe
-              </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/user/favourites"
-              >
-                My Favourite Recipes
-              </Link>
-            </div>
-          </div>
-        </div>
-        <section className="section" id="view">
-          <div className="container">
-            <h3 className="text-center bottom">My Favourite Recipes</h3>
-            <br />
-            <h4 className="text-center m-5"> {userFavouritesError} </h4>
-          </div>
-        </section>
-      </div>
+      </section>
     );
   }
 }
@@ -172,7 +115,6 @@ class UserFavourites extends React.Component {
 UserFavourites.propTypes = {
   favourites: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
-  userFavouritesError: PropTypes.string.isRequired
 };
 
 

@@ -3,31 +3,25 @@ import PropTypes from 'prop-types';
 
 
 const ActionButtons = props => (
-  <div className="mainBtn">
+  <div className="container">
 
-    <button
-      className="btn btn-outline-danger disabled"
-      style={{ margin: '5px' }}
-    >
+    <button className="btn disabled">
       <span>
-        <i className="fa fa-thumbs-down" />
+        <i className="far fa-thumbs-up" />
       </span>
       {props.singleRecipe.downvote}
     </button>
 
-    <button
-      className="btn btn-outline-success disabled"
-      style={{ margin: '5px' }}
-    >
+    <button className="btn disabled">
       <span>
-        <i className="fa fa-thumbs-up" />
+        <i className="fa fa-thumbs-down" />
       </span>
       {props.singleRecipe.upvote}
     </button>
 
-    <button className="btn btn-outline-danger disabled">
+    <button className="btn disabled">
       <span>
-        <i className="fa fa-heart disabled" />
+        <i className="far fa-heart" />
       </span>
       {props.singleRecipe.favourite}
     </button>

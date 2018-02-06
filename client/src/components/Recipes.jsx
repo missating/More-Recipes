@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // components
-import RecipeGallery from './RecipeGallery';
+import RecipeCard from './RecipeCard';
 
 // actions
 import getAllRecipes from '../actions/getAllRecipes';
@@ -34,13 +34,19 @@ export class Recipes extends React.Component {
 
     const recipeList = recipes.map((recipe, i) => (
       <div className="col-md-4" key={`recipe${i + 1}`}>
-        <RecipeGallery {...recipe} />
+        <RecipeCard
+          {...recipe}
+        />
       </div>
     ));
 
     return (
-      <div id="recipe-container" className="container">
-        <div className="row">{recipeList}</div>
+      <div>
+        <section className="container" id="recipes">
+          <div className="row">
+            {recipeList}
+          </div>
+        </section>
       </div>
     );
   }

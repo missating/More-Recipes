@@ -146,63 +146,40 @@ class AddRecipe extends React.Component {
           <Redirect to="/" />
         }
 
-        <div className="container userButtons">
-          <div className="row">
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/profile"
-              >
-                My Profile
-              </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/users/recipes"
-              >
-                My Recipes
-              </Link>
-            </div>
-            <div className="col-md-4">
-              <Link
-                className="btn btn-outline-primary"
-                to="/users/favourites"
-              >
-                My Favourite Recipes
-              </Link>
-            </div>
-          </div>
-        </div>
 
-        <section className="section" id="add">
+        <section className="container" id="recipes">
 
-          <h3 className="text-center bottom">Add New Recipe</h3>
+          <h3 className="text-center mb-4">New Recipe</h3>
 
           <div className="row">
-            <div className="col-md-12">
-              <form className="form-horizontal" onSubmit={this.onSubmit}>
+            <div className="col-md-12 col-sm-12">
+              <form onSubmit={this.onSubmit}>
                 <Dropzone
                   onDrop={this.handleDrop}
                   accept="image/*"
                   multiple={false}
-                  style={{ border: '1px solid #000' }}
+                  style={{
+                    border: '3px dashed ',
+                    width: '300px',
+                    height: 'auto',
+                    margin: '0 auto',
+                    padding: '5px'
+                  }}
                 >
                   {!newRecipe.recipeImage.preview &&
-                    <p className="text-center">Click here to upload</p>
+                    <h5 className="text-center">Click here to upload</h5>
                   }
                   {
                     newRecipe.recipeImage.preview &&
                     <img
                       src={newRecipe.recipeImage.preview}
                       alt=""
-                      style={{ width: '300px' }}
-                      className="img-responsive"
+                      className="img-fluid mx-auto d-block"
                     />
                   }
                 </Dropzone>
 
-                <div className="form-group">
+                <div className="form-group form-width">
                   <input
                     type="text"
                     name="name"
@@ -211,12 +188,17 @@ class AddRecipe extends React.Component {
                     value={newRecipe.name}
                     onChange={this.onChange}
                   />
-                  {errors.name &&
-                    <span className="help-block">{errors.name}</span>}
+                  {
+                    errors.name &&
+                    <span
+                      className="help-block text-danger">
+                      {errors.name}
+                    </span>
+                  }
                 </div>
 
 
-                <div className="form-group">
+                <div className="form-group form-width">
                   <input
                     type="text"
                     name="ingredients"
@@ -225,11 +207,16 @@ class AddRecipe extends React.Component {
                     value={newRecipe.ingredients}
                     onChange={this.onChange}
                   />
-                  {errors.ingredients &&
-                    <span className="help-block">{errors.ingredients}</span>}
+                  {
+                    errors.ingredients &&
+                    <span
+                      className="help-block text-danger">
+                      {errors.ingredients}
+                    </span>
+                  }
                 </div>
 
-                <div className="form-group">
+                <div className="form-group form-width">
                   <textarea
                     type="text"
                     rows="5"
@@ -240,20 +227,30 @@ class AddRecipe extends React.Component {
                     value={newRecipe.description}
                     onChange={this.onChange}
                   />
-                  {errors.description &&
-                    <span className="help-block">{errors.description}</span>}
+                  {
+                    errors.description &&
+                    <span
+                      className="help-block text-danger">
+                      {errors.description}
+                    </span>
+                  }
                 </div>
 
-                <div className="form-group">
-                  <button className="btn btn-primary">Add Recipe</button>
+                <div className="form-group form-width">
+                  <button
+                    className="btn btn-secondary">
+                    Add Recipe
+                  </button>
+                  <Link
+                    className="btn btn-secondary"
+                    to="/users/recipes"
+                  >
+                    Cancel
+              </Link>
                 </div>
-
               </form>
-
             </div>
-
           </div>
-
         </section>
       </div>
 

@@ -42,7 +42,7 @@ export default class reviewsController {
         return db.Review.create(newReview)
           .then(createdReview => db.Review.findById(createdReview.id, {
             include: [{
-              model: db.User, attributes: ['fullname']
+              model: db.User, attributes: ['fullname', 'email']
             }]
           }).then(review => res.status(201)
             .json({

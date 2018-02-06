@@ -6,23 +6,20 @@ import PropTypes from 'prop-types';
 const RecipeCard = props => (
   <div>
     <div className="card">
-      <div className="card-header">{props.name}</div>
-      <div className="card-main">
-        <img
-          src={props.recipeImage}
-          alt={props.recipeImage}
-          className="img-thumbnail"
-        />
-        <div className="main-description">
-          <p>{props.description} </p>
-        </div>
-        <div className="mainBtn">
+      <img src={props.recipeImage}
+        alt={props.recipeImage}
+        className="image-width"
+      />
+      <div className="container p-3 recipedetails-column">
+        <h2>{props.name}</h2>
+        <p><small>{props.description}</small></p>
+        <div className="center-button">
           <Link
-            className="btn btn-outline-primary"
+            className="btn btn-secondary"
             to={`/recipes/view/${props.id}`}
           >
-            Details
-          </Link>
+            CHECK IT OUT
+     </Link>
         </div>
       </div>
     </div>

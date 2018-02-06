@@ -21,9 +21,10 @@ const fetchUserSignin = formData => (dispatch) => {
   dispatch(setFetching());
   return axios.post('/api/v1/users/signin', formData)
     .then((response) => {
-      const { token, user } = response.data;
+      const { token, foundUser } = response.data;
       localStorage.setItem('token', token);
-      dispatch(getAuth(user, token));
+      localStorage.setItem('user', JSON.stringify(foundUser));
+      dispatch(getAuth(foundUser, token));
       dispatch(unsetFetching());
     }).catch((error) => {
       const { message } = error.response.data;
