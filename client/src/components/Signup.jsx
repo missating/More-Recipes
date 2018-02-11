@@ -44,7 +44,7 @@ class Signup extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated &&
       nextProps.auth.errorMessage.length === 0) {
-      $('#myModal').modal('hide');
+      $('#signup-modal').modal('hide');
     }
   }
 
@@ -83,8 +83,10 @@ class Signup extends React.Component {
     const { isValid, errors } = signupValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
     }
-    return isValid;
   }
 
   /**
@@ -99,20 +101,33 @@ class Signup extends React.Component {
     let signupError;
     if (this.props.auth.errorMessage) {
       signupError = (
-        <span className="help-block">{this.props.auth.errorMessage}</span>
+        <span className="help-block text-danger">{this.props.auth.errorMessage}</span>
       );
     }
     return (
       <div>
         <div
-          id="myModal"
+          id="signup-modal"
           className="modal fade"
-          tabIndex="-1"
-          role="dialog"
-          aria-hidden="true"
         >
-          <div className="modal-dialog modal-lg">
+          <div className="modal-dialog modal-dialog-centered modal-sm">
             <div className="modal-content">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    float: 'right',
+                    cursor: 'pointer'
+                  }}
+                >
+                  &times;
+                </span>
+              </button>
               <div className="modal-body">
 
                 {signupError}
@@ -132,7 +147,7 @@ class Signup extends React.Component {
                         />
                         {
                           errors.fullname &&
-                          <span className="help-block">
+                          <span className="help-block text-danger">
                             {errors.fullname}
                           </span>
                         }
@@ -149,7 +164,7 @@ class Signup extends React.Component {
                         />
                         {
                           errors.username &&
-                          <span className="help-block">
+                          <span className="help-block text-danger">
                             {errors.username}
                           </span>
                         }
@@ -166,7 +181,7 @@ class Signup extends React.Component {
                         />
                         {
                           errors.email &&
-                          <span className="help-block">
+                          <span className="help-block text-danger">
                             {errors.email}
                           </span>
                         }
@@ -183,7 +198,7 @@ class Signup extends React.Component {
                         />
                         {
                           errors.password &&
-                          <span className="help-block">
+                          <span className="help-block text-danger">
                             {errors.password}
                           </span>
                         }
@@ -201,29 +216,20 @@ class Signup extends React.Component {
                         />
                         {
                           errors.confirmPassword &&
-                          <span className="help-block">
+                          <span className="help-block text-danger">
                             {errors.confirmPassword}
                           </span>
                         }
                       </div>
-                      <br />
-
                       <button
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-secondary"
                         type="submit"
-                      > Submit
+                      >
+                        Submit
                       </button>
                     </form>
                   </div>
                 </div>
-              </div>
-              <div className="modal-footer">
-                <button
-                  className="btn btn-danger btn-sm"
-                  data-dismiss="modal"
-                >
-                  close
-                </button>
               </div>
             </div>
           </div>
@@ -234,7 +240,7 @@ class Signup extends React.Component {
 }
 const authProps = {
   isAuthenticated: PropTypes.bool,
-  user: PropTypes.object,
+  user: PropTypes.string,
   token: PropTypes.string,
   errorMessage: PropTypes.string
 };

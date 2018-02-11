@@ -22,7 +22,7 @@ export default (sequelize, DataTypes) => {
 
     recipeImage: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
 
 
@@ -36,10 +36,10 @@ export default (sequelize, DataTypes) => {
 
   Recipe.associate = (models) => {
     // associations defined here
-    Recipe.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-    Recipe.hasMany(models.Review, { foreignKey: 'recipeId' });
-    Recipe.hasMany(models.Vote, { foreignKey: 'recipeId' });
-    Recipe.hasMany(models.Favourite, { foreignKey: 'recipeId' });
+    Recipe.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
+    Recipe.hasMany(models.Review, { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true });
+    Recipe.hasMany(models.Vote, { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true });
+    Recipe.hasMany(models.Favourite, { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true });
   };
   return Recipe;
 };

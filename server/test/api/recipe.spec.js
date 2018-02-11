@@ -80,20 +80,17 @@ describe('RECIPE CONTROLLER', () => {
         });
     });
 
-    it('Should not add a recipe with an empty image field', (done) => {
+    it('Should add a recipe without an empty image field', (done) => {
       chai.request(app)
         .post(recipeUrl)
         .set('token', userToken)
         .send({
-          name: 'Test Recipe',
+          name: 'Test Recipe 1',
           ingredients: 'test, test, test',
           description: 'For testing the recipe',
-          recipeImage: ''
         })
         .end((error, response) => {
-          expect(response.status).to.equal(400);
-          expect(response.body.error.recipeImage)
-            .to.include('Image for recipe is required');
+          expect(response.status).to.equal(201);
           done();
         });
     });

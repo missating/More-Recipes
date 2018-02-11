@@ -48,7 +48,7 @@ describe('Recip component', () => {
     ];
     const wrapper = mount(<MemoryRouter>
       <Recipes fetchAllRecipes={fetchAllRecipes} allRecipes={allRecipes} />
-                          </MemoryRouter>);
+    </MemoryRouter>);
     expect(wrapper.find(RecipeGallery).length).toEqual(2);
   });
 });

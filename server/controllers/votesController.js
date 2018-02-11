@@ -20,6 +20,14 @@ export default class votesController {
       return res.status(400).json({ message: 'Vote query action is required' });
     }
 
+    if ((voteQuery !== 'upvote') && (voteQuery !== 'downvote')) {
+      return res.status(400).json({ message: 'Please provide the correct query action' });
+    }
+
+    if (isNaN(parseInt(req.params.recipeId, 10))) {
+      return res.status(400).json({ message: 'RecipeId must be a number' });
+    }
+
     return db.Recipe.findById(req.params.recipeId)
       .then((foundRecipe) => {
         if (!foundRecipe) {
@@ -68,11 +76,11 @@ export default class votesController {
                 [queryAction]: 0,
                 [voteQuery]: 1
               }, {
-                where: {
-                  userId: req.userId,
-                  recipeId: req.params.recipeId
-                }
-              });
+                  where: {
+                    userId: req.userId,
+                    recipeId: req.params.recipeId
+                  }
+                });
               return res.status(200)
                 .json({
                   status: 'sucess',

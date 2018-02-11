@@ -44,14 +44,14 @@ class TopRecipes extends React.Component {
 
     if (topRecipe.length < 1) {
       topRecipeList =
-        <p className="text-center display-5">Currently no featured recipes.</p>;
+        <h5 className="text-center display-5">Currently no featured recipes.</h5>;
     }
     return (
       <div>
         <section className="container">
           <h2 className="text-center mt-5"> Featured Recipes </h2>
           <hr />
-          <div className="row justify-content-center py-3">
+          <div className="row justify-content-center">
             {topRecipeList}
           </div>
         </section>

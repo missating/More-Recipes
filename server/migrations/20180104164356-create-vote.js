@@ -9,13 +9,24 @@ module.exports = {
 
     recipeId: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Recipes',
+        key: 'id',
+        as: 'recipeId'
+      }
     },
 
     userId: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: '`roleId`'
+      }
     },
 
     upvote: {

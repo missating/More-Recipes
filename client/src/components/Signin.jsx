@@ -31,6 +31,20 @@ class Signin extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  /**
+  *
+  * @returns {json} with nextProps details
+  * @param {any} nextProps
+  * @memberof Signin
+  */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated &&
+      nextProps.auth.errorMessage.length === 0) {
+      $('#signin-modal').modal('hide');
+    }
+  }
+
   /**
  * @description handles form change events
  * @returns {null} null
@@ -66,8 +80,10 @@ class Signin extends React.Component {
     const { isValid, errors } = signinValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
     }
-    return isValid;
   }
 
   /**
@@ -82,56 +98,87 @@ class Signin extends React.Component {
     let signinError;
     if (this.props.auth.errorMessage) {
       signinError = (
-        <span className="help-block">{this.props.auth.errorMessage}</span>
+        <span className="help-block text-danger">{this.props.auth.errorMessage}</span>
       );
     }
     return (
       <div>
-        <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
+        <div
+          id="signin-modal"
+          className="modal fade"
+        >
+          <div className="modal-dialog modal-dialog-centered modal-sm">
+            <div className="modal-content">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    float: 'right',
+                    cursor: 'pointer'
+                  }}
+                >
+                  &times;
+                </span>
+              </button>
+              <div className="modal-body">
 
-          {signinError}
+                {signinError}
 
-          <div className="form-group">
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={this.state.email}
-              onChange={this.onChange}
-              className="form-control"
-            />
-            {
-              errors.email &&
-              <span className="help-block text-danger">
-                {errors.email}
-              </span>
-            }
+                <div className="row">
+                  <div className="col-sm-12">
+                    <form onSubmit={this.onSubmit}>
+
+                      <div className="form-group">
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          name="email"
+                          value={this.state.email}
+                          onChange={this.onChange}
+                          className="form-control signin-input"
+                        />
+                        {
+                          errors.email &&
+                          <span className="help-block text-danger">
+                            {errors.email}
+                          </span>
+                        }
+                      </div>
+
+                      <div className="form-group">
+                        <input
+                          type="password"
+                          placeholder="Password"
+                          name="password"
+                          value={this.state.password}
+                          onChange={this.onChange}
+                          className="form-control signin-input"
+                        />
+                        {
+                          errors.password &&
+                          <span className="help-block text-danger">
+                            {errors.password}
+                          </span>
+                        }
+                      </div>
+                      <button
+                        className="btn btn-secondary"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div className="form-group">
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={this.state.password}
-              onChange={this.onChange}
-              className="form-control"
-            />
-            {
-              errors.password &&
-              <span className="help-block text-danger">
-                {errors.password}
-              </span>
-            }
-          </div>
-
-          <button
-            className="btn btn-primary my-2 my-sm-0"
-            type="submit"
-          >Sign In
-          </button>
-
-        </form>
+        </div>
       </div>
     );
   }
@@ -139,7 +186,7 @@ class Signin extends React.Component {
 
 const authProps = {
   isAuthenticated: PropTypes.bool,
-  user: PropTypes.object,
+  user: PropTypes.string,
   token: PropTypes.string,
   errorMessage: PropTypes.string
 };

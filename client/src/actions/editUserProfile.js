@@ -1,33 +1,32 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import { EDIT_RECIPE } from './actionTypes';
+import { EDIT_USER_PROFILE } from './actionTypes';
 import { setFetching, unsetFetching } from './fetching';
 
-const editRecipeSuccess = recipe => ({
-  type: EDIT_RECIPE,
-  recipe
+const editProfileSuccess = user => ({
+  type: EDIT_USER_PROFILE,
+  user
 });
 
-
-const editRecipe = (recipe, recipeId) => (dispatch) => {
+const editProfile = userDetails => (dispatch) => {
   const {
-    name, ingredients, description, recipeImage
-  } = recipe;
+    fullname, username
+  } = userDetails;
   const token = localStorage.getItem('token');
   dispatch(setFetching());
   return axios({
     method: 'PUT',
-    url: `/api/v1/recipes/${recipeId}`,
+    url: 'api/v1/users/profile',
     headers: {
       token
     },
     data: {
-      name, ingredients, description, recipeImage
+      fullname, username
     }
   })
     .then((response) => {
-      const updatedRecipe = response.data.recipe;
-      dispatch(editRecipeSuccess(updatedRecipe));
+      const updatedProfile = response.data.user;
+      dispatch(editProfileSuccess(updatedProfile));
       dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
@@ -35,13 +34,13 @@ const editRecipe = (recipe, recipeId) => (dispatch) => {
         positionClass: 'toast-top-right',
         hideMethod: 'fadeOut'
       };
-      toastr.success('Recipe updated succesfully');
+      toastr.success('Profile updated succesfully');
     })
     .catch((error) => {
-      console.log('Edit recipes error', error.response.data.message);
+      console.log('Edit profile error', error.response.data.message);
       dispatch(unsetFetching());
     });
 };
 
-export default editRecipe;
+export default editProfile;
 

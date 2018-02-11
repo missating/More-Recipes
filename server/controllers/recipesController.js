@@ -32,8 +32,14 @@ export default class recipesController {
    */
   static addRecipe(req, res) {
     const {
-      name, ingredients, description, recipeImage
+      name, ingredients, description,
     } = req.body;
+
+    let { recipeImage } = req.body;
+
+    if (!recipeImage) {
+      recipeImage = 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png';
+    }
 
     db.Recipe.findOne({
       where: {
@@ -159,7 +165,8 @@ export default class recipesController {
             where: {
               id: req.params.recipeId,
               userId: req.userId
-            }
+            },
+            cascade: true
           })
             .then(() => res.status(200)
               .json({
@@ -185,38 +192,55 @@ export default class recipesController {
     let { sort } = req.query;
 
     if (!sort) {
-      db.Recipe.findAll({
-        include: [
-          {
-            model: db.Review,
-            attributes: ['content']
-          },
-          {
-            model: db.Vote,
-            attributes: ['upvote', 'downvote']
-          }
-        ]
-      })
-        .then((recipes) => {
-          if (recipes) {
-            return res.status(200)
-              .json({
-                status: 'Success',
-                recipes: updateRecipeAttributes(recipes),
-              });
-          }
-          if (!recipes) {
-            return res.status(200)
-              .json({
-                status: 'success',
-                message: 'Currently no recipes'
-              });
-          }
+      db.Recipe.findAndCountAll().then((all) => {
+        const limit = 2;
+        let offset = 0;
+        const page = parseInt((req.query.page || 1), 10);
+        const numberOfItems = all.count;
+        const pages = Math.ceil(numberOfItems / limit);
+        offset = limit * (page - 1);
+        db.Recipe.findAll({
+          limit,
+          offset,
+          order: [
+            ['id', 'DESC']
+          ],
+          include: [
+            {
+              model: db.Review,
+              attributes: ['content']
+            },
+            {
+              model: db.Vote,
+              attributes: ['upvote', 'downvote']
+            }
+          ]
         })
-        .catch(() => res.status(500).json({
-          status: 'error',
-          message: 'Internal server error'
-        }));
+          .then((recipes) => {
+            if (recipes) {
+              return res.status(200)
+                .json({
+                  status: 'Success',
+                  NumberOfItems: numberOfItems,
+                  Limit: limit,
+                  Pages: pages,
+                  CurrentPage: page,
+                  recipes: updateRecipeAttributes(recipes),
+                });
+            }
+            if (!recipes) {
+              return res.status(200)
+                .json({
+                  status: 'success',
+                  message: 'Currently no recipes'
+                });
+            }
+          })
+          .catch(() => res.status(500).json({
+            status: 'error',
+            message: 'Internal server error'
+          }));
+      });
     }
 
     if (sort) {
@@ -277,7 +301,7 @@ export default class recipesController {
           attributes: ['content', 'createdAt'],
           include: [{
             model: db.User,
-            attributes: ['fullname']
+            attributes: ['fullname', 'email']
           }]
         },
         {

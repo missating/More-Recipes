@@ -6,61 +6,96 @@ import PropTypes from 'prop-types';
 // actions
 import signUserOut from '../actions/signout';
 
-// components
-import Signin from './Signin';
-
 const Header = props => (
   <header>
-    <nav className="navbar navbar-expand-lg navbar-dark mb-5 bg-dark">
-      <a className="navbar-brand" href="/">More Recipes</a>
+    <nav
+      className="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-black"
+    >
+      <a
+        className="navbar-brand"
+        href="/"
+      >
+        More Recipes
+      </a>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler navbar-toggler-right"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon" />
       </button>
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-            <span className="sr-only">(current)</span>
-          </li>
+      <div className="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul className="navbar-nav ml-auto">
+          <span className="sr-only">(current)</span>
           <li className="nav-item">
             <Link className="nav-link" to="/recipes">Recipes</Link>
           </li>
 
           {
             props.authenticated &&
-            <li className="nav-item" >
-              <Link className="nav-link" to="/profile">Profile</Link>
+            <Link className="nav-link" to="/recipe/add">Create Recipe</Link>
+          }
+
+          {
+            props.authenticated &&
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Dashboard
+              </a>
+              <div
+                className="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <Link
+                  className="nav-link"
+                  to="/profile"
+                >
+                  My Profile
+                </Link>
+                <Link
+                  className="nav-link"
+                  to="/users/recipes"
+                >
+                  My Recipes
+                </Link>
+                <Link
+                  className="nav-link"
+                  to="/users/favourites"
+                >
+                  My Favourites
+                </Link>
+              </div>
             </li>
           }
 
           {
             props.authenticated &&
             <li className="nav-item">
-              <a
-                className="nav-link"
+              <button
+                className="btn-secondary"
+                style={{ width: '100px' }}
                 onClick={() => { props.signUserOut(); }}
               >
-                Sign out
-              </a>
+                SIGN OUT
+              </button>
             </li>
           }
-        </ul>
 
-        {
-          !props.authenticated &&
-          <Signin />
-        }
+        </ul>
       </div>
     </nav>
+
   </header>
 );
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
@@ -37,7 +38,7 @@ class SingleRecipe extends React.Component {
    * @returns {json} with recipe details
    * @memberof SingleRecipe
    */
-  componentWillMount() {
+  componentDidMount() {
     const recipeId = this.props.match.params.id;
     this.props.recipe(recipeId);
   }
@@ -71,17 +72,22 @@ class SingleRecipe extends React.Component {
  * @memberof SingleRecipe
  */
   render() {
-    const ingredients = (this.state.singleRecipe.ingredients) ?
-      (this.state.singleRecipe.ingredients) : '';
-    const ingredientsList = ingredients.split(',').map((item, i) => (
-      <li className="list-group-item" key={i}>{item}</li>
-    ));
+    const { singleRecipe } = this.props;
+
+    if (singleRecipe.singleRecipe && !singleRecipe.singleRecipe.name) {
+      return (
+        <div className="loader-container">
+          <div className="loader" />
+        </div>
+      );
+    }
 
     const { reviews } = this.state;
     const allReviews = reviews.map((review, i) => (
       <div key={`review ${i + 1}`} className="container">
         <ViewReviews
           user={review.User.fullname}
+          email={review.User.email}
           content={review.content}
           created={new Date(review.createdAt).toDateString()}
         />
@@ -90,95 +96,90 @@ class SingleRecipe extends React.Component {
 
     return (
       <div>
-        <section className="container text-center" id="oneRecipe">
-          <h3 className="styles">{this.state.singleRecipe.name}</h3>
+        <section className="container" id="recipes">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-6 col-sm-12">
+              <h2 className="ml-4">{this.props.singleRecipe.name}</h2>
               <img
-                src={this.state.singleRecipe.recipeImage}
-                alt={this.state.singleRecipe.name}
+                src={this.props.singleRecipe.recipeImage}
+                alt={this.props.singleRecipe.name}
                 className="img-thumbnail"
               />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12">
-              <h4>Ingredients</h4>
-              <ul className="list-group">
-                {ingredientsList}
-              </ul>
-
-              <h4>Direction for cooking</h4>
-              <p>{this.state.singleRecipe.description}</p>
-
               {
                 !this.props.authenticated &&
                 <ActionButtons singleRecipe={this.state.singleRecipe} />
               }
               {
                 this.props.authenticated &&
-                <div className="mainBtn">
-
-                  <button
-                    className="btn btn-outline-danger"
-                    style={{ margin: '5px' }}
-                  >
+                <div className="container">
+                  <button className="btn active">
                     <span>
-                      <i
-                        className="fa fa-thumbs-down"
-                        aria-hidden="true"
-                      />
+                      <i className="far fa-thumbs-up" />
                     </span>
-                    {this.state.singleRecipe.downvote}
+                    {this.props.singleRecipe.downvote}
+                  </button>
+
+                  <button className="btn active">
+                    <span>
+                      <i className="far fa-thumbs-down" />
+                    </span>
+                    {this.props.singleRecipe.upvote}
                   </button>
 
                   <button
-                    className="btn btn-outline-success"
-                    style={{ margin: '5px' }}
-                  >
-                    <span>
-                      <i
-                        className="fa fa-thumbs-up"
-                        aria-hidden="true"
-                      />
-                    </span>
-                    {this.state.singleRecipe.upvote}
-                  </button>
-
-                  <button
-                    className="btn btn-outline-danger"
+                    className="btn active"
                     onClick={this.onFavourite}
                   >
                     <span>
-                      <i className="fa fa-heart" />
+                      <i className="far fa-heart" />
                     </span>
-                    {this.state.singleRecipe.favourite}
+                    {this.props.singleRecipe.favourite}
                   </button>
+
                 </div>
               }
             </div>
+            <div className="col-md-6 col-sm-12 recipe-details">
+              <hr />
+              <h5>Ingredients</h5>
+              <p>{this.props.singleRecipe.ingredients}</p>
+              <hr />
+              <h5> Method </h5>
+              <p>{this.props.singleRecipe.description}</p>
+            </div>
           </div>
-          <div className="container top">
-            <div className="row">
-              <div className="col-md-12">
-                <h4 className="text-center"> Reviews </h4>
-                {this.props.authenticated &&
-                  <AddReview recipeId={this.state.singleRecipe.id} />
-                }
-                <br />
-                {
-                  allReviews.length > 0 &&
-                  <div>
-                    {allReviews}
-                  </div>
-                }
-                {
-                  !allReviews.length &&
-                  <div className="container">
-                    <h2>There are currently no reviews for this recipe.</h2>
-                  </div>
-                }
-              </div>
+
+          <div className="row mt-5 recipe-details">
+            <div className="col-md-6 col-sm-12 reviews">
+              <h4> Reviews </h4>
+              {
+                allReviews.length > 0 &&
+                <div>
+                  {allReviews}
+                </div>
+              }
+              {
+                !allReviews.length &&
+                <div className="container">
+                  <p>Currently no reviews</p>
+                </div>
+              }
+            </div>
+            <div className="col-md-6 col-sm-12">
+              {this.props.authenticated &&
+                <AddReview recipeId={this.props.singleRecipe.id} />
+              }
+              {!this.props.authenticated &&
+                <div>
+                  <p className="ml-5"> Sign in to add a review </p>
+                  <Link
+                    className="btn btn-secondary ml-5"
+                    to="/"
+                  >
+                    SIGN IN
+                  </Link>
+                </div>
+              }
             </div>
           </div>
         </section>
@@ -198,7 +199,8 @@ SingleRecipe.propTypes = {
 
 const mapStateToProps = state => ({
   singleRecipe: state.recipes.singleRecipe,
-  authenticated: state.auth.isAuthenticated
+  authenticated: state.auth.isAuthenticated,
+  isFetching: state.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({

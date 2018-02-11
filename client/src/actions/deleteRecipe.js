@@ -20,6 +20,7 @@ const deleteRecipe = recipeId => (dispatch) => {
   })
     .then(() => {
       dispatch(deleteRecipeSuccess(recipeId));
+      dispatch(unsetFetching());
       toastr.options = {
         closeButton: true,
         extendedTimeOut: '1000',

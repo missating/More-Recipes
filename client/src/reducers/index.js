@@ -8,6 +8,7 @@ import topRecipes from './topRecipe';
 import userProfile from './userProfile';
 import userRecipes from './userRecipes';
 import userFavourites from './userFavourites';
+import pagination from './pagination';
 
 const rootReducer = combineReducers({
   auth,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   topRecipes,
   userProfile,
   userRecipes,
-  userFavourites
+  userFavourites,
+  pagination
 });
 
 export default rootReducer;
