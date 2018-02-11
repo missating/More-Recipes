@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 
 
 const RecipeCard = props => (
-  <div>
+  <div className="flex">
     <div className="card">
-      <img src={props.recipeImage}
+      <img
+        src={props.recipeImage}
         alt={props.recipeImage}
         className="image-width"
       />
@@ -18,8 +19,8 @@ const RecipeCard = props => (
             className="btn btn-secondary"
             to={`/recipes/view/${props.id}`}
           >
-            CHECK IT OUT
-     </Link>
+            VIEW
+          </Link>
         </div>
       </div>
     </div>

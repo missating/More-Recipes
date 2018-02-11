@@ -44,7 +44,7 @@ class TopRecipes extends React.Component {
 
     if (topRecipe.length < 1) {
       topRecipeList =
-        <p className="text-center display-5">Currently no featured recipes.</p>;
+        <h5 className="text-center display-5">Currently no featured recipes.</h5>;
     }
     return (
       <div>

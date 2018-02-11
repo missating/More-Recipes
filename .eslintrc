@@ -29,7 +29,8 @@
     "shallow": true,
     "mount": true,
     "eventObject": true,
-    "token": true
+    "token": true,
+    "localStorage": true
   },
   "rules": {
     "mport/extensions": 0,

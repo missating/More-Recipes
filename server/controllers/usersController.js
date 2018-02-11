@@ -154,7 +154,7 @@ export default class usersController {
  * @memberof Users
  */
   static updateUserProfile(req, res) {
-    const { fullname, username, email } = req.body;
+    const { fullname, username } = req.body;
 
     return db.User.findOne({
       where: {
@@ -166,7 +166,6 @@ export default class usersController {
           const update = {
             fullname: fullname || foundUser.fullname,
             username: username || foundUser.username,
-            email: email || foundUser.email
           };
           foundUser.update(update)
             .then(updatedUser => res.status(200)

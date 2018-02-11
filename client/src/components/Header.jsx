@@ -8,17 +8,29 @@ import signUserOut from '../actions/signout';
 
 const Header = props => (
   <header>
-    <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-black">
-      <a className="navbar-brand" href="/">More Recipes</a>
-      <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
+    <nav
+      className="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-black"
+    >
+      <a
+        className="navbar-brand"
+        href="/"
+      >
+        More Recipes
+      </a>
+      <button
+        className="navbar-toggler navbar-toggler-right"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-            <span className="sr-only">(current)</span>
-          </li>
+          <span className="sr-only">(current)</span>
           <li className="nav-item">
             <Link className="nav-link" to="/recipes">Recipes</Link>
           </li>
@@ -31,13 +43,38 @@ const Header = props => (
           {
             props.authenticated &&
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 Dashboard
-               </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <Link className="nav-link" to="/profile">My Profile</Link>
-                <Link className="nav-link" to="/users/recipes">My Recipes</Link>
-                <Link className="nav-link" to="/users/favourites">My Favourites</Link>
+              </a>
+              <div
+                className="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <Link
+                  className="nav-link"
+                  to="/profile"
+                >
+                  My Profile
+                </Link>
+                <Link
+                  className="nav-link"
+                  to="/users/recipes"
+                >
+                  My Recipes
+                </Link>
+                <Link
+                  className="nav-link"
+                  to="/users/favourites"
+                >
+                  My Favourites
+                </Link>
               </div>
             </li>
           }

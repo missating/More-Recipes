@@ -17,13 +17,17 @@ const Home = props => (
           <div className="btn-group">
             {!props.authenticated && (
               <div>
-                <a href="#signup-modal" data-toggle="modal" data-target="#signup-modal">
+                <a
+                  href="#signup-modal"
+                  data-toggle="modal"
+                  data-target="#signup-modal"
+                >
                   <button
                     type="button"
                     className="btn signup-button"
                   >
                     SIGN UP
-              </button>
+                  </button>
                 </a>
               </div>
             )}
@@ -31,13 +35,17 @@ const Home = props => (
 
             {!props.authenticated && (
               <div>
-                <a href="#signin-modal" data-toggle="modal" data-target="#signin-modal">
+                <a
+                  href="#signin-modal"
+                  data-toggle="modal"
+                  data-target="#signin-modal"
+                >
                   <button
                     type="button"
                     className="btn signin-button"
                   >
                     SIGN IN
-              </button>
+                  </button>
                 </a>
               </div>
             )}
@@ -51,7 +59,13 @@ const Home = props => (
         </div>
       </div>
       <div className="scroll-holder">
-        <a href="#featured" ><i className="fas fa-angle-double-down fa-3x scroll-down" /></a>
+        <a
+          href="#featured"
+        >
+          <i
+            className="fas fa-angle-double-down fa-3x scroll-down"
+          />
+        </a>
       </div>
     </div>
     <TopRecipes />

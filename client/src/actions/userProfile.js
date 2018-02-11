@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { RECEIVE_USER_PROFILE } from './actionTypes';
+import { GET_USER_PROFILE } from './actionTypes';
+
 
 // action creators to get user profile
-export const receiveUserProfile = userDetails => ({
-  type: RECEIVE_USER_PROFILE,
-  userDetails
+export const userProfile = user => ({
+  type: GET_USER_PROFILE,
+  user
 });
 
-const receiveUserProfileRequest = () => (dispatch) => {
+const getUserProfile = () => (dispatch) => {
   dispatch(setFetching());
   const token = localStorage.getItem('token');
   return axios({
@@ -19,8 +20,8 @@ const receiveUserProfileRequest = () => (dispatch) => {
     }
   })
     .then((response) => {
-      const userProfile = response.data.user;
-      dispatch(receiveUserProfile(userProfile));
+      const { user } = response.data;
+      dispatch(userProfile(user));
       dispatch(unsetFetching());
     }).catch((error) => {
       console.log('User profile error', error);
@@ -28,4 +29,4 @@ const receiveUserProfileRequest = () => (dispatch) => {
     });
 };
 
-export default receiveUserProfileRequest;
+export default getUserProfile;

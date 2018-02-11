@@ -34,6 +34,7 @@ class AddRecipe extends React.Component {
         recipeImage: '',
       },
       errors: {},
+      defaultImg: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -64,13 +65,30 @@ class AddRecipe extends React.Component {
  */
   onSubmit(event) {
     event.preventDefault();
+    const { newRecipe } = this.state;
     const isValid = this.isValid();
     if (isValid) {
-      this.uploadToCloudinary().then((response) => {
-        const secureUrl = response.data.secure_url;
-        const recipeData = this.state.newRecipe;
-        recipeData.recipeImage = secureUrl;
+      if (newRecipe.recipeImage) {
+        this.uploadToCloudinary().then((response) => {
+          const secureUrl = response.data.secure_url;
+          const recipeData = this.state.newRecipe;
+          recipeData.recipeImage = secureUrl;
 
+          this.props.addNewRecipe(recipeData)
+            .then(() => {
+              this.setState({
+                newRecipe: {
+                  name: '',
+                  ingredients: '',
+                  description: '',
+                  recipeImage: ''
+                }
+              });
+              this.props.history.push('/users/recipes');
+            });
+        });
+      } else {
+        const recipeData = { ...newRecipe, recipeImage: this.state.defaultImg };
         this.props.addNewRecipe(recipeData)
           .then(() => {
             this.setState({
@@ -83,7 +101,7 @@ class AddRecipe extends React.Component {
             });
             this.props.history.push('/users/recipes');
           });
-      });
+      }
     }
   }
 
@@ -138,7 +156,7 @@ class AddRecipe extends React.Component {
    * @memberof AddRecipe
    */
   render() {
-    const { errors, newRecipe } = this.state;
+    const { errors, newRecipe, defaultImg } = this.state;
     return (
       <div>
         {
@@ -167,7 +185,14 @@ class AddRecipe extends React.Component {
                   }}
                 >
                   {!newRecipe.recipeImage.preview &&
-                    <h5 className="text-center">Click here to upload</h5>
+                    <div>
+                      <img
+                        src={defaultImg}
+                        alt=""
+                        className="img-fluid mx-auto d-block"
+                      />
+                      <h5 className="text-center">Click here to upload</h5>
+                    </div>
                   }
                   {
                     newRecipe.recipeImage.preview &&
@@ -191,7 +216,8 @@ class AddRecipe extends React.Component {
                   {
                     errors.name &&
                     <span
-                      className="help-block text-danger">
+                      className="help-block text-danger"
+                    >
                       {errors.name}
                     </span>
                   }
@@ -210,7 +236,8 @@ class AddRecipe extends React.Component {
                   {
                     errors.ingredients &&
                     <span
-                      className="help-block text-danger">
+                      className="help-block text-danger"
+                    >
                       {errors.ingredients}
                     </span>
                   }
@@ -230,7 +257,8 @@ class AddRecipe extends React.Component {
                   {
                     errors.description &&
                     <span
-                      className="help-block text-danger">
+                      className="help-block text-danger"
+                    >
                       {errors.description}
                     </span>
                   }
@@ -238,7 +266,8 @@ class AddRecipe extends React.Component {
 
                 <div className="form-group form-width">
                   <button
-                    className="btn btn-secondary">
+                    className="btn btn-secondary"
+                  >
                     Add Recipe
                   </button>
                   <Link
@@ -246,7 +275,7 @@ class AddRecipe extends React.Component {
                     to="/users/recipes"
                   >
                     Cancel
-              </Link>
+                  </Link>
                 </div>
               </form>
             </div>

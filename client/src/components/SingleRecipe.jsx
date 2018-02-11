@@ -38,7 +38,7 @@ class SingleRecipe extends React.Component {
    * @returns {json} with recipe details
    * @memberof SingleRecipe
    */
-  componentWillMount() {
+  componentDidMount() {
     const recipeId = this.props.match.params.id;
     this.props.recipe(recipeId);
   }
@@ -72,6 +72,15 @@ class SingleRecipe extends React.Component {
  * @memberof SingleRecipe
  */
   render() {
+    const { singleRecipe } = this.props;
+
+    if (singleRecipe.singleRecipe && !singleRecipe.singleRecipe.name) {
+      return (
+        <div className="loader-container">
+          <div className="loader" />
+        </div>
+      );
+    }
 
     const { reviews } = this.state;
     const allReviews = reviews.map((review, i) => (
@@ -117,7 +126,8 @@ class SingleRecipe extends React.Component {
                     {this.props.singleRecipe.upvote}
                   </button>
 
-                  <button className="btn active"
+                  <button
+                    className="btn active"
                     onClick={this.onFavourite}
                   >
                     <span>
@@ -167,7 +177,7 @@ class SingleRecipe extends React.Component {
                     to="/"
                   >
                     SIGN IN
-                 </Link>
+                  </Link>
                 </div>
               }
             </div>
@@ -189,7 +199,8 @@ SingleRecipe.propTypes = {
 
 const mapStateToProps = state => ({
   singleRecipe: state.recipes.singleRecipe,
-  authenticated: state.auth.isAuthenticated
+  authenticated: state.auth.isAuthenticated,
+  isFetching: state.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({

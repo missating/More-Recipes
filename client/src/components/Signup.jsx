@@ -83,8 +83,10 @@ class Signup extends React.Component {
     const { isValid, errors } = signupValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
     }
-    return isValid;
   }
 
   /**
@@ -238,7 +240,7 @@ class Signup extends React.Component {
 }
 const authProps = {
   isAuthenticated: PropTypes.bool,
-  user: PropTypes.object,
+  user: PropTypes.string,
   token: PropTypes.string,
   errorMessage: PropTypes.string
 };

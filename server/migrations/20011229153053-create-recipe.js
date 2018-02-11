@@ -14,7 +14,13 @@ module.exports = {
 
     userId: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'userId'
+      }
     },
 
     ingredients: {
@@ -29,7 +35,7 @@ module.exports = {
 
     recipeImage: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
 
     favourite: {

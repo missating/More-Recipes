@@ -86,7 +86,7 @@ class UserFavourites extends React.Component {
             }
 
             <h3 className="text-center">My Favourite Recipes</h3>
-            <br />
+            <hr />
             <div className="row">
               {userFavouritesList}
             </div>
@@ -104,7 +104,7 @@ class UserFavourites extends React.Component {
           }
 
           <h3 className="text-center">My Favourite Recipes</h3>
-          <br />
+          <hr />
           <h4 className="text-center m-5"> {userFavouritesError} </h4>
         </div>
       </section>

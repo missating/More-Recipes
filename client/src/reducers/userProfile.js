@@ -1,9 +1,24 @@
-import { RECEIVE_USER_PROFILE } from '../actions/actionTypes';
+import { GET_USER_PROFILE, EDIT_USER_PROFILE } from '../actions/actionTypes';
 
-const userProfile = (state = {}, action) => {
+const initialState = {
+  fullname: '',
+  username: '',
+  email: '',
+  joined: ''
+};
+
+const userProfile = (state = initialState, action) => {
   switch (action.type) {
-  case RECEIVE_USER_PROFILE:
-    return Object.assign({}, state, action.userDetails);
+  case GET_USER_PROFILE:
+    return {
+      ...state,
+      ...action.user
+    };
+  case EDIT_USER_PROFILE:
+    return {
+      ...state,
+      ...action.user
+    };
   default:
     return state;
   }

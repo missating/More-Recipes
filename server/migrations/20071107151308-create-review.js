@@ -8,11 +8,23 @@ module.exports = {
     },
     userId: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'userId'
+      }
     },
     recipeId: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Recipes',
+        key: 'id',
+        as: 'recipeId'
+      }
     },
     content: {
       type: Sequelize.TEXT,
@@ -27,5 +39,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: (queryInterface /* , Sequelize */) => queryInterface.dropTable('Reviews')
+  down: queryInterface => queryInterface.dropTable('Reviews')
 };

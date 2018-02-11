@@ -9,7 +9,9 @@ import {
 const initialState = {
   recipes: {
     allrecipes: [],
-    singleRecipe: {}
+    singleRecipe: {
+      id: 0
+    }
   }
 };
 
@@ -22,10 +24,12 @@ const recipes = (state = initialState.recipes, action) => {
     };
   case GET_SINGLE_RECIPE:
     return {
+      ...state,
       singleRecipe: action.recipe
     };
   case ADD_REVIEW:
     return {
+      ...state,
       singleRecipe: {
         ...state.singleRecipe,
         Reviews: [...state.singleRecipe.Reviews, action.review]
@@ -33,6 +37,7 @@ const recipes = (state = initialState.recipes, action) => {
     };
   case ADD_FAVOURITE:
     return {
+      ...state,
       singleRecipe: {
         ...state.singleRecipe,
         favourite: state.singleRecipe.favourite + 1,
@@ -40,7 +45,7 @@ const recipes = (state = initialState.recipes, action) => {
     };
   case ADD_RECIPE:
     return {
-      newRecipe: action.newRecipe
+      ...state, newRecipe: action.newRecipe
     };
   default:
     return state;

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import PropTypes from 'prop-types';
+import Dropzone from 'react-dropzone';
 import { Link, Redirect } from 'react-router-dom';
 
 // action
@@ -25,10 +27,13 @@ class EditRecipe extends React.Component {
     this.state = {
       name: '',
       ingredients: '',
-      description: ''
+      description: '',
+      recipeImage: '',
+      newImage: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onEdit = this.onEdit.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
   }
   /**
  *
@@ -47,10 +52,10 @@ class EditRecipe extends React.Component {
  */
   componentWillReceiveProps(nextProps) {
     const {
-      id, name, description, ingredients
+      id, name, description, ingredients, recipeImage
     } = nextProps.singleRecipe;
     this.setState({
-      id, name, description, ingredients
+      id, name, description, ingredients, recipeImage
     });
   }
   /**
@@ -64,18 +69,69 @@ class EditRecipe extends React.Component {
   }
   /**
  *
- *@returns {josn} updates the recipe
+ *@returns {json} updates the recipe
  * @param {any} event
  * @memberof EditRecipe
  */
   onEdit(event) {
     event.preventDefault();
     const {
-      id, name, description, ingredients
+      id, name, description, ingredients, newImage, recipeImage
     } = this.state;
-    this.props.updateRecipe({ name, description, ingredients, }, id);
-    this.props.history.push('/users/recipes');
+    if (newImage) {
+      this.uploadToCloudinary().then((response) => {
+        const secureUrl = response.data.secure_url;
+        this.props.updateRecipe(
+          {
+            name, description, ingredients, recipeImage: secureUrl
+          },
+          id
+        ).then(() => {
+          this.props.history.push('/users/recipes');
+        });
+      });
+    } else {
+      this.props.updateRecipe(
+        {
+          name, description, ingredients, recipeImage
+        },
+        id
+      ).then(() => {
+        this.props.history.push('/users/recipes');
+      });
+    }
   }
+
+  /**
+  * Handle image drop
+  * @param {array} files
+  * @returns {null} null
+  */
+  handleDrop(files) {
+    this.setState({
+      newImage: files[0],
+      recipeImage: files[0].preview
+    });
+  }
+
+  /**
+  * Handle image upload
+  * @returns {null} null
+  */
+  uploadToCloudinary() {
+    const formData = new FormData();
+    formData.append('file', this.state.newImage);
+    formData.append('upload_preset', 'moreRecipes');
+    formData.append('api_key', '462882972372719');
+
+    return axios.post(
+      'https://api.cloudinary.com/v1_1/dxayftnxb/image/upload',
+      formData, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      }
+    );
+  }
+
   /**
    * @description react render method
    *
@@ -90,13 +146,48 @@ class EditRecipe extends React.Component {
           <Redirect to="/" />
         }
 
-        <section className="container" id="recipes">
+        <section className="container" id="recipes" >
 
           <h3 className="text-center mb-4">Edit Recipe</h3>
 
           <div className="row">
             <div className="col-md-12 col-sm-12">
               <form>
+                <Dropzone
+                  onDrop={this.handleDrop}
+                  accept="image/*"
+                  multiple={false}
+                  style={{
+                    border: '3px dashed ',
+                    width: '300px',
+                    height: 'auto',
+                    margin: '0 auto',
+                    padding: '5px'
+                  }}
+                >
+                  {/* {!newRecipe.recipeImage.preview &&
+                    <div>
+                      <img
+                        src={defaultImg}
+                        alt=""
+                        className="img-fluid mx-auto d-block"
+                      />
+                      <h5 className="text-center">Click here to upload</h5>
+                    </div>
+                  } */}
+                  {
+                    this.state.recipeImage &&
+                    <div>
+                      <img
+                        src={this.state.recipeImage}
+                        alt=""
+                        className="img-fluid mx-auto d-block"
+                      />
+                      <h5 className="text-center">Click here to upload</h5>
+                    </div>
+                  }
+                </Dropzone>
+
                 <div className="form-group form-width">
                   <h5> Name </h5>
                   <input
@@ -144,13 +235,13 @@ class EditRecipe extends React.Component {
                     to="/users/recipes"
                   >
                     Cancel
-              </Link>
+                  </Link>
                 </div>
               </form>
             </div>
           </div>
-        </section>
-      </div>
+        </section >
+      </div >
     );
   }
 }
@@ -161,6 +252,7 @@ EditRecipe.propTypes = {
   singleRecipe: PropTypes.objectOf.isRequired,
   getRecipeDetails: PropTypes.func.isRequired,
   updateRecipe: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired

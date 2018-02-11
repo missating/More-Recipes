@@ -80,8 +80,10 @@ class Signin extends React.Component {
     const { isValid, errors } = signinValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
     }
-    return isValid;
   }
 
   /**
@@ -184,7 +186,7 @@ class Signin extends React.Component {
 
 const authProps = {
   isAuthenticated: PropTypes.bool,
-  user: PropTypes.object,
+  user: PropTypes.string,
   token: PropTypes.string,
   errorMessage: PropTypes.string
 };

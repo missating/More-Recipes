@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 // components
 import UserRecipeCard from './UserRecipeCard';
@@ -53,6 +53,16 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   render() {
+    const { isFetching } = this.props;
+
+    if (isFetching) {
+      return (
+        <div className="loader-container">
+          <div className="loader" />
+        </div>
+      );
+    }
+
     let userRecipeError;
     if (this.props.userRecipesError) {
       userRecipeError = (
@@ -66,7 +76,7 @@ class UserRecipes extends React.Component {
       (this.state.userRecipes) ?
         this.state.userRecipes : [];
     const userRecipesList = userRecipes.map((recipe, i) => (
-      <div className="col-md-4" key={`recipe${i + 1}`}>
+      <div className="col-md-6 col-lg-4 col-sm-6 p-0" key={`recipe${i + 1}`}>
         <UserRecipeCard
           {...recipe}
         />
@@ -74,7 +84,7 @@ class UserRecipes extends React.Component {
     ));
     if (userRecipes.length) {
       return (
-        <section className="container" id="recipes">
+        <section className="container p-0" id="recipes">
           <div>
             {
               !this.props.authenticated &&
@@ -82,7 +92,7 @@ class UserRecipes extends React.Component {
             }
 
             <h3 className="text-center">My Recipes</h3>
-            <br />
+            <hr />
             <div className="row">
               {userRecipesList}
             </div>
@@ -99,7 +109,7 @@ class UserRecipes extends React.Component {
           }
 
           <h3 className="text-center">My Recipes</h3>
-          <br />
+          <hr />
           <h4 className="text-center m-5"> {userRecipeError} </h4>
         </div>
       </section>
@@ -116,7 +126,8 @@ UserRecipes.propTypes = {
 const mapStateToProps = state => ({
   userRecipes: state.userRecipes.recipes,
   userRecipesError: state.userRecipes.errorMessage,
-  authenticated: state.auth.isAuthenticated
+  authenticated: state.auth.isAuthenticated,
+  isFetching: state.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
