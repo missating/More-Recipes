@@ -1,20 +1,17 @@
-import Validator from 'validator';
+import validator from 'validator';
 import isEmpty from 'lodash.isempty';
 
 const recipeValidator = (recipe) => {
   const errors = {};
-  if (Validator.isEmpty(recipe.name)) {
+  if (validator.isEmpty(recipe.name)) {
     errors.name = 'Recipe name cannot be empty';
   }
-  if (Validator.isEmpty(recipe.description)) {
+  if (validator.isEmpty(recipe.description)) {
     errors.description = 'Recipe should have a decription';
   }
-  if (Validator.isEmpty(recipe.ingredients)) {
+  if (validator.isEmpty(recipe.ingredients)) {
     errors.ingredients = 'Ingredients cannot be empty';
   }
-  // if (Validator.isEmpty(recipe.recipeImage)) {
-  //   errors.recipeImage = 'Please select an image';
-  // }
   return {
     errors,
     isValid: isEmpty(errors)
