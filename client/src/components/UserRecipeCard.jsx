@@ -30,10 +30,12 @@ class UserRecipeCard extends React.Component {
    */
   onDeleteRecipe() {
     confirmAlert({
+      // title: 'Confirm to submit',
       message: 'Are you sure you want to delete this recipe ?',
       confirmLabel: 'Yes, delete!',
       cancelLabel: 'Cancel',
-      onConfirm: () => this.props.deleteRecipe(this.props.id),
+      onConfirm: () =>
+        this.props.deleteRecipe(this.props.id),
     });
   }
   /**
