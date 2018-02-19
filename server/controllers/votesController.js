@@ -21,7 +21,10 @@ export default class votesController {
     }
 
     if ((voteQuery !== 'upvote') && (voteQuery !== 'downvote')) {
-      return res.status(400).json({ message: 'Please provide the correct query action' });
+      return res.status(400)
+        .json({
+          message: 'Please provide the correct query action'
+        });
     }
 
     if (isNaN(parseInt(req.params.recipeId, 10))) {
@@ -76,24 +79,23 @@ export default class votesController {
                 [queryAction]: 0,
                 [voteQuery]: 1
               }, {
-                  where: {
-                    userId: req.userId,
-                    recipeId: req.params.recipeId
-                  }
-                });
+                where: {
+                  userId: req.userId,
+                  recipeId: req.params.recipeId
+                }
+              });
               return res.status(200)
                 .json({
                   status: 'sucess',
                   message: `Recipe ${voteQuery}d successfully.`,
                 });
             }
-          });
-        return res.status(500)
-          .json({
-            status: 'error',
-            message: 'Internal server error'
+            return res.status(500)
+              .json({
+                status: 'error',
+                message: 'Internal server error'
+              });
           });
       });
   }
 }
-

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactPaginate from 'react-paginate';
 import { Redirect } from 'react-router-dom';
 
 // components
@@ -22,14 +23,17 @@ class UserRecipes extends React.Component {
  */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true
+    };
+    this.onPageChange = this.onPageChange.bind(this);
   }
   /**
  *
- *@returns {null} null
+ *@returns {null} null //
  * @memberof UserRecipes
  */
-  componentWillMount() {
+  componentDidMount() {
     this.props.recipes();
   }
 
@@ -42,10 +46,24 @@ class UserRecipes extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.userRecipes !== nextProps.userRecipes) {
       this.setState({
-        userRecipes: nextProps.userRecipes
+        userRecipes: nextProps.userRecipes,
+        loading: false
       });
     }
   }
+
+  /**
+   * @returns {number} number of the page
+   *
+   * @param {any} current
+   * @memberof Recipes
+   */
+  onPageChange(current) {
+    const selected = current.selected + 1;
+    this.props.history.push(`/users/recipes?page=${selected}`);
+    this.props.recipes(selected);
+  }
+
   /**
    * @description react render method
    *
@@ -53,15 +71,17 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   render() {
-    const { isFetching } = this.props;
+    const { loading } = this.state;
 
-    if (isFetching) {
+    if (loading) {
       return (
         <div className="loader-container">
           <div className="loader" />
         </div>
       );
     }
+
+    const { pages } = this.props.pagination;
 
     let userRecipeError;
     if (this.props.userRecipesError) {
@@ -96,6 +116,26 @@ class UserRecipes extends React.Component {
             <div className="row">
               {userRecipesList}
             </div>
+            <div className="container">
+              <ReactPaginate
+                pageCount={pages}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={3}
+                previousLabel="Previous"
+                nextLabel="Next"
+                breakClassName="text-center"
+                initialPage={0}
+                containerClassName="container pagination justify-content-center"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                activeClassName="page-item active"
+                previousClassName="page-item"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                previousLinkClassName="page-link"
+                onPageChange={this.onPageChange}
+              />
+            </div>
           </div>
         </section>
       );
@@ -127,11 +167,12 @@ const mapStateToProps = state => ({
   userRecipes: state.userRecipes.recipes,
   userRecipesError: state.userRecipes.errorMessage,
   authenticated: state.auth.isAuthenticated,
+  pagination: state.pagination,
   isFetching: state.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
-  recipes: () => dispatch(getUserRecipes())
+  recipes: page => dispatch(getUserRecipes(page))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);

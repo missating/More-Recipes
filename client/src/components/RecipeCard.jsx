@@ -21,6 +21,18 @@ const RecipeCard = props => (
           >
             VIEW
           </Link>
+          {
+            props.button &&
+            (
+              <button
+                className="btn btn-secondary"
+                onClick={() => props.onButtonClick(props.id)}
+              >
+                Remove
+              </button>
+            )
+
+          }
         </div>
       </div>
     </div>

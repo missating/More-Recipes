@@ -3,7 +3,10 @@ import {
   GET_SINGLE_RECIPE,
   ADD_REVIEW,
   ADD_FAVOURITE,
-  ADD_RECIPE
+  ADD_RECIPE,
+  REMOVE_FAVOURITE,
+  SEARCH_RECIPES,
+  SEARCH_RECIPES_ERROR
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -21,6 +24,16 @@ const recipes = (state = initialState.recipes, action) => {
     return {
       ...state,
       allrecipes: action.recipes
+    };
+  case SEARCH_RECIPES:
+    return {
+      ...state,
+      allrecipes: action.recipes
+    };
+  case SEARCH_RECIPES_ERROR:
+    return {
+      ...state,
+      allrecipes: []
     };
   case GET_SINGLE_RECIPE:
     return {
@@ -43,9 +56,18 @@ const recipes = (state = initialState.recipes, action) => {
         favourite: state.singleRecipe.favourite + 1,
       }
     };
+  case REMOVE_FAVOURITE:
+    return {
+      ...state,
+      singleRecipe: {
+        ...state.singleRecipe,
+        favourite: state.singleRecipe.favourite - 1,
+      }
+    };
   case ADD_RECIPE:
     return {
-      ...state, newRecipe: action.newRecipe
+      ...state,
+      newRecipe: action.newRecipe
     };
   default:
     return state;

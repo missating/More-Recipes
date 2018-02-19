@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 // components
 import RecipeCard from './RecipeCard';
+import SearchRecipe from './SearchRecipe';
 
 // actions
 import getAllRecipes from '../actions/getAllRecipes';
@@ -56,19 +57,28 @@ export class Recipes extends React.Component {
    */
   render() {
     const { pages } = this.props.pagination;
-    const recipes = this.props.allRecipes ? this.props.allRecipes : [];
 
-    const recipeList = recipes.map((recipe, i) => (
-      <div className="col-md-6 col-lg-4 p-0" key={`recipe${i + 1}`}>
-        <RecipeCard
-          {...recipe}
-        />
-      </div>
-    ));
+    const recipes = this.props.allRecipes ? this.props.allRecipes : [];
+    let recipeList;
+    if (recipes.length <= 0) {
+      recipeList = (
+        <div>No recipe found.</div>
+      );
+    } else {
+      recipeList = recipes.map((recipe, i) => (
+        <div className="col-md-6 col-lg-4 p-0" key={`recipe${i + 1}`}>
+          <RecipeCard
+            {...recipe}
+          />
+        </div>
+      ));
+    }
+
 
     return (
       <div>
         <section className="container" id="recipes">
+          <SearchRecipe />
           <div className="row">
             {recipeList}
           </div>
@@ -106,6 +116,7 @@ Recipes.propTypes = {
 const mapStateToProps = state => ({
   allRecipes: state.recipes.allrecipes,
   pagination: state.pagination,
+  isFetching: state.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,56 +3,117 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/3de0dc6a00a683e72f5f/maintainability)](https://codeclimate.com/github/missating/More-Recipes/maintainability)
 
 
-## More-Recipes
+# More-Recipes
+More-Recipes is a full stack web application that provides a platform for users to share their awesome and exciting recipe ideas they have invented or learnt.
 
-More-Recipes provides a platform for users to share the awesome and exciting recipe ideas they have invented or learnt.
-Suppose a user comes up with a recipe, he/she can post it on More-Recipes and get feedback in form of reviews and votes from other users who explore that recipe. Users can also keep a list of their favorite recipes on the application.
+ ### Technologies
+ ----
 
- ## Features
-<ul>
-<li>A User can sign up and sign in to use app</li>
-    
-<li>A recipe listing page that allows viewers to search for recipes. It also shows popular recipes.</li>
+ 1. [Nodejs](https://nodejs.org/en/)
+ 1. [Postgresql](https://www.postgresql.org/)
+ 1. [Express](https://expressjs.com/)
+ 1. [Sequelize](http://docs.sequelizejs.com/)
+ 1. [React](https://reactjs.org/)
+ 1. [Redux](https://redux.js.org/)
 
-<li>A User can view details of a particular recipe, upvote/downvote recipes, add recipe as favourite and see any reviews. Only Authenticated users can post reviews</li>
+## API Documentation
+----
 
-<li>A page, where authenticated users can view a list of their favourite recipes</li>
 
-<li>A user's profile page</li>
+## Functionalities 
+----
+Users are grouped into 2 categories: 
 
-<li>A page where an authenticated user can do the following:</li>
-        <ol>
-        <li> Add recipe</li>
-        <li> View or Modify the recipe he/she added</li>
-        <li> Delete the recipe he/she added </li>
-        <li> View favourite recipes </li>
-        <li> View all recipes he/she has added </li>
-        </ol>
+### Non Registered Users: 
+* Create an account (Sign up)
+* View Featured Recipes 
+* View all Recipes 
+* View a single Recipe 
+* Search for a Recipe
 
-</ul>
+### Registered Users: 
+* Sign in as a user 
+* Create Recipe 
+* Update created Recipes
+* Delete Created Recipes 
+* Upvote a Recipe
+* Downvote a Recipe 
+* Add a recipe as Favourite
+* View all created Recipe
+* View all favourited Recipe
+* Remove upvote on a Recipe
+* Remove downvote on a Recipe
+* Remove Recipe from favourite
+* Add Review for a Recipe 
+* View Profile
+* Update Profile
+* View Featured Recipes 
+* View all Recipes 
+* View a single Recipe 
+* Search for a Recipe
 
-## To Run:
+## Limitations 
+----
+This project has some Limitations. The most notable ones are:
 
-* clone this repo by typing this in the command line
+1. Users cannot view other user's profile
+2. Users cannot view other user's favourited recipes or created recipes
+3. Users cannot change their password or reset password if forgotten
+4. Users cannot deactivate their account
 
-```
-git clone https://github.com/missating/More-Recipes.git
-```
+## How to Install
+____
 
-* then cd into the new directry and run
+1. Clone the repository and `change directory` into the folder 
 
-```
-npm install && npm run start:dev
-```
+`git clone https://github.com/missating/More-Recipes.git && cd more-recipes`
 
-* Navigate to your browser and go to the following URL
+2. Install project dependencies 
 
-* GET http://localhost:3000/api/v1/recipes - to view all recipes
+`npm install`
 
-* PUT http://localhost:3000/api/v1/recipes/1 - to update a recipes with ID of 1
+3. Create a `.env` file and copy comtent of `.env.sample` to it and provide the appropraite values
 
-* DELETE http://localhost:3000/api/v1/recipes/1 - to delete a recipe with ID of 1
+4. Look at this file [config.json](https://github.com/missating/More-Recipes/blob/develop/server/config/config.js) and read [this](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) to setup postgres/sequelize to create a Database then run migration
 
-* POST http://localhost:3000/api/v1/recipes - to add a recipe
+`npm run migration`
 
-* POST http://localhost:3000/api/v1/recipes/1/review - to add a review for recipe with ID of 1
+5. Then start the server 
+
+`npm run start:dev`
+
+6. Navigate to your browser to view the app on `http://localhost:3000`
+
+## Demo
+____
+
+View the application [here](https://nkoyo-more-recipes.herokuapp.com/)
+
+## Test
+____
+
+The application uses the following for Testing:
+
+* Backend Test 
+`npm run test` 
+
+## FAQ 
+____
+
+* What language was used to develop this application ?
+
+`This is a fullstack Javascript application with client side in React/Redux`
+
+* Who can contribute ?
+
+`Anyone`
+
+## Author 
+____
+
+Nkoyo Ating [miss__ating](https://missating.github.io/)
+
+## License 
+____
+
+This is licensed for your use, modification and distribution under the [MIT LICENSE](https://github.com/missating/More-Recipes/blob/develop/LICENSE)

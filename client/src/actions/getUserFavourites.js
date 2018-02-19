@@ -2,7 +2,8 @@ import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
 import {
   GET_USER_FAVOURITE,
-  GET_USER_FAVOURITE_ERROR
+  GET_USER_FAVOURITE_ERROR,
+  SHOW_PAGINATION,
 }
   from './actionTypes';
 
@@ -16,21 +17,34 @@ export const userFavouritesError = message => ({
   message
 });
 
-const getUserFavourites = () => (dispatch) => {
+export const pagination = details => ({
+  type: SHOW_PAGINATION,
+  details
+});
+
+const getUserFavourites = page => (dispatch) => {
+  const pageNumber = page || 1;
   dispatch(setFetching());
   const token = localStorage.getItem('token');
   return axios({
     methiod: 'GET',
-    url: '/api/v1/users/favourites',
+    url: `/api/v1/users/favourites?page=${pageNumber}`,
     headers: {
       token
     }
   })
     .then((response) => {
-      const { favourites } = response.data;
+      const {
+        CurrentPage, Limit, NumberOfItems, Pages, favourites
+      } = response.data;
+      const paginationInfo = {
+        CurrentPage, Limit, NumberOfItems, Pages
+      };
       dispatch(userFavourites(favourites));
+      dispatch(pagination(paginationInfo));
       dispatch(unsetFetching());
-    }).catch((error) => {
+    })
+    .catch((error) => {
       const { message } = error.response.data;
       dispatch(userFavouritesError(message));
       dispatch(unsetFetching());

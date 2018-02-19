@@ -3,13 +3,13 @@ import isEmpty from 'lodash.isempty';
 
 const recipeValidator = (recipe) => {
   const errors = {};
-  if (validator.isEmpty(recipe.name)) {
+  if (validator.isEmpty(recipe.name.trim() || '')) {
     errors.name = 'Recipe name cannot be empty';
   }
-  if (validator.isEmpty(recipe.description)) {
+  if (validator.isEmpty(recipe.description.trim() || '')) {
     errors.description = 'Recipe should have a decription';
   }
-  if (validator.isEmpty(recipe.ingredients)) {
+  if (validator.isEmpty(recipe.ingredients.trim() || '')) {
     errors.ingredients = 'Ingredients cannot be empty';
   }
   return {

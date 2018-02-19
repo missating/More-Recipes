@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { Link, Redirect } from 'react-router-dom';
 
+// validations
+import recipeValidator from '../validation/recipeValidator';
+
 // action
 import getSingleRecipe from '../actions/getSingleRecipe';
 import editRecipe from '../actions/editRecipe';
@@ -29,7 +32,8 @@ class EditRecipe extends React.Component {
       ingredients: '',
       description: '',
       recipeImage: '',
-      newImage: ''
+      newImage: '',
+      errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onEdit = this.onEdit.bind(this);
@@ -78,27 +82,30 @@ class EditRecipe extends React.Component {
     const {
       id, name, description, ingredients, newImage, recipeImage
     } = this.state;
-    if (newImage) {
-      this.uploadToCloudinary().then((response) => {
-        const secureUrl = response.data.secure_url;
+    const isValid = this.isValid();
+    if (isValid) {
+      if (newImage) {
+        this.uploadToCloudinary().then((response) => {
+          const secureUrl = response.data.secure_url;
+          this.props.updateRecipe(
+            {
+              name, description, ingredients, recipeImage: secureUrl
+            },
+            id
+          ).then(() => {
+            this.props.history.push('/users/recipes');
+          });
+        });
+      } else {
         this.props.updateRecipe(
           {
-            name, description, ingredients, recipeImage: secureUrl
+            name, description, ingredients, recipeImage
           },
           id
         ).then(() => {
           this.props.history.push('/users/recipes');
         });
-      });
-    } else {
-      this.props.updateRecipe(
-        {
-          name, description, ingredients, recipeImage
-        },
-        id
-      ).then(() => {
-        this.props.history.push('/users/recipes');
-      });
+      }
     }
   }
 
@@ -133,6 +140,21 @@ class EditRecipe extends React.Component {
   }
 
   /**
+*
+*
+* @returns {boolean} boolean
+* @memberof EditRecipe
+*/
+  isValid() {
+    const { errors, isValid } = recipeValidator(this.state);
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+
+
+  /**
    * @description react render method
    *
    * @returns {component} react component
@@ -165,16 +187,6 @@ class EditRecipe extends React.Component {
                     padding: '5px'
                   }}
                 >
-                  {/* {!newRecipe.recipeImage.preview &&
-                    <div>
-                      <img
-                        src={defaultImg}
-                        alt=""
-                        className="img-fluid mx-auto d-block"
-                      />
-                      <h5 className="text-center">Click here to upload</h5>
-                    </div>
-                  } */}
                   {
                     this.state.recipeImage &&
                     <div>
@@ -197,6 +209,14 @@ class EditRecipe extends React.Component {
                     value={this.state.name}
                     onChange={this.onChange}
                   />
+                  {
+                    this.state.errors.name &&
+                    <span
+                      className="help-block text-danger"
+                    >
+                      {this.state.errors.name}
+                    </span>
+                  }
                 </div>
 
                 <div className="form-group form-width">
@@ -208,6 +228,14 @@ class EditRecipe extends React.Component {
                     value={this.state.ingredients}
                     onChange={this.onChange}
                   />
+                  {
+                    this.state.errors.ingredients &&
+                    <span
+                      className="help-block text-danger"
+                    >
+                      {this.state.errors.ingredients}
+                    </span>
+                  }
                 </div>
 
                 <div className="form-group form-width">
@@ -220,6 +248,14 @@ class EditRecipe extends React.Component {
                     value={this.state.description}
                     onChange={this.onChange}
                   />
+                  {
+                    this.state.errors.description &&
+                    <span
+                      className="help-block text-danger"
+                    >
+                      {this.state.errors.description}
+                    </span>
+                  }
                 </div>
 
                 <div className="form-group form-width">
