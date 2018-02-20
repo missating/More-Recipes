@@ -31,7 +31,7 @@ const getUserRecipes = page => (dispatch) => {
   const token = localStorage.getItem('token');
   return axios({
     method: 'GET',
-    url: `/api/v1/recipes/user/allrecipes?page=${pageNumber}`,
+    url: `/api/v1/recipes/user/recipes?page=${pageNumber}`,
     headers: {
       token
     }

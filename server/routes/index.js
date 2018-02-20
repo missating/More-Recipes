@@ -52,7 +52,7 @@ const routes = (app) => {
 
   // user can get all their recipe
   app.get(
-    '/api/v1/recipes/user/allrecipes',
+    '/api/v1/recipes/user/recipes',
     verifyToken, Recipe.getAllUserRecipes
   );
 

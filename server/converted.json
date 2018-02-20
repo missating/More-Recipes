@@ -1,0 +1,2599 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MoreRecipes",
+    "description": "API documentation for More Recipes web application. All actions performed on the application can be done by sending request via the api url.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/recipes": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get all recipes",
+        "description": "Endpoint to get all recipes",
+        "operationId": "GetAllRecipes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllRecipes"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Create recipe",
+        "description": "Endpoint for users to create recipes",
+        "operationId": "CreateRecipe",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "name",
+                  "ingredients",
+                  "description"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "test food"
+                  },
+                  "ingredients": {
+                    "type": "string",
+                    "example": "salt, maggi, pepper"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "mix all together"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/16": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get single recipe",
+        "description": "Endpoint to get a single recipe",
+        "operationId": "GetSingleRecipe",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "recipe": {
+                      "id": 16,
+                      "name": "name",
+                      "userId": 1,
+                      "ingredients": "ingedinj",
+                      "description": "djjhujdjn",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+                      "favourite": 1,
+                      "createdAt": "2018-02-15T22:16:47.538Z",
+                      "updatedAt": "2018-02-18T22:35:20.629Z",
+                      "Reviews": [],
+                      "upvote": 1,
+                      "downvote": 0
+                    }
+                  },
+                  "$ref": "#/components/schemas/GetSingleRecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "recipe": {
+                    "id": 16,
+                    "name": "name",
+                    "userId": 1,
+                    "ingredients": "ingedinj",
+                    "description": "djjhujdjn",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+                    "favourite": 1,
+                    "createdAt": "2018-02-15T22:16:47.538Z",
+                    "updatedAt": "2018-02-18T22:35:20.629Z",
+                    "Reviews": [],
+                    "upvote": 1,
+                    "downvote": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/search": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Search for a recipe",
+        "description": "Endpoint to search for a recipe by name or by ingredients",
+        "operationId": "SearchForARecipe",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "s"
+            },
+            "example": "s"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchForARecipe"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "User sign-up",
+        "description": "Endpoint for users to sign up to use the application",
+        "operationId": "User signUp",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "fullname",
+                  "username",
+                  "email",
+                  "password",
+                  "confirmPassword"
+                ],
+                "type": "object",
+                "properties": {
+                  "fullname": {
+                    "type": "string",
+                    "example": "Vanessa Ating"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "nessa"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "test@test.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "message": "Account created",
+                    "user": {
+                      "username": "nessa",
+                      "fullname": "Vanessa Ating",
+                      "email": "test@test.com",
+                      "id": 3
+                    },
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
+                  },
+                  "$ref": "#/components/schemas/User signUp"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Account created",
+                  "user": {
+                    "username": "nessa",
+                    "fullname": "Vanessa Ating",
+                    "email": "test@test.com",
+                    "id": 3
+                  },
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/signin": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "User sign-in",
+        "description": "Endpoint for users to login to use the application",
+        "operationId": "User signIn",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "test@test.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o",
+                    "foundUser": {
+                      "username": "nessa",
+                      "fullname": "Vanessa Ating",
+                      "email": "test@test.com",
+                      "id": 3
+                    }
+                  },
+                  "$ref": "#/components/schemas/User signIn"
+                },
+                "example": {
+                  "status": "success",
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o",
+                  "foundUser": {
+                    "username": "nessa",
+                    "fullname": "Vanessa Ating",
+                    "email": "test@test.com",
+                    "id": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get user profile",
+        "description": "Endpoint to view a user's profile",
+        "operationId": "GetUserProfile",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "user": {
+                      "fullname": "Vanessa Ating",
+                      "username": "nessa",
+                      "email": "test@test.com",
+                      "joined": "Tue Feb 20 2018"
+                    }
+                  },
+                  "$ref": "#/components/schemas/GetUserProfile"
+                },
+                "example": {
+                  "status": "success",
+                  "user": {
+                    "fullname": "Vanessa Ating",
+                    "username": "nessa",
+                    "email": "test@test.com",
+                    "joined": "Tue Feb 20 2018"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "put": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Edit user profile",
+        "description": "Endpoint for users to edit their profile",
+        "operationId": "EditUserProfile",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "fullname",
+                  "username"
+                ],
+                "type": "object",
+                "properties": {
+                  "fullname": {
+                    "type": "string",
+                    "example": "Nessa nessa"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "nessy baby"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "user": {
+                      "fullname": "Nessa nessa",
+                      "username": "nessy baby",
+                      "email": "test@test.com",
+                      "joined": "Tue Feb 20 2018"
+                    }
+                  },
+                  "$ref": "#/components/schemas/EditUserProfile"
+                },
+                "example": {
+                  "status": "success",
+                  "user": {
+                    "fullname": "Nessa nessa",
+                    "username": "nessy baby",
+                    "email": "test@test.com",
+                    "joined": "Tue Feb 20 2018"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/27": {
+      "put": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Update recipe",
+        "description": "Endpoint for a user to update their recipe",
+        "operationId": "UpdateRecipe",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "name",
+                  "ingredients",
+                  "description"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "testing food "
+                  },
+                  "ingredients": {
+                    "type": "string",
+                    "example": "water, sugar, garri"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "mix water and add groundnut"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "message": "Update successful",
+                    "recipe": {
+                      "id": 27,
+                      "name": "testing food ",
+                      "userId": 3,
+                      "ingredients": "water, sugar, garri",
+                      "description": "mix water and add groundnut",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                      "favourite": 0,
+                      "createdAt": "2018-02-20T12:46:50.832Z",
+                      "updatedAt": "2018-02-20T15:19:13.139Z"
+                    }
+                  },
+                  "$ref": "#/components/schemas/UpdateRecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Update successful",
+                  "recipe": {
+                    "id": 27,
+                    "name": "testing food ",
+                    "userId": 3,
+                    "ingredients": "water, sugar, garri",
+                    "description": "mix water and add groundnut",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                    "favourite": 0,
+                    "createdAt": "2018-02-20T12:46:50.832Z",
+                    "updatedAt": "2018-02-20T15:19:13.139Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Delete recipe",
+        "description": "Endpoint for a user to delete their recipe",
+        "operationId": "DeleteRecipe",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "message": "recipe deleted"
+                  },
+                  "$ref": "#/components/schemas/DeleteRecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "recipe deleted"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/26/review": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Add review",
+        "description": "Endpoint for a user to add review for a recipe ",
+        "operationId": "AddReview",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "content"
+                ],
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "example": "good stuff"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "Success",
+                    "review": {
+                      "id": 6,
+                      "userId": 3,
+                      "recipeId": 26,
+                      "content": "good stuff",
+                      "createdAt": "2018-02-20T15:30:21.046Z",
+                      "updatedAt": "2018-02-20T15:30:21.046Z",
+                      "User": {
+                        "fullname": "Nessa nessa",
+                        "email": "test@test.com"
+                      }
+                    }
+                  },
+                  "$ref": "#/components/schemas/AddReview"
+                },
+                "example": {
+                  "status": "Success",
+                  "review": {
+                    "id": 6,
+                    "userId": 3,
+                    "recipeId": 26,
+                    "content": "good stuff",
+                    "createdAt": "2018-02-20T15:30:21.046Z",
+                    "updatedAt": "2018-02-20T15:30:21.046Z",
+                    "User": {
+                      "fullname": "Nessa nessa",
+                      "email": "test@test.com"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/user/recipes": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get all user recipes",
+        "description": "Endpoint for users to get all their recipes",
+        "operationId": "GetAllUserRecipes",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "Success",
+                    "NumberOfItems": 1,
+                    "Limit": 6,
+                    "Pages": 1,
+                    "CurrentPage": 1,
+                    "recipes": [
+                      {
+                        "id": 28,
+                        "name": "test food",
+                        "userId": 3,
+                        "ingredients": "salt, maggi, pepper",
+                        "description": "mix all together",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                        "favourite": 0,
+                        "createdAt": "2018-02-20T15:35:07.878Z",
+                        "updatedAt": "2018-02-20T15:35:07.878Z",
+                        "Reviews": [],
+                        "Votes": []
+                      }
+                    ]
+                  },
+                  "$ref": "#/components/schemas/GetAllUserRecipes"
+                },
+                "example": {
+                  "status": "Success",
+                  "NumberOfItems": 1,
+                  "Limit": 6,
+                  "Pages": 1,
+                  "CurrentPage": 1,
+                  "recipes": [
+                    {
+                      "id": 28,
+                      "name": "test food",
+                      "userId": 3,
+                      "ingredients": "salt, maggi, pepper",
+                      "description": "mix all together",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                      "favourite": 0,
+                      "createdAt": "2018-02-20T15:35:07.878Z",
+                      "updatedAt": "2018-02-20T15:35:07.878Z",
+                      "Reviews": [],
+                      "Votes": []
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/26/favourite": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Add favourite recipe",
+        "description": "Endpoint for users to add a recipe as favourite",
+        "operationId": "AddFavouriteRecipe",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "added",
+                    "message": "recipe favourited",
+                    "addedFavourite": {
+                      "id": 26,
+                      "name": "db bnd",
+                      "userId": 1,
+                      "ingredients": "d nmjd",
+                      "description": "dbhbhe",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg",
+                      "favourite": 0,
+                      "createdAt": "2018-02-19T17:46:59.994Z",
+                      "updatedAt": "2018-02-19T17:46:59.994Z"
+                    }
+                  },
+                  "$ref": "#/components/schemas/AddFavouriteRecipe"
+                },
+                "example": {
+                  "status": "added",
+                  "message": "recipe favourited",
+                  "addedFavourite": {
+                    "id": 26,
+                    "name": "db bnd",
+                    "userId": 1,
+                    "ingredients": "d nmjd",
+                    "description": "dbhbhe",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg",
+                    "favourite": 0,
+                    "createdAt": "2018-02-19T17:46:59.994Z",
+                    "updatedAt": "2018-02-19T17:46:59.994Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/favourites": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get favourited recipes",
+        "description": "Endpoint for users to get all their favourite recipes",
+        "operationId": "GetFavouritedRecipes",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "Success",
+                    "NumberOfItems": 1,
+                    "Limit": 6,
+                    "Pages": 1,
+                    "CurrentPage": 1,
+                    "favourites": [
+                      {
+                        "id": 23,
+                        "recipeId": 26,
+                        "userId": 3,
+                        "createdAt": "2018-02-20T15:45:59.918Z",
+                        "updatedAt": "2018-02-20T15:45:59.918Z",
+                        "Recipe": {
+                          "name": "db bnd",
+                          "ingredients": "d nmjd",
+                          "description": "dbhbhe",
+                          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+                        }
+                      }
+                    ]
+                  },
+                  "$ref": "#/components/schemas/GetFavouritedRecipes"
+                },
+                "example": {
+                  "status": "Success",
+                  "NumberOfItems": 1,
+                  "Limit": 6,
+                  "Pages": 1,
+                  "CurrentPage": 1,
+                  "favourites": [
+                    {
+                      "id": 23,
+                      "recipeId": 26,
+                      "userId": 3,
+                      "createdAt": "2018-02-20T15:45:59.918Z",
+                      "updatedAt": "2018-02-20T15:45:59.918Z",
+                      "Recipe": {
+                        "name": "db bnd",
+                        "ingredients": "d nmjd",
+                        "description": "dbhbhe",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/18/vote": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Upvote recipe",
+        "description": "Endpoint for a user to upvote a recipe",
+        "operationId": "UpvoteRecipe",
+        "parameters": [
+          {
+            "name": "vote",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "upvote"
+            },
+            "example": "upvote"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "message": "Recipe upvoted successfully."
+                  },
+                  "$ref": "#/components/schemas/UpvoteRecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Recipe upvoted successfully."
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/20/vote": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Downvote recipe",
+        "description": "Endpoint for a user to downvote recipe",
+        "operationId": "DownvoteRecipe",
+        "parameters": [
+          {
+            "name": "vote",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "downvote"
+            },
+            "example": "downvote"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "message": "Recipe downvoted successfully."
+                  },
+                  "$ref": "#/components/schemas/DownvoteRecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Recipe downvoted successfully."
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetAllRecipes": {
+        "title": "Get all recipes",
+        "required": [
+          "status",
+          "NumberOfItems",
+          "Limit",
+          "Pages",
+          "CurrentPage",
+          "recipes"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "NumberOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "example": 8
+          },
+          "Limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 6
+          },
+          "Pages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 2
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recipe"
+            },
+            "description": ""
+          }
+        }
+      },
+      "Recipe": {
+        "title": "Recipe",
+        "required": [
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "favourite",
+          "createdAt",
+          "updatedAt",
+          "Reviews",
+          "upvote",
+          "downvote"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 26
+          },
+          "name": {
+            "type": "string",
+            "example": "db bnd"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "d nmjd"
+          },
+          "description": {
+            "type": "string",
+            "example": "dbhbhe"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+          },
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2/19/2018 5:46:59 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2/19/2018 5:46:59 PM"
+          },
+          "Reviews": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": []
+            },
+            "description": ""
+          },
+          "upvote": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "downvote": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          }
+        },
+        "example": {
+          "id": 16,
+          "name": "name",
+          "userId": 1,
+          "ingredients": "ingedinj",
+          "description": "djjhujdjn",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+          "favourite": 1,
+          "createdAt": "2018-02-15T22:16:47.538Z",
+          "updatedAt": "2018-02-18T22:35:20.629Z",
+          "Reviews": [],
+          "upvote": 1,
+          "downvote": 0
+        }
+      },
+      "GetSingleRecipe": {
+        "title": "Get single recipe",
+        "required": [
+          "status",
+          "recipe"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "recipe": {
+            "example": {
+              "id": 16,
+              "name": "name",
+              "userId": 1,
+              "ingredients": "ingedinj",
+              "description": "djjhujdjn",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+              "favourite": 1,
+              "createdAt": "2018-02-15T22:16:47.538Z",
+              "updatedAt": "2018-02-18T22:35:20.629Z",
+              "Reviews": [],
+              "upvote": 1,
+              "downvote": 0
+            },
+            "$ref": "#/components/schemas/Recipe"
+          }
+        },
+        "example": {
+          "status": "success",
+          "recipe": {
+            "id": 16,
+            "name": "name",
+            "userId": 1,
+            "ingredients": "ingedinj",
+            "description": "djjhujdjn",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+            "favourite": 1,
+            "createdAt": "2018-02-15T22:16:47.538Z",
+            "updatedAt": "2018-02-18T22:35:20.629Z",
+            "Reviews": [],
+            "upvote": 1,
+            "downvote": 0
+          }
+        }
+      },
+      "SearchForARecipe": {
+        "title": "Search for a recipe",
+        "required": [
+          "NumberOfItems",
+          "Pages",
+          "CurrentPage",
+          "limit",
+          "recipes"
+        ],
+        "type": "object",
+        "properties": {
+          "NumberOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "example": 5
+          },
+          "Pages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 6
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recipe5"
+            },
+            "description": ""
+          }
+        }
+      },
+      "Recipe5": {
+        "title": "Recipe5",
+        "required": [
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "favourite",
+          "createdAt",
+          "updatedAt",
+          "Reviews",
+          "Votes"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 18
+          },
+          "name": {
+            "type": "string",
+            "example": "s nd"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 2
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "dnnd"
+          },
+          "description": {
+            "type": "string",
+            "example": "sdnjf"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518734084/nb1qjojij0xsqk5dihwz.jpg"
+          },
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2/15/2018 10:34:45 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2/19/2018 1:49:20 PM"
+          },
+          "Reviews": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": []
+            },
+            "description": ""
+          },
+          "Votes": {
+            "type": "array",
+            "items": {
+              "example": [
+                {
+                  "upvote": 1,
+                  "downvote": 0
+                }
+              ],
+              "$ref": "#/components/schemas/Vote"
+            },
+            "description": ""
+          }
+        }
+      },
+      "Vote": {
+        "title": "Vote",
+        "required": [
+          "upvote",
+          "downvote"
+        ],
+        "type": "object",
+        "properties": {
+          "upvote": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "downvote": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          }
+        },
+        "example": {
+          "upvote": 1,
+          "downvote": 0
+        }
+      },
+      "User signUp": {
+        "title": "User sign-up",
+        "required": [
+          "status",
+          "message",
+          "user",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Account created"
+          },
+          "user": {
+            "example": {
+              "username": "nessa",
+              "fullname": "Vanessa Ating",
+              "email": "test@test.com",
+              "id": 3
+            },
+            "$ref": "#/components/schemas/User"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "Account created",
+          "user": {
+            "username": "nessa",
+            "fullname": "Vanessa Ating",
+            "email": "test@test.com",
+            "id": 3
+          },
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
+        }
+      },
+      "User": {
+        "title": "User",
+        "required": [
+          "username",
+          "fullname",
+          "email",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "nessa"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "Vanessa Ating"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          }
+        },
+        "example": {
+          "username": "nessa",
+          "fullname": "Vanessa Ating",
+          "email": "test@test.com",
+          "id": 3
+        }
+      },
+      "User signIn": {
+        "title": "User sign-in",
+        "required": [
+          "status",
+          "token",
+          "foundUser"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          },
+          "foundUser": {
+            "example": {
+              "username": "nessa",
+              "fullname": "Vanessa Ating",
+              "email": "test@test.com",
+              "id": 3
+            },
+            "$ref": "#/components/schemas/FoundUser"
+          }
+        },
+        "example": {
+          "status": "success",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o",
+          "foundUser": {
+            "username": "nessa",
+            "fullname": "Vanessa Ating",
+            "email": "test@test.com",
+            "id": 3
+          }
+        }
+      },
+      "FoundUser": {
+        "title": "FoundUser",
+        "required": [
+          "username",
+          "fullname",
+          "email",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "nessa"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "Vanessa Ating"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          }
+        },
+        "example": {
+          "username": "nessa",
+          "fullname": "Vanessa Ating",
+          "email": "test@test.com",
+          "id": 3
+        }
+      },
+      "GetUserProfile": {
+        "title": "Get user profile",
+        "required": [
+          "status",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "user": {
+            "example": {
+              "fullname": "Vanessa Ating",
+              "username": "nessa",
+              "email": "test@test.com",
+              "joined": "Tue Feb 20 2018"
+            },
+            "$ref": "#/components/schemas/User12"
+          }
+        },
+        "example": {
+          "status": "success",
+          "user": {
+            "fullname": "Vanessa Ating",
+            "username": "nessa",
+            "email": "test@test.com",
+            "joined": "Tue Feb 20 2018"
+          }
+        }
+      },
+      "User12": {
+        "title": "User12",
+        "required": [
+          "fullname",
+          "username",
+          "email",
+          "joined"
+        ],
+        "type": "object",
+        "properties": {
+          "fullname": {
+            "type": "string",
+            "example": "Vanessa Ating"
+          },
+          "username": {
+            "type": "string",
+            "example": "nessa"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"
+          },
+          "joined": {
+            "type": "string",
+            "example": "Tue Feb 20 2018"
+          }
+        },
+        "example": {
+          "fullname": "Vanessa Ating",
+          "username": "nessa",
+          "email": "test@test.com",
+          "joined": "Tue Feb 20 2018"
+        }
+      },
+      "EditUserProfile": {
+        "title": "Edit user profile",
+        "required": [
+          "status",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "user": {
+            "example": {
+              "fullname": "Nessa nessa",
+              "username": "nessy baby",
+              "email": "test@test.com",
+              "joined": "Tue Feb 20 2018"
+            },
+            "$ref": "#/components/schemas/User12"
+          }
+        },
+        "example": {
+          "status": "success",
+          "user": {
+            "fullname": "Nessa nessa",
+            "username": "nessy baby",
+            "email": "test@test.com",
+            "joined": "Tue Feb 20 2018"
+          }
+        }
+      },
+      "UpdateRecipe": {
+        "title": "Update recipe",
+        "required": [
+          "status",
+          "message",
+          "recipe"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Update successful"
+          },
+          "recipe": {
+            "example": {
+              "id": 27,
+              "name": "testing food ",
+              "userId": 3,
+              "ingredients": "water, sugar, garri",
+              "description": "mix water and add groundnut",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+              "favourite": 0,
+              "createdAt": "2018-02-20T12:46:50.832Z",
+              "updatedAt": "2018-02-20T15:19:13.139Z"
+            },
+            "$ref": "#/components/schemas/Recipe16"
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "Update successful",
+          "recipe": {
+            "id": 27,
+            "name": "testing food ",
+            "userId": 3,
+            "ingredients": "water, sugar, garri",
+            "description": "mix water and add groundnut",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+            "favourite": 0,
+            "createdAt": "2018-02-20T12:46:50.832Z",
+            "updatedAt": "2018-02-20T15:19:13.139Z"
+          }
+        }
+      },
+      "Recipe16": {
+        "title": "Recipe16",
+        "required": [
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "favourite",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 27
+          },
+          "name": {
+            "type": "string",
+            "example": "testing food "
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "water, sugar, garri"
+          },
+          "description": {
+            "type": "string",
+            "example": "mix water and add groundnut"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
+          },
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2/20/2018 12:46:50 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2/20/2018 3:19:13 PM"
+          }
+        },
+        "example": {
+          "id": 27,
+          "name": "testing food ",
+          "userId": 3,
+          "ingredients": "water, sugar, garri",
+          "description": "mix water and add groundnut",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+          "favourite": 0,
+          "createdAt": "2018-02-20T12:46:50.832Z",
+          "updatedAt": "2018-02-20T15:19:13.139Z"
+        }
+      },
+      "DeleteRecipe": {
+        "title": "Delete recipe",
+        "required": [
+          "status",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "recipe deleted"
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "recipe deleted"
+        }
+      },
+      "AddReview": {
+        "title": "Add review",
+        "required": [
+          "status",
+          "review"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "review": {
+            "example": {
+              "id": 6,
+              "userId": 3,
+              "recipeId": 26,
+              "content": "good stuff",
+              "createdAt": "2018-02-20T15:30:21.046Z",
+              "updatedAt": "2018-02-20T15:30:21.046Z",
+              "User": {
+                "fullname": "Nessa nessa",
+                "email": "test@test.com"
+              }
+            },
+            "$ref": "#/components/schemas/Review"
+          }
+        },
+        "example": {
+          "status": "Success",
+          "review": {
+            "id": 6,
+            "userId": 3,
+            "recipeId": 26,
+            "content": "good stuff",
+            "createdAt": "2018-02-20T15:30:21.046Z",
+            "updatedAt": "2018-02-20T15:30:21.046Z",
+            "User": {
+              "fullname": "Nessa nessa",
+              "email": "test@test.com"
+            }
+          }
+        }
+      },
+      "Review": {
+        "title": "Review",
+        "required": [
+          "id",
+          "userId",
+          "recipeId",
+          "content",
+          "createdAt",
+          "updatedAt",
+          "User"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 6
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 26
+          },
+          "content": {
+            "type": "string",
+            "example": "good stuff"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2/20/2018 3:30:21 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2/20/2018 3:30:21 PM"
+          },
+          "User": {
+            "example": {
+              "fullname": "Nessa nessa",
+              "email": "test@test.com"
+            },
+            "$ref": "#/components/schemas/User20"
+          }
+        },
+        "example": {
+          "id": 6,
+          "userId": 3,
+          "recipeId": 26,
+          "content": "good stuff",
+          "createdAt": "2018-02-20T15:30:21.046Z",
+          "updatedAt": "2018-02-20T15:30:21.046Z",
+          "User": {
+            "fullname": "Nessa nessa",
+            "email": "test@test.com"
+          }
+        }
+      },
+      "User20": {
+        "title": "User20",
+        "required": [
+          "fullname",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "fullname": {
+            "type": "string",
+            "example": "Nessa nessa"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"
+          }
+        },
+        "example": {
+          "fullname": "Nessa nessa",
+          "email": "test@test.com"
+        }
+      },
+      "GetAllUserRecipes": {
+        "title": "Get all user recipes",
+        "required": [
+          "status",
+          "NumberOfItems",
+          "Limit",
+          "Pages",
+          "CurrentPage",
+          "recipes"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "NumberOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "Limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 6
+          },
+          "Pages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "example": [
+                {
+                  "id": 28,
+                  "name": "test food",
+                  "userId": 3,
+                  "ingredients": "salt, maggi, pepper",
+                  "description": "mix all together",
+                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                  "favourite": 0,
+                  "createdAt": "2018-02-20T15:35:07.878Z",
+                  "updatedAt": "2018-02-20T15:35:07.878Z",
+                  "Reviews": [],
+                  "Votes": []
+                }
+              ],
+              "$ref": "#/components/schemas/Recipe22"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "status": "Success",
+          "NumberOfItems": 1,
+          "Limit": 6,
+          "Pages": 1,
+          "CurrentPage": 1,
+          "recipes": [
+            {
+              "id": 28,
+              "name": "test food",
+              "userId": 3,
+              "ingredients": "salt, maggi, pepper",
+              "description": "mix all together",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+              "favourite": 0,
+              "createdAt": "2018-02-20T15:35:07.878Z",
+              "updatedAt": "2018-02-20T15:35:07.878Z",
+              "Reviews": [],
+              "Votes": []
+            }
+          ]
+        }
+      },
+      "Recipe22": {
+        "title": "Recipe22",
+        "required": [
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "favourite",
+          "createdAt",
+          "updatedAt",
+          "Reviews",
+          "Votes"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 28
+          },
+          "name": {
+            "type": "string",
+            "example": "test food"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "salt, maggi, pepper"
+          },
+          "description": {
+            "type": "string",
+            "example": "mix all together"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
+          },
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2/20/2018 3:35:07 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2/20/2018 3:35:07 PM"
+          },
+          "Reviews": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": []
+            },
+            "description": ""
+          },
+          "Votes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": []
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "id": 28,
+          "name": "test food",
+          "userId": 3,
+          "ingredients": "salt, maggi, pepper",
+          "description": "mix all together",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+          "favourite": 0,
+          "createdAt": "2018-02-20T15:35:07.878Z",
+          "updatedAt": "2018-02-20T15:35:07.878Z",
+          "Reviews": [],
+          "Votes": []
+        }
+      },
+      "AddFavouriteRecipe": {
+        "title": "Add favourite recipe",
+        "required": [
+          "status",
+          "message",
+          "addedFavourite"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "added"
+          },
+          "message": {
+            "type": "string",
+            "example": "recipe favourited"
+          },
+          "addedFavourite": {
+            "example": {
+              "id": 26,
+              "name": "db bnd",
+              "userId": 1,
+              "ingredients": "d nmjd",
+              "description": "dbhbhe",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg",
+              "favourite": 0,
+              "createdAt": "2018-02-19T17:46:59.994Z",
+              "updatedAt": "2018-02-19T17:46:59.994Z"
+            },
+            "$ref": "#/components/schemas/AddedFavourite"
+          }
+        },
+        "example": {
+          "status": "added",
+          "message": "recipe favourited",
+          "addedFavourite": {
+            "id": 26,
+            "name": "db bnd",
+            "userId": 1,
+            "ingredients": "d nmjd",
+            "description": "dbhbhe",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg",
+            "favourite": 0,
+            "createdAt": "2018-02-19T17:46:59.994Z",
+            "updatedAt": "2018-02-19T17:46:59.994Z"
+          }
+        }
+      },
+      "AddedFavourite": {
+        "title": "AddedFavourite",
+        "required": [
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "favourite",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 26
+          },
+          "name": {
+            "type": "string",
+            "example": "db bnd"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "d nmjd"
+          },
+          "description": {
+            "type": "string",
+            "example": "dbhbhe"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+          },
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2/19/2018 5:46:59 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2/19/2018 5:46:59 PM"
+          }
+        },
+        "example": {
+          "id": 26,
+          "name": "db bnd",
+          "userId": 1,
+          "ingredients": "d nmjd",
+          "description": "dbhbhe",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg",
+          "favourite": 0,
+          "createdAt": "2018-02-19T17:46:59.994Z",
+          "updatedAt": "2018-02-19T17:46:59.994Z"
+        }
+      },
+      "GetFavouritedRecipes": {
+        "title": "Get favourited recipes",
+        "required": [
+          "status",
+          "NumberOfItems",
+          "Limit",
+          "Pages",
+          "CurrentPage",
+          "favourites"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "NumberOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "Limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 6
+          },
+          "Pages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "favourites": {
+            "type": "array",
+            "items": {
+              "example": [
+                {
+                  "id": 23,
+                  "recipeId": 26,
+                  "userId": 3,
+                  "createdAt": "2018-02-20T15:45:59.918Z",
+                  "updatedAt": "2018-02-20T15:45:59.918Z",
+                  "Recipe": {
+                    "name": "db bnd",
+                    "ingredients": "d nmjd",
+                    "description": "dbhbhe",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+                  }
+                }
+              ],
+              "$ref": "#/components/schemas/Favourite"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "status": "Success",
+          "NumberOfItems": 1,
+          "Limit": 6,
+          "Pages": 1,
+          "CurrentPage": 1,
+          "favourites": [
+            {
+              "id": 23,
+              "recipeId": 26,
+              "userId": 3,
+              "createdAt": "2018-02-20T15:45:59.918Z",
+              "updatedAt": "2018-02-20T15:45:59.918Z",
+              "Recipe": {
+                "name": "db bnd",
+                "ingredients": "d nmjd",
+                "description": "dbhbhe",
+                "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+              }
+            }
+          ]
+        }
+      },
+      "Favourite": {
+        "title": "Favourite",
+        "required": [
+          "id",
+          "recipeId",
+          "userId",
+          "createdAt",
+          "updatedAt",
+          "Recipe"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 23
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 26
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2/20/2018 3:45:59 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2/20/2018 3:45:59 PM"
+          },
+          "Recipe": {
+            "example": {
+              "name": "db bnd",
+              "ingredients": "d nmjd",
+              "description": "dbhbhe",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+            },
+            "$ref": "#/components/schemas/Recipe27"
+          }
+        },
+        "example": {
+          "id": 23,
+          "recipeId": 26,
+          "userId": 3,
+          "createdAt": "2018-02-20T15:45:59.918Z",
+          "updatedAt": "2018-02-20T15:45:59.918Z",
+          "Recipe": {
+            "name": "db bnd",
+            "ingredients": "d nmjd",
+            "description": "dbhbhe",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+          }
+        }
+      },
+      "Recipe27": {
+        "title": "Recipe27",
+        "required": [
+          "name",
+          "ingredients",
+          "description",
+          "recipeImage"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "db bnd"
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "d nmjd"
+          },
+          "description": {
+            "type": "string",
+            "example": "dbhbhe"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+          }
+        },
+        "example": {
+          "name": "db bnd",
+          "ingredients": "d nmjd",
+          "description": "dbhbhe",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+        }
+      },
+      "UpvoteRecipe": {
+        "title": "Upvote recipe",
+        "required": [
+          "status",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Recipe upvoted successfully."
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "Recipe upvoted successfully."
+        }
+      },
+      "DownvoteRecipe": {
+        "title": "Downvote recipe",
+        "required": [
+          "status",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Recipe downvoted successfully."
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "Recipe downvoted successfully."
+        }
+      }
+    }
+  }
+}

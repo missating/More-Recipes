@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import swaggerUi from 'swagger-ui-express';
 import webpackConfig from '../webpack.config';
 
 import routes from './routes';
@@ -40,7 +41,9 @@ if (process.env.NODE_ENV === 'development') {
 
   app.use(webpackHotMiddleware(compiler));
 }
+const swaggerDocument = require('./converted.json');
 
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 routes(app);
 
 app.get('/*', (req, res) => {

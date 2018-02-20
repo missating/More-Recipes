@@ -86,6 +86,7 @@
     "sequelize": "^4.19.0",
     "sequelize-cli": "^3.2.0",
     "superagent": "^3.8.2",
+    "swagger-ui-express": "^2.0.15",
     "toastr": "^2.1.4",
     "transfer-webpack-plugin": "^0.1.4",
     "uglifyjs-webpack-plugin": "^1.1.8",
