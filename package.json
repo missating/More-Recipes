@@ -15,7 +15,7 @@
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "watch": "webpack --config ./webpack.dev.js -w",
     "build:client": "webpack --config ./webpack.prod.js",
-    "build": "npm run clean && npm run build:client && npm run build:server && cp server/index.html build",
+    "build": "npm run clean && npm run build:client && npm run build:server && cp server/index.html build && cp server/converted.json build",
     "clean": "rm -rf build && mkdir build",
     "postinstall": "npm run build"
   },
