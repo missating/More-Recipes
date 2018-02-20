@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 // actions
 import getSingleRecipe from '../actions/getSingleRecipe';
 import addFavourite from '../actions/addFavourite';
+import upvoteRecipe from '../actions/upvoteRecipe';
 
 // components
 import ActionButtons from './ActionButtons';
@@ -32,6 +33,8 @@ class SingleRecipe extends React.Component {
       reviews: []
     };
     this.onFavourite = this.onFavourite.bind(this);
+    this.onUpvote = this.onUpvote.bind(this);
+    this.onDownVote = this.onDownVote.bind(this);
   }
   /**
    *
@@ -64,6 +67,26 @@ class SingleRecipe extends React.Component {
   onFavourite() {
     const recipeId = this.props.singleRecipe.id;
     this.props.favourite(recipeId);
+  }
+
+  /**
+   * @returns {json} with the id of upvoted recipe
+   *
+   * @memberof SingleRecipe
+   */
+  onUpvote() {
+    const recipeId = this.props.singleRecipe.id;
+    this.props.upvote(recipeId, 'upvote');
+  }
+
+  /**
+   * @returns {json} with the id of upvoted recipe
+   *
+   * @memberof SingleRecipe
+   */
+  onDownVote() {
+    const recipeId = this.props.singleRecipe.id;
+    this.props.upvote(recipeId, 'downvote');
   }
   /**
  *
@@ -112,16 +135,22 @@ class SingleRecipe extends React.Component {
               {
                 this.props.authenticated &&
                 <div className="container">
-                  <button className="btn active">
+                  <button
+                    className="btn active"
+                    onClick={this.onDownVote}
+                  >
                     <span>
-                      <i className="far fa-thumbs-up" />
+                      <i className="far fa-thumbs-down" />
                     </span>
                     {this.props.singleRecipe.downvote}
                   </button>
 
-                  <button className="btn active">
+                  <button
+                    className="btn active"
+                    onClick={this.onUpvote}
+                  >
                     <span>
-                      <i className="far fa-thumbs-down" />
+                      <i className="far fa-thumbs-up" />
                     </span>
                     {this.props.singleRecipe.upvote}
                   </button>
@@ -205,7 +234,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   recipe: id => dispatch(getSingleRecipe(id)),
-  favourite: recipeId => dispatch(addFavourite(recipeId))
+  favourite: recipeId => dispatch(addFavourite(recipeId)),
+  upvote: (recipeId, queryType) => dispatch(upvoteRecipe(recipeId, queryType))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleRecipe);

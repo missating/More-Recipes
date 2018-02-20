@@ -2,11 +2,19 @@ import axios from 'axios';
 import toastr from 'toastr';
 
 import { setFetching, unsetFetching } from './fetching';
-import { ADD_FAVOURITE, ADD_FAVOURITE_ERROR } from './actionTypes';
+import {
+  ADD_FAVOURITE,
+  ADD_FAVOURITE_ERROR,
+  REMOVE_FAVOURITE
+} from './actionTypes';
+import getUserFavourites from './getUserFavourites';
 
-const addFavouriteSuccess = recipe => ({
+const addFavouriteSuccess = () => ({
   type: ADD_FAVOURITE,
-  recipe
+});
+
+const removeFavouriteSuccess = () => ({
+  type: REMOVE_FAVOURITE
 });
 
 const addFavouriteError = message => ({
@@ -24,29 +32,56 @@ const addFavouriteRecipe = recipeId => (dispatch) => {
       token
     }
   })
-    .then(() => {
-      dispatch(addFavouriteSuccess(recipeId));
-      dispatch(unsetFetching());
-      toastr.options = {
-        closeButton: true,
-        extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
-        hideMethod: 'fadeOut'
-      };
-      toastr.success('Recipe favourited succesfully');
+    .then(({ data }) => {
+      if (data.status === 'added') {
+        dispatch(addFavouriteSuccess());
+        dispatch(unsetFetching());
+        toastr.options = {
+          closeButton: true,
+          extendedTimeOut: '1000',
+          positionClass: 'toast-top-right',
+          hideMethod: 'fadeOut'
+        };
+        toastr.success('Recipe favourited succesfully');
+      } else if (data.status === 'removed') {
+        dispatch(removeFavouriteSuccess());
+        dispatch(unsetFetching());
+        toastr.options = {
+          closeButton: true,
+          extendedTimeOut: '1000',
+          positionClass: 'toast-top-right',
+          hideMethod: 'fadeOut'
+        };
+        toastr.success('Recipe removed from Favourite');
+      }
     })
     .catch((error) => {
       const { message } = error.response.data;
       dispatch(addFavouriteError(message));
       dispatch(unsetFetching());
-      toastr.options = {
-        closeButton: true,
-        extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
-        hideMethod: 'fadeOut'
-      };
-      toastr.error(message);
     });
+};
+
+export const removeUserFavourite = recipeId => (dispatch) => {
+  const token = localStorage.getItem('token');
+  dispatch(setFetching());
+  return axios({
+    method: 'POST',
+    url: `/api/v1/users/${recipeId}/favourite`,
+    headers: {
+      token
+    }
+  }).then(() => {
+    dispatch(getUserFavourites());
+    toastr.options = {
+      closeButton: true,
+      extendedTimeOut: '1000',
+      positionClass: 'toast-top-right',
+      hideMethod: 'fadeOut'
+    };
+    toastr.success('Recipe removed from Favourite');
+    dispatch(unsetFetching());
+  });
 };
 
 export default addFavouriteRecipe;

@@ -37,10 +37,22 @@ export default class favouritesController {
         })
           .then((foundFavourite) => {
             if (foundFavourite) {
-              return res.status(409)
-                .json({
-                  status: 'fail',
-                  message: 'You already added this recipe as your favourite'
+              return db.Favourite.destroy({
+                where: {
+                  userId: req.userId,
+                  recipeId: req.params.recipeId
+                }
+              })
+                .then(() => {
+                  foundRecipe.decrement(
+                    'favourite',
+                    { where: { id: req.params.recipeId } }
+                  );
+                  return res.status(200)
+                    .json({
+                      status: 'removed',
+                      message: 'Recipe removed from favourite'
+                    });
                 });
             }
             return db.Favourite.create({
@@ -53,7 +65,7 @@ export default class favouritesController {
                   { where: { id: req.params.recipeId } }
                 );
                 return res.status(200).json({
-                  status: 'success',
+                  status: 'added',
                   message: 'recipe favourited',
                   addedFavourite: foundRecipe
                 });
@@ -74,31 +86,56 @@ export default class favouritesController {
    * @memberof Favourite
    */
   static getAllFavourites(req, res) {
-    return db.Favourite.findAll({
-      where: { userId: req.userId },
-      include: [{
-        model: db.Recipe,
-        attributes: ['name', 'ingredients', 'description', 'recipeImage']
-      }]
-    })
-      .then((found) => {
-        const userFavourites = found.length;
-        if (userFavourites === 0) {
-          return res.status(404)
-            .json({
-              status: 'fail',
-              message: 'You have no recipes added as favourites'
-            });
-        }
-        return res.status(200)
-          .json({
-            status: 'Success',
-            favourites: found
-          });
+    return db.Favourite.findAndCountAll({
+      where: {
+        userId: req.userId
+      }
+    }).then((all) => {
+      const limit = 6;
+      let offset = 0;
+      const page = parseInt((req.query.page || 1), 10);
+      const numberOfItems = all.count;
+      const pages = Math.ceil(numberOfItems / limit);
+      offset = limit * (page - 1);
+      db.Favourite.findAll({
+        where: {
+          userId: req.userId
+        },
+        limit,
+        offset,
+        order: [
+          ['id', 'DESC']
+        ],
+        include: [
+          {
+            model: db.Recipe,
+            attributes: ['name', 'ingredients', 'description', 'recipeImage']
+          }
+        ]
       })
-      .catch(() => res.status(500).json({
-        status: 'error',
-        message: 'Internal server error'
-      }));
+        .then((found) => {
+          const userFavourites = found.length;
+          if (userFavourites === 0) {
+            return res.status(404)
+              .json({
+                status: 'fail',
+                message: 'You have no recipes added as favourites'
+              });
+          }
+          return res.status(200)
+            .json({
+              status: 'Success',
+              NumberOfItems: numberOfItems,
+              Limit: limit,
+              Pages: pages,
+              CurrentPage: page,
+              favourites: found
+            });
+        })
+        .catch(() => res.status(500).json({
+          status: 'error',
+          message: 'Internal server error'
+        }));
+    });
   }
 }

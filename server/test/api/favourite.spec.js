@@ -96,21 +96,6 @@ describe('FAVOURITE API', () => {
     );
 
     it(
-      'Should not allow auth user to add a recipe as favourite more than once',
-      (done) => {
-        chai.request(app)
-          .post(`/api/v1/users/${recipeId}/favourite`)
-          .set('token', userToken)
-          .end((error, response) => {
-            expect(response.status).to.equal(409);
-            expect(response.body.message)
-              .to.equal('You already added this recipe as your favourite');
-            done();
-          });
-      }
-    );
-
-    it(
       'Should not add a recipeId that is not a number as favourite',
       (done) => {
         chai.request(app)
@@ -147,6 +132,21 @@ describe('FAVOURITE API', () => {
           .set('token', userToken)
           .end((error, response) => {
             expect(response.status).to.equal(200);
+            done();
+          });
+      }
+    );
+
+    it(
+      'Should allow auth user remove recipe from favourite',
+      (done) => {
+        chai.request(app)
+          .post(`/api/v1/users/${recipeId}/favourite`)
+          .set('token', userToken)
+          .end((error, response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.message)
+              .to.equal('Recipe removed from favourite');
             done();
           });
       }

@@ -49,6 +49,7 @@ export default class usersController {
                 username: newUser.username,
                 fullname: newUser.fullname,
                 email: newUser.email,
+                id: newUser.id
               },
               token
             });
@@ -96,7 +97,12 @@ export default class usersController {
           .json({
             status: 'success',
             token,
-            foundUser
+            foundUser: {
+              username: foundUser.username,
+              fullname: foundUser.fullname,
+              email: foundUser.email,
+              id: foundUser.id
+            }
           });
       })
       .catch(() => res.status(500).json({

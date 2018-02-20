@@ -7,7 +7,8 @@ import {
   verifyToken,
   verifySignup,
   verifySignin,
-  verifyNewRecipe
+  verifyNewRecipe,
+  verfiyUpdateRecipe,
 } from '../middleware/validation';
 
 
@@ -39,7 +40,7 @@ const routes = (app) => {
   // auth user can edit their recipe
   // anybody can view a recipe
   app.route('/api/v1/recipes/:recipeId')
-    .put(verifyToken, Recipe.updateRecipe)
+    .put(verifyToken, verfiyUpdateRecipe, Recipe.updateRecipe)
     .delete(verifyToken, Recipe.deleteRecipe)
     .get(Recipe.getOneRecipe);
 
@@ -73,6 +74,9 @@ const routes = (app) => {
     '/api/v1/recipes/:recipeId/vote',
     verifyToken, Vote.voteRecipe
   );
+
+  // user can search for a recipe
+  app.post('/api/v1/recipes/search', Recipe.searchRecipes);
 };
 
 export default routes;

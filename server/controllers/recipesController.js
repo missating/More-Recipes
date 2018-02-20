@@ -196,7 +196,7 @@ export default class recipesController {
 
     if (!sort) {
       db.Recipe.findAndCountAll().then((all) => {
-        const limit = 2;
+        const limit = 6;
         let offset = 0;
         const page = parseInt((req.query.page || 1), 10);
         const numberOfItems = all.count;
@@ -333,7 +333,6 @@ export default class recipesController {
       }));
   }
 
-
   /**
  * @static
  * @param {object} req
@@ -352,16 +351,37 @@ export default class recipesController {
           status: 'fail',
           message: 'A user with that id is not found',
         });
-      } db.Recipe.findAll({
+      } db.Recipe.findAndCountAll({
         where: {
           userId: req.userId
-        },
-        include: [
-          { model: db.Review, attributes: ['content'] },
-          { model: db.Vote }
-        ]
-      })
-        .then((allRecipes) => {
+        }
+      }).then((all) => {
+        const limit = 6;
+        let offset = 0;
+        const page = parseInt((req.query.page || 1), 10);
+        const numberOfItems = all.count;
+        const pages = Math.ceil(numberOfItems / limit);
+        offset = limit * (page - 1);
+        db.Recipe.findAll({
+          where: {
+            userId: req.userId
+          },
+          limit,
+          offset,
+          order: [
+            ['id', 'DESC']
+          ],
+          include: [
+            {
+              model: db.Review,
+              attributes: ['content']
+            },
+            {
+              model: db.Vote,
+              attributes: ['upvote', 'downvote']
+            }
+          ]
+        }).then((allRecipes) => {
           const userRecipes = allRecipes.length;
           if (userRecipes === 0) {
             return res.status(404)
@@ -372,14 +392,93 @@ export default class recipesController {
           }
           return res.status(200)
             .json({
-              status: 'success',
+              status: 'Success',
+              NumberOfItems: numberOfItems,
+              Limit: limit,
+              Pages: pages,
+              CurrentPage: page,
               recipes: allRecipes
             });
         })
-        .catch(() => res.status(500).json({
-          status: 'error',
-          message: 'Internal server error'
-        }));
+          .catch(() => res.status(500).json({
+            status: 'error',
+            message: 'Internal server error'
+          }));
+      });
     });
+  }
+
+
+  /**
+   *
+   *
+   * @static
+   * @param {any} req
+   * @param {any} res
+   *  @returns {object} with the result of the search query
+   * @memberof recipesController
+   */
+  static searchRecipes(req, res) {
+    const { search } = req.query;
+
+    db.Recipe.findAndCountAll({
+      where: {
+        $or: [
+          { name: { $ilike: `%${search}%` } },
+          { ingredients: { $ilike: `%${search}%` } }
+        ],
+      }
+    })
+      .then((all) => {
+        const limit = 6;
+        let offset = 0;
+        const page = parseInt((req.query.page || 1), 10);
+        const NumberOfItems = all.count;
+        const Pages = Math.ceil(NumberOfItems / limit);
+        offset = limit * (page - 1);
+        db.Recipe.findAll({
+          where: {
+            $or: [
+              { name: { $ilike: `%${search}%` } },
+              { ingredients: { $ilike: `%${search}%` } }
+            ],
+          },
+          include: [
+            {
+              model: db.Review,
+              attributes: ['content']
+            },
+            {
+              model: db.Vote,
+              attributes: ['upvote', 'downvote']
+            }
+          ],
+          limit,
+          offset,
+          order: [
+            ['id', 'ASC']
+          ],
+        })
+          .then((foundRecipe) => {
+            if (foundRecipe.length < 1) {
+              return res.status(404)
+                .json({
+                  message: 'No match(es) found'
+                });
+            }
+            return res.status(200)
+              .json({
+                NumberOfItems,
+                Pages,
+                CurrentPage: page,
+                limit,
+                recipes: foundRecipe
+              });
+          });
+      })
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 }

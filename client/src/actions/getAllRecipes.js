@@ -19,8 +19,12 @@ const getAllRecipes = page => (dispatch) => {
   dispatch(setFetching());
   return axios.get(`/api/v1/recipes?page=${pageNumber}`)
     .then((response) => {
-      const { CurrentPage, Limit, NumberOfItems, Pages, recipes } = response.data;
-      const paginationInfo = { CurrentPage, Limit, NumberOfItems, Pages };
+      const {
+        CurrentPage, Limit, NumberOfItems, Pages, recipes
+      } = response.data;
+      const paginationInfo = {
+        CurrentPage, Limit, NumberOfItems, Pages
+      };
       dispatch(allRecipes(recipes));
       dispatch(pagination(paginationInfo));
       dispatch(unsetFetching());

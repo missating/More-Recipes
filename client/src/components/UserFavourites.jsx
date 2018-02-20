@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
+import { Redirect } from 'react-router-dom';
 
 // components
 import RecipeCard from './RecipeCard';
 
 // actions
 import getUserFavourites from '../actions/getUserFavourites';
+
+import { removeUserFavourite } from '../actions/addFavourite';
 
 /**
  *
@@ -23,14 +26,18 @@ class UserFavourites extends React.Component {
      */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true,
+    };
+    this.removeFromFavourite = this.removeFromFavourite.bind(this);
+    this.onPageChange = this.onPageChange.bind(this);
   }
   /**
  *
  *@returns {null} null
  * @memberof UserFavourites
  */
-  componentWillMount() {
+  componentDidMount() {
     this.props.favourites();
   }
   /**
@@ -42,10 +49,34 @@ class UserFavourites extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.userFavourites !== nextProps.userFavourites) {
       this.setState({
-        userFavourites: nextProps.userFavourites
+        userFavourites: nextProps.userFavourites,
+        loading: false
       });
     }
   }
+
+  /**
+   * @returns {number} number of the page
+   *
+   * @param {any} current
+   * @memberof Recipes
+   */
+  onPageChange(current) {
+    const selected = current.selected + 1;
+    this.props.favourites(selected);
+  }
+
+  /**
+ *
+ *
+ * @param {any} id
+ * @memberof UserFavourites
+ */
+  removeFromFavourite(id) {
+    this.props.removeFavourite(id);
+  }
+
+
   /**
    *
    *
@@ -53,6 +84,18 @@ class UserFavourites extends React.Component {
    * @memberof UserFavourites
    */
   render() {
+    const { loading } = this.state;
+
+    if (loading) {
+      return (
+        <div className="loader-container">
+          <div className="loader" />
+        </div>
+      );
+    }
+
+    const { pages } = this.props.pagination;
+
     let userFavouritesError;
     if (this.props.userFavouritesError) {
       userFavouritesError = (
@@ -72,6 +115,8 @@ class UserFavourites extends React.Component {
           name={favourites.Recipe.name}
           description={favourites.Recipe.description}
           id={favourites.recipeId}
+          button="true"
+          onButtonClick={this.removeFromFavourite}
         />
       </div>
     ));
@@ -89,6 +134,26 @@ class UserFavourites extends React.Component {
             <hr />
             <div className="row">
               {userFavouritesList}
+            </div>
+            <div className="container">
+              <ReactPaginate
+                pageCount={pages}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={3}
+                previousLabel="Previous"
+                nextLabel="Next"
+                breakClassName="text-center"
+                initialPage={0}
+                containerClassName="container pagination justify-content-center"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                activeClassName="page-item active"
+                previousClassName="page-item"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                previousLinkClassName="page-link"
+                onPageChange={this.onPageChange}
+              />
             </div>
           </div>
         </section>
@@ -121,11 +186,14 @@ UserFavourites.propTypes = {
 const mapStateToProps = state => ({
   userFavourites: state.userFavourites.favourites,
   userFavouritesError: state.userFavourites.errorMessage,
-  authenticated: state.auth.isAuthenticated
+  authenticated: state.auth.isAuthenticated,
+  pagination: state.pagination,
+  isFetching: state.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
-  favourites: () => dispatch(getUserFavourites())
+  favourites: page => dispatch(getUserFavourites(page)),
+  removeFavourite: recipedId => dispatch(removeUserFavourite(recipedId))
 });
 
 
