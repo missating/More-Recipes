@@ -238,7 +238,7 @@ describe('RECIPE CONTROLLER', () => {
 
     it('Should allow auth user view all their recipes', (done) => {
       chai.request(app)
-        .get('/api/v1/recipes/user/allrecipes')
+        .get('/api/v1/recipes/user/recipes')
         .set('token', userToken)
         .end((error, response) => {
           expect(response).to.have.status(200);
@@ -247,9 +247,9 @@ describe('RECIPE CONTROLLER', () => {
     });
 
 
-    it('Should not allow auth user view all their recipes', (done) => {
+    it('Should not allow non auth user view all their recipes', (done) => {
       chai.request(app)
-        .get('/api/v1/recipes/user/allrecipes')
+        .get('/api/v1/recipes/user/recipes')
         .end((error, response) => {
           expect(response).to.have.status(401);
           expect(response.body.message).to.equal('Unauthorized.');
