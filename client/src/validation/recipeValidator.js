@@ -3,6 +3,7 @@ import isEmpty from 'lodash.isempty';
 
 const recipeValidator = (recipe) => {
   const errors = {};
+
   if (validator.isEmpty(recipe.name.trim() || '')) {
     errors.name = 'Recipe name cannot be empty';
   }
