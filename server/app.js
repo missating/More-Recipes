@@ -31,9 +31,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-const compiler = webpack(webpackDev);
-
 if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(webpackDev);
   app.use(webpackMiddleware(compiler, {
     publicPath: webpackDev.output.publicPath,
     noInfo: true
