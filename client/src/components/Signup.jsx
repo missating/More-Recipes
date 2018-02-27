@@ -101,7 +101,9 @@ class Signup extends React.Component {
     let signupError;
     if (this.props.auth.errorMessage) {
       signupError = (
-        <span className="help-block text-danger">{this.props.auth.errorMessage}</span>
+        <span className="help-block text-danger">
+          {this.props.auth.errorMessage}
+        </span>
       );
     }
     return (

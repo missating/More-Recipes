@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // actions
 import signUserOut from '../actions/signout';
 
-const Header = props => (
+export const Header = props => (
   <header>
     <nav
       className="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-black"
@@ -45,7 +45,6 @@ const Header = props => (
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdownMenuLink"
                 data-toggle="dropdown"
                 aria-haspopup="true"
@@ -85,6 +84,7 @@ const Header = props => (
               <button
                 className="btn-secondary"
                 style={{ width: '100px' }}
+                id="signout"
                 onClick={() => { props.signUserOut(); }}
               >
                 SIGN OUT

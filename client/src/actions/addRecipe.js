@@ -12,6 +12,7 @@ export const createRecipe = newRecipe => ({
 
 export const recipeError = message => ({
   type: ADD_RECIPE_ERROR,
+  newRecipe: '',
   message
 });
 

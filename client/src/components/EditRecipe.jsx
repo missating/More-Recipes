@@ -149,10 +149,11 @@ class EditRecipe extends React.Component {
     const { errors, isValid } = recipeValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
     }
-    return isValid;
   }
-
 
   /**
    * @description react render method

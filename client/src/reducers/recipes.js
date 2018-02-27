@@ -4,6 +4,7 @@ import {
   ADD_REVIEW,
   ADD_FAVOURITE,
   ADD_RECIPE,
+  ADD_RECIPE_ERROR,
   REMOVE_FAVOURITE,
   SEARCH_RECIPES,
   SEARCH_RECIPES_ERROR
@@ -67,7 +68,14 @@ const recipes = (state = initialState.recipes, action) => {
   case ADD_RECIPE:
     return {
       ...state,
-      newRecipe: action.newRecipe
+      newRecipe: action.newRecipe,
+      errorMessage: '',
+    };
+  case ADD_RECIPE_ERROR:
+    return {
+      ...state,
+      newRecipe: '',
+      errorMessage: action.message
     };
   default:
     return state;

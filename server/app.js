@@ -7,7 +7,7 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import swaggerUi from 'swagger-ui-express';
-import webpackConfig from '../webpack.config';
+import webpackDev from '../webpack.dev';
 
 import routes from './routes';
 
@@ -31,11 +31,11 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-const compiler = webpack(webpackConfig);
+const compiler = webpack(webpackDev);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(webpackMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
+    publicPath: webpackDev.output.publicPath,
     noInfo: true
   }));
 

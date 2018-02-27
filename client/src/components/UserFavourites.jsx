@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import { Redirect } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 // components
 import RecipeCard from './RecipeCard';
@@ -73,7 +75,13 @@ class UserFavourites extends React.Component {
  * @memberof UserFavourites
  */
   removeFromFavourite(id) {
-    this.props.removeFavourite(id);
+    confirmAlert({
+      message: 'Are you sure you want to remove this recipe ?',
+      confirmLabel: 'Yes, remove!',
+      cancelLabel: 'Cancel',
+      onConfirm: () =>
+        this.props.removeFavourite(id),
+    });
   }
 
 

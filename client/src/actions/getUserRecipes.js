@@ -48,7 +48,12 @@ const getUserRecipes = page => (dispatch) => {
       dispatch(unsetFetching());
     }).catch((error) => {
       const { message } = error.response.data;
-      dispatch(userRecipesError(message));
+      if (error.response.status === 404) {
+        dispatch(userRecipes([]));
+        dispatch(userRecipesError(message));
+      } else {
+        dispatch(userRecipesError(message));
+      }
       dispatch(unsetFetching());
     });
 };

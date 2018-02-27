@@ -27,7 +27,7 @@ const getUserFavourites = page => (dispatch) => {
   dispatch(setFetching());
   const token = localStorage.getItem('token');
   return axios({
-    methiod: 'GET',
+    method: 'GET',
     url: `/api/v1/users/favourites?page=${pageNumber}`,
     headers: {
       token
@@ -46,7 +46,12 @@ const getUserFavourites = page => (dispatch) => {
     })
     .catch((error) => {
       const { message } = error.response.data;
-      dispatch(userFavouritesError(message));
+      if (error.response.status === 404) {
+        dispatch(userFavourites([]));
+        dispatch(userFavouritesError(message));
+      } else {
+        dispatch(userFavouritesError(message));
+      }
       dispatch(unsetFetching());
     });
 };

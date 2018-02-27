@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// validations
+import reviewValidator from '../validation/reviewValidator';
+
 // actions
 import addReview from '../actions/addReview';
 /**
@@ -19,7 +22,8 @@ class AddReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: ''
+      content: '',
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -40,15 +44,34 @@ class AddReview extends React.Component {
    * @memberof AddReview
    */
   onSubmit(event) {
+    event.preventDefault();
     const { content } = this.state;
     const { recipeId } = this.props;
-    event.preventDefault();
-    this.props.addNewReview(content, recipeId)
-      .then(() => {
-        this.setState({
-          content: ''
+    const isValid = this.isValid();
+    if (isValid) {
+      this.props.addNewReview(content, recipeId)
+        .then(() => {
+          this.setState({
+            content: ''
+          });
         });
-      });
+    }
+  }
+
+  /**
+   *
+   *
+   * @returns {boolean} boolean
+   * @memberof AddReview
+   */
+  isValid() {
+    const { errors, isValid } = reviewValidator(this.state);
+    if (!isValid) {
+      this.setState({ errors });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
+    }
   }
   /**
    *
@@ -69,10 +92,19 @@ class AddReview extends React.Component {
             onChange={this.onChange}
             value={this.state.content}
           />
+          {
+            this.state.errors.content &&
+            <span
+              className="help-block text-danger"
+            >
+              {this.state.errors.content}
+            </span>
+          }
+
           <br />
           <button className="btn btn-secondary" style={{ float: 'right' }}>
             SUBMIT
-        </button>
+          </button>
         </form>
       </div>
     );

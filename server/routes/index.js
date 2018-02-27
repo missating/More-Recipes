@@ -9,6 +9,7 @@ import {
   verifySignin,
   verifyNewRecipe,
   verfiyUpdateRecipe,
+  verifyReview,
 } from '../middleware/validation';
 
 
@@ -47,7 +48,7 @@ const routes = (app) => {
   // user adds review for a recipe
   app.post(
     '/api/v1/recipes/:recipeId/review',
-    verifyToken, Review.addReview
+    verifyToken, verifyReview, Review.addReview
   );
 
   // user can get all their recipe

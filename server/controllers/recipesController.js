@@ -70,13 +70,10 @@ export default class recipesController {
               }));
         }
       })
-      .catch((err) => {
-        console.log(err, 'err');
-        return res.status(500).json({
-          status: 'error',
-          message: 'Internal server error'
-        });
-      });
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 

@@ -106,3 +106,17 @@ export const verfiyUpdateRecipe = (req, res, next) => {
   return res.status(400).json({ error });
 };
 
+
+export const verifyReview = (req, res, next) => {
+  const { content } = req.body;
+
+  const error = {};
+
+  if (Validator.isEmpty(content.trim() || '')) {
+    error.content = 'Please add a review';
+  }
+
+  if (isEmpty(error)) return next();
+  return res.status(400).json({ error });
+};
+

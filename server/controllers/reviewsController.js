@@ -15,15 +15,11 @@ export default class reviewsController {
    * @memberof Review
    */
   static addReview(req, res) {
-    const { content } = req.body;
-
     if (isNaN(parseInt(req.params.recipeId, 10))) {
       return res.status(400).json({ message: 'RecipeId must be a number' });
     }
 
-    if (!content) {
-      return res.status(400).json({ message: 'Please add a review' });
-    }
+    const { content } = req.body;
 
     return db.Recipe.findById(req.params.recipeId)
       .then((foundRecipe) => {
@@ -50,12 +46,9 @@ export default class reviewsController {
               review
             })));
       })
-      .catch((error) => {
-        console.log(error);
-        res.status(500).json({
-          status: 'error',
-          message: 'Internal server error'
-        });
-      });
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 }
