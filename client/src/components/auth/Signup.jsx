@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // validations
-import signupValidator from '../validation/signupValidator';
+import signupValidator from '../../validation/signupValidator';
 
 // actions
-import fetchUserSignup from '../actions/signup';
+import fetchUserSignup from '../../actions/signup';
 
 
 /**
@@ -101,7 +101,9 @@ class Signup extends React.Component {
     let signupError;
     if (this.props.auth.errorMessage) {
       signupError = (
-        <span className="help-block text-danger">{this.props.auth.errorMessage}</span>
+        <span className="help-block text-danger">
+          {this.props.auth.errorMessage}
+        </span>
       );
     }
     return (

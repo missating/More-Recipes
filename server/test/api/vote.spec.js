@@ -55,8 +55,25 @@ describe('VOTE API', () => {
           .set('token', userToken)
           .end((error, response) => {
             expect(response.status).to.equal(400);
+            expect(response.body).to.be.an('object');
             expect(response.body.message)
               .to.equal('Vote query action is required');
+            done();
+          });
+      }
+    );
+
+    it(
+      'Should not upvote a recipe if the correct query action is not provided',
+      (done) => {
+        chai.request(app)
+          .post(`/api/v1/recipes/${recipeId}/vote?vote=test`)
+          .set('token', userToken)
+          .end((error, response) => {
+            expect(response.status).to.equal(400);
+            expect(response.body).to.be.an('object');
+            expect(response.body.message)
+              .to.equal('Please provide the correct query action');
             done();
           });
       }

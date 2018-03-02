@@ -6,8 +6,8 @@ import { Redirect } from 'react-router-dom';
 
 
 // actions
-import getUserProfile from '../actions/userProfile';
-import editProfile from '../actions/editUserProfile';
+import getUserProfile from '../../actions/userProfile';
+import editProfile from '../../actions/editUserProfile';
 /**
  *
  *
@@ -32,6 +32,7 @@ class Profile extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onEdit = this.onEdit.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
   }
   /**
    *
@@ -71,6 +72,16 @@ class Profile extends React.Component {
    */
   onEdit() {
     this.setState({ disabled: !this.state.disabled });
+  }
+  /**
+   *
+   *
+   * @memberof Profile
+   */
+  cancelEdit() {
+    this.setState({
+      disabled: true
+    });
   }
   /**
    *@returns {json} updates the profile
@@ -192,7 +203,14 @@ class Profile extends React.Component {
                   >
                     Submit
                   </button>
-                  {/* <button type="button" className="btn btn-secondary">Right</button> */}
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={this.cancelEdit}
+                    disabled={this.state.disabled}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             </form>

@@ -27,10 +27,6 @@ export default class votesController {
         });
     }
 
-    if (isNaN(parseInt(req.params.recipeId, 10))) {
-      return res.status(400).json({ message: 'RecipeId must be a number' });
-    }
-
     return db.Recipe.findById(req.params.recipeId)
       .then((foundRecipe) => {
         if (!foundRecipe) {

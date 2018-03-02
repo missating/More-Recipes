@@ -7,16 +7,16 @@ const initialState = {
 
 const pagination = (state = initialState.recipes, action) => {
   switch (action.type) {
-    case SHOW_PAGINATION:
-      return {
-        ...state,
-        currentPage: action.details.CurrentPage,
-        limit: action.details.Limit,
-        pages: action.details.Pages,
-        numberOfItems: action.details.NumberOfItems
-      };
-    default:
-      return state;
+  case SHOW_PAGINATION:
+    return {
+      ...state,
+      currentPage: action.details.currentPage,
+      limit: action.details.limit,
+      pages: action.details.pages,
+      numberOfItems: action.details.numberOfItems
+    };
+  default:
+    return state;
   }
 };
 

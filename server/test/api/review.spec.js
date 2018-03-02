@@ -42,6 +42,12 @@ describe('REVIEW API', () => {
           .to.equal('test, test, test');
         expect(response.body.recipe.description)
           .to.equal('For testing recipe 2');
+        expect(response.body.recipe.recipeImage)
+          .to.be.a('string');
+        expect(response.body.recipe.id)
+          .to.be.a('number');
+        expect(response.body.recipe.userId)
+          .to.be.a('number');
         done();
       });
   });
@@ -57,6 +63,7 @@ describe('REVIEW API', () => {
           })
           .end((error, response) => {
             expect(response.status).to.equal(401);
+            expect(response.body).to.be.an('object');
             expect(response.body.message).to.equal('Unauthorized.');
             done();
           });
@@ -72,7 +79,9 @@ describe('REVIEW API', () => {
         })
         .end((error, response) => {
           expect(response.status).to.equal(400);
-          expect(response.body.message).to.equal('Please add a review');
+          expect(response.body).to.be.an('object');
+          expect(response.body.error.content)
+            .to.include('Please add a review');
           done();
         });
     });
@@ -86,6 +95,7 @@ describe('REVIEW API', () => {
         })
         .end((error, response) => {
           expect(response.status).to.equal(201);
+          expect(response.body).to.be.an('object');
           expect(response.body.review.content).to.equal('Good stuff');
           done();
         });
@@ -100,7 +110,9 @@ describe('REVIEW API', () => {
         })
         .end((error, response) => {
           expect(response.status).to.equal(400);
-          expect(response.body.message).to.equal('RecipeId must be a number');
+          expect(response.body).to.be.an('object');
+          expect(response.body.error.recipeId)
+            .to.include('RecipeId must be a number');
           done();
         });
     });

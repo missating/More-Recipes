@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import { Redirect } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 // components
-import RecipeCard from './RecipeCard';
+import RecipeCard from '../cards/RecipeCard';
 
 // actions
-import getUserFavourites from '../actions/getUserFavourites';
+import getUserFavourites from '../../actions/getUserFavourites';
 
-import { removeUserFavourite } from '../actions/addFavourite';
+import { removeUserFavourite } from '../../actions/addFavourite';
 
 /**
  *
@@ -73,7 +75,13 @@ class UserFavourites extends React.Component {
  * @memberof UserFavourites
  */
   removeFromFavourite(id) {
-    this.props.removeFavourite(id);
+    confirmAlert({
+      message: 'Are you sure you want to remove this recipe ?',
+      confirmLabel: 'Yes, remove!',
+      cancelLabel: 'Cancel',
+      onConfirm: () =>
+        this.props.removeFavourite(id),
+    });
   }
 
 
@@ -96,18 +104,20 @@ class UserFavourites extends React.Component {
 
     const { pages } = this.props.pagination;
 
+    const userFavourites =
+      (this.state.userFavourites) ?
+        this.state.userFavourites : [];
+
     let userFavouritesError;
-    if (this.props.userFavouritesError) {
+    if (userFavourites.length === 0) {
       userFavouritesError = (
         <span className="help-block">
-          {this.props.userFavouritesError}
+          You have no recipes added as favourites
         </span>
       );
     }
 
-    const userFavourites =
-      (this.state.userFavourites) ?
-        this.state.userFavourites : [];
+
     const userFavouritesList = userFavourites.map((favourites, i) => (
       <div className="col-md-4" key={`favourites${i + 1}`}>
         <RecipeCard
@@ -135,26 +145,30 @@ class UserFavourites extends React.Component {
             <div className="row">
               {userFavouritesList}
             </div>
-            <div className="container">
-              <ReactPaginate
-                pageCount={pages}
-                pageRangeDisplayed={5}
-                marginPagesDisplayed={3}
-                previousLabel="Previous"
-                nextLabel="Next"
-                breakClassName="text-center"
-                initialPage={0}
-                containerClassName="container pagination justify-content-center"
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                activeClassName="page-item active"
-                previousClassName="page-item"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-                previousLinkClassName="page-link"
-                onPageChange={this.onPageChange}
-              />
-            </div>
+            {
+              userFavourites.length > 6 && (
+                <div className="container">
+                  <ReactPaginate
+                    pageCount={pages}
+                    pageRangeDisplayed={5}
+                    marginPagesDisplayed={3}
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    breakClassName="text-center"
+                    initialPage={0}
+                    containerClassName="container pagination justify-content-center"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    activeClassName="page-item active"
+                    previousClassName="page-item"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    previousLinkClassName="page-link"
+                    onPageChange={this.onPageChange}
+                  />
+                </div>
+              )
+            }
           </div>
         </section>
 
@@ -185,7 +199,6 @@ UserFavourites.propTypes = {
 
 const mapStateToProps = state => ({
   userFavourites: state.userFavourites.favourites,
-  userFavouritesError: state.userFavourites.errorMessage,
   authenticated: state.auth.isAuthenticated,
   pagination: state.pagination,
   isFetching: state.isFetching

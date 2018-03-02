@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // actions
-import signUserOut from '../actions/signout';
+import signUserOut from '../../actions/signout';
 
-const Header = props => (
+export const Header = props => (
   <header>
     <nav
       className="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-black"
@@ -42,16 +42,19 @@ const Header = props => (
 
           {
             props.authenticated &&
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown user-name">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdownMenuLink"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Dashboard
+                {
+                  props.authenticated &&
+                  <span>Hi, {props.user.fullname}</span>
+                }
+
               </a>
               <div
                 className="dropdown-menu"
@@ -85,6 +88,7 @@ const Header = props => (
               <button
                 className="btn-secondary"
                 style={{ width: '100px' }}
+                id="signout"
                 onClick={() => { props.signUserOut(); }}
               >
                 SIGN OUT
@@ -106,7 +110,8 @@ Header.propTypes = {
 
 
 const mapStateToProps = state => ({
-  authenticated: state.auth.isAuthenticated
+  authenticated: state.auth.isAuthenticated,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({

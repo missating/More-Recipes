@@ -6,11 +6,11 @@ import Dropzone from 'react-dropzone';
 import { Link, Redirect } from 'react-router-dom';
 
 // validations
-import recipeValidator from '../validation/recipeValidator';
+import recipeValidator from '../../validation/recipeValidator';
 
 // action
-import getSingleRecipe from '../actions/getSingleRecipe';
-import editRecipe from '../actions/editRecipe';
+import getSingleRecipe from '../../actions/getSingleRecipe';
+import editRecipe from '../../actions/editRecipe';
 
 
 /**
@@ -33,6 +33,7 @@ class EditRecipe extends React.Component {
       description: '',
       recipeImage: '',
       newImage: '',
+      updating: false,
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -79,6 +80,9 @@ class EditRecipe extends React.Component {
  */
   onEdit(event) {
     event.preventDefault();
+    this.setState({
+      updating: true
+    });
     const {
       id, name, description, ingredients, newImage, recipeImage
     } = this.state;
@@ -149,10 +153,11 @@ class EditRecipe extends React.Component {
     const { errors, isValid } = recipeValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
     }
-    return isValid;
   }
-
 
   /**
    * @description react render method
@@ -261,9 +266,10 @@ class EditRecipe extends React.Component {
                 <div className="form-group form-width">
                   <button
                     className="btn btn-secondary"
+                    disabled={this.state.updating}
                     onClick={this.onEdit}
                   >
-                    Update Recipe
+                    {this.state.updating ? 'Updating...' : 'Update'}
                   </button>
 
                   <Link

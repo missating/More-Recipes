@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 
 // actions
-import getSingleRecipe from '../actions/getSingleRecipe';
-import addFavourite from '../actions/addFavourite';
-import upvoteRecipe from '../actions/upvoteRecipe';
+import getSingleRecipe from '../../actions/getSingleRecipe';
+import addFavourite from '../../actions/addFavourite';
+import upvoteRecipe from '../../actions/upvoteRecipe';
 
 // components
-import ActionButtons from './ActionButtons';
-import AddReview from './AddReview';
-import ViewReviews from './ViewReviews';
+import ActionButtons from '../common/ActionButtons';
+import AddReview from '../reviews/AddReview';
+import ViewReviews from '../reviews/ViewReviews';
 
 /**
  *

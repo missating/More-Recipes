@@ -1,9 +1,9 @@
 import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import userProfile from '../../actions/userProfile';
+import getUserProfile from '../../actions/userProfile';
 import {
-  RECEIVE_USER_PROFILE,
+  GET_USER_PROFILE,
   SET_FETCHING,
   UNSET_FETCHING
 } from '../../actions/actionTypes';
@@ -38,10 +38,10 @@ describe('User profile action', () => {
       });
 
       const store = mockStore({});
-      store.dispatch(userProfile()).then(() => {
+      store.dispatch(getUserProfile()).then(() => {
         expect(store.getActions()[0].type).toEqual(SET_FETCHING);
-        expect(store.getActions()[1].type).toEqual(RECEIVE_USER_PROFILE);
-        expect(store.getActions()[1].userDetails).toEqual(user);
+        expect(store.getActions()[1].type).toEqual(GET_USER_PROFILE);
+        expect(store.getActions()[1].user).toEqual(user);
         expect(store.getActions()[2].type).toEqual(UNSET_FETCHING);
       });
       done();
@@ -54,7 +54,7 @@ describe('User profile action', () => {
     });
 
     const store = mockStore({});
-    store.dispatch(userProfile()).then(() => {
+    store.dispatch(getUserProfile()).then(() => {
       expect(store.getActions()[1].type).toEqual(UNSET_FETCHING);
     });
     done();

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { GET_ALL_RECIPES, SHOW_PAGINATION } from './actionTypes';
+import {
+  GET_ALL_RECIPES,
+  SHOW_PAGINATION,
+  GET_ALL_RECIPES_ERROR
+} from './actionTypes';
 
 // action creators for get all recipes
 export const allRecipes = recipes => ({
@@ -13,6 +17,10 @@ export const pagination = details => ({
   details
 });
 
+export const recipeError = () => ({
+  type: GET_ALL_RECIPES_ERROR
+});
+
 // action for get all recipes
 const getAllRecipes = page => (dispatch) => {
   const pageNumber = page || 1;
@@ -20,16 +28,17 @@ const getAllRecipes = page => (dispatch) => {
   return axios.get(`/api/v1/recipes?page=${pageNumber}`)
     .then((response) => {
       const {
-        CurrentPage, Limit, NumberOfItems, Pages, recipes
+        currentPage, limit, numberOfItems, pages, recipes
       } = response.data;
       const paginationInfo = {
-        CurrentPage, Limit, NumberOfItems, Pages
+        currentPage, limit, numberOfItems, pages
       };
       dispatch(allRecipes(recipes));
       dispatch(pagination(paginationInfo));
       dispatch(unsetFetching());
     }).catch((error) => {
-      console.log('All recipes error', error.response.data.message);
+      const { message } = error.response.data;
+      dispatch(recipeError(message));
       dispatch(unsetFetching());
     });
 };

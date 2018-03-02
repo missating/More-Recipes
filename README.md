@@ -18,7 +18,7 @@ More-Recipes is a full stack web application that provides a platform for users 
 
 ## API Documentation
 ----
-
+The full documentation for all API end point can be found [here](https://nkoyo-more-recipes.herokuapp.com/api/docs/)
 
 ## Functionalities 
 ----

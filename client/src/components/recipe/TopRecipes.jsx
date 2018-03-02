@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // components
-import RecipeCard from './RecipeCard';
+import RecipeCard from '../cards/RecipeCard';
 
 // actions
-import getTopRecipes from '../actions/getTopRecipes';
+import getTopRecipes from '../../actions/getTopRecipes';
 
 
 /**
@@ -42,13 +42,17 @@ class TopRecipes extends React.Component {
       </div>
     ));
 
-    if (topRecipe.length < 1) {
+    if (topRecipe.length === 0) {
       topRecipeList =
-        <h5 className="text-center display-5">Currently no featured recipes.</h5>;
+        (
+          <h5 className="text-center display-5">
+            Currently no featured recipes
+          </h5>
+        );
     }
     return (
       <div>
-        <section className="container">
+        <section className="container" id="featured">
           <h2 className="text-center mt-5"> Featured Recipes </h2>
           <hr />
           <div className="row justify-content-center">

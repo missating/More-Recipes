@@ -38,10 +38,10 @@ const getUserRecipes = page => (dispatch) => {
   })
     .then((response) => {
       const {
-        CurrentPage, Limit, NumberOfItems, Pages, recipes
+        currentPage, limit, numberOfItems, pages, recipes
       } = response.data;
       const paginationInfo = {
-        CurrentPage, Limit, NumberOfItems, Pages
+        currentPage, limit, numberOfItems, pages
       };
       dispatch(userRecipes(recipes));
       dispatch(pagination(paginationInfo));

@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 // validations
-import recipeValidator from '../validation/recipeValidator';
+import recipeValidator from '../../validation/recipeValidator';
 
 // action
-import addRecipe from '../actions/addRecipe';
+import addRecipe from '../../actions/addRecipe';
 
 
 /**
@@ -32,6 +32,7 @@ class AddRecipe extends React.Component {
         ingredients: '',
         description: '',
         recipeImage: '',
+        submitting: false
       },
       errors: {},
       defaultImg: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png',
@@ -65,6 +66,9 @@ class AddRecipe extends React.Component {
  */
   onSubmit(event) {
     event.preventDefault();
+    this.setState({
+      submitting: true
+    });
     const { newRecipe } = this.state;
     const isValid = this.isValid();
     if (isValid) {
@@ -81,7 +85,8 @@ class AddRecipe extends React.Component {
                   name: '',
                   ingredients: '',
                   description: '',
-                  recipeImage: ''
+                  recipeImage: '',
+                  submitting: false,
                 }
               });
               this.props.history.push('/users/recipes');
@@ -96,7 +101,8 @@ class AddRecipe extends React.Component {
                 name: '',
                 ingredients: '',
                 description: '',
-                recipeImage: ''
+                recipeImage: '',
+                submitting: false,
               }
             });
             this.props.history.push('/users/recipes');
@@ -144,9 +150,11 @@ class AddRecipe extends React.Component {
   isValid() {
     const { errors, isValid } = recipeValidator(this.state.newRecipe);
     if (!isValid) {
-      this.setState({ errors });
+      this.setState({ errors, submitting: false });
+    } else {
+      this.setState({ errors: {} });
+      return isValid;
     }
-    return isValid;
   }
 
   /**
@@ -209,7 +217,7 @@ class AddRecipe extends React.Component {
                     type="text"
                     name="name"
                     className="form-control"
-                    placeholder="Recipe Name"
+                    placeholder="The name of the dish..."
                     value={newRecipe.name}
                     onChange={this.onChange}
                   />
@@ -229,7 +237,7 @@ class AddRecipe extends React.Component {
                     type="text"
                     name="ingredients"
                     className="form-control"
-                    placeholder="Ingredients"
+                    placeholder="A comma seperated list of ingredients..."
                     value={newRecipe.ingredients}
                     onChange={this.onChange}
                   />
@@ -249,7 +257,7 @@ class AddRecipe extends React.Component {
                     rows="5"
                     id="recipeDescription"
                     className="form-control"
-                    placeholder="Description"
+                    placeholder="Instructions on how this dish should be made..."
                     name="description"
                     value={newRecipe.description}
                     onChange={this.onChange}
@@ -267,8 +275,9 @@ class AddRecipe extends React.Component {
                 <div className="form-group form-width">
                   <button
                     className="btn btn-secondary"
+                    disabled={this.state.submitting}
                   >
-                    Add Recipe
+                    {this.state.submitting ? 'Submitting...' : 'Add Recipe'}
                   </button>
                   <Link
                     className="btn btn-secondary"
@@ -298,7 +307,8 @@ AddRecipe.propTypes = {
 
 const mapStateToProps = state => ({
   addRecipe: state.addRecipe,
-  authenticated: state.auth.isAuthenticated
+  authenticated: state.auth.isAuthenticated,
+  errorMessage: state.errorMessage
 });
 
 export default connect(mapStateToProps, {

@@ -4,11 +4,11 @@ import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 
 // components
-import RecipeCard from './RecipeCard';
-import SearchRecipe from './SearchRecipe';
+import RecipeCard from '../cards/RecipeCard';
+import SearchRecipe from '../recipe/SearchRecipe';
 
 // actions
-import getAllRecipes from '../actions/getAllRecipes';
+import getAllRecipes from '../../actions/getAllRecipes';
 
 /**
  *
@@ -60,9 +60,11 @@ export class Recipes extends React.Component {
 
     const recipes = this.props.allRecipes ? this.props.allRecipes : [];
     let recipeList;
-    if (recipes.length <= 0) {
+    if (recipes.length === 0) {
       recipeList = (
-        <div>No recipe found.</div>
+        <div className="text-center ml-5" style={{ width: '100%' }}>
+          <h4> You currently have no recipes </h4>
+        </div>
       );
     } else {
       recipeList = recipes.map((recipe, i) => (
@@ -82,26 +84,31 @@ export class Recipes extends React.Component {
           <div className="row">
             {recipeList}
           </div>
-          <div className="container">
-            <ReactPaginate
-              pageCount={pages}
-              pageRangeDisplayed={5}
-              marginPagesDisplayed={3}
-              previousLabel="Previous"
-              nextLabel="Next"
-              breakClassName="text-center"
-              initialPage={0}
-              containerClassName="container pagination justify-content-center"
-              pageClassName="page-item"
-              pageLinkClassName="page-link"
-              activeClassName="page-item active"
-              previousClassName="page-item"
-              nextClassName="page-item"
-              nextLinkClassName="page-link"
-              previousLinkClassName="page-link"
-              onPageChange={this.onPageChange}
-            />
-          </div>
+          {
+            recipeList.length > 6 && (
+              <div className="container">
+                <ReactPaginate
+                  pageCount={pages}
+                  pageRangeDisplayed={5}
+                  marginPagesDisplayed={3}
+                  previousLabel="Previous"
+                  nextLabel="Next"
+                  breakClassName="text-center"
+                  initialPage={0}
+                  containerClassName="container pagination justify-content-center"
+                  pageClassName="page-item"
+                  pageLinkClassName="page-link"
+                  activeClassName="page-item active"
+                  previousClassName="page-item"
+                  nextClassName="page-item"
+                  nextLinkClassName="page-link"
+                  previousLinkClassName="page-link"
+                  onPageChange={this.onPageChange}
+                />
+              </div>
+            )
+          }
+
         </section>
       </div>
     );

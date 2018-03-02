@@ -27,7 +27,7 @@ const getUserFavourites = page => (dispatch) => {
   dispatch(setFetching());
   const token = localStorage.getItem('token');
   return axios({
-    methiod: 'GET',
+    method: 'GET',
     url: `/api/v1/users/favourites?page=${pageNumber}`,
     headers: {
       token
@@ -35,10 +35,10 @@ const getUserFavourites = page => (dispatch) => {
   })
     .then((response) => {
       const {
-        CurrentPage, Limit, NumberOfItems, Pages, favourites
+        currentPage, limit, numberOfItems, pages, favourites
       } = response.data;
       const paginationInfo = {
-        CurrentPage, Limit, NumberOfItems, Pages
+        currentPage, limit, numberOfItems, pages
       };
       dispatch(userFavourites(favourites));
       dispatch(pagination(paginationInfo));

@@ -24,7 +24,7 @@ const getUserProfile = () => (dispatch) => {
       dispatch(userProfile(user));
       dispatch(unsetFetching());
     }).catch((error) => {
-      console.log('User profile error', error);
+      Promise.reject(error);
       dispatch(unsetFetching());
     });
 };

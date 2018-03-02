@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // validations
-import signinValidator from '../validation/signinValidator';
+import signinValidator from '../../validation/signinValidator';
 
 // actions
-import fetchUserSignin from '../actions/userSignIn';
+import fetchUserSignin from '../../actions/userSignIn';
 
 
 /**

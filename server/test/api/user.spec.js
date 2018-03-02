@@ -20,8 +20,15 @@ describe('USER API', () => {
           confirmPassword: '1234567890'
         })
         .end((error, response) => {
-          expect(response
-            .status).to.equal(201);
+          expect(response.status).to.equal(201);
+          expect(response.body).to.be.an('object');
+          expect(response.body.message).to.equal('Account created');
+          expect(response.body.user.username).to.equal('test');
+          expect(response.body.user.fullname).to.equal('test');
+          expect(response.body.user.email).to.equal('test@test.com');
+          expect(response.body).to.have.property('token');
+          expect(response.body.token).to.be.a('string');
+          expect(response.body.user).to.not.have.property('password');
           done();
         });
     });
@@ -40,6 +47,7 @@ describe('USER API', () => {
           })
           .end((error, response) => {
             expect(response).to.have.status(409);
+            expect(response.body).to.be.an('object');
             expect(response.body.message).to.equal('Email already exist');
             done();
           });
@@ -59,6 +67,7 @@ describe('USER API', () => {
           })
           .end((error, response) => {
             expect(response).to.have.status(400);
+            expect(response.body).to.be.an('object');
             expect(response.body.error.email)
               .to.include('Email address is empty or invalid');
             done();
@@ -80,6 +89,7 @@ describe('USER API', () => {
           })
           .end((error, response) => {
             expect(response).to.have.status(400);
+            expect(response.body).to.be.an('object');
             expect(response.body.error.fullname)
               .to.include('Fullname is required');
             done();
@@ -101,6 +111,7 @@ describe('USER API', () => {
           })
           .end((error, response) => {
             expect(response).to.have.status(400);
+            expect(response.body).to.be.an('object');
             expect(response.body.error.username)
               .to.include('Username is required');
             done();
@@ -122,6 +133,7 @@ describe('USER API', () => {
           })
           .end((error, response) => {
             expect(response).to.have.status(400);
+            expect(response.body).to.be.an('object');
             expect(response.body.error.email)
               .to.equal('Email address is empty or invalid');
             done();
@@ -143,6 +155,7 @@ describe('USER API', () => {
           })
           .end((error, response) => {
             expect(response).to.have.status(400);
+            expect(response.body).to.be.an('object');
             expect(response.body.error.password)
               .to.include('Passwords mismatch or empty');
             done();
@@ -164,6 +177,7 @@ describe('USER API', () => {
           })
           .end((error, response) => {
             expect(response).to.have.status(400);
+            expect(response.body).to.be.an('object');
             expect(response.body.error.password)
               .to.equal('Passwords mismatch or empty');
             done();
@@ -184,7 +198,14 @@ describe('USER API', () => {
         .end((error, response) => {
           userToken = response.body.token;
           expect(response).to.have.status(200);
+          expect(response.body).to.be.an('object');
+          expect(response.body.foundUser.username).to.equal('test');
+          expect(response.body.foundUser.fullname).to.equal('test');
+          expect(response.body.foundUser.email).to.equal('test@test.com');
           expect(response.body).to.have.property('token');
+          expect(response.body.foundUser).to.not.have.property('password');
+          expect(response.body).to.have.property('token');
+          expect(response.body.token).to.be.a('string');
           done();
         });
     });
@@ -198,6 +219,7 @@ describe('USER API', () => {
         })
         .end((error, response) => {
           expect(response).to.have.status(400);
+          expect(response.body).to.be.an('object');
           expect(response.body.error.password).to.equal('Password is required');
           done();
         });
@@ -212,6 +234,7 @@ describe('USER API', () => {
         })
         .end((error, response) => {
           expect(response).to.have.status(400);
+          expect(response.body).to.be.an('object');
           expect(response.body.error.email)
             .to.equal('Please provide a valid email address');
           done();
@@ -227,6 +250,7 @@ describe('USER API', () => {
         })
         .end((error, response) => {
           expect(response).to.have.status(401);
+          expect(response.body).to.be.an('object');
           expect(response.body.message)
             .to.equal('Email or Password is incorrect');
           done();
@@ -242,6 +266,7 @@ describe('USER API', () => {
         })
         .end((error, response) => {
           expect(response).to.have.status(404);
+          expect(response.body).to.be.an('object');
           expect(response.body.message)
             .to.equal('This email does not exist. Sign up instead ?');
           done();
@@ -257,12 +282,13 @@ describe('USER API', () => {
         .get(userProfileUrl)
         .set('token', userToken)
         .end((error, response) => {
-          expect(response
-            .status).to.equal(200);
+          expect(response.status).to.equal(200);
+          expect(response.body).to.be.an('object');
           expect(response.body.user).to.have.property('fullname');
           expect(response.body.user).to.have.property('username');
           expect(response.body.user).to.have.property('email');
           expect(response.body.user).to.have.property('joined');
+          expect(response.body.user).to.not.have.property('password');
           done();
         });
     });
@@ -271,9 +297,10 @@ describe('USER API', () => {
       chai.request(app)
         .get(userProfileUrl)
         .end((error, response) => {
-          expect(response
-            .status).to.equal(401);
+          expect(response.status).to.equal(401);
+          expect(response.body).to.be.an('object');
           expect(response.body.message).to.equal('Unauthorized.');
+          expect(response.body.message).to.be.a('string');
           done();
         });
     });
@@ -286,9 +313,10 @@ describe('USER API', () => {
       chai.request(app)
         .put(userProfileUrl)
         .end((error, response) => {
-          expect(response
-            .status).to.equal(401);
+          expect(response.status).to.equal(401);
+          expect(response.body).to.be.an('object');
           expect(response.body.message).to.equal('Unauthorized.');
+          expect(response.body.message).to.be.a('string');
           done();
         });
     });
@@ -304,11 +332,12 @@ describe('USER API', () => {
             username: 'Janny',
           })
           .end((error, response) => {
-            expect(response
-              .status).to.equal(200);
+            expect(response.status).to.equal(200);
+            expect(response.body).to.be.an('object');
             expect(response.body.user.fullname).to.equal('Jane Doe');
             expect(response.body.user.username).to.equal('Janny');
             expect(response.body.user.email).to.equal('test@test.com');
+            expect(response.body.user.joined).to.be.a('string');
             done();
           });
       }

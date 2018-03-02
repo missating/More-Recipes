@@ -66,17 +66,15 @@ export default class recipesController {
             .then(newRecipe => res.status(201)
               .json({
                 status: 'success',
+                message: 'Recipe created successfully',
                 recipe: newRecipe
               }));
         }
       })
-      .catch((err) => {
-        console.log(err, 'err');
-        return res.status(500).json({
-          status: 'error',
-          message: 'Internal server error'
-        });
-      });
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      }));
   }
 
 
@@ -88,10 +86,6 @@ export default class recipesController {
  * @memberof Recipes
  */
   static updateRecipe(req, res) {
-    if (isNaN(parseInt(req.params.recipeId, 10))) {
-      return res.status(400).json({ message: 'RecipeId must be a number' });
-    }
-
     const {
       name, ingredients, description, recipeImage
     } = req.body;
@@ -116,11 +110,6 @@ export default class recipesController {
                 status: 'success',
                 message: 'Update successful',
                 recipe: updatedRecipe
-              }))
-            .catch(error => res.status(500)
-              .json({
-                status: 'Fail',
-                message: error
               }));
         }
         if (!foundRecipe) {
@@ -145,10 +134,6 @@ export default class recipesController {
  * @memberof Recipes
  */
   static deleteRecipe(req, res) {
-    if (isNaN(parseInt(req.params.recipeId, 10))) {
-      return res.status(400).json({ message: 'RecipeId must be a number' });
-    }
-
     db.Recipe.findOne({
       where: {
         id: req.params.recipeId,
@@ -223,19 +208,12 @@ export default class recipesController {
             if (recipes) {
               return res.status(200)
                 .json({
-                  status: 'Success',
-                  NumberOfItems: numberOfItems,
-                  Limit: limit,
-                  Pages: pages,
-                  CurrentPage: page,
-                  recipes: updateRecipeAttributes(recipes),
-                });
-            }
-            if (!recipes) {
-              return res.status(200)
-                .json({
                   status: 'success',
-                  message: 'Currently no recipes'
+                  numberOfItems,
+                  limit,
+                  pages,
+                  currentPage: page,
+                  recipes: updateRecipeAttributes(recipes),
                 });
             }
           })
@@ -290,10 +268,6 @@ export default class recipesController {
  * @memberof Recipes
  */
   static getOneRecipe(req, res) {
-    if (isNaN(parseInt(req.params.recipeId, 10))) {
-      return res.status(400).json({ message: 'RecipeId must be a number' });
-    }
-
     db.Recipe.findOne({
       where: {
         id: req.params.recipeId
@@ -381,25 +355,15 @@ export default class recipesController {
               attributes: ['upvote', 'downvote']
             }
           ]
-        }).then((allRecipes) => {
-          const userRecipes = allRecipes.length;
-          if (userRecipes === 0) {
-            return res.status(404)
-              .json({
-                status: 'success',
-                message: 'You currently have no recipes'
-              });
-          }
-          return res.status(200)
-            .json({
-              status: 'Success',
-              NumberOfItems: numberOfItems,
-              Limit: limit,
-              Pages: pages,
-              CurrentPage: page,
-              recipes: allRecipes
-            });
-        })
+        }).then(allRecipes => res.status(200)
+          .json({
+            status: 'success',
+            numberOfItems,
+            limit,
+            pages,
+            currentPage: page,
+            recipes: allRecipes
+          }))
           .catch(() => res.status(500).json({
             status: 'error',
             message: 'Internal server error'
@@ -433,8 +397,8 @@ export default class recipesController {
         const limit = 6;
         let offset = 0;
         const page = parseInt((req.query.page || 1), 10);
-        const NumberOfItems = all.count;
-        const Pages = Math.ceil(NumberOfItems / limit);
+        const numberOfItems = all.count;
+        const pages = Math.ceil(numberOfItems / limit);
         offset = limit * (page - 1);
         db.Recipe.findAll({
           where: {
@@ -463,14 +427,16 @@ export default class recipesController {
             if (foundRecipe.length < 1) {
               return res.status(404)
                 .json({
+                  status: 'fail',
                   message: 'No match(es) found'
                 });
             }
             return res.status(200)
               .json({
-                NumberOfItems,
-                Pages,
-                CurrentPage: page,
+                status: 'success',
+                numberOfItems,
+                pages,
+                currentPage: page,
                 limit,
                 recipes: foundRecipe
               });

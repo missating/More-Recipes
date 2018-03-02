@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // components
-import Signup from './Signup';
-import Signin from './Signin';
-import TopRecipes from './TopRecipes';
+import Signup from '../auth/Signup';
+import Signin from '../auth/Signin';
+import TopRecipes from '../recipe/TopRecipes';
 
 const Home = props => (
   <div>
@@ -51,11 +51,6 @@ const Home = props => (
             )}
             <Signin />
           </div>
-
-          {
-            props.authenticated &&
-            <p>Welcome, {props.user.fullname} </p>
-          }
         </div>
       </div>
       <div className="scroll-holder">
@@ -78,7 +73,6 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.isAuthenticated,
-  user: state.auth.user
 });
 
 export default connect(mapStateToProps)(Home);
