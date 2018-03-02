@@ -120,3 +120,29 @@ export const verifyReview = (req, res, next) => {
   return res.status(400).json({ error });
 };
 
+export const verifyId = (req, res, next) => {
+  const { recipeId } = req.params;
+
+  const error = {};
+
+  if (isNaN(parseInt(recipeId, 10))) {
+    error.recipeId = 'RecipeId must be a number';
+  }
+
+  if (isEmpty(error)) return next();
+  return res.status(400).json({ error });
+};
+
+
+export const verifyPageNumber = (req, res, next) => {
+  const { page } = req.query;
+
+  const error = {};
+
+  if (page && isNaN(parseInt(page, 10))) {
+    error.page = 'Page number must be an integer';
+  }
+
+  if (isEmpty(error)) return next();
+  return res.status(400).json({ error });
+};

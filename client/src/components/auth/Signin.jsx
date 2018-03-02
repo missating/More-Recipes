@@ -3,32 +3,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // validations
-import signupValidator from '../validation/signupValidator';
+import signinValidator from '../../validation/signinValidator';
 
 // actions
-import fetchUserSignup from '../actions/signup';
+import fetchUserSignin from '../../actions/userSignIn';
 
 
 /**
  *
  *
- * @class Signup
+ * @class Signin
  * @extends {React.Component}
  */
-class Signup extends React.Component {
+class Signin extends React.Component {
   /**
-   * Creates an instance of Signup.
+   * Creates an instance of Signin.
    * @param {any} props
-   * @memberof Signup
+   * @memberof Signin
    */
   constructor(props) {
     super(props);
     this.state = {
-      fullname: '',
-      username: '',
       email: '',
       password: '',
-      confirmPassword: '',
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -36,24 +33,24 @@ class Signup extends React.Component {
   }
 
   /**
- *
- * @returns {json} with nextProps details
- * @param {any} nextProps
- * @memberof Signup
- */
+  *
+  * @returns {json} with nextProps details
+  * @param {any} nextProps
+  * @memberof Signin
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated &&
       nextProps.auth.errorMessage.length === 0) {
-      $('#signup-modal').modal('hide');
+      $('#signin-modal').modal('hide');
     }
   }
 
   /**
-* @description handles form change events
-* @returns {null} null
-* @param {any} event
-* @memberof Signup
-*/
+ * @description handles form change events
+ * @returns {null} null
+ * @param {any} event
+ * @memberof Signin
+ */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -63,24 +60,24 @@ class Signup extends React.Component {
  *
  * @param {any} event
  * @returns {dispatch} react-redux dispatch
- * @memberof Signup
+ * @memberof Signin
  */
   onSubmit(event) {
     event.preventDefault();
     const isValid = this.isValid();
     if (isValid) {
-      this.props.signupUser(this.state);
+      this.props.signinUser(this.state);
     }
   }
 
   /**
- *
- *
- * @returns {boolean} boolean
- * @memberof Signup
- */
+*
+*
+* @returns {boolean} boolean
+* @memberof Signin
+*/
   isValid() {
-    const { isValid, errors } = signupValidator(this.state);
+    const { isValid, errors } = signinValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
     } else {
@@ -93,23 +90,21 @@ class Signup extends React.Component {
    * @description react render method
    *
    * @returns {component} react component
-   * @memberof Signup
+   * @memberof Signin
    */
   render() {
     const { errors } = this.state;
 
-    let signupError;
+    let signinError;
     if (this.props.auth.errorMessage) {
-      signupError = (
-        <span className="help-block text-danger">
-          {this.props.auth.errorMessage}
-        </span>
+      signinError = (
+        <span className="help-block text-danger">{this.props.auth.errorMessage}</span>
       );
     }
     return (
       <div>
         <div
-          id="signup-modal"
+          id="signin-modal"
           className="modal fade"
         >
           <div className="modal-dialog modal-dialog-centered modal-sm">
@@ -132,7 +127,7 @@ class Signup extends React.Component {
               </button>
               <div className="modal-body">
 
-                {signupError}
+                {signinError}
 
                 <div className="row">
                   <div className="col-sm-12">
@@ -140,46 +135,12 @@ class Signup extends React.Component {
 
                       <div className="form-group">
                         <input
-                          type="text"
-                          name="fullname"
-                          className="form-control"
-                          placeholder="Full Name"
-                          value={this.state.fullname}
-                          onChange={this.onChange}
-                        />
-                        {
-                          errors.fullname &&
-                          <span className="help-block text-danger">
-                            {errors.fullname}
-                          </span>
-                        }
-                      </div>
-
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          name="username"
-                          className="form-control"
-                          placeholder="User Name"
-                          value={this.state.username}
-                          onChange={this.onChange}
-                        />
-                        {
-                          errors.username &&
-                          <span className="help-block text-danger">
-                            {errors.username}
-                          </span>
-                        }
-                      </div>
-
-                      <div className="form-group">
-                        <input
                           type="email"
+                          placeholder="Email"
                           name="email"
-                          className="form-control"
-                          placeholder="Email Address"
                           value={this.state.email}
                           onChange={this.onChange}
+                          className="form-control signin-input"
                         />
                         {
                           errors.email &&
@@ -192,34 +153,16 @@ class Signup extends React.Component {
                       <div className="form-group">
                         <input
                           type="password"
-                          name="password"
-                          className="form-control"
                           placeholder="Password"
+                          name="password"
                           value={this.state.password}
                           onChange={this.onChange}
+                          className="form-control signin-input"
                         />
                         {
                           errors.password &&
                           <span className="help-block text-danger">
                             {errors.password}
-                          </span>
-                        }
-                      </div>
-
-
-                      <div className="form-group">
-                        <input
-                          type="password"
-                          name="confirmPassword"
-                          className="form-control"
-                          placeholder="Confirm Password"
-                          value={this.state.confirmPassword}
-                          onChange={this.onChange}
-                        />
-                        {
-                          errors.confirmPassword &&
-                          <span className="help-block text-danger">
-                            {errors.confirmPassword}
                           </span>
                         }
                       </div>
@@ -240,6 +183,7 @@ class Signup extends React.Component {
     );
   }
 }
+
 const authProps = {
   isAuthenticated: PropTypes.bool,
   user: PropTypes.string,
@@ -247,14 +191,14 @@ const authProps = {
   errorMessage: PropTypes.string
 };
 
-Signup.propTypes = {
+Signin.propTypes = {
   auth: PropTypes.shape(authProps).isRequired,
-  signupUser: PropTypes.func.isRequired
+  signinUser: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  signupUser: (userDetails) => {
-    dispatch(fetchUserSignup(userDetails));
+  signinUser: (userDetails) => {
+    dispatch(fetchUserSignin(userDetails));
   }
 });
 
@@ -262,4 +206,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

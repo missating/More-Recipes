@@ -10,6 +10,8 @@ import {
   verifyNewRecipe,
   verfiyUpdateRecipe,
   verifyReview,
+  verifyId,
+  verifyPageNumber,
 } from '../middleware/validation';
 
 
@@ -35,41 +37,40 @@ const routes = (app) => {
   // user adds recipe
   app.route('/api/v1/recipes')
     .post(verifyToken, verifyNewRecipe, Recipe.addRecipe)
-    .get(Recipe.getAllRecipes);
+    .get(verifyPageNumber, Recipe.getAllRecipes);
 
   // auth user can delete their recipe
   // auth user can edit their recipe
   // anybody can view a recipe
   app.route('/api/v1/recipes/:recipeId')
-    .put(verifyToken, verfiyUpdateRecipe, Recipe.updateRecipe)
-    .delete(verifyToken, Recipe.deleteRecipe)
-    .get(Recipe.getOneRecipe);
+    .put(verifyToken, verifyId, verfiyUpdateRecipe, Recipe.updateRecipe)
+    .delete(verifyToken, verifyId, Recipe.deleteRecipe)
+    .get(verifyId, Recipe.getOneRecipe);
 
   // user adds review for a recipe
   app.post(
     '/api/v1/recipes/:recipeId/review',
-    verifyToken, verifyReview, Review.addReview
+    verifyToken, verifyId, verifyReview, Review.addReview
   );
 
   // user can get all their recipe
   app.get(
     '/api/v1/recipes/user/recipes',
-    verifyToken, Recipe.getAllUserRecipes
+    verifyToken, verifyPageNumber, Recipe.getAllUserRecipes
   );
 
 
   // user can add recipe as favourite
   app.post(
     '/api/v1/users/:recipeId/favourite',
-    verifyToken, Favourite.addFavourite
+    verifyToken, verifyId, Favourite.addFavourite
   );
 
   // user can get all fav recipe
   app.get(
     '/api/v1/users/favourites',
-    verifyToken, Favourite.getAllFavourites
+    verifyToken, verifyPageNumber, Favourite.getAllFavourites
   );
-
   // user can vote a recipe with the right query parameter
   app.post(
     '/api/v1/recipes/:recipeId/vote',
@@ -77,7 +78,7 @@ const routes = (app) => {
   );
 
   // user can search for a recipe
-  app.post('/api/v1/recipes/search', Recipe.searchRecipes);
+  app.post('/api/v1/recipes/search', verifyPageNumber, Recipe.searchRecipes);
 };
 
 export default routes;

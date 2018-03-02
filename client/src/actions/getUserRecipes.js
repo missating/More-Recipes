@@ -38,22 +38,17 @@ const getUserRecipes = page => (dispatch) => {
   })
     .then((response) => {
       const {
-        CurrentPage, Limit, NumberOfItems, Pages, recipes
+        currentPage, limit, numberOfItems, pages, recipes
       } = response.data;
       const paginationInfo = {
-        CurrentPage, Limit, NumberOfItems, Pages
+        currentPage, limit, numberOfItems, pages
       };
       dispatch(userRecipes(recipes));
       dispatch(pagination(paginationInfo));
       dispatch(unsetFetching());
     }).catch((error) => {
       const { message } = error.response.data;
-      if (error.response.status === 404) {
-        dispatch(userRecipes([]));
-        dispatch(userRecipesError(message));
-      } else {
-        dispatch(userRecipesError(message));
-      }
+      dispatch(userRecipesError(message));
       dispatch(unsetFetching());
     });
 };

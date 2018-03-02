@@ -1,135 +1,137 @@
 import React from 'react';
-import axios from 'axios';
-import Dropzone from 'react-dropzone';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import Dropzone from 'react-dropzone';
 import { Link, Redirect } from 'react-router-dom';
 
 // validations
-import recipeValidator from '../validation/recipeValidator';
+import recipeValidator from '../../validation/recipeValidator';
 
 // action
-import addRecipe from '../actions/addRecipe';
+import getSingleRecipe from '../../actions/getSingleRecipe';
+import editRecipe from '../../actions/editRecipe';
 
 
 /**
  *
  *
- * @className AddRecipe
+ * @class UpdateRecipe
  * @extends {React.Component}
  */
-class AddRecipe extends React.Component {
+class EditRecipe extends React.Component {
   /**
-   * Creates an instance of AddRecipe.
+   * Creates an instance of EditRecipe.
    * @param {any} props
-   * @memberof AddRecipe
+   * @memberof EditRecipe
    */
   constructor(props) {
     super(props);
     this.state = {
-      newRecipe: {
-        name: '',
-        ingredients: '',
-        description: '',
-        recipeImage: '',
-        submitting: false
-      },
+      name: '',
+      ingredients: '',
+      description: '',
+      recipeImage: '',
+      newImage: '',
+      updating: false,
       errors: {},
-      defaultImg: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png',
     };
-
     this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onEdit = this.onEdit.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
   }
   /**
  *
- * @returns {null} null
- * @param {any} event
- * @memberof AddRecipe
+ *@returns {json} with recipe details
+ * @memberof EditRecipe
  */
-  onChange(event) {
-    this.setState({
-      newRecipe: {
-        ...this.state.newRecipe,
-        [event.target.name]: event.target.value
-      }
-    });
+  componentDidMount() {
+    const recipeId = this.props.match.params.id;
+    this.props.getRecipeDetails(recipeId);
   }
-
   /**
  *
- *
- * @param {any} event
- * @returns {dispatch} react-redux dispatch
- * @memberof AddRecipe
+ *@returns {json} with the new recipe details
+ * @param {any} nextProps
+ * @memberof EditRecipe
  */
-  onSubmit(event) {
+  componentWillReceiveProps(nextProps) {
+    const {
+      id, name, description, ingredients, recipeImage
+    } = nextProps.singleRecipe;
+    this.setState({
+      id, name, description, ingredients, recipeImage
+    });
+  }
+  /**
+ *
+ *@returns {json} with the new recipe name
+ * @param {any} event
+ * @memberof EditRecipe
+ */
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+  /**
+ *
+ *@returns {json} updates the recipe
+ * @param {any} event
+ * @memberof EditRecipe
+ */
+  onEdit(event) {
     event.preventDefault();
     this.setState({
-      submitting: true
+      updating: true
     });
-    const { newRecipe } = this.state;
+    const {
+      id, name, description, ingredients, newImage, recipeImage
+    } = this.state;
     const isValid = this.isValid();
     if (isValid) {
-      if (newRecipe.recipeImage) {
+      if (newImage) {
         this.uploadToCloudinary().then((response) => {
           const secureUrl = response.data.secure_url;
-          const recipeData = this.state.newRecipe;
-          recipeData.recipeImage = secureUrl;
-
-          this.props.addNewRecipe(recipeData)
-            .then(() => {
-              this.setState({
-                newRecipe: {
-                  name: '',
-                  ingredients: '',
-                  description: '',
-                  recipeImage: '',
-                  submitting: false,
-                }
-              });
-              this.props.history.push('/users/recipes');
-            });
-        });
-      } else {
-        const recipeData = { ...newRecipe, recipeImage: this.state.defaultImg };
-        this.props.addNewRecipe(recipeData)
-          .then(() => {
-            this.setState({
-              newRecipe: {
-                name: '',
-                ingredients: '',
-                description: '',
-                recipeImage: '',
-                submitting: false,
-              }
-            });
+          this.props.updateRecipe(
+            {
+              name, description, ingredients, recipeImage: secureUrl
+            },
+            id
+          ).then(() => {
             this.props.history.push('/users/recipes');
           });
+        });
+      } else {
+        this.props.updateRecipe(
+          {
+            name, description, ingredients, recipeImage
+          },
+          id
+        ).then(() => {
+          this.props.history.push('/users/recipes');
+        });
       }
     }
   }
 
   /**
-   * Handle image drop
-   * @param {array} files
-   * @returns {null} null
-   */
+  * Handle image drop
+  * @param {array} files
+  * @returns {null} null
+  */
   handleDrop(files) {
     this.setState({
-      newRecipe: {
-        recipeImage: files[0]
-      }
+      newImage: files[0],
+      recipeImage: files[0].preview
     });
   }
+
   /**
-   * Handle image upload
-   * @returns {null} null
-   */
+  * Handle image upload
+  * @returns {null} null
+  */
   uploadToCloudinary() {
     const formData = new FormData();
-    formData.append('file', this.state.newRecipe.recipeImage);
+    formData.append('file', this.state.newImage);
     formData.append('upload_preset', 'moreRecipes');
     formData.append('api_key', '462882972372719');
 
@@ -142,15 +144,15 @@ class AddRecipe extends React.Component {
   }
 
   /**
- *
- *
- * @returns {boolean} boolean
- * @memberof AddRecipe
- */
+*
+*
+* @returns {boolean} boolean
+* @memberof EditRecipe
+*/
   isValid() {
-    const { errors, isValid } = recipeValidator(this.state.newRecipe);
+    const { errors, isValid } = recipeValidator(this.state);
     if (!isValid) {
-      this.setState({ errors, submitting: false });
+      this.setState({ errors });
     } else {
       this.setState({ errors: {} });
       return isValid;
@@ -161,10 +163,9 @@ class AddRecipe extends React.Component {
    * @description react render method
    *
    * @returns {component} react component
-   * @memberof AddRecipe
+   * @memberof EditRecipe
    */
   render() {
-    const { errors, newRecipe, defaultImg } = this.state;
     return (
       <div>
         {
@@ -172,14 +173,13 @@ class AddRecipe extends React.Component {
           <Redirect to="/" />
         }
 
+        <section className="container" id="recipes" >
 
-        <section className="container" id="recipes">
-
-          <h3 className="text-center mb-4">New Recipe</h3>
+          <h3 className="text-center mb-4">Edit Recipe</h3>
 
           <div className="row">
             <div className="col-md-12 col-sm-12">
-              <form onSubmit={this.onSubmit}>
+              <form>
                 <Dropzone
                   onDrop={this.handleDrop}
                   accept="image/*"
@@ -192,82 +192,73 @@ class AddRecipe extends React.Component {
                     padding: '5px'
                   }}
                 >
-                  {!newRecipe.recipeImage.preview &&
+                  {
+                    this.state.recipeImage &&
                     <div>
                       <img
-                        src={defaultImg}
+                        src={this.state.recipeImage}
                         alt=""
                         className="img-fluid mx-auto d-block"
                       />
                       <h5 className="text-center">Click here to upload</h5>
                     </div>
                   }
-                  {
-                    newRecipe.recipeImage.preview &&
-                    <img
-                      src={newRecipe.recipeImage.preview}
-                      alt=""
-                      className="img-fluid mx-auto d-block"
-                    />
-                  }
                 </Dropzone>
 
                 <div className="form-group form-width">
+                  <h5> Name </h5>
                   <input
                     type="text"
+                    className="form-control"
                     name="name"
-                    className="form-control"
-                    placeholder="The name of the dish..."
-                    value={newRecipe.name}
+                    value={this.state.name}
                     onChange={this.onChange}
                   />
                   {
-                    errors.name &&
+                    this.state.errors.name &&
                     <span
                       className="help-block text-danger"
                     >
-                      {errors.name}
+                      {this.state.errors.name}
                     </span>
                   }
                 </div>
 
-
                 <div className="form-group form-width">
+                  <h5> Ingredients </h5>
                   <input
                     type="text"
-                    name="ingredients"
                     className="form-control"
-                    placeholder="A comma seperated list of ingredients..."
-                    value={newRecipe.ingredients}
+                    name="ingredients"
+                    value={this.state.ingredients}
                     onChange={this.onChange}
                   />
                   {
-                    errors.ingredients &&
+                    this.state.errors.ingredients &&
                     <span
                       className="help-block text-danger"
                     >
-                      {errors.ingredients}
+                      {this.state.errors.ingredients}
                     </span>
                   }
                 </div>
 
                 <div className="form-group form-width">
+                  <h5> Description </h5>
                   <textarea
                     type="text"
                     rows="5"
-                    id="recipeDescription"
                     className="form-control"
-                    placeholder="Instructions on how this dish should be made..."
                     name="description"
-                    value={newRecipe.description}
+                    value={this.state.description}
                     onChange={this.onChange}
                   />
                   {
-                    errors.description &&
+                    this.state.errors.description &&
                     <span
                       className="help-block text-danger"
                     >
-                      {errors.description}
+                      {this.state.errors.description}
                     </span>
                   }
                 </div>
@@ -275,10 +266,12 @@ class AddRecipe extends React.Component {
                 <div className="form-group form-width">
                   <button
                     className="btn btn-secondary"
-                    disabled={this.state.submitting}
+                    disabled={this.state.updating}
+                    onClick={this.onEdit}
                   >
-                    {this.state.submitting ? 'Submitting...' : 'Add Recipe'}
+                    {this.state.updating ? 'Updating...' : 'Update'}
                   </button>
+
                   <Link
                     className="btn btn-secondary"
                     to="/users/recipes"
@@ -289,15 +282,18 @@ class AddRecipe extends React.Component {
               </form>
             </div>
           </div>
-        </section>
-      </div>
-
+        </section >
+      </div >
     );
   }
 }
 
-AddRecipe.propTypes = {
-  addNewRecipe: PropTypes.func.isRequired,
+
+EditRecipe.propTypes = {
+  match: PropTypes.objectOf.isRequired,
+  singleRecipe: PropTypes.objectOf.isRequired,
+  getRecipeDetails: PropTypes.func.isRequired,
+  updateRecipe: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
@@ -306,11 +302,13 @@ AddRecipe.propTypes = {
 
 
 const mapStateToProps = state => ({
-  addRecipe: state.addRecipe,
-  authenticated: state.auth.isAuthenticated,
-  errorMessage: state.errorMessage
+  singleRecipe: state.recipes.singleRecipe,
+  authenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, {
-  addNewRecipe: addRecipe
-})(AddRecipe);
+const mapDispatchToProps = dispatch => ({
+  getRecipeDetails: id => dispatch(getSingleRecipe(id)),
+  updateRecipe: (recipe, id) => dispatch(editRecipe(recipe, id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditRecipe);

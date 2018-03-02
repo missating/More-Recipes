@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // validations
-import reviewValidator from '../validation/reviewValidator';
+import reviewValidator from '../../validation/reviewValidator';
 
 // actions
-import addReview from '../actions/addReview';
+import addReview from '../../actions/addReview';
 /**
  *
  *

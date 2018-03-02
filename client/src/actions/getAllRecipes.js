@@ -28,22 +28,17 @@ const getAllRecipes = page => (dispatch) => {
   return axios.get(`/api/v1/recipes?page=${pageNumber}`)
     .then((response) => {
       const {
-        CurrentPage, Limit, NumberOfItems, Pages, recipes
+        currentPage, limit, numberOfItems, pages, recipes
       } = response.data;
       const paginationInfo = {
-        CurrentPage, Limit, NumberOfItems, Pages
+        currentPage, limit, numberOfItems, pages
       };
       dispatch(allRecipes(recipes));
       dispatch(pagination(paginationInfo));
       dispatch(unsetFetching());
     }).catch((error) => {
       const { message } = error.response.data;
-      if (error.response.status === 404) {
-        dispatch(allRecipes([]));
-        dispatch(recipeError(message));
-      } else {
-        dispatch(recipeError(message));
-      }
+      dispatch(recipeError(message));
       dispatch(unsetFetching());
     });
 };

@@ -5,10 +5,10 @@ import ReactPaginate from 'react-paginate';
 import { Redirect } from 'react-router-dom';
 
 // components
-import UserRecipeCard from './UserRecipeCard';
+import UserRecipeCard from '../cards/UserRecipeCard';
 
 // actions
-import getUserRecipes from '../actions/getUserRecipes';
+import getUserRecipes from '../../actions/getUserRecipes';
 /**
  *
  *
@@ -83,18 +83,19 @@ class UserRecipes extends React.Component {
 
     const { pages } = this.props.pagination;
 
+    const userRecipes =
+      (this.state.userRecipes) ?
+        this.state.userRecipes : [];
+
     let userRecipeError;
-    if (this.props.userRecipesError) {
+    if (userRecipes.length === 0) {
       userRecipeError = (
         <span className="help-block">
-          {this.props.userRecipesError}
+          You currently have no recipes
         </span>
       );
     }
 
-    const userRecipes =
-      (this.state.userRecipes) ?
-        this.state.userRecipes : [];
     const userRecipesList = userRecipes.map((recipe, i) => (
       <div className="col-md-6 col-lg-4 col-sm-6 p-0" key={`recipe${i + 1}`}>
         <UserRecipeCard
@@ -116,26 +117,31 @@ class UserRecipes extends React.Component {
             <div className="row">
               {userRecipesList}
             </div>
-            <div className="container">
-              <ReactPaginate
-                pageCount={pages}
-                pageRangeDisplayed={5}
-                marginPagesDisplayed={3}
-                previousLabel="Previous"
-                nextLabel="Next"
-                breakClassName="text-center"
-                initialPage={0}
-                containerClassName="container pagination justify-content-center"
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                activeClassName="page-item active"
-                previousClassName="page-item"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-                previousLinkClassName="page-link"
-                onPageChange={this.onPageChange}
-              />
-            </div>
+            {
+              userRecipesList.length > 6 && (
+                <div className="container">
+                  <ReactPaginate
+                    pageCount={pages}
+                    pageRangeDisplayed={5}
+                    marginPagesDisplayed={3}
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    breakClassName="text-center"
+                    initialPage={0}
+                    containerClassName="container pagination justify-content-center"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    activeClassName="page-item active"
+                    previousClassName="page-item"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    previousLinkClassName="page-link"
+                    onPageChange={this.onPageChange}
+                  />
+                </div>
+              )
+            }
+
           </div>
         </section>
       );
@@ -165,7 +171,6 @@ UserRecipes.propTypes = {
 
 const mapStateToProps = state => ({
   userRecipes: state.userRecipes.recipes,
-  userRecipesError: state.userRecipes.errorMessage,
   authenticated: state.auth.isAuthenticated,
   pagination: state.pagination,
   isFetching: state.isFetching

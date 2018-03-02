@@ -15,10 +15,6 @@ export default class favouritesController {
    * @memberof Favourite
    */
   static addFavourite(req, res) {
-    if (isNaN(parseInt(req.params.recipeId, 10))) {
-      return res.status(400).json({ message: 'RecipeId must be a number' });
-    }
-
     return db.Recipe.findById(req.params.recipeId)
       .then((foundRecipe) => {
         if (!foundRecipe) {
@@ -113,25 +109,15 @@ export default class favouritesController {
           }
         ]
       })
-        .then((found) => {
-          const userFavourites = found.length;
-          if (userFavourites === 0) {
-            return res.status(404)
-              .json({
-                status: 'fail',
-                message: 'You have no recipes added as favourites'
-              });
-          }
-          return res.status(200)
-            .json({
-              status: 'Success',
-              NumberOfItems: numberOfItems,
-              Limit: limit,
-              Pages: pages,
-              CurrentPage: page,
-              favourites: found
-            });
-        })
+        .then(found => res.status(200)
+          .json({
+            status: 'success',
+            numberOfItems,
+            limit,
+            pages,
+            currentPage: page,
+            favourites: found
+          }))
         .catch(() => res.status(500).json({
           status: 'error',
           message: 'Internal server error'

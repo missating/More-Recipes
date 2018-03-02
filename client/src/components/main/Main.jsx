@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
-import Recipes from './Recipes';
-import EditRecipe from './EditRecipe';
-import SingleRecipe from './SingleRecipe';
-import Profile from './Profile';
-import AddRecipe from './AddRecipe';
-import UserRecipes from './UserRecipes';
-import UserFavourites from './UserFavourites';
-import NotFound from './NotFound'
+import Recipes from '../recipe/Recipes';
+import EditRecipe from '../recipe/EditRecipe';
+import SingleRecipe from '../recipe/SingleRecipe';
+import Profile from '../user/Profile';
+import AddRecipe from '../recipe/AddRecipe';
+import UserRecipes from '../user/UserRecipes';
+import UserFavourites from '../user/UserFavourites';
+import NotFound from '../common/NotFound';
 
 
 const Main = () => (

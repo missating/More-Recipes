@@ -35,10 +35,10 @@ const getUserFavourites = page => (dispatch) => {
   })
     .then((response) => {
       const {
-        CurrentPage, Limit, NumberOfItems, Pages, favourites
+        currentPage, limit, numberOfItems, pages, favourites
       } = response.data;
       const paginationInfo = {
-        CurrentPage, Limit, NumberOfItems, Pages
+        currentPage, limit, numberOfItems, pages
       };
       dispatch(userFavourites(favourites));
       dispatch(pagination(paginationInfo));
@@ -46,12 +46,7 @@ const getUserFavourites = page => (dispatch) => {
     })
     .catch((error) => {
       const { message } = error.response.data;
-      if (error.response.status === 404) {
-        dispatch(userFavourites([]));
-        dispatch(userFavouritesError(message));
-      } else {
-        dispatch(userFavouritesError(message));
-      }
+      dispatch(userFavouritesError(message));
       dispatch(unsetFetching());
     });
 };

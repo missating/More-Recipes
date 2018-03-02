@@ -31,12 +31,13 @@ const searchRecipes = (searchQuery, page) => (dispatch) => {
   })
     .then((response) => {
       const {
-        CurrentPage, Limit, NumberOfItems, Pages, recipes
+        currentPage, limit, numberOfItems, pages, recipes
       } = response.data;
       const paginationInfo = {
-        CurrentPage, Limit, NumberOfItems, Pages
+        currentPage, limit, numberOfItems, pages
       };
       dispatch(search(recipes));
+      console.log(paginationInfo, 'search');
       dispatch(pagination(paginationInfo));
       dispatch(unsetFetching());
     })

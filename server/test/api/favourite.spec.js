@@ -37,11 +37,18 @@ describe('FAVOURITE API', () => {
       .end((error, response) => {
         recipeId = response.body.recipe.id;
         expect(response.status).to.equal(201);
+        expect(response.body).to.be.an('object');
         expect(response.body.recipe.name).to.equal('Test Recipe 3');
         expect(response.body.recipe.ingredients)
           .to.equal('test, test, test');
         expect(response.body.recipe.description)
           .to.equal('For testing recipe 3');
+        expect(response.body.recipe.recipeImage)
+          .to.be.a('string');
+        expect(response.body.recipe.id)
+          .to.be.a('number');
+        expect(response.body.recipe.userId)
+          .to.be.a('number');
         done();
       });
   });
@@ -54,6 +61,7 @@ describe('FAVOURITE API', () => {
           .post(`/api/v1/users/${recipeId}/favourite`)
           .end((error, response) => {
             expect(response.status).to.equal(401);
+            expect(response.body).to.be.an('object');
             expect(response.body.message).to.equal('Unauthorized.');
             done();
           });
@@ -61,13 +69,14 @@ describe('FAVOURITE API', () => {
     );
 
     it(
-      'Should not add a recipe that doesn\'t exist as a favourite',
+      'Should not add a recipe that doesn\'t exist, as a favourite',
       (done) => {
         chai.request(app)
           .post('/api/v1/users/10/favourite')
           .set('token', userToken)
           .end((error, response) => {
             expect(response.status).to.equal(404);
+            expect(response.body).to.be.an('object');
             expect(response.body.message)
               .to.equal('recipe does not exist in catalogue');
             done();
@@ -83,6 +92,7 @@ describe('FAVOURITE API', () => {
           .set('token', userToken)
           .end((error, response) => {
             expect(response.status).to.equal(200);
+            expect(response.body).to.be.an('object');
             expect(response.body.message).to.equal('recipe favourited');
             expect(response.body.addedFavourite.name)
               .to.equal('Test Recipe 3');
@@ -90,6 +100,13 @@ describe('FAVOURITE API', () => {
               .to.equal('test, test, test');
             expect(response.body.addedFavourite.description)
               .to.equal('For testing recipe 3');
+            expect(response.body.addedFavourite.recipeImage)
+              .to.be.a('string');
+            expect(response.body.addedFavourite.id)
+              .to.be.a('number');
+            expect(response.body.addedFavourite.userId)
+              .to.be.a('number');
+            expect(response.body).to.have.property('addedFavourite');
             done();
           });
       }
@@ -103,7 +120,9 @@ describe('FAVOURITE API', () => {
           .set('token', userToken)
           .end((error, response) => {
             expect(response.status).to.equal(400);
-            expect(response.body.message).to.equal('RecipeId must be a number');
+            expect(response.body).to.be.an('object');
+            expect(response.body.error.recipeId)
+              .to.include('RecipeId must be a number');
             done();
           });
       }
@@ -118,6 +137,7 @@ describe('FAVOURITE API', () => {
           .get('/api/v1/users/favourites')
           .end((error, response) => {
             expect(response.status).to.equal(401);
+            expect(response.body).to.be.an('object');
             expect(response.body.message).to.equal('Unauthorized.');
             done();
           });
@@ -132,6 +152,19 @@ describe('FAVOURITE API', () => {
           .set('token', userToken)
           .end((error, response) => {
             expect(response.status).to.equal(200);
+            expect(response.body).to.be.an('object');
+            expect(response.body.numberOfItems)
+              .to.be.a('number');
+            expect(response.body.limit)
+              .to.be.a('number');
+            expect(response.body.currentPage)
+              .to.be.a('number');
+            expect(response.body.pages)
+              .to.be.a('number');
+            expect(response.body.favourites)
+              .to.be.an('array').with.lengthOf(1);
+            expect(response.body)
+              .to.have.property('favourites').with.lengthOf(1);
             done();
           });
       }
@@ -145,6 +178,7 @@ describe('FAVOURITE API', () => {
           .set('token', userToken)
           .end((error, response) => {
             expect(response.status).to.equal(200);
+            expect(response.body).to.be.an('object');
             expect(response.body.message)
               .to.equal('Recipe removed from favourite');
             done();

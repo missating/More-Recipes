@@ -6,4 +6,4 @@ configure({ adapter: new Adapter() });
 global.shallow = shallow;
 global.mount = mount;
 global.token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTE2ODg3NTU3fQ.iU_SPDM5iX_ZPUwE2ZpZQD - uUU0zGRda1E1dAskWzys';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o';

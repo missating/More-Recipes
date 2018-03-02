@@ -15,10 +15,6 @@ export default class reviewsController {
    * @memberof Review
    */
   static addReview(req, res) {
-    if (isNaN(parseInt(req.params.recipeId, 10))) {
-      return res.status(400).json({ message: 'RecipeId must be a number' });
-    }
-
     const { content } = req.body;
 
     return db.Recipe.findById(req.params.recipeId)
@@ -42,7 +38,7 @@ export default class reviewsController {
             }]
           }).then(review => res.status(201)
             .json({
-              status: 'Success',
+              status: 'success',
               review
             })));
       })

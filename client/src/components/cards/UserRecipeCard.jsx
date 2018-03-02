@@ -6,7 +6,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { connect } from 'react-redux';
 
 // actions
-import deleteRecipe from '../actions/deleteRecipe';
+import deleteRecipe from '../../actions/deleteRecipe';
 /**
  *
  *
