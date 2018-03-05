@@ -21,7 +21,7 @@ describe('Delete Recipe Action', () => {
     moxios.uninstall();
   });
 
-  it.only(
+  it(
     'Should dispatch delete recipe to the store if request is sucessful',
     (done) => {
       const recipeId = 1;
