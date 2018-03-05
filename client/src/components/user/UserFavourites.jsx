@@ -145,30 +145,27 @@ class UserFavourites extends React.Component {
             <div className="row">
               {userFavouritesList}
             </div>
-            {
-              userFavourites.length > 6 && (
-                <div className="container">
-                  <ReactPaginate
-                    pageCount={pages}
-                    pageRangeDisplayed={5}
-                    marginPagesDisplayed={3}
-                    previousLabel="Previous"
-                    nextLabel="Next"
-                    breakClassName="text-center"
-                    initialPage={0}
-                    containerClassName="container pagination justify-content-center"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    activeClassName="page-item active"
-                    previousClassName="page-item"
-                    nextClassName="page-item"
-                    nextLinkClassName="page-link"
-                    previousLinkClassName="page-link"
-                    onPageChange={this.onPageChange}
-                  />
-                </div>
-              )
-            }
+            <div className="container">
+              <ReactPaginate
+                pageCount={pages}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={3}
+                previousLabel="Previous"
+                nextLabel="Next"
+                breakClassName="text-center"
+                initialPage={0}
+                containerClassName="container pagination justify-content-center"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                activeClassName="page-item active"
+                previousClassName="page-item"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                previousLinkClassName="page-link"
+                onPageChange={this.onPageChange}
+              />
+            </div>
+
           </div>
         </section>
 
