@@ -1,8 +1,7 @@
 import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import signUserOut from '../../actions/signout';
-// import localStorage from '../__mocks__/localStorage.mock';
+import signout from '../../actions/signout';
 import {
   SIGN_OUT
 } from '../../actions/actionTypes';
@@ -11,7 +10,7 @@ import {
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-describe('Sign out', () => {
+describe('SIGN OUT Action', () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -21,21 +20,26 @@ describe('Sign out', () => {
   });
 
   it('Should sign user out', (done) => {
-    const token = 'qwertyasdfghzxcvbqwertyasdfghzxcvqwery';
     const user = {
       fullname: 'fullname',
       username: 'username',
     };
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    expect(localStorage.getItem('token')).toEqual(token);
-    expect(localStorage.getItem('user')).toEqual(JSON.stringify(user));
+
+    const expectedActions = [
+      {
+        type: SIGN_OUT
+      }
+    ];
+
+    localStorage.removeItem('token', token);
+    localStorage.removeItem('user', JSON.stringify(user));
 
     const store = mockStore({});
-    store.dispatch(signUserOut());
+    store.dispatch(signout());
     expect(localStorage.getItem('token')).toBeNull();
     expect(localStorage.getItem('user')).toBeNull();
+    expect(store.getActions()).toEqual(expectedActions);
+    expect(store.getActions().length).toBe(1);
     done();
   });
 });
-

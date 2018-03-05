@@ -1,11 +1,6 @@
 import { SHOW_PAGINATION } from '../actions/actionTypes';
 
-const initialState = {
-  recipes: {
-  }
-};
-
-const pagination = (state = initialState.recipes, action) => {
+const pagination = (state = {}, action) => {
   switch (action.type) {
   case SHOW_PAGINATION:
     return {

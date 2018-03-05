@@ -1,18 +1,19 @@
 import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import addRecipe from '../../actions/addRecipe';
+import getTopRecipes from '../../actions/getTopRecipes';
 import {
+  GET_TOP_RECIPES,
   SET_FETCHING,
-  ADD_RECIPE,
-  ADD_RECIPE_ERROR,
-  UNSET_FETCHING
-} from '../../actions/actionTypes';
+  UNSET_FETCHING,
+  GET_TOP_RECIPES_ERROR
+}
+  from '../../actions/actionTypes';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-describe('Add Recipe Action', () => {
+describe('Top recipes action', () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -22,33 +23,33 @@ describe('Add Recipe Action', () => {
   });
 
   it(
-    'Should dispatch add recipe to the store if request is sucessful',
+    'Should dispatch top recipes to store if request is successful',
     (done) => {
-      const newRecipe = {
-        name: 'test name',
+      const recipes = {
+        name: 'test recipe',
         ingredients: 'test, test, test',
-        description: 'mix everything together'
+        description: 'add all together'
       };
 
-      moxios.stubRequest('/api/v1/recipes', {
+      moxios.stubRequest('/api/v1/recipes?sort=upvote', {
         status: 200,
         response: {
           status: 'success',
-          recipe: newRecipe
+          recipes,
         }
       });
 
       const expected = [
         { type: SET_FETCHING },
         {
-          type: ADD_RECIPE,
-          newRecipe
+          type: GET_TOP_RECIPES,
+          recipes
         },
         { type: UNSET_FETCHING }
       ];
 
       const store = mockStore({});
-      store.dispatch(addRecipe(newRecipe))
+      store.dispatch(getTopRecipes())
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(3);
@@ -58,12 +59,7 @@ describe('Add Recipe Action', () => {
   );
 
   it('dispatch error message to store if request is unsucessful', (done) => {
-    const newRecipe = {
-      name: 'test name',
-      ingredients: 'test, test, test',
-      description: 'mix everything together'
-    };
-    moxios.stubRequest('/api/v1/recipes', {
+    moxios.stubRequest('/api/v1/recipes?sort=upvote', {
       status: 500,
       response: {
         status: 'error',
@@ -73,14 +69,14 @@ describe('Add Recipe Action', () => {
     const expected = [
       { type: SET_FETCHING },
       {
-        type: ADD_RECIPE_ERROR,
+        type: GET_TOP_RECIPES_ERROR,
         message: 'Internal server error'
       },
       { type: UNSET_FETCHING }
     ];
 
     const store = mockStore({});
-    store.dispatch(addRecipe(newRecipe))
+    store.dispatch(getTopRecipes())
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);

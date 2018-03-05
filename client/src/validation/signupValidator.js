@@ -8,7 +8,7 @@ const signupvalidator = (data) => {
   }
 
   if (validator.isEmpty(data.username)) {
-    errors.username = 'Email is required';
+    errors.username = 'username is required';
   }
 
   if (validator.isEmpty(data.email)) {
@@ -16,7 +16,7 @@ const signupvalidator = (data) => {
   }
 
   if (!validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = 'Please provide a valid email address';
   }
 
   if (validator.isEmpty(data.password)) {

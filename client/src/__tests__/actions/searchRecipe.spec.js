@@ -33,19 +33,19 @@ describe('Search all recipes', () => {
 
       const searchQuery = 'test';
       const pageNumber = 1;
-      const Limit = 6;
-      const CurrentPage = 1;
-      const NumberOfItems = 1;
-      const Pages = 1;
+      const limit = 6;
+      const currentPage = 1;
+      const numberOfItems = 1;
+      const pages = 1;
       moxios.stubRequest(`/api/v1/recipes/search?search=${searchQuery}&page=${pageNumber}`, {
         status: 200,
         response: {
           status: 'success',
           recipes,
-          Limit,
-          NumberOfItems,
-          Pages,
-          CurrentPage
+          limit,
+          numberOfItems,
+          pages,
+          currentPage
         }
       });
       const store = mockStore({});
@@ -66,7 +66,7 @@ describe('Search all recipes', () => {
     const pageNumber = 1;
     const message = 'No recipes found';
     moxios.stubRequest(`/api/v1/recipes/search?search=${searchQuery}&page=${pageNumber}`, {
-      status: 400,
+      status: 404,
       response: {
         message
       }

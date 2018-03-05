@@ -252,7 +252,7 @@ describe('USER API', () => {
           expect(response).to.have.status(401);
           expect(response.body).to.be.an('object');
           expect(response.body.message)
-            .to.equal('Email or Password is incorrect');
+            .to.equal('These credentials do not match our record');
           done();
         });
     });

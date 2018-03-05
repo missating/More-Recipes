@@ -142,12 +142,6 @@ class Signin extends React.Component {
                           onChange={this.onChange}
                           className="form-control signin-input"
                         />
-                        {
-                          errors.email &&
-                          <span className="help-block text-danger">
-                            {errors.email}
-                          </span>
-                        }
                       </div>
 
                       <div className="form-group">
@@ -159,13 +153,22 @@ class Signin extends React.Component {
                           onChange={this.onChange}
                           className="form-control signin-input"
                         />
-                        {
-                          errors.password &&
-                          <span className="help-block text-danger">
-                            {errors.password}
-                          </span>
-                        }
                       </div>
+                      {
+                        errors.email &&
+                        <span className="help-block text-danger">
+                          {errors.email}
+                        </span>
+                      }
+                      <br />
+                      {
+                        errors.password &&
+                        <span className="help-block text-danger">
+                          {errors.password}
+                        </span>
+                      }
+                      <div />
+
                       <button
                         className="btn btn-secondary"
                         type="submit"

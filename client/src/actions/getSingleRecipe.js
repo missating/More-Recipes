@@ -1,11 +1,16 @@
 import axios from 'axios';
 import { setFetching, unsetFetching } from './fetching';
-import { GET_SINGLE_RECIPE } from './actionTypes';
+import { GET_SINGLE_RECIPE, GET_SINGLE_RECIPE_ERROR } from './actionTypes';
 
 // action creators for get all recipes
 export const singleRecipe = recipe => ({
   type: GET_SINGLE_RECIPE,
   recipe
+});
+
+export const singleRecipeError = message => ({
+  type: GET_SINGLE_RECIPE_ERROR,
+  message
 });
 
 
@@ -18,7 +23,8 @@ const getSingleRecipe = id => (dispatch) => {
       dispatch(singleRecipe(recipe));
       dispatch(unsetFetching());
     }).catch((error) => {
-      console.log('Single recipe error', error);
+      const { message } = error.response.data;
+      dispatch(singleRecipeError(message));
       dispatch(unsetFetching());
     });
 };

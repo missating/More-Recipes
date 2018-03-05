@@ -425,10 +425,10 @@ export default class recipesController {
         })
           .then((foundRecipe) => {
             if (foundRecipe.length < 1) {
-              return res.status(404)
+              return res.status(200)
                 .json({
-                  status: 'fail',
-                  message: 'No match(es) found'
+                  status: 'success',
+                  recipes: foundRecipe
                 });
             }
             return res.status(200)

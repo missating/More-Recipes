@@ -18,8 +18,9 @@ export const pagination = details => ({
   details
 });
 
-export const searchError = () => ({
-  type: SEARCH_RECIPES_ERROR
+export const searchError = message => ({
+  type: SEARCH_RECIPES_ERROR,
+  message
 });
 
 const searchRecipes = (searchQuery, page) => (dispatch) => {
@@ -37,7 +38,6 @@ const searchRecipes = (searchQuery, page) => (dispatch) => {
         currentPage, limit, numberOfItems, pages
       };
       dispatch(search(recipes));
-      console.log(paginationInfo, 'search');
       dispatch(pagination(paginationInfo));
       dispatch(unsetFetching());
     })

@@ -12,115 +12,6 @@
     }
   ],
   "paths": {
-    "/recipes": {
-      "get": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Get all recipes",
-        "description": "Endpoint to get all recipes",
-        "operationId": "GetAllRecipes",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllRecipes"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      },
-      "post": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Create recipe",
-        "description": "Endpoint for users to create recipes",
-        "operationId": "CreateRecipe",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-            },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "application/x-www-form-urlencoded"
-            },
-            "example": "application/x-www-form-urlencoded"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "name",
-                  "ingredients",
-                  "description"
-                ],
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "test food"
-                  },
-                  "ingredients": {
-                    "type": "string",
-                    "example": "salt, maggi, pepper"
-                  },
-                  "description": {
-                    "type": "string",
-                    "example": "mix all together"
-                  }
-                }
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
     "/recipes/16": {
       "get": {
         "tags": [
@@ -139,15 +30,15 @@
                   "example": {
                     "status": "success",
                     "recipe": {
-                      "id": 16,
-                      "name": "name",
+                      "id": 2,
+                      "name": "spaghetti",
                       "userId": 1,
-                      "ingredients": "ingedinj",
-                      "description": "djjhujdjn",
-                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+                      "ingredients": "sapg, sauce, leaf",
+                      "description": "turn welll",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
                       "favourite": 1,
-                      "createdAt": "2018-02-15T22:16:47.538Z",
-                      "updatedAt": "2018-02-18T22:35:20.629Z",
+                      "createdAt": "2018-03-02T20:18:40.219Z",
+                      "updatedAt": "2018-03-02T22:12:49.767Z",
                       "Reviews": [],
                       "upvote": 1,
                       "downvote": 0
@@ -158,15 +49,15 @@
                 "example": {
                   "status": "success",
                   "recipe": {
-                    "id": 16,
-                    "name": "name",
+                    "id": 2,
+                    "name": "spaghetti",
                     "userId": 1,
-                    "ingredients": "ingedinj",
-                    "description": "djjhujdjn",
-                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+                    "ingredients": "sapg, sauce, leaf",
+                    "description": "turn welll",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
                     "favourite": 1,
-                    "createdAt": "2018-02-15T22:16:47.538Z",
-                    "updatedAt": "2018-02-18T22:35:20.629Z",
+                    "createdAt": "2018-03-02T20:18:40.219Z",
+                    "updatedAt": "2018-03-02T22:12:49.767Z",
                     "Reviews": [],
                     "upvote": 1,
                     "downvote": 0
@@ -215,7 +106,61 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "example": {
+                    "status": "success",
+                    "numberOfItems": 1,
+                    "pages": 1,
+                    "currentPage": 1,
+                    "limit": 6,
+                    "recipes": [
+                      {
+                        "id": 2,
+                        "name": "spaghetti",
+                        "userId": 1,
+                        "ingredients": "sapg, sauce, leaf",
+                        "description": "turn welll",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                        "favourite": 1,
+                        "createdAt": "2018-03-02T20:18:40.219Z",
+                        "updatedAt": "2018-03-02T22:12:49.767Z",
+                        "Reviews": [],
+                        "Votes": [
+                          {
+                            "upvote": 1,
+                            "downvote": 0
+                          }
+                        ]
+                      }
+                    ]
+                  },
                   "$ref": "#/components/schemas/SearchForARecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "numberOfItems": 1,
+                  "pages": 1,
+                  "currentPage": 1,
+                  "limit": 6,
+                  "recipes": [
+                    {
+                      "id": 2,
+                      "name": "spaghetti",
+                      "userId": 1,
+                      "ingredients": "sapg, sauce, leaf",
+                      "description": "turn welll",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                      "favourite": 1,
+                      "createdAt": "2018-03-02T20:18:40.219Z",
+                      "updatedAt": "2018-03-02T22:12:49.767Z",
+                      "Reviews": [],
+                      "Votes": [
+                        {
+                          "upvote": 1,
+                          "downvote": 0
+                        }
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -372,7 +317,7 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "example": "test@test.com"
+                    "example": "nessa@nessa.com"
                   },
                   "password": {
                     "type": "string",
@@ -575,6 +520,161 @@
                 }
               }
             }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get all recipes",
+        "description": "Endpoint to get all recipes",
+        "operationId": "GetAllRecipes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "numberOfItems": 1,
+                    "limit": 6,
+                    "pages": 1,
+                    "currentPage": 1,
+                    "recipes": [
+                      {
+                        "id": 2,
+                        "name": "spaghetti",
+                        "userId": 1,
+                        "ingredients": "sapg, sauce, leaf",
+                        "description": "turn welll",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                        "favourite": 1,
+                        "createdAt": "2018-03-02T20:18:40.219Z",
+                        "updatedAt": "2018-03-02T22:12:49.767Z",
+                        "Reviews": [],
+                        "upvote": 1,
+                        "downvote": 0
+                      }
+                    ]
+                  },
+                  "$ref": "#/components/schemas/GetAllRecipes"
+                },
+                "example": {
+                  "status": "success",
+                  "numberOfItems": 1,
+                  "limit": 6,
+                  "pages": 1,
+                  "currentPage": 1,
+                  "recipes": [
+                    {
+                      "id": 2,
+                      "name": "spaghetti",
+                      "userId": 1,
+                      "ingredients": "sapg, sauce, leaf",
+                      "description": "turn welll",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                      "favourite": 1,
+                      "createdAt": "2018-03-02T20:18:40.219Z",
+                      "updatedAt": "2018-03-02T22:12:49.767Z",
+                      "Reviews": [],
+                      "upvote": 1,
+                      "downvote": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Create recipe",
+        "description": "Endpoint for users to create recipes",
+        "operationId": "CreateRecipe",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "name",
+                  "ingredients",
+                  "description"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "test food"
+                  },
+                  "ingredients": {
+                    "type": "string",
+                    "example": "salt, maggi, pepper"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "mix all together"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": ""
           }
         },
         "deprecated": false,
@@ -892,48 +992,58 @@
               "application/json": {
                 "schema": {
                   "example": {
-                    "status": "Success",
-                    "NumberOfItems": 1,
-                    "Limit": 6,
-                    "Pages": 1,
-                    "CurrentPage": 1,
+                    "status": "success",
+                    "numberOfItems": 1,
+                    "limit": 6,
+                    "pages": 1,
+                    "currentPage": 1,
                     "recipes": [
                       {
-                        "id": 28,
-                        "name": "test food",
-                        "userId": 3,
-                        "ingredients": "salt, maggi, pepper",
-                        "description": "mix all together",
-                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-                        "favourite": 0,
-                        "createdAt": "2018-02-20T15:35:07.878Z",
-                        "updatedAt": "2018-02-20T15:35:07.878Z",
+                        "id": 2,
+                        "name": "spaghetti",
+                        "userId": 1,
+                        "ingredients": "sapg, sauce, leaf",
+                        "description": "turn welll",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                        "favourite": 1,
+                        "createdAt": "2018-03-02T20:18:40.219Z",
+                        "updatedAt": "2018-03-02T22:12:49.767Z",
                         "Reviews": [],
-                        "Votes": []
+                        "Votes": [
+                          {
+                            "upvote": 1,
+                            "downvote": 0
+                          }
+                        ]
                       }
                     ]
                   },
                   "$ref": "#/components/schemas/GetAllUserRecipes"
                 },
                 "example": {
-                  "status": "Success",
-                  "NumberOfItems": 1,
-                  "Limit": 6,
-                  "Pages": 1,
-                  "CurrentPage": 1,
+                  "status": "success",
+                  "numberOfItems": 1,
+                  "limit": 6,
+                  "pages": 1,
+                  "currentPage": 1,
                   "recipes": [
                     {
-                      "id": 28,
-                      "name": "test food",
-                      "userId": 3,
-                      "ingredients": "salt, maggi, pepper",
-                      "description": "mix all together",
-                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-                      "favourite": 0,
-                      "createdAt": "2018-02-20T15:35:07.878Z",
-                      "updatedAt": "2018-02-20T15:35:07.878Z",
+                      "id": 2,
+                      "name": "spaghetti",
+                      "userId": 1,
+                      "ingredients": "sapg, sauce, leaf",
+                      "description": "turn welll",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                      "favourite": 1,
+                      "createdAt": "2018-03-02T20:18:40.219Z",
+                      "updatedAt": "2018-03-02T22:12:49.767Z",
                       "Reviews": [],
-                      "Votes": []
+                      "Votes": [
+                        {
+                          "upvote": 1,
+                          "downvote": 0
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1056,23 +1166,23 @@
               "application/json": {
                 "schema": {
                   "example": {
-                    "status": "Success",
-                    "NumberOfItems": 1,
-                    "Limit": 6,
-                    "Pages": 1,
-                    "CurrentPage": 1,
+                    "status": "success",
+                    "numberOfItems": 1,
+                    "limit": 6,
+                    "pages": 1,
+                    "currentPage": 1,
                     "favourites": [
                       {
-                        "id": 23,
-                        "recipeId": 26,
-                        "userId": 3,
-                        "createdAt": "2018-02-20T15:45:59.918Z",
-                        "updatedAt": "2018-02-20T15:45:59.918Z",
+                        "id": 3,
+                        "recipeId": 2,
+                        "userId": 1,
+                        "createdAt": "2018-03-02T22:12:49.753Z",
+                        "updatedAt": "2018-03-02T22:12:49.753Z",
                         "Recipe": {
-                          "name": "db bnd",
-                          "ingredients": "d nmjd",
-                          "description": "dbhbhe",
-                          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+                          "name": "spaghetti",
+                          "ingredients": "sapg, sauce, leaf",
+                          "description": "turn welll",
+                          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
                         }
                       }
                     ]
@@ -1080,23 +1190,23 @@
                   "$ref": "#/components/schemas/GetFavouritedRecipes"
                 },
                 "example": {
-                  "status": "Success",
-                  "NumberOfItems": 1,
-                  "Limit": 6,
-                  "Pages": 1,
-                  "CurrentPage": 1,
+                  "status": "success",
+                  "numberOfItems": 1,
+                  "limit": 6,
+                  "pages": 1,
+                  "currentPage": 1,
                   "favourites": [
                     {
-                      "id": 23,
-                      "recipeId": 26,
-                      "userId": 3,
-                      "createdAt": "2018-02-20T15:45:59.918Z",
-                      "updatedAt": "2018-02-20T15:45:59.918Z",
+                      "id": 3,
+                      "recipeId": 2,
+                      "userId": 1,
+                      "createdAt": "2018-03-02T22:12:49.753Z",
+                      "updatedAt": "2018-03-02T22:12:49.753Z",
                       "Recipe": {
-                        "name": "db bnd",
-                        "ingredients": "d nmjd",
-                        "description": "dbhbhe",
-                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+                        "name": "spaghetti",
+                        "ingredients": "sapg, sauce, leaf",
+                        "description": "turn welll",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
                       }
                     }
                   ]
@@ -1250,48 +1360,51 @@
   },
   "components": {
     "schemas": {
-      "GetAllRecipes": {
-        "title": "Get all recipes",
+      "GetSingleRecipe": {
+        "title": "Get single recipe",
         "required": [
           "status",
-          "NumberOfItems",
-          "Limit",
-          "Pages",
-          "CurrentPage",
-          "recipes"
+          "recipe"
         ],
         "type": "object",
         "properties": {
           "status": {
             "type": "string",
-            "example": "Success"
+            "example": "success"
           },
-          "NumberOfItems": {
-            "type": "integer",
-            "format": "int32",
-            "example": 8
-          },
-          "Limit": {
-            "type": "integer",
-            "format": "int32",
-            "example": 6
-          },
-          "Pages": {
-            "type": "integer",
-            "format": "int32",
-            "example": 2
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32",
-            "example": 1
-          },
-          "recipes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Recipe"
+          "recipe": {
+            "example": {
+              "id": 2,
+              "name": "spaghetti",
+              "userId": 1,
+              "ingredients": "sapg, sauce, leaf",
+              "description": "turn welll",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+              "favourite": 1,
+              "createdAt": "2018-03-02T20:18:40.219Z",
+              "updatedAt": "2018-03-02T22:12:49.767Z",
+              "Reviews": [],
+              "upvote": 1,
+              "downvote": 0
             },
-            "description": ""
+            "$ref": "#/components/schemas/Recipe"
+          }
+        },
+        "example": {
+          "status": "success",
+          "recipe": {
+            "id": 2,
+            "name": "spaghetti",
+            "userId": 1,
+            "ingredients": "sapg, sauce, leaf",
+            "description": "turn welll",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+            "favourite": 1,
+            "createdAt": "2018-03-02T20:18:40.219Z",
+            "updatedAt": "2018-03-02T22:12:49.767Z",
+            "Reviews": [],
+            "upvote": 1,
+            "downvote": 0
           }
         }
       },
@@ -1316,11 +1429,11 @@
           "id": {
             "type": "integer",
             "format": "int32",
-            "example": 26
+            "example": 2
           },
           "name": {
             "type": "string",
-            "example": "db bnd"
+            "example": "spaghetti"
           },
           "userId": {
             "type": "integer",
@@ -1329,28 +1442,28 @@
           },
           "ingredients": {
             "type": "string",
-            "example": "d nmjd"
+            "example": "sapg, sauce, leaf"
           },
           "description": {
             "type": "string",
-            "example": "dbhbhe"
+            "example": "turn welll"
           },
           "recipeImage": {
             "type": "string",
-            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
           },
           "favourite": {
             "type": "integer",
             "format": "int32",
-            "example": 0
+            "example": 1
           },
           "createdAt": {
             "type": "string",
-            "example": "2/19/2018 5:46:59 PM"
+            "example": "3/2/2018 8:18:40 PM"
           },
           "updatedAt": {
             "type": "string",
-            "example": "2/19/2018 5:46:59 PM"
+            "example": "3/2/2018 10:12:49 PM"
           },
           "Reviews": {
             "type": "array",
@@ -1363,7 +1476,7 @@
           "upvote": {
             "type": "integer",
             "format": "int32",
-            "example": 0
+            "example": 1
           },
           "downvote": {
             "type": "integer",
@@ -1372,25 +1485,29 @@
           }
         },
         "example": {
-          "id": 16,
-          "name": "name",
+          "id": 2,
+          "name": "spaghetti",
           "userId": 1,
-          "ingredients": "ingedinj",
-          "description": "djjhujdjn",
-          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
+          "ingredients": "sapg, sauce, leaf",
+          "description": "turn welll",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
           "favourite": 1,
-          "createdAt": "2018-02-15T22:16:47.538Z",
-          "updatedAt": "2018-02-18T22:35:20.629Z",
+          "createdAt": "2018-03-02T20:18:40.219Z",
+          "updatedAt": "2018-03-02T22:12:49.767Z",
           "Reviews": [],
           "upvote": 1,
           "downvote": 0
         }
       },
-      "GetSingleRecipe": {
-        "title": "Get single recipe",
+      "SearchForARecipe": {
+        "title": "Search for a recipe",
         "required": [
           "status",
-          "recipe"
+          "numberOfItems",
+          "pages",
+          "currentPage",
+          "limit",
+          "recipes"
         ],
         "type": "object",
         "properties": {
@@ -1398,64 +1515,17 @@
             "type": "string",
             "example": "success"
           },
-          "recipe": {
-            "example": {
-              "id": 16,
-              "name": "name",
-              "userId": 1,
-              "ingredients": "ingedinj",
-              "description": "djjhujdjn",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
-              "favourite": 1,
-              "createdAt": "2018-02-15T22:16:47.538Z",
-              "updatedAt": "2018-02-18T22:35:20.629Z",
-              "Reviews": [],
-              "upvote": 1,
-              "downvote": 0
-            },
-            "$ref": "#/components/schemas/Recipe"
-          }
-        },
-        "example": {
-          "status": "success",
-          "recipe": {
-            "id": 16,
-            "name": "name",
-            "userId": 1,
-            "ingredients": "ingedinj",
-            "description": "djjhujdjn",
-            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518733006/guobuqz12lazaszzpwwq.jpg",
-            "favourite": 1,
-            "createdAt": "2018-02-15T22:16:47.538Z",
-            "updatedAt": "2018-02-18T22:35:20.629Z",
-            "Reviews": [],
-            "upvote": 1,
-            "downvote": 0
-          }
-        }
-      },
-      "SearchForARecipe": {
-        "title": "Search for a recipe",
-        "required": [
-          "NumberOfItems",
-          "Pages",
-          "CurrentPage",
-          "limit",
-          "recipes"
-        ],
-        "type": "object",
-        "properties": {
-          "NumberOfItems": {
-            "type": "integer",
-            "format": "int32",
-            "example": 5
-          },
-          "Pages": {
+          "numberOfItems": {
             "type": "integer",
             "format": "int32",
             "example": 1
           },
-          "CurrentPage": {
+          "pages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "currentPage": {
             "type": "integer",
             "format": "int32",
             "example": 1
@@ -1468,14 +1538,61 @@
           "recipes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Recipe5"
+              "example": [
+                {
+                  "id": 2,
+                  "name": "spaghetti",
+                  "userId": 1,
+                  "ingredients": "sapg, sauce, leaf",
+                  "description": "turn welll",
+                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                  "favourite": 1,
+                  "createdAt": "2018-03-02T20:18:40.219Z",
+                  "updatedAt": "2018-03-02T22:12:49.767Z",
+                  "Reviews": [],
+                  "Votes": [
+                    {
+                      "upvote": 1,
+                      "downvote": 0
+                    }
+                  ]
+                }
+              ],
+              "$ref": "#/components/schemas/Recipe3"
             },
             "description": ""
           }
+        },
+        "example": {
+          "status": "success",
+          "numberOfItems": 1,
+          "pages": 1,
+          "currentPage": 1,
+          "limit": 6,
+          "recipes": [
+            {
+              "id": 2,
+              "name": "spaghetti",
+              "userId": 1,
+              "ingredients": "sapg, sauce, leaf",
+              "description": "turn welll",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+              "favourite": 1,
+              "createdAt": "2018-03-02T20:18:40.219Z",
+              "updatedAt": "2018-03-02T22:12:49.767Z",
+              "Reviews": [],
+              "Votes": [
+                {
+                  "upvote": 1,
+                  "downvote": 0
+                }
+              ]
+            }
+          ]
         }
       },
-      "Recipe5": {
-        "title": "Recipe5",
+      "Recipe3": {
+        "title": "Recipe3",
         "required": [
           "id",
           "name",
@@ -1494,41 +1611,41 @@
           "id": {
             "type": "integer",
             "format": "int32",
-            "example": 18
+            "example": 2
           },
           "name": {
             "type": "string",
-            "example": "s nd"
+            "example": "spaghetti"
           },
           "userId": {
             "type": "integer",
             "format": "int32",
-            "example": 2
+            "example": 1
           },
           "ingredients": {
             "type": "string",
-            "example": "dnnd"
+            "example": "sapg, sauce, leaf"
           },
           "description": {
             "type": "string",
-            "example": "sdnjf"
+            "example": "turn welll"
           },
           "recipeImage": {
             "type": "string",
-            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1518734084/nb1qjojij0xsqk5dihwz.jpg"
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
           },
           "favourite": {
             "type": "integer",
             "format": "int32",
-            "example": 0
+            "example": 1
           },
           "createdAt": {
             "type": "string",
-            "example": "2/15/2018 10:34:45 PM"
+            "example": "3/2/2018 8:18:40 PM"
           },
           "updatedAt": {
             "type": "string",
-            "example": "2/19/2018 1:49:20 PM"
+            "example": "3/2/2018 10:12:49 PM"
           },
           "Reviews": {
             "type": "array",
@@ -1551,6 +1668,24 @@
             },
             "description": ""
           }
+        },
+        "example": {
+          "id": 2,
+          "name": "spaghetti",
+          "userId": 1,
+          "ingredients": "sapg, sauce, leaf",
+          "description": "turn welll",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+          "favourite": 1,
+          "createdAt": "2018-03-02T20:18:40.219Z",
+          "updatedAt": "2018-03-02T22:12:49.767Z",
+          "Reviews": [],
+          "Votes": [
+            {
+              "upvote": 1,
+              "downvote": 0
+            }
+          ]
         }
       },
       "Vote": {
@@ -1748,7 +1883,7 @@
               "email": "test@test.com",
               "joined": "Tue Feb 20 2018"
             },
-            "$ref": "#/components/schemas/User12"
+            "$ref": "#/components/schemas/User10"
           }
         },
         "example": {
@@ -1761,8 +1896,8 @@
           }
         }
       },
-      "User12": {
-        "title": "User12",
+      "User10": {
+        "title": "User10",
         "required": [
           "fullname",
           "username",
@@ -1814,7 +1949,7 @@
               "email": "test@test.com",
               "joined": "Tue Feb 20 2018"
             },
-            "$ref": "#/components/schemas/User12"
+            "$ref": "#/components/schemas/User10"
           }
         },
         "example": {
@@ -1856,7 +1991,7 @@
               "createdAt": "2018-02-20T12:46:50.832Z",
               "updatedAt": "2018-02-20T15:19:13.139Z"
             },
-            "$ref": "#/components/schemas/Recipe16"
+            "$ref": "#/components/schemas/Recipe14"
           }
         },
         "example": {
@@ -1875,8 +2010,8 @@
           }
         }
       },
-      "Recipe16": {
-        "title": "Recipe16",
+      "Recipe14": {
+        "title": "Recipe14",
         "required": [
           "id",
           "name",
@@ -2053,7 +2188,7 @@
               "fullname": "Nessa nessa",
               "email": "test@test.com"
             },
-            "$ref": "#/components/schemas/User20"
+            "$ref": "#/components/schemas/User18"
           }
         },
         "example": {
@@ -2069,8 +2204,8 @@
           }
         }
       },
-      "User20": {
-        "title": "User20",
+      "User18": {
+        "title": "User18",
         "required": [
           "fullname",
           "email"
@@ -2095,34 +2230,34 @@
         "title": "Get all user recipes",
         "required": [
           "status",
-          "NumberOfItems",
-          "Limit",
-          "Pages",
-          "CurrentPage",
+          "numberOfItems",
+          "limit",
+          "pages",
+          "currentPage",
           "recipes"
         ],
         "type": "object",
         "properties": {
           "status": {
             "type": "string",
-            "example": "Success"
+            "example": "success"
           },
-          "NumberOfItems": {
+          "numberOfItems": {
             "type": "integer",
             "format": "int32",
             "example": 1
           },
-          "Limit": {
+          "limit": {
             "type": "integer",
             "format": "int32",
             "example": 6
           },
-          "Pages": {
+          "pages": {
             "type": "integer",
             "format": "int32",
             "example": 1
           },
-          "CurrentPage": {
+          "currentPage": {
             "type": "integer",
             "format": "int32",
             "example": 1
@@ -2132,132 +2267,55 @@
             "items": {
               "example": [
                 {
-                  "id": 28,
-                  "name": "test food",
-                  "userId": 3,
-                  "ingredients": "salt, maggi, pepper",
-                  "description": "mix all together",
-                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-                  "favourite": 0,
-                  "createdAt": "2018-02-20T15:35:07.878Z",
-                  "updatedAt": "2018-02-20T15:35:07.878Z",
+                  "id": 2,
+                  "name": "spaghetti",
+                  "userId": 1,
+                  "ingredients": "sapg, sauce, leaf",
+                  "description": "turn welll",
+                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                  "favourite": 1,
+                  "createdAt": "2018-03-02T20:18:40.219Z",
+                  "updatedAt": "2018-03-02T22:12:49.767Z",
                   "Reviews": [],
-                  "Votes": []
+                  "Votes": [
+                    {
+                      "upvote": 1,
+                      "downvote": 0
+                    }
+                  ]
                 }
               ],
-              "$ref": "#/components/schemas/Recipe22"
+              "$ref": "#/components/schemas/Recipe3"
             },
             "description": ""
           }
         },
         "example": {
-          "status": "Success",
-          "NumberOfItems": 1,
-          "Limit": 6,
-          "Pages": 1,
-          "CurrentPage": 1,
+          "status": "success",
+          "numberOfItems": 1,
+          "limit": 6,
+          "pages": 1,
+          "currentPage": 1,
           "recipes": [
             {
-              "id": 28,
-              "name": "test food",
-              "userId": 3,
-              "ingredients": "salt, maggi, pepper",
-              "description": "mix all together",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-              "favourite": 0,
-              "createdAt": "2018-02-20T15:35:07.878Z",
-              "updatedAt": "2018-02-20T15:35:07.878Z",
+              "id": 2,
+              "name": "spaghetti",
+              "userId": 1,
+              "ingredients": "sapg, sauce, leaf",
+              "description": "turn welll",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+              "favourite": 1,
+              "createdAt": "2018-03-02T20:18:40.219Z",
+              "updatedAt": "2018-03-02T22:12:49.767Z",
               "Reviews": [],
-              "Votes": []
+              "Votes": [
+                {
+                  "upvote": 1,
+                  "downvote": 0
+                }
+              ]
             }
           ]
-        }
-      },
-      "Recipe22": {
-        "title": "Recipe22",
-        "required": [
-          "id",
-          "name",
-          "userId",
-          "ingredients",
-          "description",
-          "recipeImage",
-          "favourite",
-          "createdAt",
-          "updatedAt",
-          "Reviews",
-          "Votes"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "example": 28
-          },
-          "name": {
-            "type": "string",
-            "example": "test food"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32",
-            "example": 3
-          },
-          "ingredients": {
-            "type": "string",
-            "example": "salt, maggi, pepper"
-          },
-          "description": {
-            "type": "string",
-            "example": "mix all together"
-          },
-          "recipeImage": {
-            "type": "string",
-            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
-          },
-          "favourite": {
-            "type": "integer",
-            "format": "int32",
-            "example": 0
-          },
-          "createdAt": {
-            "type": "string",
-            "example": "2/20/2018 3:35:07 PM"
-          },
-          "updatedAt": {
-            "type": "string",
-            "example": "2/20/2018 3:35:07 PM"
-          },
-          "Reviews": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "example": []
-            },
-            "description": ""
-          },
-          "Votes": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "example": []
-            },
-            "description": ""
-          }
-        },
-        "example": {
-          "id": 28,
-          "name": "test food",
-          "userId": 3,
-          "ingredients": "salt, maggi, pepper",
-          "description": "mix all together",
-          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-          "favourite": 0,
-          "createdAt": "2018-02-20T15:35:07.878Z",
-          "updatedAt": "2018-02-20T15:35:07.878Z",
-          "Reviews": [],
-          "Votes": []
         }
       },
       "AddFavouriteRecipe": {
@@ -2379,34 +2437,34 @@
         "title": "Get favourited recipes",
         "required": [
           "status",
-          "NumberOfItems",
-          "Limit",
-          "Pages",
-          "CurrentPage",
+          "numberOfItems",
+          "limit",
+          "pages",
+          "currentPage",
           "favourites"
         ],
         "type": "object",
         "properties": {
           "status": {
             "type": "string",
-            "example": "Success"
+            "example": "success"
           },
-          "NumberOfItems": {
+          "numberOfItems": {
             "type": "integer",
             "format": "int32",
             "example": 1
           },
-          "Limit": {
+          "limit": {
             "type": "integer",
             "format": "int32",
             "example": 6
           },
-          "Pages": {
+          "pages": {
             "type": "integer",
             "format": "int32",
             "example": 1
           },
-          "CurrentPage": {
+          "currentPage": {
             "type": "integer",
             "format": "int32",
             "example": 1
@@ -2416,16 +2474,16 @@
             "items": {
               "example": [
                 {
-                  "id": 23,
-                  "recipeId": 26,
-                  "userId": 3,
-                  "createdAt": "2018-02-20T15:45:59.918Z",
-                  "updatedAt": "2018-02-20T15:45:59.918Z",
+                  "id": 3,
+                  "recipeId": 2,
+                  "userId": 1,
+                  "createdAt": "2018-03-02T22:12:49.753Z",
+                  "updatedAt": "2018-03-02T22:12:49.753Z",
                   "Recipe": {
-                    "name": "db bnd",
-                    "ingredients": "d nmjd",
-                    "description": "dbhbhe",
-                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+                    "name": "spaghetti",
+                    "ingredients": "sapg, sauce, leaf",
+                    "description": "turn welll",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
                   }
                 }
               ],
@@ -2435,23 +2493,23 @@
           }
         },
         "example": {
-          "status": "Success",
-          "NumberOfItems": 1,
-          "Limit": 6,
-          "Pages": 1,
-          "CurrentPage": 1,
+          "status": "success",
+          "numberOfItems": 1,
+          "limit": 6,
+          "pages": 1,
+          "currentPage": 1,
           "favourites": [
             {
-              "id": 23,
-              "recipeId": 26,
-              "userId": 3,
-              "createdAt": "2018-02-20T15:45:59.918Z",
-              "updatedAt": "2018-02-20T15:45:59.918Z",
+              "id": 3,
+              "recipeId": 2,
+              "userId": 1,
+              "createdAt": "2018-03-02T22:12:49.753Z",
+              "updatedAt": "2018-03-02T22:12:49.753Z",
               "Recipe": {
-                "name": "db bnd",
-                "ingredients": "d nmjd",
-                "description": "dbhbhe",
-                "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+                "name": "spaghetti",
+                "ingredients": "sapg, sauce, leaf",
+                "description": "turn welll",
+                "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
               }
             }
           ]
@@ -2472,52 +2530,52 @@
           "id": {
             "type": "integer",
             "format": "int32",
-            "example": 23
+            "example": 3
           },
           "recipeId": {
             "type": "integer",
             "format": "int32",
-            "example": 26
+            "example": 2
           },
           "userId": {
             "type": "integer",
             "format": "int32",
-            "example": 3
+            "example": 1
           },
           "createdAt": {
             "type": "string",
-            "example": "2/20/2018 3:45:59 PM"
+            "example": "3/2/2018 10:12:49 PM"
           },
           "updatedAt": {
             "type": "string",
-            "example": "2/20/2018 3:45:59 PM"
+            "example": "3/2/2018 10:12:49 PM"
           },
           "Recipe": {
             "example": {
-              "name": "db bnd",
-              "ingredients": "d nmjd",
-              "description": "dbhbhe",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+              "name": "spaghetti",
+              "ingredients": "sapg, sauce, leaf",
+              "description": "turn welll",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
             },
-            "$ref": "#/components/schemas/Recipe27"
+            "$ref": "#/components/schemas/Recipe26"
           }
         },
         "example": {
-          "id": 23,
-          "recipeId": 26,
-          "userId": 3,
-          "createdAt": "2018-02-20T15:45:59.918Z",
-          "updatedAt": "2018-02-20T15:45:59.918Z",
+          "id": 3,
+          "recipeId": 2,
+          "userId": 1,
+          "createdAt": "2018-03-02T22:12:49.753Z",
+          "updatedAt": "2018-03-02T22:12:49.753Z",
           "Recipe": {
-            "name": "db bnd",
-            "ingredients": "d nmjd",
-            "description": "dbhbhe",
-            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+            "name": "spaghetti",
+            "ingredients": "sapg, sauce, leaf",
+            "description": "turn welll",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
           }
         }
       },
-      "Recipe27": {
-        "title": "Recipe27",
+      "Recipe26": {
+        "title": "Recipe26",
         "required": [
           "name",
           "ingredients",
@@ -2528,26 +2586,26 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "db bnd"
+            "example": "spaghetti"
           },
           "ingredients": {
             "type": "string",
-            "example": "d nmjd"
+            "example": "sapg, sauce, leaf"
           },
           "description": {
             "type": "string",
-            "example": "dbhbhe"
+            "example": "turn welll"
           },
           "recipeImage": {
             "type": "string",
-            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
           }
         },
         "example": {
-          "name": "db bnd",
-          "ingredients": "d nmjd",
-          "description": "dbhbhe",
-          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1519062418/dnxohqdjqm0a5xfxl5vu.jpg"
+          "name": "spaghetti",
+          "ingredients": "sapg, sauce, leaf",
+          "description": "turn welll",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
         }
       },
       "UpvoteRecipe": {
@@ -2592,6 +2650,90 @@
         "example": {
           "status": "success",
           "message": "Recipe downvoted successfully."
+        }
+      },
+      "GetAllRecipes": {
+        "title": "Get all recipes",
+        "required": [
+          "status",
+          "numberOfItems",
+          "limit",
+          "pages",
+          "currentPage",
+          "recipes"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "numberOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 6
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "example": [
+                {
+                  "id": 2,
+                  "name": "spaghetti",
+                  "userId": 1,
+                  "ingredients": "sapg, sauce, leaf",
+                  "description": "turn welll",
+                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                  "favourite": 1,
+                  "createdAt": "2018-03-02T20:18:40.219Z",
+                  "updatedAt": "2018-03-02T22:12:49.767Z",
+                  "Reviews": [],
+                  "upvote": 1,
+                  "downvote": 0
+                }
+              ],
+              "$ref": "#/components/schemas/Recipe"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "status": "success",
+          "numberOfItems": 1,
+          "limit": 6,
+          "pages": 1,
+          "currentPage": 1,
+          "recipes": [
+            {
+              "id": 2,
+              "name": "spaghetti",
+              "userId": 1,
+              "ingredients": "sapg, sauce, leaf",
+              "description": "turn welll",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+              "favourite": 1,
+              "createdAt": "2018-03-02T20:18:40.219Z",
+              "updatedAt": "2018-03-02T22:12:49.767Z",
+              "Reviews": [],
+              "upvote": 1,
+              "downvote": 0
+            }
+          ]
         }
       }
     }

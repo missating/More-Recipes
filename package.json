@@ -5,14 +5,14 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
-    "test": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
+    "test:server": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha --exit --compilers js:babel-register -- server/test/**/**.spec.js",
     "test:client": "jest client/src/__tests__/**/*.spec.js",
+    "test": "nyc npm run test:client && nyc npm run test:server",
     "build:server": "babel -d ./build ./server -s",
     "start": "node build/app.js",
     "migrate": "sequelize db:migrate",
     "reset-migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
     "watch": "webpack --config ./webpack.dev.js -w",
     "build:client": "webpack --config ./webpack.prod.js",
     "build": "npm run clean && npm run build:client && npm run build:server && cp server/index.html build && cp server/converted.json build",
@@ -23,10 +23,20 @@
     "type": "git",
     "url": "git+https://github.com/missating/More-Recipes.git"
   },
-  "author": "Vanessa",
+  "author": "Vanessa Ating",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/missating/More-Recipes/issues"
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "exclude": [
+      "server/test"
+    ],
+    "sourceMap": false,
+    "instrument": false
   },
   "homepage": "https://github.com/missating/More-Recipes#readme",
   "dependencies": {
@@ -123,6 +133,11 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/client/src/__tests__/__mocks__/fileMock.js",
       "\\.(css|less|scss)$": "identity-obj-proxy"
     },
-    "collectCoverage": true
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary"
+    ]
   }
 }

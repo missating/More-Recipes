@@ -10,6 +10,7 @@ import {
   ADD_FAVOURITE,
   ADD_FAVOURITE_ERROR,
   REMOVE_FAVOURITE,
+  REMOVE_FAVOURITE_ERROR,
   UNSET_FETCHING
 } from '../../actions/actionTypes';
 
@@ -133,6 +134,32 @@ describe('Favorite Action', () => {
       ];
       expect(store.getActions()).toEqual(expected);
     });
+    done();
+  });
+
+  it('dispatch error message to store if request is unsuccessful', (done) => {
+    moxios.stubRequest(`/api/v1/users/${1}/favourite`, {
+      status: 500,
+      response: {
+        status: 'error',
+        message: 'Internal server error'
+      }
+    });
+    const expected = [
+      { type: SET_FETCHING },
+      {
+        type: REMOVE_FAVOURITE_ERROR,
+        message: 'Internal server error'
+      },
+      { type: UNSET_FETCHING }
+    ];
+
+    const store = mockStore({});
+    store.dispatch(removeUserFavourite(1))
+      .then(() => {
+        expect(store.getActions()).toEqual(expected);
+        expect(store.getActions().length).toBe(3);
+      });
     done();
   });
 });

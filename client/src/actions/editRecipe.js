@@ -1,6 +1,6 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import { EDIT_RECIPE } from './actionTypes';
+import { EDIT_RECIPE, EDIT_RECIPE_ERROR } from './actionTypes';
 import { setFetching, unsetFetching } from './fetching';
 
 const editRecipeSuccess = recipe => ({
@@ -8,6 +8,10 @@ const editRecipeSuccess = recipe => ({
   recipe
 });
 
+const editRecipeError = message => ({
+  type: EDIT_RECIPE_ERROR,
+  message
+});
 
 const editRecipe = (recipe, recipeId) => (dispatch) => {
   const {
@@ -32,13 +36,14 @@ const editRecipe = (recipe, recipeId) => (dispatch) => {
       toastr.options = {
         closeButton: true,
         extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
+        positionClass: 'toast-bottom-right',
         hideMethod: 'fadeOut'
       };
       toastr.success('Recipe updated succesfully');
     })
     .catch((error) => {
-      console.log('Edit recipes error', error.response.data.message);
+      const { message } = error.response.data;
+      dispatch(editRecipeError(message));
       dispatch(unsetFetching());
     });
 };

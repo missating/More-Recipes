@@ -17,8 +17,9 @@ export const pagination = details => ({
   details
 });
 
-export const recipeError = () => ({
-  type: GET_ALL_RECIPES_ERROR
+export const allRecipesError = message => ({
+  type: GET_ALL_RECIPES_ERROR,
+  message
 });
 
 // action for get all recipes
@@ -38,7 +39,7 @@ const getAllRecipes = page => (dispatch) => {
       dispatch(unsetFetching());
     }).catch((error) => {
       const { message } = error.response.data;
-      dispatch(recipeError(message));
+      dispatch(allRecipesError(message));
       dispatch(unsetFetching());
     });
 };

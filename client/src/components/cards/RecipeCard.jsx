@@ -5,12 +5,15 @@ import PropTypes from 'prop-types';
 
 const RecipeCard = props => (
   <div className="flex">
+
     <div className="card">
-      <img
-        src={props.recipeImage}
-        alt={props.recipeImage}
-        className="image-width"
-      />
+      <Link to={`/recipes/view/${props.id}`} className="hover">
+        <img
+          src={props.recipeImage}
+          alt={props.recipeImage}
+          className="image-width"
+        />
+      </Link>
       <div className="container p-3 recipedetails-column">
         <h2>{props.name}</h2>
         <p><small>{props.description}</small></p>

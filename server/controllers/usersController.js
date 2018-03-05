@@ -89,7 +89,7 @@ export default class usersController {
           return res.status(401)
             .json({
               status: 'fail',
-              message: 'Email or Password is incorrect'
+              message: 'These credentials do not match our record'
             });
         }
         const token = generateToken(foundUser);
