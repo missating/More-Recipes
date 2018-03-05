@@ -44,8 +44,8 @@ describe('User profile action', () => {
         expect(store.getActions()[1].type).toEqual(GET_USER_PROFILE);
         expect(store.getActions()[1].user).toEqual(user);
         expect(store.getActions()[2].type).toEqual(UNSET_FETCHING);
+        done();
       });
-      done();
     }
   );
 
@@ -71,8 +71,8 @@ describe('User profile action', () => {
     store.dispatch(getUserProfile()).then(() => {
       expect(store.getActions()).toEqual(expected);
       expect(store.getActions().length).toBe(3);
+      done();
     });
-    done();
   });
 });
 

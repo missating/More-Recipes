@@ -34,7 +34,7 @@ const deleteRecipe = recipeId => (dispatch) => {
         hideMethod: 'fadeOut'
       };
       toastr.success('Recipe deleted succesfully');
-      return dispatch(getUserRecipes());
+      dispatch(getUserRecipes());
     })
     .catch((error) => {
       const { message } = error.response.data;

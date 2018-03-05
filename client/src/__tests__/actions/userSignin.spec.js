@@ -59,8 +59,8 @@ describe('SIGN IN Action', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
           expect(store.getActions().length).toBe(3);
+          done();
         });
-      done();
     }
   );
 
@@ -91,8 +91,8 @@ describe('SIGN IN Action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });
 

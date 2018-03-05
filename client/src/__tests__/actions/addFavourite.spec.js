@@ -56,8 +56,8 @@ describe('Favorite Action', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(3);
+          done();
         });
-      done();
     }
   );
 
@@ -85,8 +85,8 @@ describe('Favorite Action', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(3);
+          done();
         });
-      done();
     }
   );
 
@@ -112,8 +112,8 @@ describe('Favorite Action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 
   it('removes user favorite', (done) => {
@@ -133,8 +133,8 @@ describe('Favorite Action', () => {
         { type: UNSET_FETCHING }
       ];
       expect(store.getActions()).toEqual(expected);
+      done();
     });
-    done();
   });
 
   it('dispatch error message to store if request is unsuccessful', (done) => {
@@ -159,8 +159,8 @@ describe('Favorite Action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });
 

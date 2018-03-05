@@ -49,8 +49,8 @@ describe('Add Review Action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 
 
@@ -81,8 +81,8 @@ describe('Add Review Action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });
 

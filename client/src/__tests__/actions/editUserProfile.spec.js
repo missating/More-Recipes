@@ -1,7 +1,7 @@
 import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import editRecipe from '../../actions/editRecipe';
+import editUserProfile from '../../actions/editUserProfile';
 import {
   SET_FETCHING,
   EDIT_USER_PROFILE,
@@ -48,12 +48,12 @@ describe('Edit User Profile Action', () => {
       ];
 
       const store = mockStore({});
-      store.dispatch(editRecipe(userDetails))
+      store.dispatch(editUserProfile(userDetails))
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(3);
+          done();
         });
-      done();
     }
   );
 
@@ -81,11 +81,11 @@ describe('Edit User Profile Action', () => {
     ];
 
     const store = mockStore({});
-    store.dispatch(editRecipe(userDetails))
+    store.dispatch(editUserProfile(userDetails))
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });

@@ -69,8 +69,8 @@ describe('Get user recipes action', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(4);
+          done();
         });
-      done();
     }
   );
 
@@ -96,8 +96,8 @@ describe('Get user recipes action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });
 

@@ -21,7 +21,7 @@ describe('Delete Recipe Action', () => {
     moxios.uninstall();
   });
 
-  it(
+  it.only(
     'Should dispatch delete recipe to the store if request is sucessful',
     (done) => {
       const recipeId = 1;
@@ -39,16 +39,17 @@ describe('Delete Recipe Action', () => {
           type: DELETE_RECIPE,
           recipeId
         },
-        { type: UNSET_FETCHING }
+        { type: UNSET_FETCHING },
+        { type: SET_FETCHING }
       ];
 
       const store = mockStore({});
       store.dispatch(deleteRecipe(recipeId))
         .then(() => {
           expect(store.getActions()).toEqual(expected);
-          expect(store.getActions().length).toBe(3);
+          expect(store.getActions().length).toBe(4);
+          done();
         });
-      done();
     }
   );
 
@@ -76,8 +77,8 @@ describe('Delete Recipe Action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });
 

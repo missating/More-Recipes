@@ -41,8 +41,8 @@ describe('VOTE recipes', () => {
       store.dispatch(voteRecipe(1, queryType)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-      done();
     }
   );
 
@@ -61,8 +61,8 @@ describe('VOTE recipes', () => {
     const store = mockStore({});
     store.dispatch(voteRecipe(1, queryType)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
+      done();
     });
-    done();
   });
 });
 

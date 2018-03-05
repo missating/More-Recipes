@@ -55,8 +55,8 @@ describe('Edit Recipe Action', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(3);
+          done();
         });
-      done();
     }
   );
 
@@ -90,7 +90,7 @@ describe('Edit Recipe Action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });

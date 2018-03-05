@@ -50,14 +50,13 @@ describe('Search all recipes', () => {
       });
       const store = mockStore({});
       store.dispatch(searchRecipes(searchQuery)).then(() => {
-        // console.log('========', store.getActions());
         expect(store.getActions()[0].type).toEqual(SET_FETCHING);
         expect(store.getActions()[1].type).toEqual(SEARCH_RECIPES);
         expect(store.getActions()[1].recipes).toEqual(recipes);
         expect(store.getActions()[3].type).toEqual(UNSET_FETCHING);
         expect(store.getActions()[2].type).toEqual(SHOW_PAGINATION);
+        done();
       });
-      done();
     }
   );
 
@@ -76,8 +75,8 @@ describe('Search all recipes', () => {
       expect(store.getActions()[0].type).toEqual(SET_FETCHING);
       expect(store.getActions()[1].type).toEqual(SEARCH_RECIPES_ERROR);
       expect(store.getActions()[2].type).toEqual(UNSET_FETCHING);
+      done();
     });
-    done();
   });
 });
 
