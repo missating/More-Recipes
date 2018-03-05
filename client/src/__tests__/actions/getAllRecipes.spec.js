@@ -32,19 +32,19 @@ describe('All recipes action', () => {
         description: 'add all together'
       };
       const page = 1;
-      const Limit = 6;
-      const CurrentPage = 1;
-      const NumberOfItems = 1;
-      const Pages = 1;
+      const limit = 6;
+      const currentPage = 1;
+      const numberOfItems = 1;
+      const pages = 1;
       moxios.stubRequest(`/api/v1/recipes?page=${page}`, {
         status: 200,
         response: {
           status: 'success',
           recipes,
-          Limit,
-          NumberOfItems,
-          Pages,
-          CurrentPage
+          limit,
+          numberOfItems,
+          pages,
+          currentPage
         }
       });
 
@@ -57,7 +57,7 @@ describe('All recipes action', () => {
         {
           type: SHOW_PAGINATION,
           details: {
-            Limit: 6, NumberOfItems: 1, CurrentPage: 1, Pages: 1
+            limit: 6, numberOfItems: 1, currentPage: 1, pages: 1
           }
         },
         { type: UNSET_FETCHING }
@@ -68,40 +68,8 @@ describe('All recipes action', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(4);
+          done();
         });
-      done();
-    }
-  );
-
-  it(
-    'Should dispatch error message to store if request is unsucessful',
-    (done) => {
-      moxios.stubRequest(`/api/v1/recipes?page=${1}`, {
-        status: 404,
-        response: {
-          status: 'success',
-          message: 'Currently no recipe'
-        }
-      });
-      const expected = [
-        { type: SET_FETCHING },
-        {
-          type: GET_ALL_RECIPES,
-          recipes: []
-        },
-        {
-          type: GET_ALL_RECIPES_ERROR,
-        },
-        { type: UNSET_FETCHING }
-      ];
-
-      const store = mockStore({});
-      store.dispatch(getAllRecipes())
-        .then(() => {
-          expect(store.getActions()).toEqual(expected);
-          expect(store.getActions().length).toBe(4);
-        });
-      done();
     }
   );
 
@@ -117,6 +85,7 @@ describe('All recipes action', () => {
       { type: SET_FETCHING },
       {
         type: GET_ALL_RECIPES_ERROR,
+        message: 'Internal server error'
       },
       { type: UNSET_FETCHING }
     ];
@@ -126,8 +95,8 @@ describe('All recipes action', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);
+        done();
       });
-    done();
   });
 });
 

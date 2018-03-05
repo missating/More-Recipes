@@ -30,9 +30,10 @@ const addReview = (content, recipeId) => (dispatch) => {
       dispatch(addReviewSuccess(review));
       dispatch(unsetFetching());
       toastr.options = {
+        timeOut: '500',
         closeButton: true,
-        extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
+        extendedTimeOut: '500',
+        positionClass: 'toast-bottom-right',
         hideMethod: 'fadeOut'
       };
       toastr.success('Review added succesfully');

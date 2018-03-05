@@ -4,11 +4,7 @@ import {
 } from '../actions/actionTypes';
 
 
-const initialState = {
-  recipes: {}
-};
-
-const userFavourites = (state = initialState.recipes, action) => {
+const userFavourites = (state = {}, action) => {
   switch (action.type) {
   case GET_USER_FAVOURITE:
     return {
@@ -17,6 +13,7 @@ const userFavourites = (state = initialState.recipes, action) => {
     };
   case GET_USER_FAVOURITE_ERROR:
     return {
+      ...state,
       errorMessage: action.message
     };
   default:

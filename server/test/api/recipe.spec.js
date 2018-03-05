@@ -411,14 +411,16 @@ describe('RECIPE CONTROLLER', () => {
   });
 
   describe('Search for a recipe', () => {
-    it('Should return 404 for a recipe that does not exist', (done) => {
+    it('Should return an empty array for a recipe that does not exist', (done) => {
       chai.request(app)
         .post('/api/v1/recipes/search?search=eba')
         .end((error, response) => {
-          expect(response).to.have.status(404);
+          expect(response).to.have.status(200);
           expect(response.body).to.be.an('object');
-          expect(response.body.message).to.be.a('string');
-          expect(response.body.message).to.equal('No match(es) found');
+          expect(response.body.recipes)
+            .to.be.an('array').with.lengthOf(0);
+          expect(response.body)
+            .to.have.property('recipes').with.lengthOf(0);
           done();
         });
     });

@@ -63,7 +63,7 @@ export class Recipes extends React.Component {
     if (recipes.length === 0) {
       recipeList = (
         <div className="text-center ml-5" style={{ width: '100%' }}>
-          <h4> You currently have no recipes </h4>
+          <h4> No recipe(s) found </h4>
         </div>
       );
     } else {
@@ -80,7 +80,9 @@ export class Recipes extends React.Component {
     return (
       <div>
         <section className="container" id="recipes">
+
           <SearchRecipe />
+
           <div className="row">
             {recipeList}
           </div>
@@ -123,7 +125,7 @@ Recipes.propTypes = {
 const mapStateToProps = state => ({
   allRecipes: state.recipes.allrecipes,
   pagination: state.pagination,
-  isFetching: state.isFetching
+  isFetching: state.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({

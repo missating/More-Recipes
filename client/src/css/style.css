@@ -313,3 +313,7 @@ margin-top: 150px;
 .user-name {
   cursor: pointer;
 }
+
+.hover:hover {
+  text-decoration: none;
+}

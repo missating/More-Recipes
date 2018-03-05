@@ -5,7 +5,8 @@ import { setFetching, unsetFetching } from './fetching';
 import {
   ADD_FAVOURITE,
   ADD_FAVOURITE_ERROR,
-  REMOVE_FAVOURITE
+  REMOVE_FAVOURITE,
+  REMOVE_FAVOURITE_ERROR,
 } from './actionTypes';
 import getUserFavourites from './getUserFavourites';
 
@@ -15,6 +16,11 @@ const addFavouriteSuccess = () => ({
 
 const removeFavouriteSuccess = () => ({
   type: REMOVE_FAVOURITE
+});
+
+const removeFavouriteError = message => ({
+  type: REMOVE_FAVOURITE_ERROR,
+  message
 });
 
 const addFavouriteError = message => ({
@@ -39,7 +45,7 @@ const addFavouriteRecipe = recipeId => (dispatch) => {
         toastr.options = {
           closeButton: true,
           extendedTimeOut: '1000',
-          positionClass: 'toast-top-right',
+          positionClass: 'toast-bottom-right',
           hideMethod: 'fadeOut'
         };
         toastr.success('Recipe favourited succesfully');
@@ -49,7 +55,7 @@ const addFavouriteRecipe = recipeId => (dispatch) => {
         toastr.options = {
           closeButton: true,
           extendedTimeOut: '1000',
-          positionClass: 'toast-top-right',
+          positionClass: 'toast-bottom-right',
           hideMethod: 'fadeOut'
         };
         toastr.success('Recipe removed from Favourite');
@@ -81,7 +87,12 @@ export const removeUserFavourite = recipeId => (dispatch) => {
     };
     toastr.success('Recipe removed from Favourite');
     dispatch(unsetFetching());
-  });
+  })
+    .catch((error) => {
+      const { message } = error.response.data;
+      dispatch(removeFavouriteError(message));
+      dispatch(unsetFetching());
+    });
 };
 
 export default addFavouriteRecipe;

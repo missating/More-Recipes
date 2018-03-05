@@ -12,7 +12,6 @@ export const createRecipe = newRecipe => ({
 
 export const recipeError = message => ({
   type: ADD_RECIPE_ERROR,
-  newRecipe: '',
   message
 });
 
@@ -36,7 +35,7 @@ const addRecipe = recipe => (dispatch) => {
       toastr.options = {
         closeButton: true,
         extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
+        positionClass: 'toast-bottom-right',
         hideMethod: 'fadeOut'
       };
       toastr.success('Recipe added succesfully');

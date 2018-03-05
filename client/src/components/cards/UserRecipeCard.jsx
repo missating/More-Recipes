@@ -46,13 +46,15 @@ class UserRecipeCard extends React.Component {
   render() {
     return (
       <div className="flex">
-        <div className="card">
-          <img
-            src={this.props.recipeImage}
-            alt={this.props.recipeImage}
-            className="image-width"
-          />
 
+        <div className="card">
+          <Link to={`/recipes/view/${this.props.id}`} className="hover">
+            <img
+              src={this.props.recipeImage}
+              alt={this.props.recipeImage}
+              className="image-width"
+            />
+          </Link>
           <div className="container p-3 recipedetails-column">
             <h2>{this.props.name}</h2>
             <p><small>{this.props.description}</small></p>
@@ -83,6 +85,7 @@ class UserRecipeCard extends React.Component {
             </div>
           </div>
         </div>
+
       </div>
     );
   }

@@ -4,6 +4,7 @@ import configureStore from 'redux-mock-store';
 import getUserProfile from '../../actions/userProfile';
 import {
   GET_USER_PROFILE,
+  GET_USER_PROFILE_ERROR,
   SET_FETCHING,
   UNSET_FETCHING
 } from '../../actions/actionTypes';
@@ -43,21 +44,35 @@ describe('User profile action', () => {
         expect(store.getActions()[1].type).toEqual(GET_USER_PROFILE);
         expect(store.getActions()[1].user).toEqual(user);
         expect(store.getActions()[2].type).toEqual(UNSET_FETCHING);
+        done();
       });
-      done();
     }
   );
 
   it('Should dispatch error message if request fails', (done) => {
     moxios.stubRequest('/api/v1/users/profile', {
-      status: 400
+      status: 500,
+      response: {
+        status: 'error',
+        message: 'Internal server error'
+      }
     });
+
+    const expected = [
+      { type: SET_FETCHING },
+      {
+        type: GET_USER_PROFILE_ERROR,
+        message: 'Internal server error'
+      },
+      { type: UNSET_FETCHING }
+    ];
 
     const store = mockStore({});
     store.dispatch(getUserProfile()).then(() => {
-      expect(store.getActions()[1].type).toEqual(UNSET_FETCHING);
+      expect(store.getActions()).toEqual(expected);
+      expect(store.getActions().length).toBe(3);
+      done();
     });
-    done();
   });
 });
 

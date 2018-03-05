@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // actions
 import getSingleRecipe from '../../actions/getSingleRecipe';
 import addFavourite from '../../actions/addFavourite';
-import upvoteRecipe from '../../actions/upvoteRecipe';
+import voteRecipe from '../../actions/voteRecipe';
 
 // components
 import ActionButtons from '../common/ActionButtons';
@@ -235,7 +235,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   recipe: id => dispatch(getSingleRecipe(id)),
   favourite: recipeId => dispatch(addFavourite(recipeId)),
-  upvote: (recipeId, queryType) => dispatch(upvoteRecipe(recipeId, queryType))
+  upvote: (recipeId, queryType) => dispatch(voteRecipe(recipeId, queryType))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleRecipe);

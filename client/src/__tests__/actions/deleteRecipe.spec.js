@@ -1,19 +1,18 @@
 import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import getUserFavourites from '../../actions/getUserFavourites';
+import deleteRecipe from '../../actions/deleteRecipe';
 import {
   SET_FETCHING,
-  GET_USER_FAVOURITE,
-  GET_USER_FAVOURITE_ERROR,
-  SHOW_PAGINATION,
-  UNSET_FETCHING,
+  DELETE_RECIPE,
+  DELETE_RECIPE_ERROR,
+  UNSET_FETCHING
 } from '../../actions/actionTypes';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-describe('Get user favourites action', () => {
+describe('Delete Recipe Action', () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -23,48 +22,29 @@ describe('Get user favourites action', () => {
   });
 
   it(
-    'Should dispatch all user favourites to store if request is successful',
+    'Should dispatch delete recipe to the store if request is sucessful',
     (done) => {
-      const favourites = {
-        recipes: {
-          name: 'test recipe',
-          ingredients: 'test, test, test',
-          description: 'mix stuff together'
-        }
-      };
-      const pageNumber = 1;
-      const limit = 6;
-      const currentPage = 1;
-      const numberOfItems = 1;
-      const pages = 1;
-      moxios.stubRequest(`/api/v1/users/favourites?page=${pageNumber}`, {
+      const recipeId = 1;
+      moxios.stubRequest(`/api/v1/recipes/${recipeId}`, {
         status: 200,
         response: {
           status: 'success',
-          favourites,
-          limit,
-          numberOfItems,
-          pages,
-          currentPage
+          message: 'recipe deleted'
         }
       });
+
       const expected = [
         { type: SET_FETCHING },
         {
-          type: GET_USER_FAVOURITE,
-          favourites
+          type: DELETE_RECIPE,
+          recipeId
         },
-        {
-          type: SHOW_PAGINATION,
-          details: {
-            limit: 6, numberOfItems: 1, currentPage: 1, pages: 1
-          }
-        },
-        { type: UNSET_FETCHING }
+        { type: UNSET_FETCHING },
+        { type: SET_FETCHING }
       ];
 
       const store = mockStore({});
-      store.dispatch(getUserFavourites())
+      store.dispatch(deleteRecipe(recipeId))
         .then(() => {
           expect(store.getActions()).toEqual(expected);
           expect(store.getActions().length).toBe(4);
@@ -73,8 +53,10 @@ describe('Get user favourites action', () => {
     }
   );
 
+
   it('dispatch error message to store if request is unsucessful', (done) => {
-    moxios.stubRequest(`/api/v1/users/favourites?page=${1}`, {
+    const recipeId = 1;
+    moxios.stubRequest(`/api/v1/recipes/${recipeId}`, {
       status: 500,
       response: {
         status: 'error',
@@ -84,14 +66,14 @@ describe('Get user favourites action', () => {
     const expected = [
       { type: SET_FETCHING },
       {
-        type: GET_USER_FAVOURITE_ERROR,
+        type: DELETE_RECIPE_ERROR,
         message: 'Internal server error'
       },
       { type: UNSET_FETCHING }
     ];
 
     const store = mockStore({});
-    store.dispatch(getUserFavourites())
+    store.dispatch(deleteRecipe(recipeId))
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);

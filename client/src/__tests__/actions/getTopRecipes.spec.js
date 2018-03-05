@@ -1,19 +1,19 @@
 import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import getUserFavourites from '../../actions/getUserFavourites';
+import getTopRecipes from '../../actions/getTopRecipes';
 import {
+  GET_TOP_RECIPES,
   SET_FETCHING,
-  GET_USER_FAVOURITE,
-  GET_USER_FAVOURITE_ERROR,
-  SHOW_PAGINATION,
   UNSET_FETCHING,
-} from '../../actions/actionTypes';
+  GET_TOP_RECIPES_ERROR
+}
+  from '../../actions/actionTypes';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-describe('Get user favourites action', () => {
+describe('Top recipes action', () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -23,58 +23,43 @@ describe('Get user favourites action', () => {
   });
 
   it(
-    'Should dispatch all user favourites to store if request is successful',
+    'Should dispatch top recipes to store if request is successful',
     (done) => {
-      const favourites = {
-        recipes: {
-          name: 'test recipe',
-          ingredients: 'test, test, test',
-          description: 'mix stuff together'
-        }
+      const recipes = {
+        name: 'test recipe',
+        ingredients: 'test, test, test',
+        description: 'add all together'
       };
-      const pageNumber = 1;
-      const limit = 6;
-      const currentPage = 1;
-      const numberOfItems = 1;
-      const pages = 1;
-      moxios.stubRequest(`/api/v1/users/favourites?page=${pageNumber}`, {
+
+      moxios.stubRequest('/api/v1/recipes?sort=upvote', {
         status: 200,
         response: {
           status: 'success',
-          favourites,
-          limit,
-          numberOfItems,
-          pages,
-          currentPage
+          recipes,
         }
       });
+
       const expected = [
         { type: SET_FETCHING },
         {
-          type: GET_USER_FAVOURITE,
-          favourites
-        },
-        {
-          type: SHOW_PAGINATION,
-          details: {
-            limit: 6, numberOfItems: 1, currentPage: 1, pages: 1
-          }
+          type: GET_TOP_RECIPES,
+          recipes
         },
         { type: UNSET_FETCHING }
       ];
 
       const store = mockStore({});
-      store.dispatch(getUserFavourites())
+      store.dispatch(getTopRecipes())
         .then(() => {
           expect(store.getActions()).toEqual(expected);
-          expect(store.getActions().length).toBe(4);
+          expect(store.getActions().length).toBe(3);
           done();
         });
     }
   );
 
   it('dispatch error message to store if request is unsucessful', (done) => {
-    moxios.stubRequest(`/api/v1/users/favourites?page=${1}`, {
+    moxios.stubRequest('/api/v1/recipes?sort=upvote', {
       status: 500,
       response: {
         status: 'error',
@@ -84,14 +69,14 @@ describe('Get user favourites action', () => {
     const expected = [
       { type: SET_FETCHING },
       {
-        type: GET_USER_FAVOURITE_ERROR,
+        type: GET_TOP_RECIPES_ERROR,
         message: 'Internal server error'
       },
       { type: UNSET_FETCHING }
     ];
 
     const store = mockStore({});
-    store.dispatch(getUserFavourites())
+    store.dispatch(getTopRecipes())
       .then(() => {
         expect(store.getActions()).toEqual(expected);
         expect(store.getActions().length).toBe(3);

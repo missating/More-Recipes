@@ -3,16 +3,13 @@ import validator from 'validator';
 
 const signinValidator = (data) => {
   const errors = {};
-  if (validator.isEmpty(data.email)) {
-    errors.email = 'Email is required';
-  }
 
   if (!validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = 'Please provide a valid email address';
   }
 
   if (validator.isEmpty(data.password)) {
-    errors.password = 'Password is required';
+    errors.password = 'Invalid credentials. Please try again';
   }
   return {
     errors,

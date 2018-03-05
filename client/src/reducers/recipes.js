@@ -1,11 +1,16 @@
 import {
   GET_ALL_RECIPES,
+  GET_ALL_RECIPES_ERROR,
   GET_SINGLE_RECIPE,
+  GET_SINGLE_RECIPE_ERROR,
   ADD_REVIEW,
+  ADD_REVIEW_ERROR,
   ADD_FAVOURITE,
+  ADD_FAVOURITE_ERROR,
   ADD_RECIPE,
   ADD_RECIPE_ERROR,
   REMOVE_FAVOURITE,
+  REMOVE_FAVOURITE_ERROR,
   SEARCH_RECIPES,
   SEARCH_RECIPES_ERROR
 } from '../actions/actionTypes';
@@ -14,7 +19,9 @@ const initialState = {
   recipes: {
     allrecipes: [],
     singleRecipe: {
-      id: 0
+      id: 0,
+      favourite: 0,
+      Reviews: []
     }
   }
 };
@@ -26,6 +33,10 @@ const recipes = (state = initialState.recipes, action) => {
       ...state,
       allrecipes: action.recipes
     };
+  case GET_ALL_RECIPES_ERROR:
+    return {
+      errorMessage: action.message
+    };
   case SEARCH_RECIPES:
     return {
       ...state,
@@ -33,13 +44,16 @@ const recipes = (state = initialState.recipes, action) => {
     };
   case SEARCH_RECIPES_ERROR:
     return {
-      ...state,
-      allrecipes: []
+      errorMessage: action.message
     };
   case GET_SINGLE_RECIPE:
     return {
       ...state,
       singleRecipe: action.recipe
+    };
+  case GET_SINGLE_RECIPE_ERROR:
+    return {
+      errorMessage: action.message
     };
   case ADD_REVIEW:
     return {
@@ -47,6 +61,12 @@ const recipes = (state = initialState.recipes, action) => {
       singleRecipe: {
         ...state.singleRecipe,
         Reviews: [...state.singleRecipe.Reviews, action.review]
+      }
+    };
+  case ADD_REVIEW_ERROR:
+    return {
+      singleRecipe: {
+        errorMessage: action.message
       }
     };
   case ADD_FAVOURITE:
@@ -57,24 +77,35 @@ const recipes = (state = initialState.recipes, action) => {
         favourite: state.singleRecipe.favourite + 1,
       }
     };
+  case ADD_FAVOURITE_ERROR:
+    return {
+      singleRecipe: {
+        ...state.singleRecipe,
+        errorMessage: action.message
+      }
+    };
   case REMOVE_FAVOURITE:
     return {
-      ...state,
       singleRecipe: {
         ...state.singleRecipe,
         favourite: state.singleRecipe.favourite - 1,
       }
     };
+  case REMOVE_FAVOURITE_ERROR:
+    return {
+      singleRecipe: {
+        ...state.singleRecipe,
+        errorMessage: action.message
+      }
+    };
   case ADD_RECIPE:
     return {
       ...state,
-      newRecipe: action.newRecipe,
-      errorMessage: '',
+      newRecipe: action.newRecipe
     };
   case ADD_RECIPE_ERROR:
     return {
       ...state,
-      newRecipe: '',
       errorMessage: action.message
     };
   default:

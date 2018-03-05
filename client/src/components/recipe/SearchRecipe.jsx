@@ -69,7 +69,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  pagination: state.pagination
+  pagination: state.pagination,
 });
 
 

@@ -4,7 +4,7 @@ import toastr from 'toastr';
 import { setFetching, unsetFetching } from './fetching';
 import getSingleRecipe from './getSingleRecipe';
 
-const upvoteRecipe = (recipeId, queryType) => (dispatch) => {
+const voteRecipe = (recipeId, queryType) => (dispatch) => {
   const token = localStorage.getItem('token');
   dispatch(setFetching());
   return axios({
@@ -20,15 +20,15 @@ const upvoteRecipe = (recipeId, queryType) => (dispatch) => {
       toastr.options = {
         closeButton: true,
         extendedTimeOut: '1000',
-        positionClass: 'toast-top-right',
+        positionClass: 'toast-bottom-right',
         hideMethod: 'fadeOut'
       };
       toastr.success(data.message);
     })
     .catch((error) => {
-      console.log('Upvote recipe error', error.response.data.message);
+      Promise.reject(error);
       dispatch(unsetFetching());
     });
 };
 
-export default upvoteRecipe;
+export default voteRecipe;

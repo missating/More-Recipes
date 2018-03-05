@@ -1,4 +1,4 @@
-import { GET_TOP_RECIPES } from '../actions/actionTypes';
+import { GET_TOP_RECIPES, GET_TOP_RECIPES_ERROR } from '../actions/actionTypes';
 
 const topRecipe = (state = {}, action) => {
   switch (action.type) {
@@ -6,6 +6,11 @@ const topRecipe = (state = {}, action) => {
     return {
       ...state,
       recipes: action.recipes
+    };
+  case GET_TOP_RECIPES_ERROR:
+    return {
+      ...state,
+      errorMessage: action.message
     };
   default:
     return state;
