@@ -6,17 +6,19 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
     "test:server": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
-    "test:client": "jest",
-    "test": "npm run test:client && npm run test:server",
+    "test:client": "jest && npm run client:coverage",
+    "test": "npm run test:client && npm run coveralls",
     "build:server": "babel -d ./build ./server -s",
     "start": "node build/app.js",
     "migrate": "sequelize db:migrate",
     "reset-migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc npm run test:server && nyc report --reporter=text-lcov | coveralls",
     "watch": "webpack --config ./webpack.dev.js -w",
     "build:client": "webpack --config ./webpack.prod.js",
     "build": "npm run clean && npm run build:client && npm run build:server && cp server/index.html build && cp server/converted.json build",
     "clean": "rm -rf build && mkdir build",
+    "client:coverage": "codecov --token=50ec302e-48d3-4b80-9f0e-4e5f64c32f67",
+    "server:coverage": "nyc report --reporter=text-lcov | coveralls",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -29,14 +31,9 @@
     "url": "https://github.com/missating/More-Recipes/issues"
   },
   "nyc": {
-    "require": [
-      "babel-register"
-    ],
     "exclude": [
-      "server/test"
-    ],
-    "sourceMap": false,
-    "instrument": false
+      "server/test/"
+    ]
   },
   "homepage": "https://github.com/missating/More-Recipes#readme",
   "dependencies": {
@@ -58,6 +55,7 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "clean-webpack-plugin": "^0.1.18",
+    "codecov": "^3.0.0",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
@@ -71,11 +69,11 @@
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "lodash.isempty": "^4.4.0",
-    "mocha": "^4.0.1",
+    "mocha": "^3.4.2",
     "morgan": "^1.9.0",
     "moxios": "^0.4.0",
     "nodemon": "^1.12.1",
-    "nyc": "^11.2.1",
+    "nyc": "^11.0.3",
     "path": "^0.12.7",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
@@ -135,13 +133,13 @@
       "\\.(css|less|scss)$": "identity-obj-proxy"
     },
     "collectCoverage": true,
+    "verbose": true,
     "testMatch": [
       "**/__tests__/**/*.spec.js?(x)",
       "**/__tests__/?(*.)(spec|test).js?(x)"
     ],
     "coveragePathIgnorePatterns": [
-      "<rootDir>/server",
-      "<rootDir>/node_modules"
+      "<rootDir>/client/src/__tests__"
     ]
   }
 }
