@@ -105,9 +105,15 @@ export const Header = props => (
 
 Header.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  signUserOut: PropTypes.func.isRequired
+  signUserOut: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    fullname: PropTypes.string
+  }),
 };
 
+Header.defaultProps = {
+  user: {}
+};
 
 const mapStateToProps = state => ({
   authenticated: state.auth.isAuthenticated,
@@ -120,5 +126,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(Header);
+export { ConnectedComponent as ConnectedHeader };
 

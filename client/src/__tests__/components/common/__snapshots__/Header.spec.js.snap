@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component Should render 1`] = `
+<header>
+  <nav
+    className="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-black"
+  >
+    <a
+      className="navbar-brand"
+      href="/"
+    >
+      More Recipes
+    </a>
+    <button
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      className="navbar-toggler navbar-toggler-right"
+      data-target="#navbarNavDropdown"
+      data-toggle="collapse"
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navbarNavDropdown"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <span
+          className="sr-only"
+        >
+          (current)
+        </span>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/recipes"
+          >
+            Recipes
+          </Link>
+        </li>
+        <Link
+          className="nav-link"
+          replace={false}
+          to="/recipe/add"
+        >
+          Create Recipe
+        </Link>
+        <li
+          className="nav-item dropdown user-name"
+        >
+          <a
+            aria-expanded="false"
+            aria-haspopup="true"
+            className="nav-link dropdown-toggle"
+            data-toggle="dropdown"
+            id="navbarDropdownMenuLink"
+          >
+            <span>
+              Hi, 
+              test
+            </span>
+          </a>
+          <div
+            aria-labelledby="navbarDropdownMenuLink"
+            className="dropdown-menu"
+          >
+            <Link
+              className="nav-link"
+              replace={false}
+              to="/profile"
+            >
+              My Profile
+            </Link>
+            <Link
+              className="nav-link"
+              replace={false}
+              to="/users/recipes"
+            >
+              My Recipes
+            </Link>
+            <Link
+              className="nav-link"
+              replace={false}
+              to="/users/favourites"
+            >
+              My Favourites
+            </Link>
+          </div>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <button
+            className="btn-secondary"
+            id="signout"
+            onClick={[Function]}
+            style={
+              Object {
+                "width": "100px",
+              }
+            }
+          >
+            SIGN OUT
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+`;

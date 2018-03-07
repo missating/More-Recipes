@@ -13,16 +13,23 @@ import addRecipe from '../../actions/addRecipe';
 
 
 /**
+ * @description Creates AddRecipe component
  *
+ * @class AddRecipe
  *
- * @className AddRecipe
  * @extends {React.Component}
  */
-class AddRecipe extends React.Component {
+export class AddRecipe extends React.Component {
   /**
-   * Creates an instance of AddRecipe.
-   * @param {any} props
+   * @description Creates an instance of AddRecipe.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
    * @memberof AddRecipe
+   *
+   * @returns {void}
    */
   constructor(props) {
     super(props);
@@ -35,6 +42,7 @@ class AddRecipe extends React.Component {
         submitting: false
       },
       errors: {},
+      // eslint-disable-next-line
       defaultImg: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png',
     };
 
@@ -42,12 +50,18 @@ class AddRecipe extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
   }
+
   /**
- *
- * @returns {null} null
- * @param {any} event
- * @memberof AddRecipe
- */
+   * @description Bind the value of the inputs to state
+   *
+   * @method onChange
+   *
+   * @param {object} event
+   *
+   * @memberof AddRecipe
+   *
+   * @returns {void}
+   */
   onChange(event) {
     this.setState({
       newRecipe: {
@@ -58,12 +72,16 @@ class AddRecipe extends React.Component {
   }
 
   /**
- *
- *
- * @param {any} event
- * @returns {dispatch} react-redux dispatch
- * @memberof AddRecipe
- */
+   * @description Submit the form
+   *
+   * @method onSubmit
+   *
+   * @param {object} event
+   *
+   * @memberof AddRecipe
+   *
+   * @returns {void}
+   */
   onSubmit(event) {
     event.preventDefault();
     this.setState({
@@ -112,9 +130,15 @@ class AddRecipe extends React.Component {
   }
 
   /**
-   * Handle image drop
+   * @description Handles image drop
+   *
+   * @method handleDrop
+   *
+   * @memberof AddRecipe
+   *
    * @param {array} files
-   * @returns {null} null
+   *
+   * @returns {void}
    */
   handleDrop(files) {
     this.setState({
@@ -123,9 +147,16 @@ class AddRecipe extends React.Component {
       }
     });
   }
+
+
   /**
-   * Handle image upload
-   * @returns {null} null
+   * @description Handle image upload
+   *
+   * @method  uploadToCloudinary
+   *
+   * @memberof AddRecipe
+   *
+   * @returns {void}
    */
   uploadToCloudinary() {
     const formData = new FormData();
@@ -142,11 +173,14 @@ class AddRecipe extends React.Component {
   }
 
   /**
- *
- *
- * @returns {boolean} boolean
- * @memberof AddRecipe
- */
+   * @description Validates user's data before making post request
+   *
+   * @method isValid
+   *
+   * @memberof AddRecipe
+   *
+   * @returns {boolean} true or false
+   */
   isValid() {
     const { errors, isValid } = recipeValidator(this.state.newRecipe);
     if (!isValid) {
@@ -158,10 +192,14 @@ class AddRecipe extends React.Component {
   }
 
   /**
-   * @description react render method
+   * @description Renders react component
    *
-   * @returns {component} react component
+   * @method render
+   *
    * @memberof AddRecipe
+   *
+   * @returns {void}
+   *
    */
   render() {
     const { errors, newRecipe, defaultImg } = this.state;
@@ -199,7 +237,9 @@ class AddRecipe extends React.Component {
                         alt=""
                         className="img-fluid mx-auto d-block"
                       />
-                      <h5 className="text-center">Click here to upload</h5>
+                      <h5 className="text-center">
+                        Click here to upload
+                      </h5>
                     </div>
                   }
                   {
@@ -215,6 +255,7 @@ class AddRecipe extends React.Component {
                 <div className="form-group form-width">
                   <input
                     type="text"
+                    id="recipeName"
                     name="name"
                     className="form-control"
                     placeholder="The name of the dish..."
@@ -235,6 +276,7 @@ class AddRecipe extends React.Component {
                 <div className="form-group form-width">
                   <input
                     type="text"
+                    id="recipeIngredients"
                     name="ingredients"
                     className="form-control"
                     placeholder="A comma seperated list of ingredients..."
@@ -257,7 +299,7 @@ class AddRecipe extends React.Component {
                     rows="5"
                     id="recipeDescription"
                     className="form-control"
-                    placeholder="Instructions on how this dish should be made..."
+                    placeholder="Instructions on how this dish is made..."
                     name="description"
                     value={newRecipe.description}
                     onChange={this.onChange}
@@ -274,6 +316,7 @@ class AddRecipe extends React.Component {
 
                 <div className="form-group form-width">
                   <button
+                    id="recipeButton"
                     className="btn btn-secondary"
                     disabled={this.state.submitting}
                   >
@@ -311,6 +354,7 @@ const mapStateToProps = state => ({
   errorMessage: state.errorMessage
 });
 
-export default connect(mapStateToProps, {
-  addNewRecipe: addRecipe
-})(AddRecipe);
+const ConnectedComponent =
+  connect(mapStateToProps, { addNewRecipe: addRecipe })(AddRecipe);
+export { ConnectedComponent as ConnectedAddRecipe };
+

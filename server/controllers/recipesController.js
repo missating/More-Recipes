@@ -18,17 +18,22 @@ const updateRecipeAttributes = arrayOfRecipes =>
   arrayOfRecipes.map(recipe => updateOneRecipeAttribute(recipe));
 
 /**
- * This handles recipe creation, updating and deleting recipes
+ * @class recipesController
+ *
  * @export
- * @class Recipes
+ *
  */
 export default class recipesController {
   /**
+   * @description - Add a new recipe
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} with the new recipe details
-   * @memberof Recipes
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof recipesController
+   *
+   * @returns {object} Class instance
    */
   static addRecipe(req, res) {
     const {
@@ -38,6 +43,7 @@ export default class recipesController {
     let { recipeImage } = req.body;
 
     if (!recipeImage) {
+      // eslint-disable-next-line
       recipeImage = 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png';
     }
 
@@ -79,12 +85,16 @@ export default class recipesController {
 
 
   /**
- * @static
- * @param {object} req
- * @param {object} res
- * @returns {object} with the updated recipe
- * @memberof Recipes
- */
+   * @description - Update a recipe
+   * @static
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof recipesController
+   *
+   * @returns {object} Class instance
+   */
   static updateRecipe(req, res) {
     const {
       name, ingredients, description, recipeImage
@@ -127,12 +137,16 @@ export default class recipesController {
   }
 
   /**
- * @static
- * @param {object} req
- * @param {object} res
- * @returns {object} with a message for successful delete action
- * @memberof Recipes
- */
+   * @description - Delete a recipe
+   * @static
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof recipesController
+   *
+   * @returns {object} Class instance
+   */
   static deleteRecipe(req, res) {
     db.Recipe.findOne({
       where: {
@@ -170,12 +184,16 @@ export default class recipesController {
   }
 
   /**
- * @static
- * @param {object} req
- * @param {object} res
- * @returns {object} with all recipes
- * @memberof Recipes
- */
+    * @description - Get all recipes with the highest number of votes or not
+    * @static
+    *
+    * @param {object} req - HTTP Request
+    * @param {object} res - HTTP Response
+    *
+    * @memberof recipesController
+    *
+    * @returns {object} Class instance
+    */
   static getAllRecipes(req, res) {
     let { sort } = req.query;
 
@@ -261,12 +279,16 @@ export default class recipesController {
 
 
   /**
- * @static
- * @param {object} req
- * @param {object} res
- * @returns {object} with one recipe
- * @memberof Recipes
- */
+   * @description - Get one recipe
+   * @static
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof recipesController
+   *
+   * @returns {object} Class instance
+   */
   static getOneRecipe(req, res) {
     db.Recipe.findOne({
       where: {
@@ -308,12 +330,16 @@ export default class recipesController {
   }
 
   /**
- * @static
- * @param {object} req
- * @param {object} res
- * @returns {object} with all user recipes
- * @memberof Recipes
- */
+   * @description - Get all recipes by a particular user
+   * @static
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof recipesController
+   *
+   * @returns {object} Class instance
+   */
   static getAllUserRecipes(req, res) {
     db.User.findOne({
       where: {
@@ -374,13 +400,15 @@ export default class recipesController {
 
 
   /**
-   *
-   *
+   * @description - Search for recipes by name or ingredients
    * @static
-   * @param {any} req
-   * @param {any} res
-   *  @returns {object} with the result of the search query
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
    * @memberof recipesController
+   *
+   * @returns {object} Class instance
    */
   static searchRecipes(req, res) {
     const { search } = req.query;

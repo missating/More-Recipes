@@ -1,19 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import searchRecipes from '../../actions/searchRecipe';
+
+
 /**
+ * @description Creates SearchRecipe component
  *
- *
- * @export
  * @class SearchRecipe
+ *
  * @extends {React.Component}
  */
 export class SearchRecipe extends React.Component {
   /**
-   * Creates an instance of SearchRecipe.
-   * @param {any} props
-   * @memberof SearchRecipe
-   */
+  * @description Creates an instance of SearchRecipe.
+  *
+  * @constructor
+  *
+  * @param {object} props
+  *
+  * @memberof SearchRecipe
+  *
+  * @returns {void}
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -23,23 +32,34 @@ export class SearchRecipe extends React.Component {
   }
 
   /**
-   *
-   *
-   * @param {any} event
-   * @memberof SearchRecipe
-   */
+  * @description Bind the value of the inputs to state
+  *
+  * @method onChange
+  *
+  * @param {object} event
+  *
+  * @memberof SearchRecipe
+  *
+  * @returns {void}
+  */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    this.props.searchRecipes(event.target.value, this.props.pagination.currentPage);
+    this.props.searchRecipes(
+      event.target.value,
+      this.props.pagination.currentPage
+    );
   }
 
-
   /**
-   *
-   *
-   * @returns
-   * @memberof SearchRecipe
-   */
+    * @description Renders react component
+    *
+    * @method render
+    *
+    * @memberof SearchRecipe
+    *
+    * @returns {void}
+    *
+    */
   render() {
     return (
       <div>
@@ -47,6 +67,7 @@ export class SearchRecipe extends React.Component {
           <form>
             <div className="input-group">
               <input
+                id="search"
                 type="text"
                 name="searchQuery"
                 className="form-control"
@@ -64,6 +85,19 @@ export class SearchRecipe extends React.Component {
   }
 }
 
+SearchRecipe.propTypes = {
+  searchRecipes: PropTypes.func.isRequired,
+  pagination: PropTypes.shape({
+    currentPage: PropTypes.number
+  })
+};
+
+SearchRecipe.defaultProps = {
+  pagination: {
+    currentPage: 1
+  }
+};
+
 const mapDispatchToProps = dispatch => ({
   searchRecipes: searchQuery => (dispatch(searchRecipes(searchQuery)))
 });
@@ -73,4 +107,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchRecipe);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(SearchRecipe);
+export { ConnectedComponent as ConnectedSearchRecipe };

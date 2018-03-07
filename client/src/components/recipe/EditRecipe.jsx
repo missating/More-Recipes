@@ -14,16 +14,23 @@ import editRecipe from '../../actions/editRecipe';
 
 
 /**
+ * @description Creates EditRecipe component
  *
+ * @class EditRecipe
  *
- * @class UpdateRecipe
  * @extends {React.Component}
  */
-class EditRecipe extends React.Component {
+export class EditRecipe extends React.Component {
   /**
-   * Creates an instance of EditRecipe.
-   * @param {any} props
+   * @description Creates an instance of EditRecipe.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
    * @memberof EditRecipe
+   *
+   * @returns {void}
    */
   constructor(props) {
     super(props);
@@ -40,21 +47,32 @@ class EditRecipe extends React.Component {
     this.onEdit = this.onEdit.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
   }
+
+
   /**
- *
- *@returns {json} with recipe details
- * @memberof EditRecipe
- */
+   * @description Get's a recipe
+   *
+   * @method
+   *
+   * @memberof EditRecipe
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     const recipeId = this.props.match.params.id;
     this.props.getRecipeDetails(recipeId);
   }
+
+
   /**
- *
- *@returns {json} with the new recipe details
- * @param {any} nextProps
- * @memberof EditRecipe
- */
+   * @description Sets state
+   *
+   * @param {object} nextProps
+   *
+   * @memberof EditRecipe
+   *
+   * @returns {void}
+   */
   componentWillReceiveProps(nextProps) {
     const {
       id, name, description, ingredients, recipeImage
@@ -63,21 +81,35 @@ class EditRecipe extends React.Component {
       id, name, description, ingredients, recipeImage
     });
   }
+
+
   /**
- *
- *@returns {json} with the new recipe name
- * @param {any} event
- * @memberof EditRecipe
- */
+   * @description Bind the value of the inputs to state
+   *
+   * @method onChange
+   *
+   * @param {object} event
+   *
+   * @memberof EditRecipe
+   *
+   * @returns {void}
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+
   /**
- *
- *@returns {json} updates the recipe
- * @param {any} event
- * @memberof EditRecipe
- */
+   * @description Update's the Recipe
+   *
+   * @method onEdit
+   *
+   * @param {object} event
+   *
+   * @memberof EditRecipe
+   *
+   * @returns {void}
+   */
   onEdit(event) {
     event.preventDefault();
     this.setState({
@@ -114,10 +146,16 @@ class EditRecipe extends React.Component {
   }
 
   /**
-  * Handle image drop
-  * @param {array} files
-  * @returns {null} null
-  */
+   * @description Handles image drop
+   *
+   * @method handleDrop
+   *
+   * @memberof EditRecipe
+   *
+   * @param {array} files
+   *
+   * @returns {void}
+   */
   handleDrop(files) {
     this.setState({
       newImage: files[0],
@@ -126,9 +164,14 @@ class EditRecipe extends React.Component {
   }
 
   /**
-  * Handle image upload
-  * @returns {null} null
-  */
+   * @description Handle image upload
+   *
+   * @method uploadToCloudinary
+   *
+   * @memberof EditRecipe
+   *
+   * @returns {void}
+   */
   uploadToCloudinary() {
     const formData = new FormData();
     formData.append('file', this.state.newImage);
@@ -144,11 +187,14 @@ class EditRecipe extends React.Component {
   }
 
   /**
-*
-*
-* @returns {boolean} boolean
-* @memberof EditRecipe
-*/
+    * @description Validates user's data before making post request
+    *
+    * @method isValid
+    *
+    * @memberof EditRecipe
+    *
+    * @returns {boolean} true or false
+    */
   isValid() {
     const { errors, isValid } = recipeValidator(this.state);
     if (!isValid) {
@@ -160,11 +206,15 @@ class EditRecipe extends React.Component {
   }
 
   /**
-   * @description react render method
-   *
-   * @returns {component} react component
-   * @memberof EditRecipe
-   */
+    * @description Renders react component
+    *
+    * @method render
+    *
+    * @memberof EditRecipe
+    *
+    * @returns {void}
+    *
+    */
   render() {
     return (
       <div>
@@ -200,7 +250,9 @@ class EditRecipe extends React.Component {
                         alt=""
                         className="img-fluid mx-auto d-block"
                       />
-                      <h5 className="text-center">Click here to upload</h5>
+                      <h5 className="text-center">
+                        Click here to upload
+                      </h5>
                     </div>
                   }
                 </Dropzone>
@@ -249,6 +301,7 @@ class EditRecipe extends React.Component {
                     type="text"
                     rows="5"
                     className="form-control"
+                    id="updateDescription"
                     name="description"
                     value={this.state.description}
                     onChange={this.onChange}
@@ -265,6 +318,7 @@ class EditRecipe extends React.Component {
 
                 <div className="form-group form-width">
                   <button
+                    id="editButton"
                     className="btn btn-secondary"
                     disabled={this.state.updating}
                     onClick={this.onEdit}
@@ -290,8 +344,12 @@ class EditRecipe extends React.Component {
 
 
 EditRecipe.propTypes = {
-  match: PropTypes.objectOf.isRequired,
-  singleRecipe: PropTypes.objectOf.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
+  singleRecipe: PropTypes.shape({}).isRequired,
   getRecipeDetails: PropTypes.func.isRequired,
   updateRecipe: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
@@ -311,4 +369,7 @@ const mapDispatchToProps = dispatch => ({
   updateRecipe: (recipe, id) => dispatch(editRecipe(recipe, id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditRecipe);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(EditRecipe);
+export { ConnectedComponent as ConnectedEditRecipe };
+

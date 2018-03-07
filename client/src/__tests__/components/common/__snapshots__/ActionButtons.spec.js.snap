@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Buttons component Should render 1`] = `
+<div
+  className="container"
+>
+  <button
+    className="btn disabled"
+  >
+    <span>
+      <i
+        className="far fa-thumbs-up"
+      />
+    </span>
+    1
+  </button>
+  <button
+    className="btn disabled"
+  >
+    <span>
+      <i
+        className="fa fa-thumbs-down"
+      />
+    </span>
+    1
+  </button>
+  <button
+    className="btn disabled"
+  >
+    <span>
+      <i
+        className="far fa-heart"
+      />
+    </span>
+    1
+  </button>
+</div>
+`;

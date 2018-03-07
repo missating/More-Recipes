@@ -11,21 +11,27 @@ import RecipeCard from '../cards/RecipeCard';
 
 // actions
 import getUserFavourites from '../../actions/getUserFavourites';
-
 import { removeUserFavourite } from '../../actions/addFavourite';
 
 /**
- *
+ * @description Creates UserFavourites component
  *
  * @class UserFavourites
+ *
  * @extends {React.Component}
  */
-class UserFavourites extends React.Component {
+export class UserFavourites extends React.Component {
   /**
-     * Creates an instance of UserFavourites.
-     * @param {any} props
-     * @memberof UserFavourites
-     */
+   * @description Creates an instance of UserFavourites.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
+   * @memberof UserFavourites
+   *
+   * @returns {void}
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -34,20 +40,31 @@ class UserFavourites extends React.Component {
     this.removeFromFavourite = this.removeFromFavourite.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
   }
+
+
   /**
- *
- *@returns {null} null
- * @memberof UserFavourites
- */
+   * @description Gets user's favourites
+   *
+   * @method
+   *
+   * @memberof UserFavourites
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     this.props.favourites();
   }
+
+
   /**
- * @returns {undefined}
- *
- * @param {object} nextProps
- * @memberof UserFavourites
- */
+   * @description Set state
+   *
+   * @param {object} nextProps
+   *
+   * @memberof UserFavourites
+   *
+   * @returns {void}
+   */
   componentWillReceiveProps(nextProps) {
     if (this.props.userFavourites !== nextProps.userFavourites) {
       this.setState({
@@ -57,25 +74,34 @@ class UserFavourites extends React.Component {
     }
   }
 
+
   /**
-   * @returns {number} number of the page
+   * @description pagination for user favourites
    *
-   * @param {any} current
-   * @memberof Recipes
+   * @param {number} current
+   *
+   * @memberof UserFavourites
+   *
+   * @returns {void}
    */
   onPageChange(current) {
     const selected = current.selected + 1;
+    this.props.history.push(`/users/favourites?page=${selected}`);
     this.props.favourites(selected);
   }
 
   /**
- *
- *
- * @param {any} id
- * @memberof UserFavourites
- */
+   * @description removes a user's favourites
+   *
+   * @param {number} id
+   *
+   * @memberof UserFavourites
+   *
+   * @returns {void}
+   */
   removeFromFavourite(id) {
     confirmAlert({
+      title: '',
       message: 'Are you sure you want to remove this recipe ?',
       confirmLabel: 'Yes, remove!',
       cancelLabel: 'Cancel',
@@ -86,10 +112,13 @@ class UserFavourites extends React.Component {
 
 
   /**
+   * @description Renders react component
    *
+   * @method render
    *
-   * @returns {jsx} - a list of items to be rendered
    * @memberof UserFavourites
+   *
+   * @returns {void}
    */
   render() {
     const { loading } = this.state;
@@ -125,7 +154,7 @@ class UserFavourites extends React.Component {
           name={favourites.Recipe.name}
           description={favourites.Recipe.description}
           id={favourites.recipeId}
-          button="true"
+          button
           onButtonClick={this.removeFromFavourite}
         />
       </div>
@@ -142,7 +171,7 @@ class UserFavourites extends React.Component {
 
             <h3 className="text-center">My Favourite Recipes</h3>
             <hr />
-            <div className="row">
+            <div className="row mh-500">
               {userFavouritesList}
             </div>
             <div className="container">
@@ -191,6 +220,21 @@ class UserFavourites extends React.Component {
 UserFavourites.propTypes = {
   favourites: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  pagination: PropTypes.shape({
+    pages: PropTypes.number
+  }),
+  userFavourites: PropTypes.arrayOf(PropTypes.shape({})),
+  removeFavourite: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+};
+
+UserFavourites.defaultProps = {
+  pagination: {
+    pages: 1
+  },
+  userFavourites: []
 };
 
 
@@ -206,5 +250,6 @@ const mapDispatchToProps = dispatch => ({
   removeFavourite: recipedId => dispatch(removeUserFavourite(recipedId))
 });
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserFavourites);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(UserFavourites);
+export { ConnectedComponent as ConnectedUserFavourites };

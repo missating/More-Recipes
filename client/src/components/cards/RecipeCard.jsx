@@ -28,6 +28,7 @@ const RecipeCard = props => (
             props.button &&
             (
               <button
+                id="removeButton"
                 className="btn btn-secondary"
                 onClick={() => props.onButtonClick(props.id)}
               >
@@ -47,7 +48,14 @@ RecipeCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  recipeImage: PropTypes.string.isRequired
+  recipeImage: PropTypes.string.isRequired,
+  onButtonClick: PropTypes.func,
+  button: PropTypes.bool
+};
+
+RecipeCard.defaultProps = {
+  onButtonClick: () => null,
+  button: false
 };
 
 export default RecipeCard;

@@ -105,13 +105,13 @@ describe('Auth reducer', () => {
     it('Should set authenticated to false and sign user out', () => {
       const action = {
         type: ActionTypes.SIGN_OUT,
-        user: '',
+        user: {},
         token: '',
       };
 
       const expected = {
         isAuthenticated: false,
-        user: '',
+        user: {},
         token: '',
       };
 

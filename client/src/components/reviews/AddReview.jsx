@@ -7,17 +7,25 @@ import reviewValidator from '../../validation/reviewValidator';
 
 // actions
 import addReview from '../../actions/addReview';
+
 /**
- *
+ * @description Creates AddReview component
  *
  * @class AddReview
+ *
  * @extends {React.Component}
  */
-class AddReview extends React.Component {
+export class AddReview extends React.Component {
   /**
-   * Creates an instance of AddReview.
-   * @param {any} props
+   * @description Creates an instance of AddReview.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
    * @memberof AddReview
+   *
+   * @returns {void}
    */
   constructor(props) {
     super(props);
@@ -28,20 +36,34 @@ class AddReview extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+
   /**
-   *
-   * @returns {null} null
-   * @param {any} event
-   * @memberof AddReview
-   */
+  * @description Bind the value of the inputs to state
+  *
+  * @method onChange
+  *
+  * @param {object} event
+  *
+  * @memberof AddReview
+  *
+  * @returns {void}
+  */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+
   /**
-   * @returns {null} null
+   * @description Submit the form
    *
-   * @param {any} event
+   * @method onSubmit
+   *
+   * @param {object} event
+   *
    * @memberof AddReview
+   *
+   * @returns {void}
    */
   onSubmit(event) {
     event.preventDefault();
@@ -58,12 +80,16 @@ class AddReview extends React.Component {
     }
   }
 
+
   /**
-   *
-   *
-   * @returns {boolean} boolean
-   * @memberof AddReview
-   */
+    * @description Validates user's data before making post request
+    *
+    * @method isValid
+    *
+    * @memberof AddReview
+    *
+    * @returns {boolean} true or false
+    */
   isValid() {
     const { errors, isValid } = reviewValidator(this.state);
     if (!isValid) {
@@ -73,11 +99,17 @@ class AddReview extends React.Component {
       return isValid;
     }
   }
+
+
   /**
+   * @description Renders react component
    *
+   * @method render
    *
-   * @returns {jsx} form to add review
    * @memberof AddReview
+   *
+   * @returns {void}
+   *
    */
   render() {
     return (
@@ -86,6 +118,7 @@ class AddReview extends React.Component {
           <textarea
             className="form-control"
             name="content"
+            id="reviewContent"
             rows="4"
             cols="30"
             placeholder="Add a review..."
@@ -120,5 +153,6 @@ const mapDispatchToProps = dispatch => ({
   addNewReview: (content, recipeId) => dispatch(addReview(content, recipeId))
 });
 
-export default connect(null, mapDispatchToProps)(AddReview);
+const ConnectedComponent = connect(null, mapDispatchToProps)(AddReview);
+export { ConnectedComponent as ConnectedAddReview };
 

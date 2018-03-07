@@ -7,6 +7,14 @@ chai.use(chaiHttp);
 let userToken;
 let recipeId;
 
+const recipe1 = {
+  name: 'Test Recipe 4',
+  ingredients: 'test, test, test',
+  description: 'For testing recipe 4',
+  // eslint-disable-next-line
+  recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
+};
+
 describe('VOTE API', () => {
   before((done) => {
     chai.request(app)
@@ -28,20 +36,15 @@ describe('VOTE API', () => {
     chai.request(app)
       .post('/api/v1/recipes')
       .set('token', userToken)
-      .send({
-        name: 'Test Recipe 4',
-        ingredients: 'test, test, test',
-        description: 'For testing recipe 4',
-        recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-      })
+      .send(recipe1)
       .end((error, response) => {
         recipeId = response.body.recipe.id;
         expect(response.status).to.equal(201);
-        expect(response.body.recipe.name).to.equal('Test Recipe 4');
+        expect(response.body.recipe.name).to.equal(recipe1.name);
         expect(response.body.recipe.ingredients)
-          .to.equal('test, test, test');
+          .to.equal(recipe1.ingredients);
         expect(response.body.recipe.description)
-          .to.equal('For testing recipe 4');
+          .to.equal(recipe1.description);
         done();
       });
   });

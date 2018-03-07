@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign in component Should render 1`] = `
+<div>
+  <div
+    className="modal fade"
+    id="signin-modal"
+  >
+    <div
+      className="modal-dialog modal-dialog-centered modal-sm"
+    >
+      <div
+        className="modal-content"
+      >
+        <button
+          aria-label="Close"
+          className="close"
+          data-dismiss="modal"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            style={
+              Object {
+                "cursor": "pointer",
+                "float": "right",
+              }
+            }
+          >
+            ×
+          </span>
+        </button>
+        <div
+          className="modal-body"
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="col-sm-12"
+            >
+              <form
+                onSubmit={[Function]}
+              >
+                <div
+                  className="form-group"
+                >
+                  <input
+                    className="form-control signin-input"
+                    name="email"
+                    onChange={[Function]}
+                    placeholder="Email"
+                    type="email"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <input
+                    className="form-control signin-input"
+                    id="signinPassword"
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="Password"
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <br />
+                <div />
+                <button
+                  className="btn btn-secondary"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

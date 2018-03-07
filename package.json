@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
     "test:server": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
-    "test:client": "jest client/src/__tests__/**/*.spec.js",
+    "test:client": "jest",
     "test": "npm run test:client && npm run test:server",
     "build:server": "babel -d ./build ./server -s",
     "start": "node build/app.js",
@@ -107,6 +107,7 @@
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-react": "^1.1.7",
@@ -134,10 +135,13 @@
       "\\.(css|less|scss)$": "identity-obj-proxy"
     },
     "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text-summary"
+    "testMatch": [
+      "**/__tests__/**/*.spec.js?(x)",
+      "**/__tests__/?(*.)(spec|test).js?(x)"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/server",
+      "<rootDir>/node_modules"
     ]
   }
 }

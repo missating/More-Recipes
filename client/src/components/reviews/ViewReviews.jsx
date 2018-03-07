@@ -19,6 +19,7 @@ const ViewReviews = props => (
 ViewReviews.propTypes = {
   content: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired
 };
 
 export default ViewReviews;

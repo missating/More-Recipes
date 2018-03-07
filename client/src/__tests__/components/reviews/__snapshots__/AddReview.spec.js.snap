@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add review component Should render 1`] = `
+<div
+  className="container"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <textarea
+      className="form-control"
+      cols="30"
+      id="reviewContent"
+      name="content"
+      onChange={[Function]}
+      placeholder="Add a review..."
+      rows="4"
+      value=""
+    />
+    <br />
+    <button
+      className="btn btn-secondary"
+      style={
+        Object {
+          "float": "right",
+        }
+      }
+    >
+      SUBMIT
+    </button>
+  </form>
+</div>
+`;

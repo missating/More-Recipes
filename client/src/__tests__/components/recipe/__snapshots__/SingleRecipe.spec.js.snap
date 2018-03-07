@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Single recipe component Should render 1`] = `
+<div>
+  <section
+    className="container"
+    id="recipes"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-6 col-sm-12"
+      >
+        <h2
+          className="ml-4"
+        >
+          test
+        </h2>
+        <img
+          alt="test"
+          className="img-thumbnail"
+          src="image_url"
+        />
+        <div
+          className="container"
+        >
+          <button
+            className="btn active"
+            id="onDownvote"
+            onClick={[Function]}
+          >
+            <span>
+              <i
+                className="far fa-thumbs-down"
+              />
+            </span>
+            0
+          </button>
+          <button
+            className="btn active"
+            id="onUpvote"
+            onClick={[Function]}
+          >
+            <span>
+              <i
+                className="far fa-thumbs-up"
+              />
+            </span>
+            0
+          </button>
+          <button
+            className="btn active"
+            id="onFavourite"
+            onClick={[Function]}
+          >
+            <span>
+              <i
+                className="far fa-heart"
+              />
+            </span>
+            0
+          </button>
+        </div>
+      </div>
+      <div
+        className="col-md-6 col-sm-12 recipe-details"
+      >
+        <hr />
+        <h5>
+          Ingredients
+        </h5>
+        <p>
+          test, test
+        </p>
+        <hr />
+        <h5>
+           Method 
+        </h5>
+        <p>
+          mix it
+        </p>
+      </div>
+    </div>
+    <div
+      className="row mt-5 recipe-details"
+    >
+      <div
+        className="col-md-6 col-sm-12 reviews"
+      >
+        <h4>
+           Reviews 
+        </h4>
+        <div
+          className="container"
+        >
+          <p>
+            Currently no reviews
+          </p>
+        </div>
+      </div>
+      <div
+        className="col-md-6 col-sm-12"
+      >
+        <Connect(AddReview)
+          recipeId={1}
+        />
+      </div>
+    </div>
+  </section>
+</div>
+`;

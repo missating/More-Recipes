@@ -10,26 +10,36 @@ import getTopRecipes from '../../actions/getTopRecipes';
 
 
 /**
- *
+ * @description Creates TopRecipes component
  *
  * @class TopRecipes
+ *
  * @extends {React.Component}
  */
-class TopRecipes extends React.Component {
+export class TopRecipes extends React.Component {
   /**
+   * @description Gets top recipes
    *
-   *@returns {null} null
+   * @method
+   *
    * @memberof TopRecipes
+   *
+   * @returns {void}
    */
   componentWillMount() {
     this.props.recipes();
   }
+
+
   /**
- *
- *
- * @return {jsx} - a list of items to be rendered
- * @memberof TopRecipes
- */
+   * @description Renders react component
+   *
+   * @method render
+   *
+   * @memberof TopRecipes
+   *
+   * @returns {void}
+   */
   render() {
     const topRecipe = (this.props.topRecipes) ? this.props.topRecipes : [];
 
@@ -67,7 +77,12 @@ class TopRecipes extends React.Component {
 }
 
 TopRecipes.propTypes = {
-  recipes: PropTypes.func.isRequired
+  recipes: PropTypes.func.isRequired,
+  topRecipes: PropTypes.arrayOf(PropTypes.object)
+};
+
+TopRecipes.defaultProps = {
+  topRecipes: []
 };
 
 
@@ -79,4 +94,8 @@ const mapDispatchToProps = dispatch => ({
   recipes: () => dispatch(getTopRecipes())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopRecipes);
+
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(TopRecipes);
+export { ConnectedComponent as ConnectedTopRecipes };
+
