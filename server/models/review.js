@@ -15,8 +15,14 @@ export default (sequelize, DataTypes) => {
   });
   Review.associate = (models) => {
     // associations defined here
-    Review.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-    Review.belongsTo(models.Recipe, { foreignKey: 'recipeId', onDelete: 'CASCADE' });
+    Review.belongsTo(
+      models.User,
+      { foreignKey: 'userId', onDelete: 'CASCADE' }
+    );
+    Review.belongsTo(
+      models.Recipe,
+      { foreignKey: 'recipeId', onDelete: 'CASCADE' }
+    );
   };
   return Review;
 };

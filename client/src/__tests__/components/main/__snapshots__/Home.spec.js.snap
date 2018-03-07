@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component Should render 1`] = `
+<div>
+  <div>
+    <div
+      className="bg flex"
+    >
+      <div
+        className="home-content center"
+      >
+        <h1>
+           More Recipes 
+        </h1>
+        <p>
+          A platform for you to share your awesome recipes 
+        </p>
+        <div
+          className="btn-group"
+        >
+          <div>
+            <a
+              data-target="#signup-modal"
+              data-toggle="modal"
+              href="#signup-modal"
+            >
+              <button
+                className="btn signup-button"
+                type="button"
+              >
+                SIGN UP
+              </button>
+            </a>
+          </div>
+          <Connect(Signup) />
+          <div>
+            <a
+              data-target="#signin-modal"
+              data-toggle="modal"
+              href="#signin-modal"
+            >
+              <button
+                className="btn signin-button"
+                type="button"
+              >
+                SIGN IN
+              </button>
+            </a>
+          </div>
+          <Connect(Signin) />
+        </div>
+      </div>
+    </div>
+    <div
+      className="scroll-holder"
+    >
+      <a
+        href="#featured"
+      >
+        <i
+          className="fas fa-angle-double-down fa-3x scroll-down"
+        />
+      </a>
+    </div>
+  </div>
+  <Connect(TopRecipes) />
+</div>
+`;

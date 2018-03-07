@@ -7,6 +7,18 @@ chai.use(chaiHttp);
 let userToken;
 let recipeId;
 
+const recipe1 = {
+  name: 'Test Recipe 2',
+  ingredients: 'test, test, test',
+  description: 'For testing recipe 2',
+  // eslint-disable-next-line
+  recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
+};
+
+const review1 = {
+  content: 'Good stuff!'
+};
+
 describe('REVIEW API', () => {
   before((done) => {
     chai.request(app)
@@ -28,20 +40,15 @@ describe('REVIEW API', () => {
     chai.request(app)
       .post('/api/v1/recipes')
       .set('token', userToken)
-      .send({
-        name: 'Test Recipe 2',
-        ingredients: 'test, test, test',
-        description: 'For testing recipe 2',
-        recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-      })
+      .send(recipe1)
       .end((error, response) => {
         recipeId = response.body.recipe.id;
         expect(response.status).to.equal(201);
-        expect(response.body.recipe.name).to.equal('Test Recipe 2');
+        expect(response.body.recipe.name).to.equal(recipe1.name);
         expect(response.body.recipe.ingredients)
-          .to.equal('test, test, test');
+          .to.equal(recipe1.ingredients);
         expect(response.body.recipe.description)
-          .to.equal('For testing recipe 2');
+          .to.equal(recipe1.description);
         expect(response.body.recipe.recipeImage)
           .to.be.a('string');
         expect(response.body.recipe.id)
@@ -58,9 +65,7 @@ describe('REVIEW API', () => {
       (done) => {
         chai.request(app)
           .post(`/api/v1/recipes/${recipeId}/review`)
-          .send({
-            content: 'Good stuff!'
-          })
+          .send(review1)
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body).to.be.an('object');
@@ -90,13 +95,11 @@ describe('REVIEW API', () => {
       chai.request(app)
         .post(`/api/v1/recipes/${recipeId}/review`)
         .set('token', userToken)
-        .send({
-          content: 'Good stuff'
-        })
+        .send(review1)
         .end((error, response) => {
           expect(response.status).to.equal(201);
           expect(response.body).to.be.an('object');
-          expect(response.body.review.content).to.equal('Good stuff');
+          expect(response.body.review.content).to.equal(review1.content);
           done();
         });
     });
@@ -105,9 +108,7 @@ describe('REVIEW API', () => {
       chai.request(app)
         .post('/api/v1/recipes/recipeId/review')
         .set('token', userToken)
-        .send({
-          content: 'Good stuff'
-        })
+        .send(review1)
         .end((error, response) => {
           expect(response.status).to.equal(400);
           expect(response.body).to.be.an('object');

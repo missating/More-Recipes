@@ -5,22 +5,30 @@ import ReactPaginate from 'react-paginate';
 import { Redirect } from 'react-router-dom';
 
 // components
-import UserRecipeCard from '../cards/UserRecipeCard';
+import { ConnectedUserRecipeCard } from '../cards/UserRecipeCard';
 
 // actions
 import getUserRecipes from '../../actions/getUserRecipes';
+
 /**
+ * @description Creates UserRecipes component
  *
+ * @class UserRecipes
  *
- * @className UserRecipe
  * @extends {React.Component}
  */
-class UserRecipes extends React.Component {
+export class UserRecipes extends React.Component {
   /**
- * Creates an instance of UserRecipes.
- * @param {any} props
- * @memberof UserRecipes
- */
+   * @description Creates an instance of UserFavourites.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
+   * @memberof UserRecipes
+   *
+   * @returns {void}
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -28,20 +36,29 @@ class UserRecipes extends React.Component {
     };
     this.onPageChange = this.onPageChange.bind(this);
   }
+
+
   /**
- *
- *@returns {null} null //
- * @memberof UserRecipes
- */
+   * @description Gets user's recipes
+   *
+   * @method
+   *
+   * @memberof UserRecipes
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     this.props.recipes();
   }
 
   /**
-   * @returns {undefined}
+   * @description Set state
    *
    * @param {object} nextProps
+   *
    * @memberof UserRecipes
+   *
+   * @returns {void}
    */
   componentWillReceiveProps(nextProps) {
     if (this.props.userRecipes !== nextProps.userRecipes) {
@@ -52,11 +69,15 @@ class UserRecipes extends React.Component {
     }
   }
 
+
   /**
-   * @returns {number} number of the page
+   * @description pagination for user recipes
    *
-   * @param {any} current
-   * @memberof Recipes
+   * @param {number} current
+   *
+   * @memberof UserRecipes
+   *
+   * @returns {void}
    */
   onPageChange(current) {
     const selected = current.selected + 1;
@@ -64,11 +85,15 @@ class UserRecipes extends React.Component {
     this.props.recipes(selected);
   }
 
+
   /**
-   * @description react render method
+   * @description Renders react component
    *
-   * @returns {component} react component
+   * @method render
+   *
    * @memberof UserRecipes
+   *
+   * @returns {void}
    */
   render() {
     const { loading } = this.state;
@@ -98,7 +123,7 @@ class UserRecipes extends React.Component {
 
     const userRecipesList = userRecipes.map((recipe, i) => (
       <div className="col-md-6 col-lg-4 col-sm-6 p-0" key={`recipe${i + 1}`}>
-        <UserRecipeCard
+        <ConnectedUserRecipeCard
           {...recipe}
         />
       </div>
@@ -114,7 +139,7 @@ class UserRecipes extends React.Component {
 
             <h3 className="text-center">My Recipes</h3>
             <hr />
-            <div className="row">
+            <div className="row mh-500">
               {userRecipesList}
             </div>
 
@@ -163,8 +188,21 @@ class UserRecipes extends React.Component {
 UserRecipes.propTypes = {
   recipes: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  pagination: PropTypes.shape({
+    pages: PropTypes.number
+  }),
+  userRecipes: PropTypes.arrayOf(PropTypes.shape({})),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
 };
 
+UserRecipes.defaultProps = {
+  pagination: {
+    pages: 1
+  },
+  userRecipes: []
+};
 
 const mapStateToProps = state => ({
   userRecipes: state.userRecipes.recipes,
@@ -177,4 +215,7 @@ const mapDispatchToProps = dispatch => ({
   recipes: page => dispatch(getUserRecipes(page))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(UserRecipes);
+export { ConnectedComponent as ConnectedUserRecipes };
+

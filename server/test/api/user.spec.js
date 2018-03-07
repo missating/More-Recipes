@@ -5,6 +5,23 @@ import app from '../../app';
 chai.use(chaiHttp);
 
 let userToken;
+const user1 = {
+  fullname: 'test',
+  username: 'test',
+  email: 'test@test.com',
+  password: '1234567890',
+  confirmPassword: '1234567890'
+};
+
+const user2 = {
+  email: 'test@test.com',
+  password: '1234567890'
+};
+
+const user3 = {
+  fullname: 'Jane Doe',
+  username: 'Janny'
+};
 
 describe('USER API', () => {
   describe('User sign up', () => {
@@ -12,23 +29,17 @@ describe('USER API', () => {
     it('Should register a new user with the correct credentials', (done) => {
       chai.request(app)
         .post(signupUrl)
-        .send({
-          fullname: 'test',
-          username: 'test',
-          email: 'test@test.com',
-          password: '1234567890',
-          confirmPassword: '1234567890'
-        })
+        .send(user1)
         .end((error, response) => {
           expect(response.status).to.equal(201);
           expect(response.body).to.be.an('object');
           expect(response.body.message).to.equal('Account created');
-          expect(response.body.user.username).to.equal('test');
-          expect(response.body.user.fullname).to.equal('test');
-          expect(response.body.user.email).to.equal('test@test.com');
+          expect(response.body.user.username).to.equal(user1.username);
+          expect(response.body.user.fullname).to.equal(user1.fullname);
+          expect(response.body.user.email).to.equal(user1.email);
           expect(response.body).to.have.property('token');
           expect(response.body.token).to.be.a('string');
-          expect(response.body.user).to.not.have.property('password');
+          expect(response.body.user).to.not.have.property(user1.password);
           done();
         });
     });
@@ -38,13 +49,7 @@ describe('USER API', () => {
       (done) => {
         chai.request(app)
           .post(signupUrl)
-          .send({
-            fullname: 'test',
-            username: 'test',
-            email: 'test@test.com',
-            password: '1234567890',
-            confirmPassword: '1234567890'
-          })
+          .send(user1)
           .end((error, response) => {
             expect(response).to.have.status(409);
             expect(response.body).to.be.an('object');
@@ -191,19 +196,16 @@ describe('USER API', () => {
     it('Should sign in a user with the correct details', (done) => {
       chai.request(app)
         .post(signinUrl)
-        .send({
-          email: 'test@test.com',
-          password: '1234567890',
-        })
+        .send(user2)
         .end((error, response) => {
           userToken = response.body.token;
           expect(response).to.have.status(200);
           expect(response.body).to.be.an('object');
-          expect(response.body.foundUser.username).to.equal('test');
-          expect(response.body.foundUser.fullname).to.equal('test');
-          expect(response.body.foundUser.email).to.equal('test@test.com');
+          expect(response.body.foundUser.username).to.equal(user1.username);
+          expect(response.body.foundUser.fullname).to.equal(user1.fullname);
+          expect(response.body.foundUser.email).to.equal(user2.email);
           expect(response.body).to.have.property('token');
-          expect(response.body.foundUser).to.not.have.property('password');
+          expect(response.body.foundUser).to.not.have.property(user2.password);
           expect(response.body).to.have.property('token');
           expect(response.body.token).to.be.a('string');
           done();
@@ -268,7 +270,7 @@ describe('USER API', () => {
           expect(response).to.have.status(404);
           expect(response.body).to.be.an('object');
           expect(response.body.message)
-            .to.equal('This email does not exist. Sign up instead ?');
+            .to.equal('These credentials do not match our record');
           done();
         });
     });
@@ -327,16 +329,13 @@ describe('USER API', () => {
         chai.request(app)
           .put('/api/v1/users/profile')
           .set('token', userToken)
-          .send({
-            fullname: 'Jane Doe',
-            username: 'Janny',
-          })
+          .send(user3)
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(response.body).to.be.an('object');
-            expect(response.body.user.fullname).to.equal('Jane Doe');
-            expect(response.body.user.username).to.equal('Janny');
-            expect(response.body.user.email).to.equal('test@test.com');
+            expect(response.body.user.fullname).to.equal(user3.fullname);
+            expect(response.body.user.username).to.equal(user3.username);
+            expect(response.body.user.email).to.equal(user1.email);
             expect(response.body.user.joined).to.be.a('string');
             done();
           });

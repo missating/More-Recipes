@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search recipes component Should render 1`] = `
+<div>
+  <div
+    className="col-lg-12"
+  >
+    <form>
+      <div
+        className="input-group"
+      >
+        <input
+          className="form-control"
+          id="search"
+          name="searchQuery"
+          onChange={[Function]}
+          placeholder="Search for..."
+          type="text"
+          value=""
+        />
+      </div>
+    </form>
+  </div>
+  <hr />
+</div>
+`;

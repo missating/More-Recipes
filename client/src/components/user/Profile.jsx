@@ -8,17 +8,26 @@ import { Redirect } from 'react-router-dom';
 // actions
 import getUserProfile from '../../actions/userProfile';
 import editProfile from '../../actions/editUserProfile';
+
+
 /**
- *
+ * @description Creates Profile component
  *
  * @class Profile
+ *
  * @extends {React.Component}
  */
-class Profile extends React.Component {
+export class Profile extends React.Component {
   /**
-   * Creates an instance of Profile.
-   * @param {any} props
+   * @description Creates an instance of Profile.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
    * @memberof Profile
+   *
+   * @returns {void}
    */
   constructor(props) {
     super(props);
@@ -34,20 +43,31 @@ class Profile extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
   }
+
+
   /**
-   *
-   * @returns {null} null
-   * @memberof Profile
-   */
+  * @description Gets user details
+  *
+  * @method
+  *
+  * @memberof Profile
+  *
+  * @returns {void}
+  */
   componentDidMount() {
     this.props.getUserDetails();
   }
+
+
   /**
-  *
-  *@returns {json} with the new user details
-  * @param {any} nextProps
-  * @memberof EditRecipe
-  */
+   * @description Set state
+   *
+   * @param {object} nextProps
+   *
+   * @memberof Profile
+   *
+   * @returns {void}
+   */
   componentWillReceiveProps(nextProps) {
     const {
       fullname, username, email, joined,
@@ -56,38 +76,46 @@ class Profile extends React.Component {
       fullname, username, email, joined,
     });
   }
+
+
   /**
-   * @returns {json} with the new use details
+   * @description Bind the value of the inputs to state
    *
-   * @param {any} event
+   * @method onChange
+   *
+   * @param {object} event
+   *
    * @memberof Profile
-   */
+   *
+   * @returns {void}
+  */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+
   /**
-   *
+   * @description Sets state to enable
    *
    * @memberof Profile
+   *
+   * @returns {void}
    */
   onEdit() {
     this.setState({ disabled: !this.state.disabled });
   }
+
+
   /**
+   * @description Submit the form
    *
+   * @method onSubmit
+   *
+   * @param {object} event
    *
    * @memberof Profile
-   */
-  cancelEdit() {
-    this.setState({
-      disabled: true
-    });
-  }
-  /**
-   *@returns {json} updates the profile
    *
-   * @param {any} event
-   * @memberof Profile
+   * @returns {void}
    */
   onSubmit(event) {
     event.preventDefault();
@@ -101,11 +129,31 @@ class Profile extends React.Component {
         });
       });
   }
+
+
   /**
-   * @description react render methodnvg
+   * @description Sets state to disable
    *
-   * @returns {component} react component
    * @memberof Profile
+   *
+   * @returns {void}
+   */
+  cancelEdit() {
+    this.setState({
+      disabled: true
+    });
+  }
+
+
+  /**
+   * @description Renders react component
+   *
+   * @method render
+   *
+   * @memberof Profile
+   *
+   * @returns {void}
+   *
    */
   render() {
     const { isFetching } = this.props;
@@ -157,6 +205,7 @@ class Profile extends React.Component {
                 <input
                   type="text"
                   className="form-control"
+                  id="usernameField"
                   name="username"
                   value={this.state.username}
                   onChange={this.onChange}
@@ -187,16 +236,23 @@ class Profile extends React.Component {
                   disabled
                 />
 
-                <div className="btn-group" role="group" aria-label="Basic example">
+                <div
+                  className="btn-group"
+                  role="group"
+                  aria-label="Basic example"
+                >
                   <button
                     type="button"
+                    id="profileEdit"
                     className="btn btn-secondary"
                     onClick={this.onEdit}
+                    disabled={!this.state.disabled}
                   >
                     Edit
                   </button>
                   <button
                     type="button"
+                    id="profileSubmit"
                     className="btn btn-secondary"
                     disabled={this.state.disabled}
                     onClick={this.onSubmit}
@@ -205,6 +261,7 @@ class Profile extends React.Component {
                   </button>
                   <button
                     type="button"
+                    id="profileCancel"
                     className="btn btn-secondary"
                     onClick={this.cancelEdit}
                     disabled={this.state.disabled}
@@ -224,10 +281,11 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = {
-  userProfile: PropTypes.func.isRequired,
-  getUserDetails: PropTypes.objectOf.isRequired,
+  userProfile: PropTypes.shape({}).isRequired,
+  getUserDetails: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   updateProfile: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -241,4 +299,6 @@ const mapDispatchToProps = dispatch => ({
   updateProfile: userDetails => dispatch(editProfile(userDetails))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(Profile);
+export { ConnectedComponent as ConnectedProfile };

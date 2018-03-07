@@ -5,22 +5,29 @@ import PropTypes from 'prop-types';
 
 // components
 import RecipeCard from '../cards/RecipeCard';
-import SearchRecipe from '../recipe/SearchRecipe';
+import { ConnectedSearchRecipe } from '../recipe/SearchRecipe';
 
 // actions
 import getAllRecipes from '../../actions/getAllRecipes';
 
 /**
- *
+ * @description Creates Recipes component
  *
  * @class Recipes
+ *
  * @extends {React.Component}
  */
 export class Recipes extends React.Component {
   /**
-   * Creates an instance of Recipes.
-   * @param {any} props
+   * @description Creates an instance of Recipes.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
    * @memberof Recipes
+   *
+   * @returns {void}
    */
   constructor(props) {
     super(props);
@@ -28,20 +35,27 @@ export class Recipes extends React.Component {
     };
     this.onPageChange = this.onPageChange.bind(this);
   }
+
+
   /**
+   * @description Get recipes
    *
-   *@returns {null} null
    * @memberof Recipes
+   *
+   * @returns {void}
    */
   componentWillMount() {
     this.props.recipes();
   }
 
   /**
-   * @returns {number} number of the page
+   * @description pagination for recipes
    *
-   * @param {any} current
+   * @param {number} current
+   *
    * @memberof Recipes
+   *
+   * @returns {void}
    */
   onPageChange(current) {
     const selected = current.selected + 1;
@@ -49,11 +63,16 @@ export class Recipes extends React.Component {
     this.props.recipes(selected);
   }
 
+
   /**
+   * @description Renders react component
    *
+   * @method render
    *
-   * @returns {null} null
    * @memberof Recipes
+   *
+   * @returns {void}
+   *
    */
   render() {
     const { pages } = this.props.pagination;
@@ -81,9 +100,9 @@ export class Recipes extends React.Component {
       <div>
         <section className="container" id="recipes">
 
-          <SearchRecipe />
+          <ConnectedSearchRecipe />
 
-          <div className="row">
+          <div className="row mh-500">
             {recipeList}
           </div>
 
@@ -118,7 +137,20 @@ export class Recipes extends React.Component {
 
 Recipes.propTypes = {
   recipes: PropTypes.func.isRequired,
-  allRecipes: PropTypes.arrayOf(PropTypes.object).isRequired
+  allRecipes: PropTypes.arrayOf(PropTypes.object),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  pagination: PropTypes.shape({
+    pages: PropTypes.number
+  })
+};
+
+Recipes.defaultProps = {
+  pagination: {
+    pages: 1
+  },
+  allRecipes: []
 };
 
 const mapStateToProps = state => ({
@@ -131,4 +163,7 @@ const mapDispatchToProps = dispatch => ({
   recipes: page => dispatch(getAllRecipes(page))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Recipes);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(Recipes);
+export { ConnectedComponent as ConnectedRecipes };
+

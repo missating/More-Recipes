@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile component Should render 1`] = `
+<div
+  className="container profile"
+  id="recipes"
+>
+  <h3
+    className="text-center"
+  >
+    Profile
+  </h3>
+  <hr />
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-6 col-sm-12"
+    >
+      <Gravatar
+        className="rounded mx-auto d-block mt-3"
+        default="retro"
+        email=""
+        height="200"
+        protocol="//"
+        rating="g"
+        size={50}
+        width="200"
+      />
+    </div>
+    <div
+      className="col-md-6 col-sm-12"
+    >
+      <div
+        className="form-group form-width"
+      >
+        <h5
+          className="pt-3"
+        >
+           Full Name 
+        </h5>
+        <input
+          className="form-control"
+          disabled={true}
+          name="fullname"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </div>
+      <form>
+        <div
+          className="form-group form-width"
+        >
+          <h5
+            className="pt-3"
+          >
+             User Name 
+          </h5>
+          <input
+            className="form-control"
+            disabled={true}
+            id="usernameField"
+            name="username"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group form-width"
+        >
+          <h5
+            className="pt-3"
+          >
+             Email 
+          </h5>
+          <input
+            className="form-control"
+            disabled={true}
+            name="email"
+            onChange={[Function]}
+            type="email"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group form-width"
+        >
+          <h5
+            className="pt-3"
+          >
+             Joined 
+          </h5>
+          <input
+            className="form-control"
+            disabled={true}
+            name="joined"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+          <div
+            aria-label="Basic example"
+            className="btn-group"
+            role="group"
+          >
+            <button
+              className="btn btn-secondary"
+              disabled={false}
+              id="profileEdit"
+              onClick={[Function]}
+              type="button"
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-secondary"
+              disabled={true}
+              id="profileSubmit"
+              onClick={[Function]}
+              type="button"
+            >
+              Submit
+            </button>
+            <button
+              className="btn btn-secondary"
+              disabled={true}
+              id="profileCancel"
+              onClick={[Function]}
+              type="button"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Profile component Should render loader when fetching 1`] = `
+<div
+  className="loader-container"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;

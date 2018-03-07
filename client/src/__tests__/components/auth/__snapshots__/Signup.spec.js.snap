@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign up component Should render 1`] = `
+<div>
+  <div
+    className="modal fade"
+    id="signup-modal"
+  >
+    <div
+      className="modal-dialog modal-dialog-centered modal-sm"
+    >
+      <div
+        className="modal-content"
+      >
+        <button
+          aria-label="Close"
+          className="close"
+          data-dismiss="modal"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            style={
+              Object {
+                "cursor": "pointer",
+                "float": "right",
+              }
+            }
+          >
+            ×
+          </span>
+        </button>
+        <div
+          className="modal-body"
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="col-sm-12"
+            >
+              <form
+                onSubmit={[Function]}
+              >
+                <div
+                  className="form-group"
+                >
+                  <input
+                    className="form-control"
+                    name="fullname"
+                    onChange={[Function]}
+                    placeholder="Full Name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <input
+                    className="form-control"
+                    name="username"
+                    onChange={[Function]}
+                    placeholder="User Name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <input
+                    className="form-control"
+                    name="email"
+                    onChange={[Function]}
+                    placeholder="Email Address"
+                    type="email"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <input
+                    className="form-control"
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="Password"
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <input
+                    className="form-control"
+                    id="signupPassword"
+                    name="confirmPassword"
+                    onChange={[Function]}
+                    placeholder="Confirm Password"
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <button
+                  className="btn btn-secondary"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

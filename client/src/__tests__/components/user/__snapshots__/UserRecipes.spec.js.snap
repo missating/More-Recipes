@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User recipes component Should not render recipes if all recipes is an empty array 1`] = `
+<div
+  className="loader-container"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;
+
+exports[`User recipes component Should render 1`] = `
+<div
+  className="loader-container"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;
+
+exports[`User recipes component Should render 2 recipes if userRecipes contains 2 objects 1`] = `
+<section
+  className="container p-0"
+  id="recipes"
+>
+  <div>
+    <h3
+      className="text-center"
+    >
+      My Recipes
+    </h3>
+    <hr />
+    <div
+      className="row mh-500"
+    >
+      <div
+        className="col-md-6 col-lg-4 col-sm-6 p-0"
+        key="recipe1"
+      >
+        <Connect(UserRecipeCard)
+          description="test, test"
+          id={1}
+          name="test"
+          recipeImage="image_url"
+        />
+      </div>
+      <div
+        className="col-md-6 col-lg-4 col-sm-6 p-0"
+        key="recipe2"
+      >
+        <Connect(UserRecipeCard)
+          description="test, test"
+          id={2}
+          name="test2"
+          recipeImage="image_url"
+        />
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <PaginationBoxView
+        activeClassName="page-item active"
+        breakClassName="text-center"
+        breakLabel="..."
+        containerClassName="container pagination justify-content-center"
+        disableInitialCallback={false}
+        disabledClassName="disabled"
+        initialPage={0}
+        marginPagesDisplayed={3}
+        nextClassName="page-item"
+        nextLabel="Next"
+        nextLinkClassName="page-link"
+        onPageChange={[Function]}
+        pageClassName="page-item"
+        pageCount={1}
+        pageLinkClassName="page-link"
+        pageRangeDisplayed={5}
+        previousClassName="page-item"
+        previousLabel="Previous"
+        previousLinkClassName="page-link"
+      />
+    </div>
+  </div>
+</section>
+`;

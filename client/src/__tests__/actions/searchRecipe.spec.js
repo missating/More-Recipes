@@ -37,6 +37,7 @@ describe('Search all recipes', () => {
       const currentPage = 1;
       const numberOfItems = 1;
       const pages = 1;
+      // eslint-disable-next-line
       moxios.stubRequest(`/api/v1/recipes/search?search=${searchQuery}&page=${pageNumber}`, {
         status: 200,
         response: {
@@ -64,6 +65,7 @@ describe('Search all recipes', () => {
     const searchQuery = 'test';
     const pageNumber = 1;
     const message = 'No recipes found';
+    // eslint-disable-next-line
     moxios.stubRequest(`/api/v1/recipes/search?search=${searchQuery}&page=${pageNumber}`, {
       status: 404,
       response: {

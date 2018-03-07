@@ -3,17 +3,22 @@ import db from '../models/index';
 import generateToken from '../utils';
 
 /**
- * This handles user sign up, sign in
+ * @class usersController
+ *
  * @export
- * @class User
+ *
  */
 export default class usersController {
   /**
+   * @description - Create a new user
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} with the new user details
-   * @memberof User
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof usersController
+   *
+   * @returns {object} Class instance
    */
   static createUser(req, res) {
     const {
@@ -63,12 +68,16 @@ export default class usersController {
 
 
   /**
- * @static
- * @param {object} req
- * @param {object} res
- * @returns {object} with the user's token
- * @memberof Users
- */
+   * @description - Logs in a user
+   * @static
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof usersController
+   *
+   * @returns {object} Class instance
+   */
   static userLogin(req, res) {
     const { email, password } = req.body;
 
@@ -82,7 +91,7 @@ export default class usersController {
           return res.status(404)
             .json({
               status: 'fail',
-              message: 'This email does not exist. Sign up instead ?',
+              message: 'These credentials do not match our record',
             });
         }
         if (!bcrypt.compareSync(password, foundUser.password)) {
@@ -113,12 +122,16 @@ export default class usersController {
 
 
   /**
- * @static
- * @param {any} req
- * @param {any} res
- * @returns {object} with the users profile details
- * @memberof Users
- */
+   * @description - Gets user's profile
+   * @static
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof usersController
+   *
+   * @returns {object} Class instance
+   */
   static getUserProfile(req, res) {
     db.User.findOne({
       where: {
@@ -153,12 +166,16 @@ export default class usersController {
 
 
   /**
- * @static
- * @param {any} req
- * @param {any} res
- * @returns {object} with the updated user details
- * @memberof Users
- */
+   * @description - Update a user's profile
+   * @static
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof usersController
+   *
+   * @returns {object} Class instance
+   */
   static updateUserProfile(req, res) {
     const { fullname, username } = req.body;
 

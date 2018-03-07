@@ -16,11 +16,6 @@ import {
 
 
 const routes = (app) => {
-  // app.get('/', (req, res) => {
-  //   res.status(200)
-  //     .send('Welcome to more-recipes api');
-  // });
-
   // create a user
   app.post('/api/v1/users/signup', verifySignup, User.createUser);
 

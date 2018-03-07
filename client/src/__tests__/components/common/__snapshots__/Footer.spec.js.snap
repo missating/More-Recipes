@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component Should render 1`] = `
+<footer>
+  <hr />
+  <div
+    className="container bg-color"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-12"
+      >
+        <div
+          className="text-center"
+        >
+          <h5
+            style={
+              Object {
+                "color": "#333",
+              }
+            }
+          >
+            Vanessa Ating © 
+            2018
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+`;

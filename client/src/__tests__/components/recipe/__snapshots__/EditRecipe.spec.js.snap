@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Edit Recipe component Should render 1`] = `
+<div>
+  <section
+    className="container"
+    id="recipes"
+  >
+    <h3
+      className="text-center mb-4"
+    >
+      Edit Recipe
+    </h3>
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-12 col-sm-12"
+      >
+        <form>
+          <t
+            accept="image/*"
+            disableClick={false}
+            disablePreview={false}
+            disabled={false}
+            maxSize={Infinity}
+            minSize={0}
+            multiple={false}
+            onDrop={[Function]}
+            preventDropOnDocument={true}
+            style={
+              Object {
+                "border": "3px dashed ",
+                "height": "auto",
+                "margin": "0 auto",
+                "padding": "5px",
+                "width": "300px",
+              }
+            }
+          />
+          <div
+            className="form-group form-width"
+          >
+            <h5>
+               Name 
+            </h5>
+            <input
+              className="form-control"
+              name="name"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group form-width"
+          >
+            <h5>
+               Ingredients 
+            </h5>
+            <input
+              className="form-control"
+              name="ingredients"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group form-width"
+          >
+            <h5>
+               Description 
+            </h5>
+            <textarea
+              className="form-control"
+              id="updateDescription"
+              name="description"
+              onChange={[Function]}
+              rows="5"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group form-width"
+          >
+            <button
+              className="btn btn-secondary"
+              disabled={false}
+              id="editButton"
+              onClick={[Function]}
+            >
+              Update
+            </button>
+            <Link
+              className="btn btn-secondary"
+              replace={false}
+              to="/users/recipes"
+            >
+              Cancel
+            </Link>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+`;

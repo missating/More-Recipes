@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // components
-import Signup from '../auth/Signup';
-import Signin from '../auth/Signin';
-import TopRecipes from '../recipe/TopRecipes';
+import { ConnectedSignup } from '../auth/Signup';
+import { ConnectedSignin } from '../auth/Signin';
+import { ConnectedTopRecipes } from '../recipe/TopRecipes';
 
-const Home = props => (
+export const Home = props => (
   <div>
     <div>
       <div className="bg flex">
@@ -31,7 +31,7 @@ const Home = props => (
                 </a>
               </div>
             )}
-            <Signup />
+            <ConnectedSignup />
 
             {!props.authenticated && (
               <div>
@@ -49,7 +49,7 @@ const Home = props => (
                 </a>
               </div>
             )}
-            <Signin />
+            <ConnectedSignin />
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@ const Home = props => (
         </a>
       </div>
     </div>
-    <TopRecipes />
+    <ConnectedTopRecipes />
   </div>
 );
 
@@ -75,4 +75,7 @@ const mapStateToProps = state => ({
   authenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(Home);
+const ConnectedComponent =
+  connect(mapStateToProps)(Home);
+export { ConnectedComponent as ConnectedHome };
+

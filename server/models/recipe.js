@@ -36,10 +36,22 @@ export default (sequelize, DataTypes) => {
 
   Recipe.associate = (models) => {
     // associations defined here
-    Recipe.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
-    Recipe.hasMany(models.Review, { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true });
-    Recipe.hasMany(models.Vote, { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true });
-    Recipe.hasMany(models.Favourite, { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true });
+    Recipe.belongsTo(
+      models.User,
+      { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true }
+    );
+    Recipe.hasMany(
+      models.Review,
+      { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true }
+    );
+    Recipe.hasMany(
+      models.Vote,
+      { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true }
+    );
+    Recipe.hasMany(
+      models.Favourite,
+      { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true }
+    );
   };
   return Recipe;
 };

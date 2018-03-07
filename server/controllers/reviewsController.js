@@ -2,17 +2,22 @@ import db from '../models/index';
 
 
 /**
- * This handles adding a review for a recipe
+ * @class reviewsController
+ *
  * @export
- * @class Review
+ *
  */
 export default class reviewsController {
   /**
+   * @description - Add a review to a recipe
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} with the review for a particular recipe
-   * @memberof Review
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof reviewsController
+   *
+   * @returns {object} Class instance
    */
   static addReview(req, res) {
     const { content } = req.body;

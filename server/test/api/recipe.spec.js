@@ -7,7 +7,30 @@ chai.use(chaiHttp);
 let userToken;
 let recipeId;
 const userToken2 =
+  // eslint-disable-next-line
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o';
+
+const recipe1 = {
+  name: 'Test Recipe 1',
+  ingredients: 'test, test, test',
+  description: 'For testing the recipe',
+};
+
+const recipe2 = {
+  name: 'Test Recipe',
+  ingredients: 'test, test, test',
+  description: 'For testing the recipe',
+  // eslint-disable-next-line
+  recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
+};
+
+const recipe3 = {
+  name: 'Test3 Recipe',
+  ingredients: 'test, test, test',
+  description: 'For testing the recipe',
+  // eslint-disable-next-line
+  recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
+};
 
 
 describe('RECIPE CONTROLLER', () => {
@@ -37,6 +60,7 @@ describe('RECIPE CONTROLLER', () => {
           name: '',
           ingredients: 'test, test, test',
           description: 'For testing the recipe',
+          // eslint-disable-next-line
           recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
@@ -56,6 +80,7 @@ describe('RECIPE CONTROLLER', () => {
           name: 'Test Recipe',
           ingredients: 'test, test, test',
           description: '',
+          // eslint-disable-next-line
           recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
@@ -75,6 +100,7 @@ describe('RECIPE CONTROLLER', () => {
           name: 'Test Recipe',
           ingredients: '',
           description: 'For testing the recipe',
+          // eslint-disable-next-line
           recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
         })
         .end((error, response) => {
@@ -90,11 +116,7 @@ describe('RECIPE CONTROLLER', () => {
       chai.request(app)
         .post(recipeUrl)
         .set('token', userToken)
-        .send({
-          name: 'Test Recipe 1',
-          ingredients: 'test, test, test',
-          description: 'For testing the recipe',
-        })
+        .send(recipe1)
         .end((error, response) => {
           expect(response.status).to.equal(201);
           expect(response.body).to.be.an('object');
@@ -120,12 +142,7 @@ describe('RECIPE CONTROLLER', () => {
       chai.request(app)
         .post(recipeUrl)
         .set('token', userToken)
-        .send({
-          name: 'Test Recipe',
-          ingredients: 'test, test, test',
-          description: 'For testing the recipe',
-          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-        })
+        .send(recipe2)
         .end((error, response) => {
           recipeId = response.body.recipe.id;
           expect(response.status).to.equal(201);
@@ -148,12 +165,7 @@ describe('RECIPE CONTROLLER', () => {
     it('Should not allow non auth user to add recipe to catalog', (done) => {
       chai.request(app)
         .post(recipeUrl)
-        .send({
-          name: 'Test Recipe',
-          ingredients: 'test, test, test',
-          description: 'For testing the recipe',
-          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-        })
+        .send(recipe2)
         .end((error, response) => {
           expect(response.status).to.equal(401);
           expect(response.body).to.be.an('object');
@@ -168,12 +180,7 @@ describe('RECIPE CONTROLLER', () => {
       chai.request(app)
         .put('/api/v1/recipes/10')
         .set('token', userToken)
-        .send({
-          name: 'Another Test Recipe',
-          ingredients: 'testing, testing, testing',
-          description: 'For testing the recipe again',
-          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-        })
+        .send(recipe2)
         .end((error, response) => {
           expect(response.status).to.equal(404);
           expect(response.body).to.be.an('object');
@@ -187,12 +194,7 @@ describe('RECIPE CONTROLLER', () => {
       (done) => {
         chai.request(app)
           .put(`/api/v1/recipes/${recipeId}`)
-          .send({
-            name: 'Another Test Recipe',
-            ingredients: 'testing, testing, testing',
-            description: 'For testing the recipe again',
-            recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-          })
+          .send(recipe2)
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body).to.be.an('object');
@@ -206,20 +208,15 @@ describe('RECIPE CONTROLLER', () => {
       chai.request(app)
         .put(`/api/v1/recipes/${recipeId}`)
         .set('token', userToken)
-        .send({
-          name: 'Another Test Recipe',
-          ingredients: 'testing, testing, testing',
-          description: 'For testing the recipe again',
-          recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-        })
+        .send(recipe3)
         .end((error, response) => {
           expect(response.status).to.equal(200);
           expect(response.body).to.be.an('object');
-          expect(response.body.recipe.name).to.equal('Another Test Recipe');
+          expect(response.body.recipe.name).to.equal(recipe3.name);
           expect(response.body.recipe.ingredients)
-            .to.equal('testing, testing, testing');
+            .to.equal(recipe3.ingredients);
           expect(response.body.recipe.description)
-            .to.equal('For testing the recipe again');
+            .to.equal(recipe3.description);
           expect(response.body.recipe.recipeImage)
             .to.be.a('string');
           expect(response.body.recipe.id)
@@ -236,12 +233,7 @@ describe('RECIPE CONTROLLER', () => {
         chai.request(app)
           .put('/api/v1/recipes/recipeId')
           .set('token', userToken)
-          .send({
-            name: 'Another Test Recipe',
-            ingredients: 'testing, testing, testing',
-            description: 'For testing the recipe again',
-            recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
-          })
+          .send(recipe3)
           .end((error, response) => {
             expect(response).to.have.status(400);
             expect(response.body).to.be.an('object');
@@ -411,19 +403,22 @@ describe('RECIPE CONTROLLER', () => {
   });
 
   describe('Search for a recipe', () => {
-    it('Should return an empty array for a recipe that does not exist', (done) => {
-      chai.request(app)
-        .post('/api/v1/recipes/search?search=eba')
-        .end((error, response) => {
-          expect(response).to.have.status(200);
-          expect(response.body).to.be.an('object');
-          expect(response.body.recipes)
-            .to.be.an('array').with.lengthOf(0);
-          expect(response.body)
-            .to.have.property('recipes').with.lengthOf(0);
-          done();
-        });
-    });
+    it(
+      'Should return an empty array for a recipe that does not exist',
+      (done) => {
+        chai.request(app)
+          .post('/api/v1/recipes/search?search=eba')
+          .end((error, response) => {
+            expect(response).to.have.status(200);
+            expect(response.body).to.be.an('object');
+            expect(response.body.recipes)
+              .to.be.an('array').with.lengthOf(0);
+            expect(response.body)
+              .to.have.property('recipes').with.lengthOf(0);
+            done();
+          });
+      }
+    );
 
     it('Should return 200 for a recipe that exist', (done) => {
       chai.request(app)

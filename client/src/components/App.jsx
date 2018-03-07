@@ -1,14 +1,16 @@
-import { BrowserRouter, Route } from 'react-router-dom';
 import React from 'react';
-import Header from './common/Header';
-import Main from './main/Main';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { ConnectedHeader } from './common/Header';
+import { RouterMain } from './main/Main';
+import Footer from './common/Footer';
 import '../css/style.css';
 
 const App = () => (
   <BrowserRouter>
     <div>
-      <Route component={Header} />
-      <Route component={Main} />
+      <Route component={ConnectedHeader} />
+      <Route component={RouterMain} />
+      <Route component={Footer} />
     </div>
   </BrowserRouter>
 );

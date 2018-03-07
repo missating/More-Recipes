@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Top recipe component Should not render recipes if topRecipes is an empty array 1`] = `
+<div>
+  <section
+    className="container"
+    id="featured"
+  >
+    <h2
+      className="text-center mt-5"
+    >
+       Featured Recipes 
+    </h2>
+    <hr />
+    <div
+      className="row justify-content-center"
+    >
+      <div>
+        <h4
+          className="text-center display-5"
+        >
+          Currently no featured recipes
+        </h4>
+      </div>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Top recipe component Should render 1`] = `
+<div>
+  <section
+    className="container"
+    id="featured"
+  >
+    <h2
+      className="text-center mt-5"
+    >
+       Featured Recipes 
+    </h2>
+    <hr />
+    <div
+      className="row justify-content-center"
+    >
+      <div>
+        <h4
+          className="text-center display-5"
+        >
+          Currently no featured recipes
+        </h4>
+      </div>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Top recipe component Should render 2 recipes if topRecipes contains 2 objects 1`] = `
+<div>
+  <section
+    className="container"
+    id="featured"
+  >
+    <h2
+      className="text-center mt-5"
+    >
+       Featured Recipes 
+    </h2>
+    <hr />
+    <div
+      className="row justify-content-center"
+    >
+      <div
+        className="col-md-4"
+        key="topRecipe1"
+      >
+        <RecipeCard
+          button={false}
+          description="Hello, this is my favorite food"
+          id={1}
+          ingredients="Garri, Fire"
+          name="Eba"
+          onButtonClick={[Function]}
+          recipeImage="image_url"
+        />
+      </div>
+      <div
+        className="col-md-4"
+        key="topRecipe2"
+      >
+        <RecipeCard
+          button={false}
+          description="Hello, this is my favorite food"
+          id={2}
+          ingredients="Garri, Fire"
+          name="Eba"
+          onButtonClick={[Function]}
+          recipeImage="image_url"
+        />
+      </div>
+    </div>
+  </section>
+</div>
+`;

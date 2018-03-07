@@ -11,21 +11,28 @@ import voteRecipe from '../../actions/voteRecipe';
 
 // components
 import ActionButtons from '../common/ActionButtons';
-import AddReview from '../reviews/AddReview';
+import { ConnectedAddReview } from '../reviews/AddReview';
 import ViewReviews from '../reviews/ViewReviews';
 
 /**
- *
+ * @description Creates SingleRecipe component
  *
  * @class SingleRecipe
+ *
  * @extends {React.Component}
  */
-class SingleRecipe extends React.Component {
+export class SingleRecipe extends React.Component {
   /**
- * Creates an instance of SingleRecipe.
- * @param {any} props
- * @memberof Recipe
- */
+   * @description Creates an instance of SingleRecipe.
+   *
+   * @constructor
+   *
+   * @param {object} props
+   *
+   * @memberof SingleRecipe
+   *
+   * @returns {void}
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -36,10 +43,16 @@ class SingleRecipe extends React.Component {
     this.onUpvote = this.onUpvote.bind(this);
     this.onDownVote = this.onDownVote.bind(this);
   }
+
+
   /**
+   * @description Gets a single recipe
    *
-   * @returns {json} with recipe details
+   * @method
+   *
    * @memberof SingleRecipe
+   *
+   * @returns {void}
    */
   componentDidMount() {
     const recipeId = this.props.match.params.id;
@@ -47,10 +60,13 @@ class SingleRecipe extends React.Component {
   }
 
   /**
+   * @description Set state
    *
-   * @return {null} null
-   * @param {any} nextProps
-   * @memberof Recipe
+   * @param {object} nextProps
+   *
+   * @memberof SingleRecipe
+   *
+   * @returns {void}
    */
   componentWillReceiveProps(nextProps) {
     const singleRecipe = (nextProps.singleRecipe) ? (
@@ -60,40 +76,58 @@ class SingleRecipe extends React.Component {
   }
 
   /**
- *
- *@returns {json} with the id of favourite recipe
- * @memberof SingleRecipe
- */
+    * @description Favourites a recipe with the it's Id
+    *
+    * @method onFavourite
+    *
+    * @memberof SingleRecipe
+    *
+    * @returns {void}
+    */
   onFavourite() {
     const recipeId = this.props.singleRecipe.id;
     this.props.favourite(recipeId);
   }
 
   /**
-   * @returns {json} with the id of upvoted recipe
-   *
-   * @memberof SingleRecipe
-   */
+    * @description Upvotes a recipe with the it's Id
+    *
+    * @method onUpvote
+    *
+    * @memberof SingleRecipe
+    *
+    * @returns {void}
+    */
   onUpvote() {
     const recipeId = this.props.singleRecipe.id;
     this.props.upvote(recipeId, 'upvote');
   }
 
   /**
-   * @returns {json} with the id of upvoted recipe
+   * @description Downvotes a recipe with the it's Id
+   *
+   * @method onDownVote
    *
    * @memberof SingleRecipe
+   *
+   * @returns {void}
    */
   onDownVote() {
     const recipeId = this.props.singleRecipe.id;
     this.props.upvote(recipeId, 'downvote');
   }
+
+
   /**
- *
- *
- * @return {jsx} - a list of items to be rendered
- * @memberof SingleRecipe
- */
+     * @description Renders react component
+     *
+     * @method render
+     *
+     * @memberof SingleRecipe
+     *
+     * @returns {void}
+     *
+     */
   render() {
     const { singleRecipe } = this.props;
 
@@ -136,6 +170,7 @@ class SingleRecipe extends React.Component {
                 this.props.authenticated &&
                 <div className="container">
                   <button
+                    id="onDownvote"
                     className="btn active"
                     onClick={this.onDownVote}
                   >
@@ -146,6 +181,7 @@ class SingleRecipe extends React.Component {
                   </button>
 
                   <button
+                    id="onUpvote"
                     className="btn active"
                     onClick={this.onUpvote}
                   >
@@ -156,6 +192,7 @@ class SingleRecipe extends React.Component {
                   </button>
 
                   <button
+                    id="onFavourite"
                     className="btn active"
                     onClick={this.onFavourite}
                   >
@@ -196,7 +233,7 @@ class SingleRecipe extends React.Component {
             </div>
             <div className="col-md-6 col-sm-12">
               {this.props.authenticated &&
-                <AddReview recipeId={this.props.singleRecipe.id} />
+                <ConnectedAddReview recipeId={this.props.singleRecipe.id} />
               }
               {!this.props.authenticated &&
                 <div>
@@ -218,11 +255,25 @@ class SingleRecipe extends React.Component {
 }
 
 SingleRecipe.propTypes = {
-  singleRecipe: PropTypes.shape({}).isRequired,
+  singleRecipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    recipeImage: PropTypes.string,
+    name: PropTypes.string,
+    ingredients: PropTypes.string,
+    description: PropTypes.string,
+    favourite: PropTypes.number,
+    upvote: PropTypes.number,
+    downvote: PropTypes.number
+  }).isRequired,
   recipe: PropTypes.func.isRequired,
+  upvote: PropTypes.func.isRequired,
   favourite: PropTypes.func.isRequired,
-  match: PropTypes.shape({}).isRequired,
-  authenticated: PropTypes.bool.isRequired
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 
@@ -238,4 +289,7 @@ const mapDispatchToProps = dispatch => ({
   upvote: (recipeId, queryType) => dispatch(voteRecipe(recipeId, queryType))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleRecipe);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(SingleRecipe);
+export { ConnectedComponent as ConnectedSingleRecipe };
+

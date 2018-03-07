@@ -10,16 +10,23 @@ import fetchUserSignup from '../../actions/signup';
 
 
 /**
- *
+ * @description Creates Signup component
  *
  * @class Signup
+ *
  * @extends {React.Component}
  */
-class Signup extends React.Component {
+export class Signup extends React.Component {
   /**
-   * Creates an instance of Signup.
+   * @description Creates an instance of Signup.
+   *
+   * @constructor
+   *
    * @param {any} props
+   *
    * @memberof Signup
+   *
+   * @returns {void}
    */
   constructor(props) {
     super(props);
@@ -36,35 +43,55 @@ class Signup extends React.Component {
   }
 
   /**
- *
- * @returns {json} with nextProps details
- * @param {any} nextProps
- * @memberof Signup
- */
+   * @description Sets state
+   *
+   * @param {any} nextProps
+   *
+   * @memberof Signup
+   *
+   * @returns {void}
+   *
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated &&
       nextProps.auth.errorMessage.length === 0) {
       $('#signup-modal').modal('hide');
+      this.setState({
+        fullname: '',
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
     }
   }
 
   /**
-* @description handles form change events
-* @returns {null} null
-* @param {any} event
-* @memberof Signup
-*/
+   * @description Bind the value of the inputs to state
+   *
+   * @method onChange
+   *
+   * @memberof Signup
+   *
+   * @param {any} event
+   *
+   * @returns {void}
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
- *
- *
- * @param {any} event
- * @returns {dispatch} react-redux dispatch
- * @memberof Signup
- */
+   * @description Submit the form
+   *
+   * @method onSubmit
+   *
+   * @param {object} event
+   *
+   * @memberof Signup
+   *
+   * @returns {void}
+   */
   onSubmit(event) {
     event.preventDefault();
     const isValid = this.isValid();
@@ -74,11 +101,14 @@ class Signup extends React.Component {
   }
 
   /**
- *
- *
- * @returns {boolean} boolean
- * @memberof Signup
- */
+   * @description Validates user's data before making post request
+   *
+   * @method isValid
+   *
+   * @memberof Signup
+   *
+   * @returns {boolean} true or false
+   */
   isValid() {
     const { isValid, errors } = signupValidator(this.state);
     if (!isValid) {
@@ -90,10 +120,14 @@ class Signup extends React.Component {
   }
 
   /**
-   * @description react render method
+   * @description Renders react component
    *
-   * @returns {component} react component
+   * @method render
+   *
    * @memberof Signup
+   *
+   * @returns {void}
+   *
    */
   render() {
     const { errors } = this.state;
@@ -210,6 +244,7 @@ class Signup extends React.Component {
                       <div className="form-group">
                         <input
                           type="password"
+                          id="signupPassword"
                           name="confirmPassword"
                           className="form-control"
                           placeholder="Confirm Password"
@@ -240,16 +275,20 @@ class Signup extends React.Component {
     );
   }
 }
-const authProps = {
-  isAuthenticated: PropTypes.bool,
-  user: PropTypes.string,
-  token: PropTypes.string,
-  errorMessage: PropTypes.string
-};
+
 
 Signup.propTypes = {
-  auth: PropTypes.shape(authProps).isRequired,
-  signupUser: PropTypes.func.isRequired
+  signupUser: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    user: PropTypes.shape({
+      fullname: PropTypes.string,
+      username: PropTypes.string,
+      email: PropTypes.string,
+      id: PropTypes.number
+    }),
+    errorMessage: PropTypes.string
+  }).isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -262,4 +301,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(Signup);
+export { ConnectedComponent as ConnectedSignup };
