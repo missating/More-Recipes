@@ -2,17 +2,22 @@ import db from '../models/index';
 
 
 /**
- * This handles upvote or downvote on a recipe
+ * @class votesController
+ *
  * @export
- * @class Vote
+ *
  */
 export default class votesController {
   /**
+   * @description - Upvote or downvote a recipe
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} with a successful message and recipe with the vote
-   * @memberof Vote
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof votesController
+   *
+   * @returns {object} Class instance
    */
   static voteRecipe(req, res) {
     const voteQuery = req.query.vote;

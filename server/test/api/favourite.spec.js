@@ -32,6 +32,7 @@ describe('FAVOURITE API', () => {
         name: 'Test Recipe 3',
         ingredients: 'test, test, test',
         description: 'For testing recipe 3',
+        // eslint-disable-next-line
         recipeImage: 'https://res.cloudinary.com/dxayftnxb/image/upload/v1517243643/moowry8hawjedgvgaeo0.png'
       })
       .end((error, response) => {

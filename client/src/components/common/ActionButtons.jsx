@@ -29,7 +29,11 @@ const ActionButtons = props => (
 );
 
 ActionButtons.propTypes = {
-  singleRecipe: PropTypes.objectOf.isRequired
+  singleRecipe: PropTypes.shape({
+    favourite: PropTypes.number,
+    upvote: PropTypes.number,
+    downvote: PropTypes.number
+  }).isRequired
 };
 
 export default ActionButtons;

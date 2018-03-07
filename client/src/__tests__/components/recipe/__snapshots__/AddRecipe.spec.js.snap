@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add Recipe component Should render 1`] = `
+<div>
+  <section
+    className="container"
+    id="recipes"
+  >
+    <h3
+      className="text-center mb-4"
+    >
+      New Recipe
+    </h3>
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-12 col-sm-12"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <t
+            accept="image/*"
+            disableClick={false}
+            disablePreview={false}
+            disabled={false}
+            maxSize={Infinity}
+            minSize={0}
+            multiple={false}
+            onDrop={[Function]}
+            preventDropOnDocument={true}
+            style={
+              Object {
+                "border": "3px dashed ",
+                "height": "auto",
+                "margin": "0 auto",
+                "padding": "5px",
+                "width": "300px",
+              }
+            }
+          >
+            <div>
+              <img
+                alt=""
+                className="img-fluid mx-auto d-block"
+                src="https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
+              />
+              <h5
+                className="text-center"
+              >
+                Click here to upload
+              </h5>
+            </div>
+          </t>
+          <div
+            className="form-group form-width"
+          >
+            <input
+              className="form-control"
+              id="recipeName"
+              name="name"
+              onChange={[Function]}
+              placeholder="The name of the dish..."
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group form-width"
+          >
+            <input
+              className="form-control"
+              id="recipeIngredients"
+              name="ingredients"
+              onChange={[Function]}
+              placeholder="A comma seperated list of ingredients..."
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group form-width"
+          >
+            <textarea
+              className="form-control"
+              id="recipeDescription"
+              name="description"
+              onChange={[Function]}
+              placeholder="Instructions on how this dish is made..."
+              rows="5"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group form-width"
+          >
+            <button
+              className="btn btn-secondary"
+              id="recipeButton"
+            >
+              Add Recipe
+            </button>
+            <Link
+              className="btn btn-secondary"
+              replace={false}
+              to="/users/recipes"
+            >
+              Cancel
+            </Link>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+`;

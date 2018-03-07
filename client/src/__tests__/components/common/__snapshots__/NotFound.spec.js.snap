@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Not found component Should render 1`] = `
+<div
+  className="container text-center"
+  id="recipes"
+>
+  <h1
+    style={
+      Object {
+        "color": "#000",
+      }
+    }
+  >
+     Are You Lost ? 
+  </h1>
+  <h5>
+     This page does not exist (404)
+  </h5>
+</div>
+`;

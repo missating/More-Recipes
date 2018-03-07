@@ -8,12 +8,11 @@ import { connect } from 'react-redux';
 // actions
 import deleteRecipe from '../../actions/deleteRecipe';
 /**
- *
- *
+ * Creates UserRecipeCard component
  * @class UserRecipeCard
  * @extends {React.Component}
  */
-class UserRecipeCard extends React.Component {
+export class UserRecipeCard extends React.Component {
   /**
    * Creates an instance of UserRecipeCard.
    * @param {any} props
@@ -24,12 +23,15 @@ class UserRecipeCard extends React.Component {
     this.onDeleteRecipe = this.onDeleteRecipe.bind(this);
   }
   /**
-   *
-   *
+   * Deletes a recipe after confirming
+   * @method onDeleRecipe
+   * @param {any} event
+   * @return {void}
    * @memberof UserRecipeCard
    */
   onDeleteRecipe() {
     confirmAlert({
+      title: '',
       message: 'Are you sure you want to delete this recipe ?',
       confirmLabel: 'Yes, delete!',
       cancelLabel: 'Cancel',
@@ -38,10 +40,10 @@ class UserRecipeCard extends React.Component {
     });
   }
   /**
-   *
-   *
-   * @returns {JSX} react component
-   * @memberof UserRecipeCard
+   * Renders react component
+   * @method render
+   * @returns {void}
+   * @memberof  UserRecipeCard
    */
   render() {
     return (
@@ -74,6 +76,7 @@ class UserRecipeCard extends React.Component {
               </Link>
 
               <button
+                id="deleteButton"
                 className="btn"
                 onClick={this.onDeleteRecipe}
               >
@@ -105,4 +108,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(null, mapDispatchToProps)(UserRecipeCard);
+const ConnectedComponent =
+  connect(null, mapDispatchToProps)(UserRecipeCard);
+export { ConnectedComponent as ConnectedUserRecipeCard };
+

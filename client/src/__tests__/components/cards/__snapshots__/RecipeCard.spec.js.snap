@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe card component Should render 1`] = `
+<div
+  className="flex"
+>
+  <div
+    className="card"
+  >
+    <Link
+      className="hover"
+      replace={false}
+      to="/recipes/view/1"
+    >
+      <img
+        alt="image_url"
+        className="image-width"
+        src="image_url"
+      />
+    </Link>
+    <div
+      className="container p-3 recipedetails-column"
+    >
+      <h2>
+        test
+      </h2>
+      <p>
+        <small>
+          add all
+        </small>
+      </p>
+      <div
+        className="center-button"
+      >
+        <Link
+          className="btn btn-secondary"
+          replace={false}
+          to="/recipes/view/1"
+        >
+          VIEW
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
+`;

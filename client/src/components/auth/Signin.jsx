@@ -10,16 +10,23 @@ import fetchUserSignin from '../../actions/userSignIn';
 
 
 /**
- *
+ * @description Creates Signin component
  *
  * @class Signin
+ *
  * @extends {React.Component}
  */
-class Signin extends React.Component {
+export class Signin extends React.Component {
   /**
-   * Creates an instance of Signin.
+   * @description Creates an instance of Signin.
+   *
+   * @constructor
+   *
    * @param {any} props
+   *
    * @memberof Signin
+   *
+   * @returns {void}
    */
   constructor(props) {
     super(props);
@@ -33,35 +40,52 @@ class Signin extends React.Component {
   }
 
   /**
-  *
-  * @returns {json} with nextProps details
-  * @param {any} nextProps
-  * @memberof Signin
-  */
+   * @description set state
+   *
+   * @param {any} nextProps
+   *
+   * @memberof Signin
+   *
+   * @returns {void}
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated &&
       nextProps.auth.errorMessage.length === 0) {
       $('#signin-modal').modal('hide');
+      this.setState({
+        email: '',
+        password: '',
+      });
     }
   }
 
+
   /**
- * @description handles form change events
- * @returns {null} null
- * @param {any} event
- * @memberof Signin
- */
+   * @description Bind the value of the inputs to state
+   *
+   * @method onChange
+   *
+   * @param {any} event
+   *
+   * @memberof Signin
+   *
+   * @returns {void}
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
- *
- *
- * @param {any} event
- * @returns {dispatch} react-redux dispatch
- * @memberof Signin
- */
+   * @description Submit the form
+   *
+   * @method onSubmit
+   *
+   * @param {object} event
+   *
+   * @memberof Signin
+   *
+   * @returns {void}
+   */
   onSubmit(event) {
     event.preventDefault();
     const isValid = this.isValid();
@@ -71,11 +95,14 @@ class Signin extends React.Component {
   }
 
   /**
-*
-*
-* @returns {boolean} boolean
-* @memberof Signin
-*/
+    * @description Validates user's data before making post request
+    *
+    * @method isValid
+    *
+    * @memberof Signin
+    *
+    * @returns {boolean} true or false
+    */
   isValid() {
     const { isValid, errors } = signinValidator(this.state);
     if (!isValid) {
@@ -86,11 +113,16 @@ class Signin extends React.Component {
     }
   }
 
+
   /**
-   * @description react render method
+   * @description Renders react component
    *
-   * @returns {component} react component
+   * @method render
+   *
    * @memberof Signin
+   *
+   * @returns {void}
+   *
    */
   render() {
     const { errors } = this.state;
@@ -98,7 +130,9 @@ class Signin extends React.Component {
     let signinError;
     if (this.props.auth.errorMessage) {
       signinError = (
-        <span className="help-block text-danger">{this.props.auth.errorMessage}</span>
+        <span className="help-block text-danger">
+          {this.props.auth.errorMessage}
+        </span>
       );
     }
     return (
@@ -148,6 +182,7 @@ class Signin extends React.Component {
                         <input
                           type="password"
                           placeholder="Password"
+                          id="signinPassword"
                           name="password"
                           value={this.state.password}
                           onChange={this.onChange}
@@ -187,15 +222,17 @@ class Signin extends React.Component {
   }
 }
 
-const authProps = {
-  isAuthenticated: PropTypes.bool,
-  user: PropTypes.string,
-  token: PropTypes.string,
-  errorMessage: PropTypes.string
-};
-
 Signin.propTypes = {
-  auth: PropTypes.shape(authProps).isRequired,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    user: PropTypes.shape({
+      fullname: PropTypes.string,
+      username: PropTypes.string,
+      email: PropTypes.string,
+      id: PropTypes.number
+    }),
+    errorMessage: PropTypes.string
+  }).isRequired,
   signinUser: PropTypes.func.isRequired
 };
 
@@ -209,4 +246,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+const ConnectedComponent =
+  connect(mapStateToProps, mapDispatchToProps)(Signin);
+export { ConnectedComponent as ConnectedSignin };

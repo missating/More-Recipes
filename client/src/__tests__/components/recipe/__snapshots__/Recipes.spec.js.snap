@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe component Should not render recipes if allRecipes is an empty array 1`] = `
+<div>
+  <section
+    className="container"
+    id="recipes"
+  >
+    <Connect(SearchRecipe) />
+    <div
+      className="row mh-500"
+    >
+      <div
+        className="text-center ml-5"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <h4>
+           No recipe(s) found 
+        </h4>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <PaginationBoxView
+        activeClassName="page-item active"
+        breakClassName="text-center"
+        breakLabel="..."
+        containerClassName="container pagination justify-content-center"
+        disableInitialCallback={false}
+        disabledClassName="disabled"
+        initialPage={0}
+        marginPagesDisplayed={3}
+        nextClassName="page-item"
+        nextLabel="Next"
+        nextLinkClassName="page-link"
+        onPageChange={[Function]}
+        pageClassName="page-item"
+        pageCount={1}
+        pageLinkClassName="page-link"
+        pageRangeDisplayed={5}
+        previousClassName="page-item"
+        previousLabel="Previous"
+        previousLinkClassName="page-link"
+      />
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Recipe component Should render 1`] = `
+<div>
+  <section
+    className="container"
+    id="recipes"
+  >
+    <Connect(SearchRecipe) />
+    <div
+      className="row mh-500"
+    >
+      <div
+        className="text-center ml-5"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <h4>
+           No recipe(s) found 
+        </h4>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <PaginationBoxView
+        activeClassName="page-item active"
+        breakClassName="text-center"
+        breakLabel="..."
+        containerClassName="container pagination justify-content-center"
+        disableInitialCallback={false}
+        disabledClassName="disabled"
+        initialPage={0}
+        marginPagesDisplayed={3}
+        nextClassName="page-item"
+        nextLabel="Next"
+        nextLinkClassName="page-link"
+        onPageChange={[Function]}
+        pageClassName="page-item"
+        pageCount={1}
+        pageLinkClassName="page-link"
+        pageRangeDisplayed={5}
+        previousClassName="page-item"
+        previousLabel="Previous"
+        previousLinkClassName="page-link"
+      />
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Recipe component Should render 2 recipes if allRecipes contains 2 objects 1`] = `
+<div>
+  <section
+    className="container"
+    id="recipes"
+  >
+    <Connect(SearchRecipe) />
+    <div
+      className="row mh-500"
+    >
+      <div
+        className="col-md-6 col-lg-4 p-0"
+        key="recipe1"
+      >
+        <RecipeCard
+          button={false}
+          description="Hello, this is my favorite food"
+          id={1}
+          ingredients="Garri, Fire"
+          name="Eba"
+          onButtonClick={[Function]}
+          recipeImage="image_url"
+        />
+      </div>
+      <div
+        className="col-md-6 col-lg-4 p-0"
+        key="recipe2"
+      >
+        <RecipeCard
+          button={false}
+          description="Hello, this is my favorite food"
+          id={2}
+          ingredients="Garri, Fire"
+          name="Eba"
+          onButtonClick={[Function]}
+          recipeImage="image_url"
+        />
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <PaginationBoxView
+        activeClassName="page-item active"
+        breakClassName="text-center"
+        breakLabel="..."
+        containerClassName="container pagination justify-content-center"
+        disableInitialCallback={false}
+        disabledClassName="disabled"
+        initialPage={0}
+        marginPagesDisplayed={3}
+        nextClassName="page-item"
+        nextLabel="Next"
+        nextLinkClassName="page-link"
+        onPageChange={[Function]}
+        pageClassName="page-item"
+        pageCount={1}
+        pageLinkClassName="page-link"
+        pageRangeDisplayed={5}
+        previousClassName="page-item"
+        previousLabel="Previous"
+        previousLinkClassName="page-link"
+      />
+    </div>
+  </section>
+</div>
+`;

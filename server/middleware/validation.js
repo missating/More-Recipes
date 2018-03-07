@@ -125,7 +125,7 @@ export const verifyId = (req, res, next) => {
 
   const error = {};
 
-  if (isNaN(parseInt(recipeId, 10))) {
+  if (Number.isNaN(parseInt(recipeId, 10))) {
     error.recipeId = 'RecipeId must be a number';
   }
 
@@ -139,7 +139,7 @@ export const verifyPageNumber = (req, res, next) => {
 
   const error = {};
 
-  if (page && isNaN(parseInt(page, 10))) {
+  if (page && Number.isNaN(parseInt(page, 10))) {
     error.page = 'Page number must be an integer';
   }
 

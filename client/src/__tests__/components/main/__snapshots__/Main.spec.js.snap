@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component should render 1`] = `
+<div
+  className="main-cont"
+>
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/recipes"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/recipes/view/:id"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/profile"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/recipe/add"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/users/recipes"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/recipe/edit/:id"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/users/favourites"
+    />
+    <Route
+      component={[Function]}
+    />
+  </Switch>
+</div>
+`;

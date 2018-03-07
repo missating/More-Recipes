@@ -55,6 +55,7 @@ app.all('*', (req, res) => {
 });
 
 app.listen(port, () => {
+  // eslint-disable-next-line
   console.log(`App running on port ${port}`);
 });
 

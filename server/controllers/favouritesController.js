@@ -2,17 +2,22 @@ import db from '../models/index';
 
 
 /**
- * This handles favourite recipes
+ * @class favouritesController
+ *
  * @export
- * @class Favourite
+ *
  */
 export default class favouritesController {
   /**
+   * @description - Add a recipe as favourite
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} with recipe added as favourite
-   * @memberof Favourite
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof favouritesController
+   *
+   * @returns {object} Class instance
    */
   static addFavourite(req, res) {
     return db.Recipe.findById(req.params.recipeId)
@@ -74,12 +79,16 @@ export default class favouritesController {
       });
   }
 
+
   /**
-   * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} with all favourite recipes for a user
-   * @memberof Favourite
+   * @description Gets a user's favourites
+   *
+   * @param {object} req - HTTP Request
+   * @param {object} res - HTTP Response
+   *
+   * @memberof favouriteController
+   *
+   * @returns {object} Class instance
    */
   static getAllFavourites(req, res) {
     return db.Favourite.findAndCountAll({

@@ -38,7 +38,7 @@ const auth = (state = initialState, action) => {
     return {
       ...state,
       isAuthenticated: false,
-      user: '',
+      user: {},
       token: ''
     };
   default:

@@ -1,6 +1,5 @@
 body, html {
   background-color: ghostwhite;
-  height: 100%;
   margin: 0;
 }
 
@@ -316,4 +315,15 @@ margin-top: 150px;
 
 .hover:hover {
   text-decoration: none;
+}
+.main-cont {
+  min-height: 70vh;
+}
+
+.mh-500 {
+  min-height: 500px
+}
+
+footer {
+  margin-top: 100px;
 }

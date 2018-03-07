@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFavourites component Should not render recipes if all favourites is an empty array 1`] = `
+<div
+  className="loader-container"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;
+
+exports[`UserFavourites component Should render 1`] = `
+<div
+  className="loader-container"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;
+
+exports[`UserFavourites component Should render 1 recipes if userFavourites contains 2 objects 1`] = `
+<section
+  className="container"
+  id="recipes"
+>
+  <div>
+    <h3
+      className="text-center"
+    >
+      My Favourite Recipes
+    </h3>
+    <hr />
+    <div
+      className="row mh-500"
+    >
+      <div
+        className="col-md-4"
+        key="favourites1"
+      >
+        <RecipeCard
+          button={true}
+          description="test, test"
+          id={1}
+          name="test"
+          onButtonClick={[Function]}
+          recipeImage="image_url"
+        />
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <PaginationBoxView
+        activeClassName="page-item active"
+        breakClassName="text-center"
+        breakLabel="..."
+        containerClassName="container pagination justify-content-center"
+        disableInitialCallback={false}
+        disabledClassName="disabled"
+        initialPage={0}
+        marginPagesDisplayed={3}
+        nextClassName="page-item"
+        nextLabel="Next"
+        nextLinkClassName="page-link"
+        onPageChange={[Function]}
+        pageClassName="page-item"
+        pageCount={1}
+        pageLinkClassName="page-link"
+        pageRangeDisplayed={5}
+        previousClassName="page-item"
+        previousLabel="Previous"
+        previousLinkClassName="page-link"
+      />
+    </div>
+  </div>
+</section>
+`;
