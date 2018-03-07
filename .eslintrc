@@ -15,16 +15,6 @@
     "mocha": true,
     "jest/globals": true
   },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    }
-  },
   "globals": {
     "shallow": true,
     "mount": true,
@@ -37,7 +27,6 @@
     "window": true
   },
   "rules": {
-    "import/extensions": 0,
     "react/jsx-filename-extension": [
       1,
       {
@@ -68,12 +57,6 @@
     "curly": [
       "error",
       "multi-line"
-    ],
-    "import/no-unresolved": [
-      2,
-      {
-        "commonjs": true
-      }
     ],
     "no-shadow": [
       "error",
