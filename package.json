@@ -7,7 +7,7 @@
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
     "start:e2e": "cross-env NODE_ENV=test nodemon --exec babel-node server/app.js",
     "test:server": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test mocha server/test/**/**.spec.js --exit --require babel-register --reporter spec",
-    "test:client": "jest -- -u && npm run client:coverage",
+    "test:client": "jest -u && npm run client:coverage",
     "test:e2e": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test nightwatch",
     "test": "npm run test:client && npm run coveralls",
     "build:server": "babel -d ./build ./server -s",
