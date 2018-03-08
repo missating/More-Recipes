@@ -171,6 +171,7 @@ export class Signin extends React.Component {
                         <input
                           type="email"
                           placeholder="Email"
+                          id="signinEmail"
                           name="email"
                           value={this.state.email}
                           onChange={this.onChange}
@@ -198,7 +199,10 @@ export class Signin extends React.Component {
                       <br />
                       {
                         errors.password &&
-                        <span className="help-block text-danger">
+                        <span
+                          className="help-block text-danger"
+                          id="passwordError"
+                        >
                           {errors.password}
                         </span>
                       }
@@ -207,6 +211,7 @@ export class Signin extends React.Component {
                       <button
                         className="btn btn-secondary"
                         type="submit"
+                        id="loginButton"
                       >
                         Submit
                       </button>

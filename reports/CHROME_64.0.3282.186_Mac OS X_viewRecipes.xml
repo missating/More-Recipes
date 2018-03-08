@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="3">
+
+  <testsuite name="viewRecipes"
+    errors="0" failures="0" hostname="" id="" package="viewRecipes" skipped="0"
+    tests="3" time="16.46" timestamp="Thu, 08 Mar 2018 13:53:02 GMT">
+  
+    <testcase name="View top recipes" classname="viewRecipes" time="8.023" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="View all recipes" classname="viewRecipes" time="4.192" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Search for a recipe" classname="viewRecipes" time="4.242" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

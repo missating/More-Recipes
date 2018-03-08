@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="4">
+
+  <testsuite name="authentication"
+    errors="0" failures="0" hostname="" id="" package="authentication" skipped="0"
+    tests="4" time="41.51" timestamp="Thu, 08 Mar 2018 13:49:04 GMT">
+  
+    <testcase name="Registers a new user" classname="authentication" time="15.84" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Returns error for incomplete fields" classname="authentication" time="9.910" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Returns error for invalid credentials" classname="authentication" time="6.937" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Logs a user in" classname="authentication" time="8.822" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

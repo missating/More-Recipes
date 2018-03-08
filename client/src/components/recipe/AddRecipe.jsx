@@ -308,6 +308,7 @@ export class AddRecipe extends React.Component {
                     errors.description &&
                     <span
                       className="help-block text-danger"
+                      id="recipeDescriptionError"
                     >
                       {errors.description}
                     </span>
@@ -324,6 +325,7 @@ export class AddRecipe extends React.Component {
                   </button>
                   <Link
                     className="btn btn-secondary"
+                    id="cancelButton"
                     to="/users/recipes"
                   >
                     Cancel

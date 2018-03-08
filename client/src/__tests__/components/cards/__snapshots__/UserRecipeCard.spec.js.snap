@@ -34,6 +34,7 @@ exports[`User recipe card component Should render 1`] = `
       >
         <Link
           className="btn btn-secondary recipe-button"
+          id="viewRecipe"
           replace={false}
           to="/recipes/view/1"
         >
@@ -41,6 +42,7 @@ exports[`User recipe card component Should render 1`] = `
         </Link>
         <Link
           className="btn btn-secondary recipe-button"
+          id="editRecipe"
           replace={false}
           to="/recipe/edit/1"
         >

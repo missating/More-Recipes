@@ -20,6 +20,7 @@ exports[`Add review component Should render 1`] = `
     <br />
     <button
       className="btn btn-secondary"
+      id="submitReview"
       style={
         Object {
           "float": "right",

@@ -116,7 +116,6 @@ font-size: 20px;
 
 .btn-group button {
   float: left;
-  margin: 20px;
   justify-content: center;
 }
 
@@ -141,12 +140,17 @@ font-size: 20px;
 }
 
 .recipedetails-column h2{
-color: #fff;
-font-family: sans-serif;
-text-transform: uppercase;
-font-size: 20px;
-line-height: 0vh;
-margin-top: 10px;
+    color: #fff;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    width: 200px;
+    height: 50px;
+    overflow : hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
 }
 
 .recipedetails-column p{
@@ -258,15 +262,9 @@ margin-top: 150px;
 }
 
 .form-width{
-  width: 600px;
+  max-width: 600px;
   margin: 20px auto;
 }
-
-@media screen and (max-width: 768px) {
-  .form-width {
-  width: 350px;
-  }
-} 
 
 .recipe-button {
   width: 80px;

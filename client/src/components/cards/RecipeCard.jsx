@@ -20,6 +20,7 @@ const RecipeCard = props => (
         <div className="center-button">
           <Link
             className="btn btn-secondary"
+            id="viewRecipe"
             to={`/recipes/view/${props.id}`}
           >
             VIEW

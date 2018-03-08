@@ -63,6 +63,7 @@ export class UserRecipeCard extends React.Component {
             <div className="container">
               <Link
                 className="btn btn-secondary recipe-button"
+                id="viewRecipe"
                 to={`/recipes/view/${this.props.id}`}
               >
                 VIEW
@@ -70,6 +71,7 @@ export class UserRecipeCard extends React.Component {
 
               <Link
                 className="btn btn-secondary recipe-button"
+                id="editRecipe"
                 to={`/recipe/edit/${this.props.id}`}
               >
                 EDIT

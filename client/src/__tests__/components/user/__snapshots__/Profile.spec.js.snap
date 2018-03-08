@@ -104,6 +104,12 @@ exports[`Profile component Should render 1`] = `
             aria-label="Basic example"
             className="btn-group"
             role="group"
+            style={
+              Object {
+                "marginTop": "30px",
+                "maxWidth": "297px",
+              }
+            }
           >
             <button
               className="btn btn-secondary"

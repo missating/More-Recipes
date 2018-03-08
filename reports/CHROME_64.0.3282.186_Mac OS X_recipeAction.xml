@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="8">
+
+  <testsuite name="recipeAction"
+    errors="0" failures="0" hostname="" id="" package="recipeAction" skipped="0"
+    tests="8" time="90.28" timestamp="Thu, 08 Mar 2018 13:49:45 GMT">
+  
+    <testcase name="Registers a new user" classname="recipeAction" time="14.21" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Create new Recipe" classname="recipeAction" time="12.81" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Create new Recipe 2" classname="recipeAction" time="14.07" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Create new Recipe 3" classname="recipeAction" time="12.54" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Return error for recipe with the same name" classname="recipeAction" time="12.11" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Returns error for incomplete field" classname="recipeAction" time="10.56" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Update a Recipe" classname="recipeAction" time="7.475" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Delete a Recipe" classname="recipeAction" time="6.509" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>
