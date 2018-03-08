@@ -45,13 +45,13 @@ const swaggerDocument = require('./converted.json');
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 routes(app);
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// returns 404 for unknown routes
+app.all('/api*', (req, res) => {
+  res.status(404).send('The api route you requested does not exist');
 });
 
-// returns 404 for unknown routes
-app.all('*', (req, res) => {
-  res.status(404).send('The api route you requested does not exist');
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(port, () => {

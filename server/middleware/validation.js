@@ -18,11 +18,19 @@ export const verifySignin = (req, res, next) => {
   const { email, password } = req.body;
   const error = {};
 
-  if (Validator.isEmpty(password || '')) {
+  if (!password) {
     error.password = 'Password is required';
   }
 
-  if (!Validator.isEmail(email || '')) {
+  if (password && Validator.isEmpty(password.trim() || '')) {
+    error.password = 'Password is required';
+  }
+
+  if (!email) {
+    error.email = 'Email is required';
+  }
+
+  if (email && !Validator.isEmail(email.trim() || '')) {
     error.email = 'Please provide a valid email address';
   }
 
@@ -37,12 +45,28 @@ export const verifySignup = (req, res, next) => {
   } = req.body;
   const error = {};
 
-  if (Validator.isEmpty(fullname || '')) {
+  if (!fullname) {
     error.fullname = 'Fullname is required';
   }
 
-  if (Validator.isEmpty(username || '')) {
+  if (fullname && Validator.isEmpty(fullname.trim() || '')) {
+    error.fullname = 'Fullname is required';
+  }
+
+  if (!username) {
     error.username = 'Username is required';
+  }
+
+  if (username && Validator.isEmpty(username.trim() || '')) {
+    error.username = 'Username is required';
+  }
+
+  if (!password) {
+    error.password = 'Password is required';
+  }
+
+  if (!confirmPassword) {
+    error.password = 'Please confirm your password';
   }
 
   if (Validator.isEmpty(password || '') ||
@@ -51,7 +75,11 @@ export const verifySignup = (req, res, next) => {
     error.password = 'Passwords mismatch or empty';
   }
 
-  if (!Validator.isEmail(email || '')) {
+  if (!email) {
+    error.email = 'Email is required';
+  }
+
+  if (email && !Validator.isEmail(email.trim() || '')) {
     error.email = 'Email address is empty or invalid';
   }
 
@@ -66,15 +94,27 @@ export const verifyRecipe = (req, res, next) => {
 
   const error = {};
 
-  if (Validator.isEmpty(name.trim() || '')) {
+  if (!name) {
     error.name = 'Recipe name is required';
   }
 
-  if (Validator.isEmpty(ingredients.trim() || '')) {
+  if (name && Validator.isEmpty(name.trim() || '')) {
+    error.name = 'Recipe name is required';
+  }
+
+  if (!ingredients) {
     error.ingredients = 'ingredients for recipe is required';
   }
 
-  if (Validator.isEmpty(description.trim() || '')) {
+  if (ingredients && Validator.isEmpty(ingredients.trim() || '')) {
+    error.ingredients = 'ingredients for recipe is required';
+  }
+
+  if (!description) {
+    error.description = 'Description for recipe is required';
+  }
+
+  if (description && Validator.isEmpty(description.trim() || '')) {
     error.description = 'Description for recipe is required';
   }
 
@@ -88,7 +128,11 @@ export const verifyReview = (req, res, next) => {
 
   const error = {};
 
-  if (Validator.isEmpty(content.trim() || '')) {
+  if (!content) {
+    error.content = 'Review canot be empty';
+  }
+
+  if (content && Validator.isEmpty(content.trim() || '')) {
     error.content = 'Please add a review';
   }
 
