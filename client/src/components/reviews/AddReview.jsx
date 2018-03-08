@@ -128,6 +128,7 @@ export class AddReview extends React.Component {
           {
             this.state.errors.content &&
             <span
+              id="reviewError"
               className="help-block text-danger"
             >
               {this.state.errors.content}
@@ -135,7 +136,11 @@ export class AddReview extends React.Component {
           }
 
           <br />
-          <button className="btn btn-secondary" style={{ float: 'right' }}>
+          <button
+            id="submitReview"
+            className="btn btn-secondary"
+            style={{ float: 'right' }}
+          >
             SUBMIT
           </button>
         </form>

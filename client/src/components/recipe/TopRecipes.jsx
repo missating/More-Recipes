@@ -65,7 +65,12 @@ export class TopRecipes extends React.Component {
     return (
       <div>
         <section className="container" id="featured">
-          <h2 className="text-center mt-5"> Featured Recipes </h2>
+          <h2
+            className="text-center mt-5"
+            id="featuredHeading"
+          >
+            Featured Recipes
+          </h2>
           <hr />
           <div className="row justify-content-center">
             {topRecipeList}

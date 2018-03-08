@@ -104,6 +104,7 @@ exports[`Add Recipe component Should render 1`] = `
             </button>
             <Link
               className="btn btn-secondary"
+              id="cancelButton"
               replace={false}
               to="/users/recipes"
             >

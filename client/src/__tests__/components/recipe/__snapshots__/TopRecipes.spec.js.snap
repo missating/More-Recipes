@@ -8,8 +8,9 @@ exports[`Top recipe component Should not render recipes if topRecipes is an empt
   >
     <h2
       className="text-center mt-5"
+      id="featuredHeading"
     >
-       Featured Recipes 
+      Featured Recipes
     </h2>
     <hr />
     <div
@@ -35,8 +36,9 @@ exports[`Top recipe component Should render 1`] = `
   >
     <h2
       className="text-center mt-5"
+      id="featuredHeading"
     >
-       Featured Recipes 
+      Featured Recipes
     </h2>
     <hr />
     <div
@@ -62,8 +64,9 @@ exports[`Top recipe component Should render 2 recipes if topRecipes contains 2 o
   >
     <h2
       className="text-center mt-5"
+      id="featuredHeading"
     >
-       Featured Recipes 
+      Featured Recipes
     </h2>
     <hr />
     <div

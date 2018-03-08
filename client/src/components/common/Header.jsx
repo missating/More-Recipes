@@ -32,17 +32,24 @@ export const Header = props => (
         <ul className="navbar-nav ml-auto">
           <span className="sr-only">(current)</span>
           <li className="nav-item">
-            <Link className="nav-link" to="/recipes">Recipes</Link>
+            <Link className="nav-link" id="recipesLink" to="/recipes">
+              Recipes
+            </Link>
           </li>
 
           {
             props.authenticated &&
-            <Link className="nav-link" to="/recipe/add">Create Recipe</Link>
+            <Link className="nav-link" id="createRecipeLink" to="/recipe/add">
+              Create Recipe
+            </Link>
           }
 
           {
             props.authenticated &&
-            <li className="nav-item dropdown user-name">
+            <li
+              id="dropdownLi"
+              className="nav-item dropdown user-name"
+            >
               <a
                 className="nav-link dropdown-toggle"
                 id="navbarDropdownMenuLink"
@@ -62,18 +69,21 @@ export const Header = props => (
               >
                 <Link
                   className="nav-link"
+                  id="profileLink"
                   to="/profile"
                 >
                   My Profile
                 </Link>
                 <Link
                   className="nav-link"
+                  id="userRecipesLink"
                   to="/users/recipes"
                 >
                   My Recipes
                 </Link>
                 <Link
                   className="nav-link"
+                  id="userFavouritesLink"
                   to="/users/favourites"
                 >
                   My Favourites

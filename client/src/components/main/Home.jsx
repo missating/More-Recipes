@@ -25,6 +25,7 @@ export const Home = props => (
                   <button
                     type="button"
                     className="btn signup-button"
+                    id="sigupButton"
                   >
                     SIGN UP
                   </button>
@@ -42,6 +43,7 @@ export const Home = props => (
                 >
                   <button
                     type="button"
+                    id="signinButton"
                     className="btn signin-button"
                   >
                     SIGN IN

@@ -47,6 +47,7 @@ exports[`Sign in component Should render 1`] = `
                 >
                   <input
                     className="form-control signin-input"
+                    id="signinEmail"
                     name="email"
                     onChange={[Function]}
                     placeholder="Email"
@@ -71,6 +72,7 @@ exports[`Sign in component Should render 1`] = `
                 <div />
                 <button
                   className="btn btn-secondary"
+                  id="loginButton"
                   type="submit"
                 >
                   Submit

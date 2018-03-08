@@ -26,6 +26,7 @@ exports[`Home component Should render 1`] = `
             >
               <button
                 className="btn signup-button"
+                id="sigupButton"
                 type="button"
               >
                 SIGN UP
@@ -41,6 +42,7 @@ exports[`Home component Should render 1`] = `
             >
               <button
                 className="btn signin-button"
+                id="signinButton"
                 type="button"
               >
                 SIGN IN

@@ -3,11 +3,11 @@ import validator from 'validator';
 
 const signupvalidator = (data) => {
   const errors = {};
-  if (validator.isEmpty(data.fullname)) {
+  if (validator.isEmpty(data.fullname.trim() || '')) {
     errors.fullname = 'fullname is required';
   }
 
-  if (validator.isEmpty(data.username)) {
+  if (validator.isEmpty(data.username.trim() || '')) {
     errors.username = 'username is required';
   }
 

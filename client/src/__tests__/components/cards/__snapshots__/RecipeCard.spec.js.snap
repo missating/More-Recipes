@@ -34,6 +34,7 @@ exports[`Recipe card component Should render 1`] = `
       >
         <Link
           className="btn btn-secondary"
+          id="viewRecipe"
           replace={false}
           to="/recipes/view/1"
         >

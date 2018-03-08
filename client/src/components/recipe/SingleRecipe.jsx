@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
@@ -130,6 +130,9 @@ export class SingleRecipe extends React.Component {
      */
   render() {
     const { singleRecipe } = this.props;
+    if (Object.keys(singleRecipe).length === 0) {
+      return <Redirect to="/not-found" />;
+    }
 
     if (singleRecipe.singleRecipe && !singleRecipe.singleRecipe.name) {
       return (
@@ -256,7 +259,7 @@ export class SingleRecipe extends React.Component {
 
 SingleRecipe.propTypes = {
   singleRecipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
     recipeImage: PropTypes.string,
     name: PropTypes.string,
     ingredients: PropTypes.string,
@@ -264,7 +267,7 @@ SingleRecipe.propTypes = {
     favourite: PropTypes.number,
     upvote: PropTypes.number,
     downvote: PropTypes.number
-  }).isRequired,
+  }),
   recipe: PropTypes.func.isRequired,
   upvote: PropTypes.func.isRequired,
   favourite: PropTypes.func.isRequired,
@@ -274,6 +277,10 @@ SingleRecipe.propTypes = {
     }).isRequired
   }).isRequired,
   authenticated: PropTypes.bool.isRequired,
+};
+
+SingleRecipe.defaultProps = {
+  singleRecipe: {}
 };
 
 

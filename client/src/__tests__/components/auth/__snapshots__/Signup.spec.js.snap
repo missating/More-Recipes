@@ -105,6 +105,7 @@ exports[`Sign up component Should render 1`] = `
                 </div>
                 <button
                   className="btn btn-secondary"
+                  id="registerbutton"
                   type="submit"
                 >
                   Submit

@@ -240,6 +240,10 @@ export class Profile extends React.Component {
                   className="btn-group"
                   role="group"
                   aria-label="Basic example"
+                  style={{
+                    marginTop: '30px',
+                    maxWidth: '297px'
+                  }}
                 >
                   <button
                     type="button"

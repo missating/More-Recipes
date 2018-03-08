@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="8">
+
+  <testsuite name="userNavigation"
+    errors="0" failures="0" hostname="" id="" package="userNavigation" skipped="0"
+    tests="8" time="64.44" timestamp="Thu, 08 Mar 2018 13:51:57 GMT">
+  
+    <testcase name="Registers a new user" classname="userNavigation" time="15.13" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Create new Recipe 3" classname="userNavigation" time="14.08" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Favourite a single recipe" classname="userNavigation" time="4.704" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Navigate to the user profile" classname="userNavigation" time="6.274" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Edit user profile" classname="userNavigation" time="6.499" assertions="0">
+    </testcase>
+  
+    <testcase name="Navigate to the user recipe" classname="userNavigation" time="6.236" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Navigate to the user favourites" classname="userNavigation" time="6.211" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Remove recipe from user favourites" classname="userNavigation" time="5.311" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

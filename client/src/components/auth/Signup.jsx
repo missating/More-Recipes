@@ -183,7 +183,10 @@ export class Signup extends React.Component {
                         />
                         {
                           errors.fullname &&
-                          <span className="help-block text-danger">
+                          <span
+                            className="help-block text-danger"
+                            id="fullnameError"
+                          >
                             {errors.fullname}
                           </span>
                         }
@@ -261,6 +264,7 @@ export class Signup extends React.Component {
                       <button
                         className="btn btn-secondary"
                         type="submit"
+                        id="registerbutton"
                       >
                         Submit
                       </button>
