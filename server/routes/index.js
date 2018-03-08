@@ -7,8 +7,7 @@ import {
   verifyToken,
   verifySignup,
   verifySignin,
-  verifyNewRecipe,
-  verfiyUpdateRecipe,
+  verifyRecipe,
   verifyReview,
   verifyId,
   verifyPageNumber,
@@ -31,14 +30,14 @@ const routes = (app) => {
   // anybody can view all recipe
   // user adds recipe
   app.route('/api/v1/recipes')
-    .post(verifyToken, verifyNewRecipe, Recipe.addRecipe)
+    .post(verifyToken, verifyRecipe, Recipe.addRecipe)
     .get(verifyPageNumber, Recipe.getAllRecipes);
 
   // auth user can delete their recipe
   // auth user can edit their recipe
   // anybody can view a recipe
   app.route('/api/v1/recipes/:recipeId')
-    .put(verifyToken, verifyId, verfiyUpdateRecipe, Recipe.updateRecipe)
+    .put(verifyToken, verifyId, verifyRecipe, Recipe.updateRecipe)
     .delete(verifyToken, verifyId, Recipe.deleteRecipe)
     .get(verifyId, Recipe.getOneRecipe);
 

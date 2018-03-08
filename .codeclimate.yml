@@ -1,0 +1,23 @@
+---
+engines:
+  csslint:
+    enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+
+exclude_patterns:
+  - "webpack.*.js"
+  - "node_modules/"
+  - "template/*"
+  - "server/test/"
+  - "client/src/__tests__/"
+  - "server/migrations"
+  - "server/models"
+  - "e2e/"

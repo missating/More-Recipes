@@ -59,31 +59,7 @@ export const verifySignup = (req, res, next) => {
   return res.status(400).json({ error });
 };
 
-export const verifyNewRecipe = (req, res, next) => {
-  const {
-    name, ingredients, description,
-  } = req.body;
-
-  const error = {};
-
-  if (Validator.isEmpty(name.trim() || '')) {
-    error.name = 'Recipe name is required';
-  }
-
-  if (Validator.isEmpty(ingredients.trim() || '')) {
-    error.ingredients = 'ingredients for recipe is required';
-  }
-
-  if (Validator.isEmpty(description.trim() || '')) {
-    error.description = 'Description for recipe is required';
-  }
-
-  if (isEmpty(error)) return next();
-  return res.status(400).json({ error });
-};
-
-
-export const verfiyUpdateRecipe = (req, res, next) => {
+export const verifyRecipe = (req, res, next) => {
   const {
     name, ingredients, description,
   } = req.body;
