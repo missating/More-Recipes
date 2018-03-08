@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/missating/More-Recipes.svg?branch=develop)](https://travis-ci.org/missating/More-Recipes)
 [![Coverage Status](https://coveralls.io/repos/github/missating/More-Recipes/badge.svg?branch=develop)](https://coveralls.io/github/missating/More-Recipes?branch=develop)
-[![Maintainability](https://api.codeclimate.com/v1/badges/3de0dc6a00a683e72f5f/maintainability)](https://codeclimate.com/github/missating/More-Recipes/maintainability)
-[![codecov](https://codecov.io/gh/amissating/More-Recipes/branch/develop/graph/badge.svg)](https://codecov.io/gh/missating/More-Recipes)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e34429abd769ade0fa9/maintainability)](https://codeclimate.com/github/missating/More-Recipes/maintainability)
+[![codecov](https://codecov.io/gh/missating/More-Recipes/branch/develop/graph/badge.svg)](https://codecov.io/gh/missating/More-Recipes)
 
 
 # More-Recipes
