@@ -22,7 +22,6 @@ exclude_patterns:
   - "node_modules/"
   - "template/*"
   - "server/test/"
-  - "e2e_tests"
   - "client/src/__tests__/"
   - "server/migrations"
   - "server/models"
