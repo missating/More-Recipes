@@ -11,11 +11,6 @@ engines:
     enabled: true
   fixme:
     enabled: true
-ratings:
-  paths:
-  - "server/**/*.js"
-  - "client/src/**/*.js"
-  - "client/src/**/*.jsx"
 
 exclude_patterns:
   - "webpack.*.js"
