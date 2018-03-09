@@ -86,7 +86,7 @@ describe('REVIEW API', () => {
           expect(response.status).to.equal(400);
           expect(response.body).to.be.an('object');
           expect(response.body.error.content)
-            .to.include('Please add a review');
+            .to.include('Review canot be empty');
           done();
         });
     });

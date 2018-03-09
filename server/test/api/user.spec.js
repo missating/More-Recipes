@@ -140,7 +140,7 @@ describe('USER API', () => {
             expect(response).to.have.status(400);
             expect(response.body).to.be.an('object');
             expect(response.body.error.email)
-              .to.equal('Email address is empty or invalid');
+              .to.equal('Email is required');
             done();
           });
       }
@@ -238,7 +238,7 @@ describe('USER API', () => {
           expect(response).to.have.status(400);
           expect(response.body).to.be.an('object');
           expect(response.body.error.email)
-            .to.equal('Please provide a valid email address');
+            .to.equal('Email is required');
           done();
         });
     });
