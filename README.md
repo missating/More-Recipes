@@ -96,7 +96,10 @@ ____
 The application uses the following for Testing:
 
 * Backend Test 
-`npm run test` 
+`npm run test:server` 
+
+* FrontEnd Test
+`npm run test:client`
 
 ## FAQ 
 ____

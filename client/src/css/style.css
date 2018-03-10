@@ -12,6 +12,12 @@ h1 {
   font-weight: 800
 }
 
+.font {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 25px;
+  color: #eceff1
+}
+
 h2 {
   text-transform: capitalize;
 }
@@ -21,7 +27,7 @@ h5 {
 }
 
 p {
-font-family: 'Gloria Hallelujah', cursive;
+font-family: 'Roboto', sans-serif;
 font-size: 25px;
 color: #eceff1
 }
@@ -141,7 +147,6 @@ font-size: 20px;
 
 .recipedetails-column h2{
     color: #fff;
-    font-family: sans-serif;
     text-transform: uppercase;
     font-size: 16px;
     width: 200px;
@@ -154,7 +159,7 @@ font-size: 20px;
 }
 
 .recipedetails-column p{
-  width: 100px;
+  width: 250px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

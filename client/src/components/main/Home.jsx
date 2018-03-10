@@ -13,7 +13,9 @@ export const Home = props => (
       <div className="bg flex">
         <div className="home-content center">
           <h1> More Recipes </h1>
-          <p>A platform for you to share your awesome recipes </p>
+          <p className="font">
+            A platform for you to share your awesome recipes
+          </p>
           <div className="btn-group">
             {!props.authenticated && (
               <div>

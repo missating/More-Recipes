@@ -12,8 +12,10 @@ exports[`Home component Should render 1`] = `
         <h1>
            More Recipes 
         </h1>
-        <p>
-          A platform for you to share your awesome recipes 
+        <p
+          className="font"
+        >
+          A platform for you to share your awesome recipes
         </p>
         <div
           className="btn-group"

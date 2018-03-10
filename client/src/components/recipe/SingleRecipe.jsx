@@ -214,7 +214,9 @@ export class SingleRecipe extends React.Component {
               <p>{this.props.singleRecipe.ingredients}</p>
               <hr />
               <h5> Method </h5>
-              <p>{this.props.singleRecipe.description}</p>
+              <p className="reviews p-3">
+                {this.props.singleRecipe.description}
+              </p>
             </div>
           </div>
 

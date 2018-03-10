@@ -11,7 +11,10 @@ const ViewReviews = props => (
       />
     </div>
     <p> {props.content} </p>
-    <h5> <em> {props.user}</em> </h5>
+    <h6>
+      <em> {props.user}</em>
+      <small> - {props.created} </small>
+    </h6>
     <hr />
   </div>
 );
@@ -19,7 +22,8 @@ const ViewReviews = props => (
 ViewReviews.propTypes = {
   content: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired
+  email: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired
 };
 
 export default ViewReviews;

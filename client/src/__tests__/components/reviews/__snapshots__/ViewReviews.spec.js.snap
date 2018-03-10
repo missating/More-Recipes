@@ -21,14 +21,16 @@ exports[`view Reviews component Should render 1`] = `
     good stuff
      
   </p>
-  <h5>
-     
+  <h6>
     <em>
        
       test
     </em>
-     
-  </h5>
+    <small>
+       - 
+       
+    </small>
+  </h6>
   <hr />
 </div>
 `;

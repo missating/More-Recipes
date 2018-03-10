@@ -77,7 +77,9 @@ exports[`Single recipe component Should render 1`] = `
         <h5>
            Method 
         </h5>
-        <p>
+        <p
+          className="reviews p-3"
+        >
           mix it
         </p>
       </div>
