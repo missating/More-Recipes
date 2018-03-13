@@ -2,17 +2,17 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MoreRecipes",
-    "description": "API documentation for More Recipes web application. All actions performed on the application can be done by sending request via the api url.",
+    "description": "Api documentation for More Recipes web application",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/v1",
+      "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
       "variables": {}
     }
   ],
   "paths": {
-    "/recipes/16": {
+    "/recipes/35": {
       "get": {
         "tags": [
           "Misc"
@@ -30,17 +30,17 @@
                   "example": {
                     "status": "success",
                     "recipe": {
-                      "id": 2,
-                      "name": "spaghetti",
-                      "userId": 1,
-                      "ingredients": "sapg, sauce, leaf",
-                      "description": "turn welll",
-                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                      "favourite": 1,
-                      "createdAt": "2018-03-02T20:18:40.219Z",
-                      "updatedAt": "2018-03-02T22:12:49.767Z",
+                      "id": 35,
+                      "name": "Eba and Egusi Soup",
+                      "userId": 17,
+                      "ingredients": "salt, maggi, pepper",
+                      "description": "mix all together",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                      "favourite": 0,
+                      "createdAt": "2018-03-12T23:31:12.287Z",
+                      "updatedAt": "2018-03-12T23:31:12.287Z",
                       "Reviews": [],
-                      "upvote": 1,
+                      "upvote": 0,
                       "downvote": 0
                     }
                   },
@@ -49,17 +49,17 @@
                 "example": {
                   "status": "success",
                   "recipe": {
-                    "id": 2,
-                    "name": "spaghetti",
-                    "userId": 1,
-                    "ingredients": "sapg, sauce, leaf",
-                    "description": "turn welll",
-                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                    "favourite": 1,
-                    "createdAt": "2018-03-02T20:18:40.219Z",
-                    "updatedAt": "2018-03-02T22:12:49.767Z",
+                    "id": 35,
+                    "name": "Eba and Egusi Soup",
+                    "userId": 17,
+                    "ingredients": "salt, maggi, pepper",
+                    "description": "mix all together",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                    "favourite": 0,
+                    "createdAt": "2018-03-12T23:31:12.287Z",
+                    "updatedAt": "2018-03-12T23:31:12.287Z",
                     "Reviews": [],
-                    "upvote": 1,
+                    "upvote": 0,
                     "downvote": 0
                   }
                 }
@@ -69,363 +69,12 @@
         },
         "deprecated": false,
         "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/recipes/search": {
-      "post": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Search for a recipe",
-        "description": "Endpoint to search for a recipe by name or by ingredients",
-        "operationId": "SearchForARecipe",
-        "parameters": [
+        "servers": [
           {
-            "name": "search",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string",
-              "example": "s"
-            },
-            "example": "s"
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
           }
         ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "numberOfItems": 1,
-                    "pages": 1,
-                    "currentPage": 1,
-                    "limit": 6,
-                    "recipes": [
-                      {
-                        "id": 2,
-                        "name": "spaghetti",
-                        "userId": 1,
-                        "ingredients": "sapg, sauce, leaf",
-                        "description": "turn welll",
-                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                        "favourite": 1,
-                        "createdAt": "2018-03-02T20:18:40.219Z",
-                        "updatedAt": "2018-03-02T22:12:49.767Z",
-                        "Reviews": [],
-                        "Votes": [
-                          {
-                            "upvote": 1,
-                            "downvote": 0
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  "$ref": "#/components/schemas/SearchForARecipe"
-                },
-                "example": {
-                  "status": "success",
-                  "numberOfItems": 1,
-                  "pages": 1,
-                  "currentPage": 1,
-                  "limit": 6,
-                  "recipes": [
-                    {
-                      "id": 2,
-                      "name": "spaghetti",
-                      "userId": 1,
-                      "ingredients": "sapg, sauce, leaf",
-                      "description": "turn welll",
-                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                      "favourite": 1,
-                      "createdAt": "2018-03-02T20:18:40.219Z",
-                      "updatedAt": "2018-03-02T22:12:49.767Z",
-                      "Reviews": [],
-                      "Votes": [
-                        {
-                          "upvote": 1,
-                          "downvote": 0
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/users/signup": {
-      "post": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "User sign-up",
-        "description": "Endpoint for users to sign up to use the application",
-        "operationId": "User signUp",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "application/x-www-form-urlencoded"
-            },
-            "example": "application/x-www-form-urlencoded"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "fullname",
-                  "username",
-                  "email",
-                  "password",
-                  "confirmPassword"
-                ],
-                "type": "object",
-                "properties": {
-                  "fullname": {
-                    "type": "string",
-                    "example": "Vanessa Ating"
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "nessa"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "test@test.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "123456"
-                  },
-                  "confirmPassword": {
-                    "type": "string",
-                    "example": "123456"
-                  }
-                }
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "message": "Account created",
-                    "user": {
-                      "username": "nessa",
-                      "fullname": "Vanessa Ating",
-                      "email": "test@test.com",
-                      "id": 3
-                    },
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
-                  },
-                  "$ref": "#/components/schemas/User signUp"
-                },
-                "example": {
-                  "status": "success",
-                  "message": "Account created",
-                  "user": {
-                    "username": "nessa",
-                    "fullname": "Vanessa Ating",
-                    "email": "test@test.com",
-                    "id": 3
-                  },
-                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/users/signin": {
-      "post": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "User sign-in",
-        "description": "Endpoint for users to login to use the application",
-        "operationId": "User signIn",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "application/x-www-form-urlencoded"
-            },
-            "example": "application/x-www-form-urlencoded"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "email",
-                  "password"
-                ],
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "nessa@nessa.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "123456"
-                  }
-                }
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o",
-                    "foundUser": {
-                      "username": "nessa",
-                      "fullname": "Vanessa Ating",
-                      "email": "test@test.com",
-                      "id": 3
-                    }
-                  },
-                  "$ref": "#/components/schemas/User signIn"
-                },
-                "example": {
-                  "status": "success",
-                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o",
-                  "foundUser": {
-                    "username": "nessa",
-                    "fullname": "Vanessa Ating",
-                    "email": "test@test.com",
-                    "id": 3
-                  }
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/users/profile": {
-      "get": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Get user profile",
-        "description": "Endpoint to view a user's profile",
-        "operationId": "GetUserProfile",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-            },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "user": {
-                      "fullname": "Vanessa Ating",
-                      "username": "nessa",
-                      "email": "test@test.com",
-                      "joined": "Tue Feb 20 2018"
-                    }
-                  },
-                  "$ref": "#/components/schemas/GetUserProfile"
-                },
-                "example": {
-                  "status": "success",
-                  "user": {
-                    "fullname": "Vanessa Ating",
-                    "username": "nessa",
-                    "email": "test@test.com",
-                    "joined": "Tue Feb 20 2018"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -433,261 +82,6 @@
           "IsMultiContentStreaming": false
         }
       },
-      "put": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Edit user profile",
-        "description": "Endpoint for users to edit their profile",
-        "operationId": "EditUserProfile",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "application/x-www-form-urlencoded"
-            },
-            "example": "application/x-www-form-urlencoded"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-            },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "fullname",
-                  "username"
-                ],
-                "type": "object",
-                "properties": {
-                  "fullname": {
-                    "type": "string",
-                    "example": "Nessa nessa"
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "nessy baby"
-                  }
-                }
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "user": {
-                      "fullname": "Nessa nessa",
-                      "username": "nessy baby",
-                      "email": "test@test.com",
-                      "joined": "Tue Feb 20 2018"
-                    }
-                  },
-                  "$ref": "#/components/schemas/EditUserProfile"
-                },
-                "example": {
-                  "status": "success",
-                  "user": {
-                    "fullname": "Nessa nessa",
-                    "username": "nessy baby",
-                    "email": "test@test.com",
-                    "joined": "Tue Feb 20 2018"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/recipes": {
-      "get": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Get all recipes",
-        "description": "Endpoint to get all recipes",
-        "operationId": "GetAllRecipes",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "numberOfItems": 1,
-                    "limit": 6,
-                    "pages": 1,
-                    "currentPage": 1,
-                    "recipes": [
-                      {
-                        "id": 2,
-                        "name": "spaghetti",
-                        "userId": 1,
-                        "ingredients": "sapg, sauce, leaf",
-                        "description": "turn welll",
-                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                        "favourite": 1,
-                        "createdAt": "2018-03-02T20:18:40.219Z",
-                        "updatedAt": "2018-03-02T22:12:49.767Z",
-                        "Reviews": [],
-                        "upvote": 1,
-                        "downvote": 0
-                      }
-                    ]
-                  },
-                  "$ref": "#/components/schemas/GetAllRecipes"
-                },
-                "example": {
-                  "status": "success",
-                  "numberOfItems": 1,
-                  "limit": 6,
-                  "pages": 1,
-                  "currentPage": 1,
-                  "recipes": [
-                    {
-                      "id": 2,
-                      "name": "spaghetti",
-                      "userId": 1,
-                      "ingredients": "sapg, sauce, leaf",
-                      "description": "turn welll",
-                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                      "favourite": 1,
-                      "createdAt": "2018-03-02T20:18:40.219Z",
-                      "updatedAt": "2018-03-02T22:12:49.767Z",
-                      "Reviews": [],
-                      "upvote": 1,
-                      "downvote": 0
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      },
-      "post": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Create recipe",
-        "description": "Endpoint for users to create recipes",
-        "operationId": "CreateRecipe",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-            },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "application/x-www-form-urlencoded"
-            },
-            "example": "application/x-www-form-urlencoded"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "name",
-                  "ingredients",
-                  "description"
-                ],
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "test food"
-                  },
-                  "ingredients": {
-                    "type": "string",
-                    "example": "salt, maggi, pepper"
-                  },
-                  "description": {
-                    "type": "string",
-                    "example": "mix all together"
-                  }
-                }
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/recipes/27": {
       "put": {
         "tags": [
           "Misc"
@@ -705,9 +99,9 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
           },
           {
             "name": "Content-Type",
@@ -762,15 +156,15 @@
                     "status": "success",
                     "message": "Update successful",
                     "recipe": {
-                      "id": 27,
-                      "name": "testing food ",
-                      "userId": 3,
+                      "id": 35,
+                      "name": " Egusi Soup and Eba",
+                      "userId": 17,
                       "ingredients": "water, sugar, garri",
                       "description": "mix water and add groundnut",
                       "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
                       "favourite": 0,
-                      "createdAt": "2018-02-20T12:46:50.832Z",
-                      "updatedAt": "2018-02-20T15:19:13.139Z"
+                      "createdAt": "2018-03-12T23:31:12.287Z",
+                      "updatedAt": "2018-03-12T23:33:20.258Z"
                     }
                   },
                   "$ref": "#/components/schemas/UpdateRecipe"
@@ -779,15 +173,15 @@
                   "status": "success",
                   "message": "Update successful",
                   "recipe": {
-                    "id": 27,
-                    "name": "testing food ",
-                    "userId": 3,
+                    "id": 35,
+                    "name": " Egusi Soup and Eba",
+                    "userId": 17,
                     "ingredients": "water, sugar, garri",
                     "description": "mix water and add groundnut",
                     "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
                     "favourite": 0,
-                    "createdAt": "2018-02-20T12:46:50.832Z",
-                    "updatedAt": "2018-02-20T15:19:13.139Z"
+                    "createdAt": "2018-03-12T23:31:12.287Z",
+                    "updatedAt": "2018-03-12T23:33:20.258Z"
                   }
                 }
               }
@@ -796,6 +190,12 @@
         },
         "deprecated": false,
         "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -820,9 +220,9 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
           }
         ],
         "responses": {
@@ -847,6 +247,12 @@
         },
         "deprecated": false,
         "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -855,7 +261,694 @@
         }
       }
     },
-    "/recipes/26/review": {
+    "/recipes/search": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Search for a recipe",
+        "description": "Endpoint to search for a recipe by name or by ingredients",
+        "operationId": "SearchForARecipe",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "s"
+            },
+            "example": "s"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "numberOfItems": 1,
+                    "pages": 1,
+                    "currentPage": 1,
+                    "limit": 6,
+                    "recipes": [
+                      {
+                        "id": 35,
+                        "name": "Eba and Egusi Soup",
+                        "userId": 17,
+                        "ingredients": "salt, maggi, pepper",
+                        "description": "mix all together",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                        "favourite": 0,
+                        "createdAt": "2018-03-12T23:31:12.287Z",
+                        "updatedAt": "2018-03-12T23:31:12.287Z",
+                        "Reviews": [],
+                        "Votes": []
+                      }
+                    ]
+                  },
+                  "$ref": "#/components/schemas/SearchForARecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "numberOfItems": 1,
+                  "pages": 1,
+                  "currentPage": 1,
+                  "limit": 6,
+                  "recipes": [
+                    {
+                      "id": 35,
+                      "name": "Eba and Egusi Soup",
+                      "userId": 17,
+                      "ingredients": "salt, maggi, pepper",
+                      "description": "mix all together",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                      "favourite": 0,
+                      "createdAt": "2018-03-12T23:31:12.287Z",
+                      "updatedAt": "2018-03-12T23:31:12.287Z",
+                      "Reviews": [],
+                      "Votes": []
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "User sign-up",
+        "description": "Endpoint for users to sign up to use the application",
+        "operationId": "User signUp",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "fullname",
+                  "username",
+                  "email",
+                  "password",
+                  "confirmPassword"
+                ],
+                "type": "object",
+                "properties": {
+                  "fullname": {
+                    "type": "string",
+                    "example": "Vanessa Ating"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "nessa"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "test@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "message": "Account created",
+                    "user": {
+                      "username": "nessa",
+                      "fullname": "Vanessa Ating",
+                      "email": "test@gmail.com",
+                      "id": 17
+                    },
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzIyMH0.lT9Nb9lAw5-vIBB8GYrbr5hY4-YzqRuvU_umwo6mKZg"
+                  },
+                  "$ref": "#/components/schemas/User signUp"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Account created",
+                  "user": {
+                    "username": "nessa",
+                    "fullname": "Vanessa Ating",
+                    "email": "test@gmail.com",
+                    "id": 17
+                  },
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzIyMH0.lT9Nb9lAw5-vIBB8GYrbr5hY4-YzqRuvU_umwo6mKZg"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/signin": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "User sign-in",
+        "description": "Endpoint for users to login to use the application",
+        "operationId": "User signIn",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "test@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg",
+                    "foundUser": {
+                      "username": "nessa",
+                      "fullname": "Vanessa Ating",
+                      "email": "test@gmail.com",
+                      "id": 17
+                    }
+                  },
+                  "$ref": "#/components/schemas/User signIn"
+                },
+                "example": {
+                  "status": "success",
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg",
+                  "foundUser": {
+                    "username": "nessa",
+                    "fullname": "Vanessa Ating",
+                    "email": "test@gmail.com",
+                    "id": 17
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get user profile",
+        "description": "Endpoint to view a user's profile",
+        "operationId": "GetUserProfile",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "user": {
+                      "fullname": "Vanessa Ating",
+                      "username": "nessa",
+                      "email": "test@gmail.com",
+                      "joined": "Mon Mar 12 2018"
+                    }
+                  },
+                  "$ref": "#/components/schemas/GetUserProfile"
+                },
+                "example": {
+                  "status": "success",
+                  "user": {
+                    "fullname": "Vanessa Ating",
+                    "username": "nessa",
+                    "email": "test@gmail.com",
+                    "joined": "Mon Mar 12 2018"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "put": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Edit user profile",
+        "description": "Endpoint for users to edit their profile",
+        "operationId": "EditUserProfile",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "fullname",
+                  "username"
+                ],
+                "type": "object",
+                "properties": {
+                  "fullname": {
+                    "type": "string",
+                    "example": "Nessa nessa"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "nessy baby"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "user": {
+                      "fullname": "Nkoyo Ating",
+                      "username": "nessa baby",
+                      "email": "test@gmail.com",
+                      "joined": "Mon Mar 12 2018"
+                    }
+                  },
+                  "$ref": "#/components/schemas/EditUserProfile"
+                },
+                "example": {
+                  "status": "success",
+                  "user": {
+                    "fullname": "Nkoyo Ating",
+                    "username": "nessa baby",
+                    "email": "test@gmail.com",
+                    "joined": "Mon Mar 12 2018"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Get all recipes",
+        "description": "Endpoint to get all recipes",
+        "operationId": "GetAllRecipes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "numberOfItems": 1,
+                    "limit": 6,
+                    "pages": 1,
+                    "currentPage": 1,
+                    "recipes": [
+                      {
+                        "id": 36,
+                        "name": "test food",
+                        "userId": 17,
+                        "ingredients": "salt, maggi, pepper",
+                        "description": "mix all together",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                        "favourite": 1,
+                        "createdAt": "2018-03-12T23:37:09.846Z",
+                        "updatedAt": "2018-03-12T23:39:12.892Z",
+                        "Reviews": [
+                          {
+                            "content": "good stuff"
+                          }
+                        ],
+                        "upvote": 0,
+                        "downvote": 1
+                      }
+                    ]
+                  },
+                  "$ref": "#/components/schemas/GetAllRecipes"
+                },
+                "example": {
+                  "status": "success",
+                  "numberOfItems": 1,
+                  "limit": 6,
+                  "pages": 1,
+                  "currentPage": 1,
+                  "recipes": [
+                    {
+                      "id": 36,
+                      "name": "test food",
+                      "userId": 17,
+                      "ingredients": "salt, maggi, pepper",
+                      "description": "mix all together",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                      "favourite": 1,
+                      "createdAt": "2018-03-12T23:37:09.846Z",
+                      "updatedAt": "2018-03-12T23:39:12.892Z",
+                      "Reviews": [
+                        {
+                          "content": "good stuff"
+                        }
+                      ],
+                      "upvote": 0,
+                      "downvote": 1
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Create recipe",
+        "description": "Endpoint for users to create recipes",
+        "operationId": "CreateRecipe",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "application/x-www-form-urlencoded"
+            },
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "name",
+                  "ingredients",
+                  "description"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "test food"
+                  },
+                  "ingredients": {
+                    "type": "string",
+                    "example": "salt, maggi, pepper"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "mix all together"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "success",
+                    "message": "Recipe created successfully",
+                    "recipe": {
+                      "favourite": 0,
+                      "id": 35,
+                      "name": "Eba and Egusi Soup",
+                      "userId": 17,
+                      "ingredients": "salt, maggi, pepper",
+                      "description": "mix all together",
+                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                      "updatedAt": "2018-03-12T23:31:12.287Z",
+                      "createdAt": "2018-03-12T23:31:12.287Z"
+                    }
+                  },
+                  "$ref": "#/components/schemas/CreateRecipe"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Recipe created successfully",
+                  "recipe": {
+                    "favourite": 0,
+                    "id": 35,
+                    "name": "Eba and Egusi Soup",
+                    "userId": 17,
+                    "ingredients": "salt, maggi, pepper",
+                    "description": "mix all together",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                    "updatedAt": "2018-03-12T23:31:12.287Z",
+                    "createdAt": "2018-03-12T23:31:12.287Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/recipes/36/review": {
       "post": {
         "tags": [
           "Misc"
@@ -873,9 +966,9 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
           },
           {
             "name": "Content-Type",
@@ -917,34 +1010,34 @@
               "application/json": {
                 "schema": {
                   "example": {
-                    "status": "Success",
+                    "status": "success",
                     "review": {
-                      "id": 6,
-                      "userId": 3,
-                      "recipeId": 26,
+                      "id": 19,
+                      "userId": 17,
+                      "recipeId": 36,
                       "content": "good stuff",
-                      "createdAt": "2018-02-20T15:30:21.046Z",
-                      "updatedAt": "2018-02-20T15:30:21.046Z",
+                      "createdAt": "2018-03-12T23:37:19.872Z",
+                      "updatedAt": "2018-03-12T23:37:19.872Z",
                       "User": {
-                        "fullname": "Nessa nessa",
-                        "email": "test@test.com"
+                        "fullname": "Nkoyo Ating",
+                        "email": "test@gmail.com"
                       }
                     }
                   },
                   "$ref": "#/components/schemas/AddReview"
                 },
                 "example": {
-                  "status": "Success",
+                  "status": "success",
                   "review": {
-                    "id": 6,
-                    "userId": 3,
-                    "recipeId": 26,
+                    "id": 19,
+                    "userId": 17,
+                    "recipeId": 36,
                     "content": "good stuff",
-                    "createdAt": "2018-02-20T15:30:21.046Z",
-                    "updatedAt": "2018-02-20T15:30:21.046Z",
+                    "createdAt": "2018-03-12T23:37:19.872Z",
+                    "updatedAt": "2018-03-12T23:37:19.872Z",
                     "User": {
-                      "fullname": "Nessa nessa",
-                      "email": "test@test.com"
+                      "fullname": "Nkoyo Ating",
+                      "email": "test@gmail.com"
                     }
                   }
                 }
@@ -954,105 +1047,12 @@
         },
         "deprecated": false,
         "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/recipes/user/recipes": {
-      "get": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Get all user recipes",
-        "description": "Endpoint for users to get all their recipes",
-        "operationId": "GetAllUserRecipes",
-        "parameters": [
+        "servers": [
           {
-            "name": "token",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-            },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
           }
         ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "numberOfItems": 1,
-                    "limit": 6,
-                    "pages": 1,
-                    "currentPage": 1,
-                    "recipes": [
-                      {
-                        "id": 2,
-                        "name": "spaghetti",
-                        "userId": 1,
-                        "ingredients": "sapg, sauce, leaf",
-                        "description": "turn welll",
-                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                        "favourite": 1,
-                        "createdAt": "2018-03-02T20:18:40.219Z",
-                        "updatedAt": "2018-03-02T22:12:49.767Z",
-                        "Reviews": [],
-                        "Votes": [
-                          {
-                            "upvote": 1,
-                            "downvote": 0
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  "$ref": "#/components/schemas/GetAllUserRecipes"
-                },
-                "example": {
-                  "status": "success",
-                  "numberOfItems": 1,
-                  "limit": 6,
-                  "pages": 1,
-                  "currentPage": 1,
-                  "recipes": [
-                    {
-                      "id": 2,
-                      "name": "spaghetti",
-                      "userId": 1,
-                      "ingredients": "sapg, sauce, leaf",
-                      "description": "turn welll",
-                      "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                      "favourite": 1,
-                      "createdAt": "2018-03-02T20:18:40.219Z",
-                      "updatedAt": "2018-03-02T22:12:49.767Z",
-                      "Reviews": [],
-                      "Votes": [
-                        {
-                          "upvote": 1,
-                          "downvote": 0
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1061,7 +1061,7 @@
         }
       }
     },
-    "/users/26/favourite": {
+    "/users/36/favourite": {
       "post": {
         "tags": [
           "Misc"
@@ -1079,9 +1079,9 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
           }
         ],
         "responses": {
@@ -1128,6 +1128,12 @@
         },
         "deprecated": false,
         "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1154,9 +1160,9 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
           }
         ],
         "responses": {
@@ -1173,16 +1179,16 @@
                     "currentPage": 1,
                     "favourites": [
                       {
-                        "id": 3,
-                        "recipeId": 2,
-                        "userId": 1,
-                        "createdAt": "2018-03-02T22:12:49.753Z",
-                        "updatedAt": "2018-03-02T22:12:49.753Z",
+                        "id": 36,
+                        "recipeId": 36,
+                        "userId": 17,
+                        "createdAt": "2018-03-12T23:39:12.882Z",
+                        "updatedAt": "2018-03-12T23:39:12.882Z",
                         "Recipe": {
-                          "name": "spaghetti",
-                          "ingredients": "sapg, sauce, leaf",
-                          "description": "turn welll",
-                          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+                          "name": "test food",
+                          "ingredients": "salt, maggi, pepper",
+                          "description": "mix all together",
+                          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
                         }
                       }
                     ]
@@ -1197,16 +1203,16 @@
                   "currentPage": 1,
                   "favourites": [
                     {
-                      "id": 3,
-                      "recipeId": 2,
-                      "userId": 1,
-                      "createdAt": "2018-03-02T22:12:49.753Z",
-                      "updatedAt": "2018-03-02T22:12:49.753Z",
+                      "id": 36,
+                      "recipeId": 36,
+                      "userId": 17,
+                      "createdAt": "2018-03-12T23:39:12.882Z",
+                      "updatedAt": "2018-03-12T23:39:12.882Z",
                       "Recipe": {
-                        "name": "spaghetti",
-                        "ingredients": "sapg, sauce, leaf",
-                        "description": "turn welll",
-                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+                        "name": "test food",
+                        "ingredients": "salt, maggi, pepper",
+                        "description": "mix all together",
+                        "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
                       }
                     }
                   ]
@@ -1217,6 +1223,12 @@
         },
         "deprecated": false,
         "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1225,73 +1237,7 @@
         }
       }
     },
-    "/recipes/18/vote": {
-      "post": {
-        "tags": [
-          "Misc"
-        ],
-        "summary": "Upvote recipe",
-        "description": "Endpoint for a user to upvote a recipe",
-        "operationId": "UpvoteRecipe",
-        "parameters": [
-          {
-            "name": "vote",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string",
-              "example": "upvote"
-            },
-            "example": "upvote"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-            },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": {
-                    "status": "success",
-                    "message": "Recipe upvoted successfully."
-                  },
-                  "$ref": "#/components/schemas/UpvoteRecipe"
-                },
-                "example": {
-                  "status": "success",
-                  "message": "Recipe upvoted successfully."
-                }
-              }
-            }
-          }
-        },
-        "deprecated": false,
-        "security": [],
-        "x-operation-settings": {
-          "CollectParameters": false,
-          "AllowDynamicQueryParameters": false,
-          "AllowDynamicFormParameters": false,
-          "IsMultiContentStreaming": false
-        }
-      }
-    },
-    "/recipes/20/vote": {
+    "/recipes/36/vote": {
       "post": {
         "tags": [
           "Misc"
@@ -1322,25 +1268,25 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "example": {
-                    "status": "success",
+                    "status": "sucess",
                     "message": "Recipe downvoted successfully."
                   },
                   "$ref": "#/components/schemas/DownvoteRecipe"
                 },
                 "example": {
-                  "status": "success",
+                  "status": "sucess",
                   "message": "Recipe downvoted successfully."
                 }
               }
@@ -1349,6 +1295,12 @@
         },
         "deprecated": false,
         "security": [],
+        "servers": [
+          {
+            "url": "https://nkoyo-more-recipes.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1374,17 +1326,17 @@
           },
           "recipe": {
             "example": {
-              "id": 2,
-              "name": "spaghetti",
-              "userId": 1,
-              "ingredients": "sapg, sauce, leaf",
-              "description": "turn welll",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-              "favourite": 1,
-              "createdAt": "2018-03-02T20:18:40.219Z",
-              "updatedAt": "2018-03-02T22:12:49.767Z",
+              "id": 35,
+              "name": "Eba and Egusi Soup",
+              "userId": 17,
+              "ingredients": "salt, maggi, pepper",
+              "description": "mix all together",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+              "favourite": 0,
+              "createdAt": "2018-03-12T23:31:12.287Z",
+              "updatedAt": "2018-03-12T23:31:12.287Z",
               "Reviews": [],
-              "upvote": 1,
+              "upvote": 0,
               "downvote": 0
             },
             "$ref": "#/components/schemas/Recipe"
@@ -1393,17 +1345,17 @@
         "example": {
           "status": "success",
           "recipe": {
-            "id": 2,
-            "name": "spaghetti",
-            "userId": 1,
-            "ingredients": "sapg, sauce, leaf",
-            "description": "turn welll",
-            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-            "favourite": 1,
-            "createdAt": "2018-03-02T20:18:40.219Z",
-            "updatedAt": "2018-03-02T22:12:49.767Z",
+            "id": 35,
+            "name": "Eba and Egusi Soup",
+            "userId": 17,
+            "ingredients": "salt, maggi, pepper",
+            "description": "mix all together",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+            "favourite": 0,
+            "createdAt": "2018-03-12T23:31:12.287Z",
+            "updatedAt": "2018-03-12T23:31:12.287Z",
             "Reviews": [],
-            "upvote": 1,
+            "upvote": 0,
             "downvote": 0
           }
         }
@@ -1429,41 +1381,41 @@
           "id": {
             "type": "integer",
             "format": "int32",
-            "example": 2
+            "example": 35
           },
           "name": {
             "type": "string",
-            "example": "spaghetti"
+            "example": "Eba and Egusi Soup"
           },
           "userId": {
             "type": "integer",
             "format": "int32",
-            "example": 1
+            "example": 17
           },
           "ingredients": {
             "type": "string",
-            "example": "sapg, sauce, leaf"
+            "example": "salt, maggi, pepper"
           },
           "description": {
             "type": "string",
-            "example": "turn welll"
+            "example": "mix all together"
           },
           "recipeImage": {
             "type": "string",
-            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
           },
           "favourite": {
             "type": "integer",
             "format": "int32",
-            "example": 1
+            "example": 0
           },
           "createdAt": {
             "type": "string",
-            "example": "3/2/2018 8:18:40 PM"
+            "example": "3/12/2018 11:31:12 PM"
           },
           "updatedAt": {
             "type": "string",
-            "example": "3/2/2018 10:12:49 PM"
+            "example": "3/12/2018 11:31:12 PM"
           },
           "Reviews": {
             "type": "array",
@@ -1476,7 +1428,7 @@
           "upvote": {
             "type": "integer",
             "format": "int32",
-            "example": 1
+            "example": 0
           },
           "downvote": {
             "type": "integer",
@@ -1485,17 +1437,17 @@
           }
         },
         "example": {
-          "id": 2,
-          "name": "spaghetti",
-          "userId": 1,
-          "ingredients": "sapg, sauce, leaf",
-          "description": "turn welll",
-          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-          "favourite": 1,
-          "createdAt": "2018-03-02T20:18:40.219Z",
-          "updatedAt": "2018-03-02T22:12:49.767Z",
+          "id": 35,
+          "name": "Eba and Egusi Soup",
+          "userId": 17,
+          "ingredients": "salt, maggi, pepper",
+          "description": "mix all together",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+          "favourite": 0,
+          "createdAt": "2018-03-12T23:31:12.287Z",
+          "updatedAt": "2018-03-12T23:31:12.287Z",
           "Reviews": [],
-          "upvote": 1,
+          "upvote": 0,
           "downvote": 0
         }
       },
@@ -1540,6 +1492,737 @@
             "items": {
               "example": [
                 {
+                  "id": 35,
+                  "name": "Eba and Egusi Soup",
+                  "userId": 17,
+                  "ingredients": "salt, maggi, pepper",
+                  "description": "mix all together",
+                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+                  "favourite": 0,
+                  "createdAt": "2018-03-12T23:31:12.287Z",
+                  "updatedAt": "2018-03-12T23:31:12.287Z",
+                  "Reviews": [],
+                  "Votes": []
+                }
+              ],
+              "$ref": "#/components/schemas/Recipe3"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "status": "success",
+          "numberOfItems": 1,
+          "pages": 1,
+          "currentPage": 1,
+          "limit": 6,
+          "recipes": [
+            {
+              "id": 35,
+              "name": "Eba and Egusi Soup",
+              "userId": 17,
+              "ingredients": "salt, maggi, pepper",
+              "description": "mix all together",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+              "favourite": 0,
+              "createdAt": "2018-03-12T23:31:12.287Z",
+              "updatedAt": "2018-03-12T23:31:12.287Z",
+              "Reviews": [],
+              "Votes": []
+            }
+          ]
+        }
+      },
+      "Recipe3": {
+        "title": "Recipe3",
+        "required": [
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "favourite",
+          "createdAt",
+          "updatedAt",
+          "Reviews",
+          "Votes"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 35
+          },
+          "name": {
+            "type": "string",
+            "example": "Eba and Egusi Soup"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 17
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "salt, maggi, pepper"
+          },
+          "description": {
+            "type": "string",
+            "example": "mix all together"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
+          },
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "3/12/2018 11:31:12 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "3/12/2018 11:31:12 PM"
+          },
+          "Reviews": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": []
+            },
+            "description": ""
+          },
+          "Votes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": []
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "id": 35,
+          "name": "Eba and Egusi Soup",
+          "userId": 17,
+          "ingredients": "salt, maggi, pepper",
+          "description": "mix all together",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+          "favourite": 0,
+          "createdAt": "2018-03-12T23:31:12.287Z",
+          "updatedAt": "2018-03-12T23:31:12.287Z",
+          "Reviews": [],
+          "Votes": []
+        }
+      },
+      "User signUp": {
+        "title": "User sign-up",
+        "required": [
+          "status",
+          "message",
+          "user",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Account created"
+          },
+          "user": {
+            "example": {
+              "username": "nessa",
+              "fullname": "Vanessa Ating",
+              "email": "test@gmail.com",
+              "id": 17
+            },
+            "$ref": "#/components/schemas/User"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzIyMH0.lT9Nb9lAw5-vIBB8GYrbr5hY4-YzqRuvU_umwo6mKZg"
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "Account created",
+          "user": {
+            "username": "nessa",
+            "fullname": "Vanessa Ating",
+            "email": "test@gmail.com",
+            "id": 17
+          },
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzIyMH0.lT9Nb9lAw5-vIBB8GYrbr5hY4-YzqRuvU_umwo6mKZg"
+        }
+      },
+      "User": {
+        "title": "User",
+        "required": [
+          "username",
+          "fullname",
+          "email",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "nessa"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "Vanessa Ating"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@gmail.com"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 17
+          }
+        },
+        "example": {
+          "username": "nessa",
+          "fullname": "Vanessa Ating",
+          "email": "test@gmail.com",
+          "id": 17
+        }
+      },
+      "User signIn": {
+        "title": "User sign-in",
+        "required": [
+          "status",
+          "token",
+          "foundUser"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg"
+          },
+          "foundUser": {
+            "example": {
+              "username": "nessa",
+              "fullname": "Vanessa Ating",
+              "email": "test@gmail.com",
+              "id": 17
+            },
+            "$ref": "#/components/schemas/FoundUser"
+          }
+        },
+        "example": {
+          "status": "success",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTUyMDg5NzI4MH0.ZC6ZEpYdWt-elfWCUrODDzwIAhaM5LlXhvJyLJ08fpg",
+          "foundUser": {
+            "username": "nessa",
+            "fullname": "Vanessa Ating",
+            "email": "test@gmail.com",
+            "id": 17
+          }
+        }
+      },
+      "FoundUser": {
+        "title": "FoundUser",
+        "required": [
+          "username",
+          "fullname",
+          "email",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "nessa"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "Vanessa Ating"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@gmail.com"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 17
+          }
+        },
+        "example": {
+          "username": "nessa",
+          "fullname": "Vanessa Ating",
+          "email": "test@gmail.com",
+          "id": 17
+        }
+      },
+      "GetUserProfile": {
+        "title": "Get user profile",
+        "required": [
+          "status",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "user": {
+            "example": {
+              "fullname": "Vanessa Ating",
+              "username": "nessa",
+              "email": "test@gmail.com",
+              "joined": "Mon Mar 12 2018"
+            },
+            "$ref": "#/components/schemas/User9"
+          }
+        },
+        "example": {
+          "status": "success",
+          "user": {
+            "fullname": "Vanessa Ating",
+            "username": "nessa",
+            "email": "test@gmail.com",
+            "joined": "Mon Mar 12 2018"
+          }
+        }
+      },
+      "User9": {
+        "title": "User9",
+        "required": [
+          "fullname",
+          "username",
+          "email",
+          "joined"
+        ],
+        "type": "object",
+        "properties": {
+          "fullname": {
+            "type": "string",
+            "example": "Vanessa Ating"
+          },
+          "username": {
+            "type": "string",
+            "example": "nessa"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@gmail.com"
+          },
+          "joined": {
+            "type": "string",
+            "example": "Mon Mar 12 2018"
+          }
+        },
+        "example": {
+          "fullname": "Vanessa Ating",
+          "username": "nessa",
+          "email": "test@gmail.com",
+          "joined": "Mon Mar 12 2018"
+        }
+      },
+      "EditUserProfile": {
+        "title": "Edit user profile",
+        "required": [
+          "status",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "user": {
+            "example": {
+              "fullname": "Nkoyo Ating",
+              "username": "nessa baby",
+              "email": "test@gmail.com",
+              "joined": "Mon Mar 12 2018"
+            },
+            "$ref": "#/components/schemas/User9"
+          }
+        },
+        "example": {
+          "status": "success",
+          "user": {
+            "fullname": "Nkoyo Ating",
+            "username": "nessa baby",
+            "email": "test@gmail.com",
+            "joined": "Mon Mar 12 2018"
+          }
+        }
+      },
+      "CreateRecipe": {
+        "title": "Create recipe",
+        "required": [
+          "status",
+          "message",
+          "recipe"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Recipe created successfully"
+          },
+          "recipe": {
+            "example": {
+              "favourite": 0,
+              "id": 35,
+              "name": "Eba and Egusi Soup",
+              "userId": 17,
+              "ingredients": "salt, maggi, pepper",
+              "description": "mix all together",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+              "updatedAt": "2018-03-12T23:31:12.287Z",
+              "createdAt": "2018-03-12T23:31:12.287Z"
+            },
+            "$ref": "#/components/schemas/Recipe13"
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "Recipe created successfully",
+          "recipe": {
+            "favourite": 0,
+            "id": 35,
+            "name": "Eba and Egusi Soup",
+            "userId": 17,
+            "ingredients": "salt, maggi, pepper",
+            "description": "mix all together",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+            "updatedAt": "2018-03-12T23:31:12.287Z",
+            "createdAt": "2018-03-12T23:31:12.287Z"
+          }
+        }
+      },
+      "Recipe13": {
+        "title": "Recipe13",
+        "required": [
+          "favourite",
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "updatedAt",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 35
+          },
+          "name": {
+            "type": "string",
+            "example": "Eba and Egusi Soup"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 17
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "salt, maggi, pepper"
+          },
+          "description": {
+            "type": "string",
+            "example": "mix all together"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "3/12/2018 11:31:12 PM"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "3/12/2018 11:31:12 PM"
+          }
+        },
+        "example": {
+          "favourite": 0,
+          "id": 35,
+          "name": "Eba and Egusi Soup",
+          "userId": 17,
+          "ingredients": "salt, maggi, pepper",
+          "description": "mix all together",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+          "updatedAt": "2018-03-12T23:31:12.287Z",
+          "createdAt": "2018-03-12T23:31:12.287Z"
+        }
+      },
+      "UpdateRecipe": {
+        "title": "Update recipe",
+        "required": [
+          "status",
+          "message",
+          "recipe"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Update successful"
+          },
+          "recipe": {
+            "example": {
+              "id": 35,
+              "name": " Egusi Soup and Eba",
+              "userId": 17,
+              "ingredients": "water, sugar, garri",
+              "description": "mix water and add groundnut",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+              "favourite": 0,
+              "createdAt": "2018-03-12T23:31:12.287Z",
+              "updatedAt": "2018-03-12T23:33:20.258Z"
+            },
+            "$ref": "#/components/schemas/Recipe13"
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "Update successful",
+          "recipe": {
+            "id": 35,
+            "name": " Egusi Soup and Eba",
+            "userId": 17,
+            "ingredients": "water, sugar, garri",
+            "description": "mix water and add groundnut",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+            "favourite": 0,
+            "createdAt": "2018-03-12T23:31:12.287Z",
+            "updatedAt": "2018-03-12T23:33:20.258Z"
+          }
+        }
+      },
+      "DeleteRecipe": {
+        "title": "Delete recipe",
+        "required": [
+          "status",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "recipe deleted"
+          }
+        },
+        "example": {
+          "status": "success",
+          "message": "recipe deleted"
+        }
+      },
+      "AddReview": {
+        "title": "Add review",
+        "required": [
+          "status",
+          "review"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "review": {
+            "example": {
+              "id": 19,
+              "userId": 17,
+              "recipeId": 36,
+              "content": "good stuff",
+              "createdAt": "2018-03-12T23:37:19.872Z",
+              "updatedAt": "2018-03-12T23:37:19.872Z",
+              "User": {
+                "fullname": "Nkoyo Ating",
+                "email": "test@gmail.com"
+              }
+            },
+            "$ref": "#/components/schemas/Review"
+          }
+        },
+        "example": {
+          "status": "success",
+          "review": {
+            "id": 19,
+            "userId": 17,
+            "recipeId": 36,
+            "content": "good stuff",
+            "createdAt": "2018-03-12T23:37:19.872Z",
+            "updatedAt": "2018-03-12T23:37:19.872Z",
+            "User": {
+              "fullname": "Nkoyo Ating",
+              "email": "test@gmail.com"
+            }
+          }
+        }
+      },
+      "Review": {
+        "title": "Review",
+        "required": [
+          "id",
+          "userId",
+          "recipeId",
+          "content",
+          "createdAt",
+          "updatedAt",
+          "User"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 19
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 17
+          },
+          "recipeId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 36
+          },
+          "content": {
+            "type": "string",
+            "example": "good stuff"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "3/12/2018 11:37:19 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "3/12/2018 11:37:19 PM"
+          },
+          "User": {
+            "example": {
+              "fullname": "Nkoyo Ating",
+              "email": "test@gmail.com"
+            },
+            "$ref": "#/components/schemas/User19"
+          }
+        },
+        "example": {
+          "id": 19,
+          "userId": 17,
+          "recipeId": 36,
+          "content": "good stuff",
+          "createdAt": "2018-03-12T23:37:19.872Z",
+          "updatedAt": "2018-03-12T23:37:19.872Z",
+          "User": {
+            "fullname": "Nkoyo Ating",
+            "email": "test@gmail.com"
+          }
+        }
+      },
+      "User19": {
+        "title": "User19",
+        "required": [
+          "fullname",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "fullname": {
+            "type": "string",
+            "example": "Nkoyo Ating"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@gmail.com"
+          }
+        },
+        "example": {
+          "fullname": "Nkoyo Ating",
+          "email": "test@gmail.com"
+        }
+      },
+      "GetAllUserRecipes": {
+        "title": "Get all user recipes",
+        "required": [
+          "status",
+          "numberOfItems",
+          "limit",
+          "pages",
+          "currentPage",
+          "recipes"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "numberOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 6
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "example": [
+                {
                   "id": 2,
                   "name": "spaghetti",
                   "userId": 1,
@@ -1558,7 +2241,7 @@
                   ]
                 }
               ],
-              "$ref": "#/components/schemas/Recipe3"
+              "$ref": "#/components/schemas/Recipe21"
             },
             "description": ""
           }
@@ -1566,9 +2249,9 @@
         "example": {
           "status": "success",
           "numberOfItems": 1,
+          "limit": 6,
           "pages": 1,
           "currentPage": 1,
-          "limit": 6,
           "recipes": [
             {
               "id": 2,
@@ -1591,8 +2274,8 @@
           ]
         }
       },
-      "Recipe3": {
-        "title": "Recipe3",
+      "Recipe21": {
+        "title": "Recipe21",
         "required": [
           "id",
           "name",
@@ -1710,612 +2393,6 @@
         "example": {
           "upvote": 1,
           "downvote": 0
-        }
-      },
-      "User signUp": {
-        "title": "User sign-up",
-        "required": [
-          "status",
-          "message",
-          "user",
-          "token"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "message": {
-            "type": "string",
-            "example": "Account created"
-          },
-          "user": {
-            "example": {
-              "username": "nessa",
-              "fullname": "Vanessa Ating",
-              "email": "test@test.com",
-              "id": 3
-            },
-            "$ref": "#/components/schemas/User"
-          },
-          "token": {
-            "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
-          }
-        },
-        "example": {
-          "status": "success",
-          "message": "Account created",
-          "user": {
-            "username": "nessa",
-            "fullname": "Vanessa Ating",
-            "email": "test@test.com",
-            "id": 3
-          },
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3Mjk1fQ.8YxnOBrFmZnjGj1ml9LpM4JUhz_qYeAh1v8S4AzhSXs"
-        }
-      },
-      "User": {
-        "title": "User",
-        "required": [
-          "username",
-          "fullname",
-          "email",
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string",
-            "example": "nessa"
-          },
-          "fullname": {
-            "type": "string",
-            "example": "Vanessa Ating"
-          },
-          "email": {
-            "type": "string",
-            "example": "test@test.com"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "example": 3
-          }
-        },
-        "example": {
-          "username": "nessa",
-          "fullname": "Vanessa Ating",
-          "email": "test@test.com",
-          "id": 3
-        }
-      },
-      "User signIn": {
-        "title": "User sign-in",
-        "required": [
-          "status",
-          "token",
-          "foundUser"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "token": {
-            "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o"
-          },
-          "foundUser": {
-            "example": {
-              "username": "nessa",
-              "fullname": "Vanessa Ating",
-              "email": "test@test.com",
-              "id": 3
-            },
-            "$ref": "#/components/schemas/FoundUser"
-          }
-        },
-        "example": {
-          "status": "success",
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE5MTI3NDc3fQ.jOZ8BYDMtc0M6ajJougAkN3Uq_NTI1mq7wwVb1ZaL2o",
-          "foundUser": {
-            "username": "nessa",
-            "fullname": "Vanessa Ating",
-            "email": "test@test.com",
-            "id": 3
-          }
-        }
-      },
-      "FoundUser": {
-        "title": "FoundUser",
-        "required": [
-          "username",
-          "fullname",
-          "email",
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string",
-            "example": "nessa"
-          },
-          "fullname": {
-            "type": "string",
-            "example": "Vanessa Ating"
-          },
-          "email": {
-            "type": "string",
-            "example": "test@test.com"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "example": 3
-          }
-        },
-        "example": {
-          "username": "nessa",
-          "fullname": "Vanessa Ating",
-          "email": "test@test.com",
-          "id": 3
-        }
-      },
-      "GetUserProfile": {
-        "title": "Get user profile",
-        "required": [
-          "status",
-          "user"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "user": {
-            "example": {
-              "fullname": "Vanessa Ating",
-              "username": "nessa",
-              "email": "test@test.com",
-              "joined": "Tue Feb 20 2018"
-            },
-            "$ref": "#/components/schemas/User10"
-          }
-        },
-        "example": {
-          "status": "success",
-          "user": {
-            "fullname": "Vanessa Ating",
-            "username": "nessa",
-            "email": "test@test.com",
-            "joined": "Tue Feb 20 2018"
-          }
-        }
-      },
-      "User10": {
-        "title": "User10",
-        "required": [
-          "fullname",
-          "username",
-          "email",
-          "joined"
-        ],
-        "type": "object",
-        "properties": {
-          "fullname": {
-            "type": "string",
-            "example": "Vanessa Ating"
-          },
-          "username": {
-            "type": "string",
-            "example": "nessa"
-          },
-          "email": {
-            "type": "string",
-            "example": "test@test.com"
-          },
-          "joined": {
-            "type": "string",
-            "example": "Tue Feb 20 2018"
-          }
-        },
-        "example": {
-          "fullname": "Vanessa Ating",
-          "username": "nessa",
-          "email": "test@test.com",
-          "joined": "Tue Feb 20 2018"
-        }
-      },
-      "EditUserProfile": {
-        "title": "Edit user profile",
-        "required": [
-          "status",
-          "user"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "user": {
-            "example": {
-              "fullname": "Nessa nessa",
-              "username": "nessy baby",
-              "email": "test@test.com",
-              "joined": "Tue Feb 20 2018"
-            },
-            "$ref": "#/components/schemas/User10"
-          }
-        },
-        "example": {
-          "status": "success",
-          "user": {
-            "fullname": "Nessa nessa",
-            "username": "nessy baby",
-            "email": "test@test.com",
-            "joined": "Tue Feb 20 2018"
-          }
-        }
-      },
-      "UpdateRecipe": {
-        "title": "Update recipe",
-        "required": [
-          "status",
-          "message",
-          "recipe"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "message": {
-            "type": "string",
-            "example": "Update successful"
-          },
-          "recipe": {
-            "example": {
-              "id": 27,
-              "name": "testing food ",
-              "userId": 3,
-              "ingredients": "water, sugar, garri",
-              "description": "mix water and add groundnut",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-              "favourite": 0,
-              "createdAt": "2018-02-20T12:46:50.832Z",
-              "updatedAt": "2018-02-20T15:19:13.139Z"
-            },
-            "$ref": "#/components/schemas/Recipe14"
-          }
-        },
-        "example": {
-          "status": "success",
-          "message": "Update successful",
-          "recipe": {
-            "id": 27,
-            "name": "testing food ",
-            "userId": 3,
-            "ingredients": "water, sugar, garri",
-            "description": "mix water and add groundnut",
-            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-            "favourite": 0,
-            "createdAt": "2018-02-20T12:46:50.832Z",
-            "updatedAt": "2018-02-20T15:19:13.139Z"
-          }
-        }
-      },
-      "Recipe14": {
-        "title": "Recipe14",
-        "required": [
-          "id",
-          "name",
-          "userId",
-          "ingredients",
-          "description",
-          "recipeImage",
-          "favourite",
-          "createdAt",
-          "updatedAt"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "example": 27
-          },
-          "name": {
-            "type": "string",
-            "example": "testing food "
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32",
-            "example": 3
-          },
-          "ingredients": {
-            "type": "string",
-            "example": "water, sugar, garri"
-          },
-          "description": {
-            "type": "string",
-            "example": "mix water and add groundnut"
-          },
-          "recipeImage": {
-            "type": "string",
-            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
-          },
-          "favourite": {
-            "type": "integer",
-            "format": "int32",
-            "example": 0
-          },
-          "createdAt": {
-            "type": "string",
-            "example": "2/20/2018 12:46:50 PM"
-          },
-          "updatedAt": {
-            "type": "string",
-            "example": "2/20/2018 3:19:13 PM"
-          }
-        },
-        "example": {
-          "id": 27,
-          "name": "testing food ",
-          "userId": 3,
-          "ingredients": "water, sugar, garri",
-          "description": "mix water and add groundnut",
-          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
-          "favourite": 0,
-          "createdAt": "2018-02-20T12:46:50.832Z",
-          "updatedAt": "2018-02-20T15:19:13.139Z"
-        }
-      },
-      "DeleteRecipe": {
-        "title": "Delete recipe",
-        "required": [
-          "status",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "message": {
-            "type": "string",
-            "example": "recipe deleted"
-          }
-        },
-        "example": {
-          "status": "success",
-          "message": "recipe deleted"
-        }
-      },
-      "AddReview": {
-        "title": "Add review",
-        "required": [
-          "status",
-          "review"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "Success"
-          },
-          "review": {
-            "example": {
-              "id": 6,
-              "userId": 3,
-              "recipeId": 26,
-              "content": "good stuff",
-              "createdAt": "2018-02-20T15:30:21.046Z",
-              "updatedAt": "2018-02-20T15:30:21.046Z",
-              "User": {
-                "fullname": "Nessa nessa",
-                "email": "test@test.com"
-              }
-            },
-            "$ref": "#/components/schemas/Review"
-          }
-        },
-        "example": {
-          "status": "Success",
-          "review": {
-            "id": 6,
-            "userId": 3,
-            "recipeId": 26,
-            "content": "good stuff",
-            "createdAt": "2018-02-20T15:30:21.046Z",
-            "updatedAt": "2018-02-20T15:30:21.046Z",
-            "User": {
-              "fullname": "Nessa nessa",
-              "email": "test@test.com"
-            }
-          }
-        }
-      },
-      "Review": {
-        "title": "Review",
-        "required": [
-          "id",
-          "userId",
-          "recipeId",
-          "content",
-          "createdAt",
-          "updatedAt",
-          "User"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "example": 6
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32",
-            "example": 3
-          },
-          "recipeId": {
-            "type": "integer",
-            "format": "int32",
-            "example": 26
-          },
-          "content": {
-            "type": "string",
-            "example": "good stuff"
-          },
-          "createdAt": {
-            "type": "string",
-            "example": "2/20/2018 3:30:21 PM"
-          },
-          "updatedAt": {
-            "type": "string",
-            "example": "2/20/2018 3:30:21 PM"
-          },
-          "User": {
-            "example": {
-              "fullname": "Nessa nessa",
-              "email": "test@test.com"
-            },
-            "$ref": "#/components/schemas/User18"
-          }
-        },
-        "example": {
-          "id": 6,
-          "userId": 3,
-          "recipeId": 26,
-          "content": "good stuff",
-          "createdAt": "2018-02-20T15:30:21.046Z",
-          "updatedAt": "2018-02-20T15:30:21.046Z",
-          "User": {
-            "fullname": "Nessa nessa",
-            "email": "test@test.com"
-          }
-        }
-      },
-      "User18": {
-        "title": "User18",
-        "required": [
-          "fullname",
-          "email"
-        ],
-        "type": "object",
-        "properties": {
-          "fullname": {
-            "type": "string",
-            "example": "Nessa nessa"
-          },
-          "email": {
-            "type": "string",
-            "example": "test@test.com"
-          }
-        },
-        "example": {
-          "fullname": "Nessa nessa",
-          "email": "test@test.com"
-        }
-      },
-      "GetAllUserRecipes": {
-        "title": "Get all user recipes",
-        "required": [
-          "status",
-          "numberOfItems",
-          "limit",
-          "pages",
-          "currentPage",
-          "recipes"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "numberOfItems": {
-            "type": "integer",
-            "format": "int32",
-            "example": 1
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int32",
-            "example": 6
-          },
-          "pages": {
-            "type": "integer",
-            "format": "int32",
-            "example": 1
-          },
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "example": 1
-          },
-          "recipes": {
-            "type": "array",
-            "items": {
-              "example": [
-                {
-                  "id": 2,
-                  "name": "spaghetti",
-                  "userId": 1,
-                  "ingredients": "sapg, sauce, leaf",
-                  "description": "turn welll",
-                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-                  "favourite": 1,
-                  "createdAt": "2018-03-02T20:18:40.219Z",
-                  "updatedAt": "2018-03-02T22:12:49.767Z",
-                  "Reviews": [],
-                  "Votes": [
-                    {
-                      "upvote": 1,
-                      "downvote": 0
-                    }
-                  ]
-                }
-              ],
-              "$ref": "#/components/schemas/Recipe3"
-            },
-            "description": ""
-          }
-        },
-        "example": {
-          "status": "success",
-          "numberOfItems": 1,
-          "limit": 6,
-          "pages": 1,
-          "currentPage": 1,
-          "recipes": [
-            {
-              "id": 2,
-              "name": "spaghetti",
-              "userId": 1,
-              "ingredients": "sapg, sauce, leaf",
-              "description": "turn welll",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
-              "favourite": 1,
-              "createdAt": "2018-03-02T20:18:40.219Z",
-              "updatedAt": "2018-03-02T22:12:49.767Z",
-              "Reviews": [],
-              "Votes": [
-                {
-                  "upvote": 1,
-                  "downvote": 0
-                }
-              ]
-            }
-          ]
         }
       },
       "AddFavouriteRecipe": {
@@ -2474,16 +2551,16 @@
             "items": {
               "example": [
                 {
-                  "id": 3,
-                  "recipeId": 2,
-                  "userId": 1,
-                  "createdAt": "2018-03-02T22:12:49.753Z",
-                  "updatedAt": "2018-03-02T22:12:49.753Z",
+                  "id": 36,
+                  "recipeId": 36,
+                  "userId": 17,
+                  "createdAt": "2018-03-12T23:39:12.882Z",
+                  "updatedAt": "2018-03-12T23:39:12.882Z",
                   "Recipe": {
-                    "name": "spaghetti",
-                    "ingredients": "sapg, sauce, leaf",
-                    "description": "turn welll",
-                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+                    "name": "test food",
+                    "ingredients": "salt, maggi, pepper",
+                    "description": "mix all together",
+                    "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
                   }
                 }
               ],
@@ -2500,16 +2577,16 @@
           "currentPage": 1,
           "favourites": [
             {
-              "id": 3,
-              "recipeId": 2,
-              "userId": 1,
-              "createdAt": "2018-03-02T22:12:49.753Z",
-              "updatedAt": "2018-03-02T22:12:49.753Z",
+              "id": 36,
+              "recipeId": 36,
+              "userId": 17,
+              "createdAt": "2018-03-12T23:39:12.882Z",
+              "updatedAt": "2018-03-12T23:39:12.882Z",
               "Recipe": {
-                "name": "spaghetti",
-                "ingredients": "sapg, sauce, leaf",
-                "description": "turn welll",
-                "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+                "name": "test food",
+                "ingredients": "salt, maggi, pepper",
+                "description": "mix all together",
+                "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
               }
             }
           ]
@@ -2530,52 +2607,52 @@
           "id": {
             "type": "integer",
             "format": "int32",
-            "example": 3
+            "example": 36
           },
           "recipeId": {
             "type": "integer",
             "format": "int32",
-            "example": 2
+            "example": 36
           },
           "userId": {
             "type": "integer",
             "format": "int32",
-            "example": 1
+            "example": 17
           },
           "createdAt": {
             "type": "string",
-            "example": "3/2/2018 10:12:49 PM"
+            "example": "3/12/2018 11:39:12 PM"
           },
           "updatedAt": {
             "type": "string",
-            "example": "3/2/2018 10:12:49 PM"
+            "example": "3/12/2018 11:39:12 PM"
           },
           "Recipe": {
             "example": {
-              "name": "spaghetti",
-              "ingredients": "sapg, sauce, leaf",
-              "description": "turn welll",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+              "name": "test food",
+              "ingredients": "salt, maggi, pepper",
+              "description": "mix all together",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
             },
-            "$ref": "#/components/schemas/Recipe26"
+            "$ref": "#/components/schemas/Recipe27"
           }
         },
         "example": {
-          "id": 3,
-          "recipeId": 2,
-          "userId": 1,
-          "createdAt": "2018-03-02T22:12:49.753Z",
-          "updatedAt": "2018-03-02T22:12:49.753Z",
+          "id": 36,
+          "recipeId": 36,
+          "userId": 17,
+          "createdAt": "2018-03-12T23:39:12.882Z",
+          "updatedAt": "2018-03-12T23:39:12.882Z",
           "Recipe": {
-            "name": "spaghetti",
-            "ingredients": "sapg, sauce, leaf",
-            "description": "turn welll",
-            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+            "name": "test food",
+            "ingredients": "salt, maggi, pepper",
+            "description": "mix all together",
+            "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
           }
         }
       },
-      "Recipe26": {
-        "title": "Recipe26",
+      "Recipe27": {
+        "title": "Recipe27",
         "required": [
           "name",
           "ingredients",
@@ -2586,26 +2663,26 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "spaghetti"
+            "example": "test food"
           },
           "ingredients": {
             "type": "string",
-            "example": "sapg, sauce, leaf"
+            "example": "salt, maggi, pepper"
           },
           "description": {
             "type": "string",
-            "example": "turn welll"
+            "example": "mix all together"
           },
           "recipeImage": {
             "type": "string",
-            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
           }
         },
         "example": {
-          "name": "spaghetti",
-          "ingredients": "sapg, sauce, leaf",
-          "description": "turn welll",
-          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg"
+          "name": "test food",
+          "ingredients": "salt, maggi, pepper",
+          "description": "mix all together",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
         }
       },
       "UpvoteRecipe": {
@@ -2640,7 +2717,7 @@
         "properties": {
           "status": {
             "type": "string",
-            "example": "success"
+            "example": "sucess"
           },
           "message": {
             "type": "string",
@@ -2648,7 +2725,7 @@
           }
         },
         "example": {
-          "status": "success",
+          "status": "sucess",
           "message": "Recipe downvoted successfully."
         }
       },
@@ -2693,21 +2770,25 @@
             "items": {
               "example": [
                 {
-                  "id": 2,
-                  "name": "spaghetti",
-                  "userId": 1,
-                  "ingredients": "sapg, sauce, leaf",
-                  "description": "turn welll",
-                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+                  "id": 36,
+                  "name": "test food",
+                  "userId": 17,
+                  "ingredients": "salt, maggi, pepper",
+                  "description": "mix all together",
+                  "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
                   "favourite": 1,
-                  "createdAt": "2018-03-02T20:18:40.219Z",
-                  "updatedAt": "2018-03-02T22:12:49.767Z",
-                  "Reviews": [],
-                  "upvote": 1,
-                  "downvote": 0
+                  "createdAt": "2018-03-12T23:37:09.846Z",
+                  "updatedAt": "2018-03-12T23:39:12.892Z",
+                  "Reviews": [
+                    {
+                      "content": "good stuff"
+                    }
+                  ],
+                  "upvote": 0,
+                  "downvote": 1
                 }
               ],
-              "$ref": "#/components/schemas/Recipe"
+              "$ref": "#/components/schemas/Recipe31"
             },
             "description": ""
           }
@@ -2720,20 +2801,139 @@
           "currentPage": 1,
           "recipes": [
             {
-              "id": 2,
-              "name": "spaghetti",
-              "userId": 1,
-              "ingredients": "sapg, sauce, leaf",
-              "description": "turn welll",
-              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1520021919/mvuh1qu1xacubdirga6y.jpg",
+              "id": 36,
+              "name": "test food",
+              "userId": 17,
+              "ingredients": "salt, maggi, pepper",
+              "description": "mix all together",
+              "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
               "favourite": 1,
-              "createdAt": "2018-03-02T20:18:40.219Z",
-              "updatedAt": "2018-03-02T22:12:49.767Z",
-              "Reviews": [],
-              "upvote": 1,
-              "downvote": 0
+              "createdAt": "2018-03-12T23:37:09.846Z",
+              "updatedAt": "2018-03-12T23:39:12.892Z",
+              "Reviews": [
+                {
+                  "content": "good stuff"
+                }
+              ],
+              "upvote": 0,
+              "downvote": 1
             }
           ]
+        }
+      },
+      "Recipe31": {
+        "title": "Recipe31",
+        "required": [
+          "id",
+          "name",
+          "userId",
+          "ingredients",
+          "description",
+          "recipeImage",
+          "favourite",
+          "createdAt",
+          "updatedAt",
+          "Reviews",
+          "upvote",
+          "downvote"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 36
+          },
+          "name": {
+            "type": "string",
+            "example": "test food"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 17
+          },
+          "ingredients": {
+            "type": "string",
+            "example": "salt, maggi, pepper"
+          },
+          "description": {
+            "type": "string",
+            "example": "mix all together"
+          },
+          "recipeImage": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png"
+          },
+          "favourite": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "3/12/2018 11:37:09 PM"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "3/12/2018 11:39:12 PM"
+          },
+          "Reviews": {
+            "type": "array",
+            "items": {
+              "example": [
+                {
+                  "content": "good stuff"
+                }
+              ],
+              "$ref": "#/components/schemas/Review32"
+            },
+            "description": ""
+          },
+          "upvote": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "downvote": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          }
+        },
+        "example": {
+          "id": 36,
+          "name": "test food",
+          "userId": 17,
+          "ingredients": "salt, maggi, pepper",
+          "description": "mix all together",
+          "recipeImage": "https://res.cloudinary.com/dxayftnxb/image/upload/v1517914951/noImage_u3sry1.png",
+          "favourite": 1,
+          "createdAt": "2018-03-12T23:37:09.846Z",
+          "updatedAt": "2018-03-12T23:39:12.892Z",
+          "Reviews": [
+            {
+              "content": "good stuff"
+            }
+          ],
+          "upvote": 0,
+          "downvote": 1
+        }
+      },
+      "Review32": {
+        "title": "Review32",
+        "required": [
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "example": "good stuff"
+          }
+        },
+        "example": {
+          "content": "good stuff"
         }
       }
     }
