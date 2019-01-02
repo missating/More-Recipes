@@ -5,17 +5,17 @@
 
 
 # More-Recipes
-More-Recipes is a full stack web application that provides a platform for users to share their awesome and exciting recipe ideas they have invented or learnt.
+More-Recipes is a full stack web application that provides a platform for users to share awesome and exciting recipe ideas they have invented or learnt.
 
  ### Technologies
  ----
 
  1. [Nodejs](https://nodejs.org/en/)
- 1. [Postgresql](https://www.postgresql.org/)
- 1. [Express](https://expressjs.com/)
- 1. [Sequelize](http://docs.sequelizejs.com/)
- 1. [React](https://reactjs.org/)
- 1. [Redux](https://redux.js.org/)
+ 2. [Postgresql](https://www.postgresql.org/)
+ 3. [Express](https://expressjs.com/)
+ 4. [Sequelize](http://docs.sequelizejs.com/)
+ 5. [React](https://reactjs.org/)
+ 6. [Redux](https://redux.js.org/)
 
 ## API Documentation
 ----
@@ -73,7 +73,7 @@ ____
 
 `npm install`
 
-3. Create a `.env` file and copy comtent of `.env.sample` to it and provide the appropraite values
+3. Create a `.env` file and copy comtent of `.env.sample` to it and provide the appropriate values
 
 4. Look at this file [config.json](https://github.com/missating/More-Recipes/blob/develop/server/config/config.js) and read [this](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) to setup postgres/sequelize to create a Database then run migration
 
